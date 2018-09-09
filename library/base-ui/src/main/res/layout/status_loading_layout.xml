@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/exception_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:minWidth="150dp"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <com.oneway.ui.widget.progress.ProgressWheel
+            android:id="@+id/load_anim"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            wheel:matProg_barColor="#5588FF"
+            wheel:matProg_progressIndeterminate="true" />
+
+
+        <TextView
+            android:id="@+id/exception_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="正在加载中.."
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

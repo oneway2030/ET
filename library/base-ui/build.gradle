@@ -1,0 +1,81 @@
+//apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    useLibrary 'org.apache.http.legacy'
+    defaultConfig {
+//        multiDexEnabled true
+//        applicationId "om.oneway.ui"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "USE_CANARY", "false"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    //
+//    api project(':library:imageloader-glide')
+//    api project(':library:core')
+    api project(':library:base-tool')
+    api project(':library:base-res')
+    api rootProject.ext.dependencies["butterknife"]
+    annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {
+        exclude module: 'support-annotations'
+    }
+    api rootProject.ext.dependencies["SmartRefreshLayout"]
+    api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+    api rootProject.ext.dependencies["statusbarutil2"]
+    //
+//    api rootProject.ext.dependencies["lifecyclemodel"]
+//    api(rootProject.ext.dependencies["rxlifecycle2"]) {
+//        exclude module: 'rxjava'
+//        exclude module: 'jsr305'
+//    }
+//    api(rootProject.ext.dependencies["rxlifecycle2-android"]) {
+//        exclude module: 'support-annotations'
+//        exclude module: 'rxjava'
+//        exclude module: 'rxandroid'
+//        exclude module: 'rxlifecycle'
+//    }
+
+//    api rootProject.ext.dependencies["androideventbus"]
+//    annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+//    api rootProject.ext.dependencies["gson"]
+    //LeakCanary
+//    debugImplementation rootProject.ext.dependencies["canary-debug"]
+//    releaseImplementation rootProject.ext.dependencies["canary-release"]
+//    testImplementation rootProject.ext.dependencies["canary-release"]
+    //額外添加
+//    api(rootProject.ext.dependencies["support-v4"]) {
+//        exclude module: 'support-annotations'
+//    }
+//    api(rootProject.ext.dependencies["appcompat-v7"]) {
+//        exclude module: 'support-annotations'
+//    }
+//    compileOnly rootProject.ext.dependencies["design"]
+//    api(rootProject.ext.dependencies["recyclerview-v7"]) {
+//        exclude module: 'support-annotations'
+//    }
+
+}

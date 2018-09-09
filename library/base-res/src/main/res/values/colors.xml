@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--通用颜色-->
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="red">#ff0000</color>
+    <color name="yellow">#ffff00</color>
+    <color name="green">#00ff00</color>
+    <color name="blue_dark">#00008B</color>
+    <color name="blue">#0000FF</color>
+    <color name="gray">#808080</color>
+    <color name="gray_dark">#A9A9A9</color>
+    <color name="gray_light">#D3D3D3</color>
+
+
+    <!--提示dailog的两个button颜色-->
+    <color name="confirm_bt">#4b8ef2</color>
+    <color name="cancel_bt">#9f9f9f</color>
+
+    <!-- 通用btn 浅色色-->
+    <color name="common_btn_blue_bg_light">#4b8ef2</color>
+    <!-- 通用btn 深色-->
+    <color name="common_btn_blue_bg_dark">#2a79f1</color>
+    <!--通用横线-->
+    <color name="divider_line">#F6F6F6</color>
+    <!--通用背景色-->
+    <color name="page_bg">#fff6f6f6</color>
+    <!--通用文字颜色-->
+    <color name="text">#464646</color>
+
+
+</resources>

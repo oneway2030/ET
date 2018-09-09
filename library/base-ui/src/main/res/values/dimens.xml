@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="custom_switch_height">30dp</dimen>
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:gravity="center">
+
+    <LinearLayout
+        android:id="@+id/exception_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/iv_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_other_str"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="数据错误"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/reload"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="6dp"
+            android:background="#ffffff"
+            android:paddingBottom="8dp"
+            android:paddingLeft="36dp"
+            android:paddingRight="36dp"
+            android:paddingTop="8dp"
+            android:text="点击刷新"
+            android:textColor="#3a3a3a"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</RelativeLayout>

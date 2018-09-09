@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="back" type="id" />
+    <item name="fork" type="id" />
+    <item name="tag_key" type="id" />
+    <item name="fragment_container" type="id" />
+    <item name="toolbar_title" type="id" />
+    <item name="toolbar_back" type="id" />
+</resources>

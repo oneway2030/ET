@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="默认sp缓存key=key1,value=我是默认sp的值" />
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取默认sp缓存key=key1的value" />
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="默认sp  clear" />
+
+
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义sp名字custom_p  缓存key=key2,value=我是自定义sp的值" />
+
+
+    <Button
+        android:id="@+id/btn5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取自定义sp 缓存key=key2的value" />
+
+    <Button
+        android:id="@+id/btn6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义sp  clear" />
+
+    <Button
+        android:id="@+id/btn7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="默认sp, 使用加密方式 缓存key=key3,value=我是加密的缓存值" />
+
+    <Button
+        android:id="@+id/btn8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="默认sp, 获取key=key3 解密后的value" />
+
+
+</LinearLayout>

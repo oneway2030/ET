@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="bgPrimary">#edeff4</color>
+    <color name="white">#ffffff</color>
+    <color name="titleColorPrimary">#3F51B5</color>
+    <color name="TRANSPARENT">#00000000</color>
+
+
+    <color name="red">#ff0000</color>
+    <color name="yellow">#ffff00</color>
+    <color name="green">#00ff00</color>
+
+
+    <!--提示dailog的两个button颜色-->
+    <color name="confirm_bt">#4b8ef2</color>
+    <color name="cancel_bt">#9f9f9f</color>
+
+    <!-- 通用btn 浅色色-->
+    <color name="common_btn_bg_brightred">#4b8ef2</color>
+    <!-- 通用btn 深色-->
+    <color name="common_btn_bg_darkred">#2a79f1</color>
+
+
+</resources>

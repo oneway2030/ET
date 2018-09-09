@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            postprocessing {
+                removeUnusedCode false
+                removeUnusedResources false
+                obfuscate false
+                optimizeCode false
+                proguardFile 'proguard-rules.pro'
+            }
+        }
+    }
+
+}
+
+dependencies {
+    api rootProject.ext.dependencies["annotations"]
+    implementation rootProject.ext.dependencies["design"]
+    api(rootProject.ext.dependencies["support-v4"]) {
+        exclude module: 'support-annotations'
+    }
+    api(rootProject.ext.dependencies["appcompat-v7"]) {
+        exclude module: 'support-annotations'
+    }
+    api(rootProject.ext.dependencies["recyclerview-v7"]) {
+        exclude module: 'support-annotations'
+    }
+    api(rootProject.ext.dependencies["cardview-v7"]) {
+        exclude module: 'support-annotations'
+    }
+    //rx2
+    api rootProject.ext.dependencies["rxjava2"]
+    api(rootProject.ext.dependencies["rxandroid2"]) {
+        exclude module: 'rxjava'
+    }
+    api rootProject.ext.dependencies["gson"]
+    api(rootProject.ext.dependencies["glide"]) {
+        exclude module: 'support-annotations'
+        exclude module: 'support-fragment'
+    }
+    api rootProject.ext.dependencies["androideventbus"]
+}

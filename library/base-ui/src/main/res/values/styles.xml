@@ -1,0 +1,99 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <!-- 自定义Dialog -->
+    <style name="Custom_Progress">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="loading_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+    </style>
+
+
+    <!--通用按钮-->
+    <style name="btn_common">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/common_btn_hight</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/btn_bg_select</item>
+        <item name="android:textSize">@dimen/dimen_sp_16</item>
+    </style>
+
+
+    <!--          dialog               -->
+
+    <!--自定义Dialog样式-->
+    <style name="Custom_Dialog" parent="AlertDialog.AppCompat">
+        <!--<style name="Custom_Dialog" parent="@android:style/Theme.Dialog">-->
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!--顶部弹出Dialog动画-->
+    <style name="TopAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/top_in</item>
+        <item name="android:windowExitAnimation">@anim/top_out</item>
+    </style>
+
+    <!--底部弹出Dialog动画-->
+    <style name="BottomAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/bottom_out</item>
+    </style>
+
+    <!--左边进入Dialog动画-->
+    <style name="LeftAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/left_in</item>
+        <item name="android:windowExitAnimation">@anim/left_out</item>
+    </style>
+
+    <!--右边进入Dialog动画-->
+    <style name="RightAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/right_in</item>
+        <item name="android:windowExitAnimation">@anim/right_out</item>
+    </style>
+
+    <!--放大缩小Dialog动画-->
+    <style name="ScaleAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/scale_in</item>
+        <item name="android:windowExitAnimation">@anim/scale_out</item>
+    </style>
+</resources>
