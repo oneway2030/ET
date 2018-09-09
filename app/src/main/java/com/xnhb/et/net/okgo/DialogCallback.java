@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.request.base.Request;
 import com.oneway.tool.utils.ui.UiUtils;
-import com.xnhb.et.GlobalConfiguration;
+import com.xnhb.et.constant.GlobalConfiguration;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
