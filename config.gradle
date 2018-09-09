@@ -1,13 +1,22 @@
 ext {
+
+    signingConfig = [
+            storeFile_debug    : file("et.jks"),
+            storePassword_debug: "147369",
+            keyAlias_debug     : "et",
+            keyPassword_debug  : "147369",
+            app_signature_SHA1: "5F472AC83641B927CA2F05E980560618B149EFD0", // sha1
+            app_signature_MD5 :"59885F3D197D8BFDB2C9B69A686E69B0"  //MD5
+    ]
+    // 在jdk1.8.0_31\bin下cmd    指令 keytool -list -v -keystore   --->  jks绝对路径
+
     android = [
-            compileSdkVersion   : 27,
-            buildToolsVersion   : "27.0.3",
-            minSdkVersion       : 14,
-            targetSdkVersion    : 27,
             versionCode         : 1,
             versionName         : "1.0.0",
-            BaseToolVersionCode : 1,
-            BaseToolVersionName : "1.0.0",
+            minSdkVersion       : 14,
+            targetSdkVersion    : 27,
+            compileSdkVersion   : 27,
+            buildToolsVersion   : "27.0.3",
             jdkVersion          : "1.7",
             excludeDependencies : "com.android.support",
             excludeRx           : "io.reactivex.rxjava2",
@@ -28,6 +37,8 @@ ext {
     ]
 
     libVersion = [
+            versionCode       : 1,
+            versionName       : "1.0.0",
             tinkerVersion     : "1.7.11",
             tinkerpatchVersion: "1.1.7"
     ]
@@ -43,12 +54,12 @@ ext {
             "annotations"                : "com.android.support:support-annotations:${version["androidSupportSdkVersion"]}",
             "recyclerview-v7"            : "com.android.support:recyclerview-v7:${version["androidSupportSdkVersion"]}",
             "javax.annotation"           : "javax.annotation:jsr250-api:1.0",
-            "multidex"                     : 'com.android.support:multidex:1.0.1',
-            "constraint-layout"            :  "com.android.support.constraint:constraint-layout:1.1.3",
+            "multidex"                   : 'com.android.support:multidex:1.0.1',
+            "constraint-layout"          : "com.android.support.constraint:constraint-layout:1.1.3",
             //------------- 测试 -------------
-            "junit"                        : "junit:junit:4.12",
-            "runner"                       : "com.android.support.test:runner:1.0.2",
-            "espresso-core"                     : "com.android.support.test.espresso:espresso-core:3.0.2",
+            "junit"                      : "junit:junit:4.12",
+            "runner"                     : "com.android.support.test:runner:1.0.2",
+            "espresso-core"              : "com.android.support.test.espresso:espresso-core:3.0.2",
             // ------------- 网络请求 -------------
             "okgo"                       : 'com.lzy.net:okgo:3.0.4',
             "nohttp"                     : 'com.yanzhenjie.nohttp:okhttp:1.1.4',

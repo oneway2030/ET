@@ -1,1 +1,6 @@
-include ':app', ':library:base-res', ':library:base-ui', ':library:base-tool'
+include ':app',
+        ':library:base-res',
+        ':library:base-ui',
+        ':library:base-tool',
+        ':library:ucrop',
+        ':library:picture'

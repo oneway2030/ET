@@ -102,6 +102,9 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
         }
     }
 
+    /**
+     * 如果只是处理服务器错误回调,可以只重写该方法
+     */
     public void onCustomError(CustomIllegalStateException customException) {
         ToastManager.warning(customException.getMessage());
     }

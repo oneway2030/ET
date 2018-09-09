@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">base-res</string>
+    <string name="message_permission_rationale">授予以下权限以继续该程序:\n\n%1$s</string>
+    <string name="message_permission_always_failed">请在设置开启以下权限:\n\n%1$s</string>
 </resources>

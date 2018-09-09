@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
-//    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
         applicationId "com.xnhb.et"
@@ -12,24 +12,59 @@ android {
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        debug {
+            storeFile rootProject.ext.signingConfig.storeFile_debug
+            storePassword rootProject.ext.signingConfig.storePassword_debug
+            keyAlias rootProject.ext.signingConfig.keyAlias_debug
+            keyPassword rootProject.ext.signingConfig.keyPassword_debug
+        }
+        release {
+            storeFile rootProject.ext.signingConfig.storeFile_debug
+            storePassword rootProject.ext.signingConfig.storePassword_debug
+            keyAlias rootProject.ext.signingConfig.keyAlias_debug
+            keyPassword rootProject.ext.signingConfig.keyPassword_debug
+//            // 满足下面两个条件时需要此配置
+//            // 1. Gradle版本 >= 2.2
+//            // 2. Android Gradle Plugin 版本 >= 2.2.0
+//            // 作用是只使用旧版签名，禁用V2版签名模式
+//            v2SigningEnabled false
+        }
+    }
+
     buildTypes {
         debug {
+            signingConfig signingConfigs.debug
 //            buildConfigField "boolean", "LOG_DEBUG", "true"
-//            buildConfigField "boolean", "USE_CANARY", "true"
 //            minifyEnabled false
 //            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
+            debuggable false
             minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.release
 //            buildConfigField "boolean", "LOG_DEBUG", "false"
-//            buildConfigField "boolean", "USE_CANARY", "false"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-//    compileOptions {
-//        sourceCompatibility JavaVersion.VERSION_1_8
-//        targetCompatibility JavaVersion.VERSION_1_8
+//    lintOptions {
+//        // 关闭指定问题检查
+//        disable 'InvalidPackage'
+//        // true--错误发生后停止gradle构建
+//        abortOnError false
+//        //  true--所有正式版构建执行规则生成崩溃的lint检查，如果有崩溃问题将停止构建
+//        checkReleaseBuilds false
 //    }
+    //不检查资源
+    //    aaptOptions.cruncherEnabled = false
+//    aaptOptions.useNewCruncher = false
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -45,9 +80,10 @@ dependencies {
     implementation rootProject.ext.dependencies["multidex"]
     implementation rootProject.ext.dependencies["okgo"]
     api project(':library:base-ui')
-    compile 'cn.pedant.sweetalert:library:1.3'
+    api project(':library:picture')
+    implementation 'cn.pedant.sweetalert:library:1.3'
+    implementation 'com.yanzhenjie:permission:2.0.0-rc12'
 //    compile 'com.youth.banner:banner:1.4.9'
 //    compile 'top.zibin:Luban:1.1.3'
 //    compile 'com.androidkun:XTabLayout:1.1.4'
-//    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
 }
