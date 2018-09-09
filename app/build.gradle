@@ -25,27 +25,22 @@ android {
             storePassword rootProject.ext.signingConfig.storePassword_debug
             keyAlias rootProject.ext.signingConfig.keyAlias_debug
             keyPassword rootProject.ext.signingConfig.keyPassword_debug
-//            // 满足下面两个条件时需要此配置
-//            // 1. Gradle版本 >= 2.2
-//            // 2. Android Gradle Plugin 版本 >= 2.2.0
-//            // 作用是只使用旧版签名，禁用V2版签名模式
-//            v2SigningEnabled false
         }
     }
 
     buildTypes {
         debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            minifyEnabled false
             signingConfig signingConfigs.debug
-//            buildConfigField "boolean", "LOG_DEBUG", "true"
-//            minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"
             debuggable false
             minifyEnabled false
             shrinkResources false
             signingConfig signingConfigs.release
-//            buildConfigField "boolean", "LOG_DEBUG", "false"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
