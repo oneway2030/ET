@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.oneway.ui.base.in.IPresenter;
 import com.oneway.ui.base.in.IView;
+import com.oneway.ui.util.ScreenUtil;
 
 /**
  * Created by ww on 2018/9/9.
@@ -16,6 +17,8 @@ public abstract class MVPActivity<P extends IPresenter> extends AppCompatActivit
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //屏幕适配
+        ScreenUtil.setCustomDensity(this, getApplication());
         super.onCreate(savedInstanceState);
         getP();
     }

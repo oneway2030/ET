@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ET</string>
+    <string name="title_home">首页</string>
+    <string name="title_details">详情</string>
+    <string name="title_c2c">C2C</string>
+    <string name="title_order">订单</string>
+    <string name="title_wallet">钱包</string>
+
+
 </resources>

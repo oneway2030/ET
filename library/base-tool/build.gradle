@@ -31,7 +31,7 @@ android {
 
 dependencies {
     api rootProject.ext.dependencies["annotations"]
-    implementation rootProject.ext.dependencies["design"]
+    api rootProject.ext.dependencies["design"]
     api(rootProject.ext.dependencies["support-v4"]) {
         exclude module: 'support-annotations'
     }

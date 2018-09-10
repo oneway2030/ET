@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#202a33</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="progress_color">#5588FF</color>
+    <!--主背景色-->
+    <color name="colorPrimary_bg">#1f2b32</color>
+    <!--主分割线颜色-->
+    <color name="colorPrimary_divider_line">#3f4554</color>
 
+    <color name="main_bottom_bg_color">#2a343c</color>
+    <color name="color_text_press">#5f99da</color>
+    <color name="color_text_nomal">#ffffff</color>
 </resources>
