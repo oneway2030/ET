@@ -1,4 +1,4 @@
-package com.oneway.tool.event.inner;
+package com.oneway.tool.event.RxBus.inner;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
-package com.oneway.tool.event;
+package com.oneway.tool.event.RxBus;
 
 
-import com.oneway.tool.event.inner.ThreadMode;
+import com.oneway.tool.event.RxBus.inner.ThreadMode;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

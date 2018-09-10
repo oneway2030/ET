@@ -1,4 +1,4 @@
-package com.oneway.tool.event.inner;
+package com.oneway.tool.event.RxBus.inner;
 
 import java.util.ArrayList;
 import java.util.HashMap;

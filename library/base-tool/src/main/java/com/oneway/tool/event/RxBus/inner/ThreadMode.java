@@ -1,4 +1,4 @@
-package com.oneway.tool.event.inner;
+package com.oneway.tool.event.RxBus.inner;
 
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
