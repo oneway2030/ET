@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.oneway.tool.utils.ui.UiUtils;
+import com.oneway.ui.BaseUiConfig;
 import com.oneway.ui.base.in.IPresenter;
 import com.oneway.ui.base.in.TitleContainer;
 import com.oneway.ui.base.title.BaseTitleView;
@@ -43,6 +45,7 @@ public abstract class BaseTitleActivity<P extends IPresenter> extends BaseStatus
         mToolbar = findViewById(R.id.toolbar);
         mFragmentContainer = findViewById(R.id.fragment_container);
         mCustomTitleView = getMyTitleContainer();
+        setDefaultUi(mCustomTitleView);
         customTitle(mCustomTitleView);
         initToolbar(mToolbar);
         setCustomTitleView(mCustomTitleView);
@@ -53,15 +56,22 @@ public abstract class BaseTitleActivity<P extends IPresenter> extends BaseStatus
         return false;
     }
 
+    protected void setDefaultUi(TitleContainer mCustomTitleView) {
+        if (BaseUiConfig.getInstance().getTitleDefBackImag() != -1)
+            mCustomTitleView.setBackImage(BaseUiConfig.getInstance().getTitleDefBackImag());
+        if (BaseUiConfig.getInstance().getTitleDefBgColor() != -1)
+            mToolbar.setBackgroundColor(BaseUiConfig.getInstance().getTitleDefBgColor());
+        if (BaseUiConfig.getInstance().getTitleDefTextColor() != -1)
+            mCustomTitleView.getTitle().setTextColor(UiUtils.getColor(BaseUiConfig.getInstance().getTitleDefTextColor()));
+    }
+
 
     @Override
     protected void setStatusBar() {
         //todo 默认白色状态栏
 //        setWhitetStatusBar(mToolbar);
         mToolbar.setBackgroundResource(DEF_COLOR);
-        setTranslucentStatusBar(mToolbar);
-
-//        setStatusBarColor(mToolbar, DEF_COLOR);
+        setTitleBar(mToolbar);
     }
 
     @Override
@@ -71,7 +81,6 @@ public abstract class BaseTitleActivity<P extends IPresenter> extends BaseStatus
 
     protected TitleContainer getMyTitleContainer() {
         return new BaseTitleView(this);
-//        return BaseTitleView.newInstance(this);
     }
 
     private void initToolbar(Toolbar toolbar) {

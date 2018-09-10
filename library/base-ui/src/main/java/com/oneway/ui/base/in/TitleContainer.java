@@ -2,6 +2,7 @@ package com.oneway.ui.base.in;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.oneway.ui.base.title.TitleLayoutHelper;
 
@@ -20,6 +21,11 @@ public interface TitleContainer {
      * 设置标题
      */
     TitleContainer setTitle(int resId);
+
+    /**
+     * 设置标题
+     */
+    TextView getTitle();
 
     /**
      * 设置返回图标
@@ -50,8 +56,14 @@ public interface TitleContainer {
 
     TitleContainer setCenterView(View view, ViewGroup.LayoutParams layoutParams);
 
+
     /**
      * 获取左边布局
+     */
+    View getLfteView();
+
+    /**
+     * 获取右边布局
      */
     View getRightView();
 

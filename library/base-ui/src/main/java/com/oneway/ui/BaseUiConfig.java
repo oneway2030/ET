@@ -1,6 +1,7 @@
 package com.oneway.ui;
 
 import android.content.Context;
+import android.support.annotation.ColorRes;
 
 import com.oneway.tool.ToolConfig;
 
@@ -39,4 +40,34 @@ public class BaseUiConfig {
         return ToolConfig.getContext();
     }
 
+    public int def_title_image = -1;
+    public int def_title_bg_color = -1;
+    public int def_title_text_color = -1;
+
+    public BaseUiConfig setTitleDefBackImag(int image) {
+        this.def_title_image = image;
+        return this;
+    }
+
+    public int getTitleDefBackImag() {
+        return def_title_image;
+    }
+
+    public BaseUiConfig setTitleDefBgColor(@ColorRes int defColor) {
+        this.def_title_bg_color = defColor;
+        return this;
+    }
+
+    public int getTitleDefBgColor() {
+        return def_title_bg_color;
+    }
+
+    public BaseUiConfig setTitleDefTextColor(@ColorRes int defColor) {
+        this.def_title_text_color = defColor;
+        return this;
+    }
+
+    public int getTitleDefTextColor() {
+        return def_title_text_color;
+    }
 }

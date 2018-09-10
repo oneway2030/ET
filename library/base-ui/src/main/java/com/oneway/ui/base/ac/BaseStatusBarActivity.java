@@ -27,6 +27,18 @@ public abstract class BaseStatusBarActivity<P extends IPresenter> extends XBaseA
     protected abstract void setStatusBar();
 
     /**
+     * 状态栏与导航栏同色
+     */
+    public void setTitleBar(View titleBar) {
+        if (mImmersionBar != null)
+            mImmersionBar
+                    .titleBar(titleBar)
+                    .keyboardEnable(true)
+                    .navigationBarColor(R.color.white)
+                    .init();
+    }
+
+    /**
      * 白色titile  黑色导航字体
      *
      * @param titleBar

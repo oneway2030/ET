@@ -13,6 +13,7 @@ import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.oneway.tool.ToolConfig;
 import com.oneway.tool.utils.log.LogUtil;
 import com.oneway.tool.utils.log.inner.LogcatTree;
+import com.oneway.ui.BaseUiConfig;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
@@ -64,6 +65,11 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        //baseui 全局设置
+        BaseUiConfig.getInstance()
+                .setTitleDefBackImag(R.mipmap.back_left_white)
+                .setTitleDefTextColor(R.color.white)
+                .setTitleDefBgColor(R.color.colorPrimary);
         //base-tool 必须初始化
         ToolConfig.getInstance().init(this) ;
         //Log初始化

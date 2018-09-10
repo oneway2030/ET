@@ -41,7 +41,6 @@ public class BaseTitleView extends RelativeLayout implements TitleContainer {
     public BaseTitleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
-        View inflate = View.inflate(mContext, R.layout.base_title_view_layout, this);
         initView();
     }
 
@@ -61,6 +60,7 @@ public class BaseTitleView extends RelativeLayout implements TitleContainer {
 
 
     private void initView() {
+        View.inflate(mContext, R.layout.base_title_view_layout, this);
         mTitle = findViewById(R.id.common_title_view_layout_title);
         mBackImageView = findViewById(R.id.common_title_view_layout_left_arrow);
         mLeftLayout = findViewById(R.id.common_title_view_layout_left_container);
@@ -105,7 +105,7 @@ public class BaseTitleView extends RelativeLayout implements TitleContainer {
         mTitle.setText(UiUtils.getString(resId));
         return this;
     }
-
+    @Override
     public TextView getTitle() {
         return mTitle;
     }
@@ -155,6 +155,11 @@ public class BaseTitleView extends RelativeLayout implements TitleContainer {
             mCenterLayout.addView(v, layoutParams);
         }
         return this;
+    }
+
+    @Override
+    public View getLfteView() {
+        return mLeftLayout;
     }
 
     @Override
