@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.oneway.ui.base.ac.BaseStatusBarActivity;
 import com.oneway.ui.base.ac.XBaseActivity;
 import com.oneway.ui.widget.BottomNavigationViewEx;
 import com.xnhb.et.constant.GlobalConfiguration;
@@ -26,7 +27,7 @@ import butterknife.ButterKnife;
  * 描述: 首页
  * 参考链接:
  */
-public class MainActivity extends XBaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseStatusBarActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_C2C = 1;
     private static final int FRAGMENT_DETAILS = 2;
@@ -102,7 +103,7 @@ public class MainActivity extends XBaseActivity implements BottomNavigationView.
                 showFragment(FRAGMENT_C2C);
                 return true;
             case R.id.navigation_order:
-                showFragment(FRAGMENT_DETAILS);
+                showFragment(FRAGMENT_ORDERS);
                 return true;
             case R.id.navigation_wallet:
                 showFragment(FRAGMENT_WALLET);
@@ -189,4 +190,8 @@ public class MainActivity extends XBaseActivity implements BottomNavigationView.
     }
 
 
+    @Override
+    protected void setStatusBar() {
+
+    }
 }

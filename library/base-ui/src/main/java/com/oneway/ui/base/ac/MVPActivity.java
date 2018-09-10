@@ -18,7 +18,7 @@ public abstract class MVPActivity<P extends IPresenter> extends AppCompatActivit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //屏幕适配
-        ScreenUtil.setCustomDensity(this, getApplication());
+//        ScreenUtil.setCustomDensity(this, getApplication());
         super.onCreate(savedInstanceState);
         getP();
     }

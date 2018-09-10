@@ -5,6 +5,8 @@
     <string name="title_c2c">C2C</string>
     <string name="title_order">订单</string>
     <string name="title_wallet">钱包</string>
+    <!--<string name="title_wallet2"><![CDATA[≈%f CNY]]></string>-->
+    <string name="total_cny_money">≈%f CNY</string>
 
 
 </resources>

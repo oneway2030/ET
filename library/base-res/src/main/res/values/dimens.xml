@@ -1,7 +1,8 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <!--通用间距-->
-    <dimen name="common_margin_space">12dp</dimen>
+    <dimen name="common_margin_space_20">20dp</dimen>
+    <dimen name="common_margin_space_12">12dp</dimen>
     <!--通用标题导航高度-->
     <dimen name="common_title_bar_hight">44dp</dimen>
     <!--通用btn高度-->

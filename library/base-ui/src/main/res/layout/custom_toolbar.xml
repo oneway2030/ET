@@ -15,8 +15,8 @@
         android:drawablePadding="4dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:gravity="center"
-        android:paddingLeft="@dimen/common_margin_space"
-        android:paddingRight="@dimen/common_margin_space"
+        android:paddingLeft="@dimen/common_margin_space_12"
+        android:paddingRight="@dimen/common_margin_space_12"
         android:textColor="#fff"
         android:textSize="16sp"
         android:visibility="visible" />
@@ -64,8 +64,8 @@
         android:drawablePadding="4dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:gravity="center"
-        android:paddingLeft="@dimen/common_margin_space"
-        android:paddingRight="@dimen/common_margin_space"
+        android:paddingLeft="@dimen/common_margin_space_12"
+        android:paddingRight="@dimen/common_margin_space_12"
         android:textColor="#fff"
         android:textSize="16sp"
         android:visibility="visible" />
