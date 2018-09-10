@@ -21,7 +21,11 @@ import com.xnhb.et.ui.fragment.WalletFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
+/**
+ * 作者 oneway on 2018/9/10
+ * 描述: 首页
+ * 参考链接:
+ */
 public class MainActivity extends XBaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_C2C = 1;

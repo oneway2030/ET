@@ -12,10 +12,10 @@
         app:pressedBackgroundColor="@color/colorPrimaryDark"
         app:pressedTextColor="@android:color/white"
         app:radius="5dp"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:foreground="?android:attr/selectableItemBackground"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:text="StateButton" />
