@@ -3,12 +3,20 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ET.iml" filepath="$PROJECT_DIR$/ET.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ET.iml" filepath="$PROJECT_DIR$/ET.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/base-res/base-res.iml" filepath="$PROJECT_DIR$/library/base-res/base-res.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/base-res/base-res.iml" filepath="$PROJECT_DIR$/library/base-res/base-res.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/base-tool/base-tool.iml" filepath="$PROJECT_DIR$/library/base-tool/base-tool.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/base-tool/base-tool.iml" filepath="$PROJECT_DIR$/library/base-tool/base-tool.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/base-ui/base-ui.iml" filepath="$PROJECT_DIR$/library/base-ui/base-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/base-ui/base-ui.iml" filepath="$PROJECT_DIR$/library/base-ui/base-ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/picture/picture.iml" filepath="$PROJECT_DIR$/library/picture/picture.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/picture/picture_library.iml" filepath="$PROJECT_DIR$/library/picture/picture_library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/ucrop/ucrop.iml" filepath="$PROJECT_DIR$/library/ucrop/ucrop.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/ucrop/ucrop.iml" filepath="$PROJECT_DIR$/library/ucrop/ucrop.iml" />
     </modules>
   </component>
