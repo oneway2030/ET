@@ -19,7 +19,7 @@ import java.io.File;
  * 圆形 渲染库  https://github.com/wasabeef/glide-transformations
  * jp.wasabeef:glide-transformations:2.0.2
  */
-public class GlideLoader implements ILoader {
+public class GlideLoaderMpl implements ILoader {
     private String asset_paht = "file:///android_asset/";
 
     @Override
@@ -36,12 +36,12 @@ public class GlideLoader implements ILoader {
     }
 
     @Override
-    public void load(String url, ImageView target) {
+    public void load(Object url, ImageView target) {
         getRequestManager().load(url).into(target);
     }
 
     @Override
-    public void load(String url, ImageView target, RequestOptions options) {
+    public void load(Object url, ImageView target, RequestOptions options) {
         getRequestManager()
                 .load(url)
                 .apply(options)
@@ -49,7 +49,7 @@ public class GlideLoader implements ILoader {
     }
 
     @Override
-    public void loadCorner(String url, ImageView target, int corners) {
+    public void loadCorner(Object url, ImageView target, int corners) {
         RoundCornersTransformation transformation =
                 new RoundCornersTransformation(ToolConfig.getContext(), UiUtils.dp2px(5), RoundCornersTransformation.CornerType.ALL);
         RequestOptions options = new RequestOptions()
@@ -61,7 +61,7 @@ public class GlideLoader implements ILoader {
     }
 
     @Override
-    public void loadCorner(String url, ImageView target, int corners, RequestOptions options) {
+    public void loadCorner(Object url, ImageView target, int corners, RequestOptions options) {
         RoundCornersTransformation transformation =
                 new RoundCornersTransformation(ToolConfig.getContext(), UiUtils.dp2px(5), RoundCornersTransformation.CornerType.ALL);
         options.transform(transformation);
@@ -72,7 +72,7 @@ public class GlideLoader implements ILoader {
     }
 
     @Override
-    public void loadRound(String url, ImageView target) {
+    public void loadRound(Object url, ImageView target) {
         getRequestManager()
                 .load(url)
                 .apply(RequestOptions.bitmapTransform(new CircleCrop()))
@@ -80,21 +80,13 @@ public class GlideLoader implements ILoader {
     }
 
     @Override
-    public void loadRound(String url, ImageView target, int def_icon) {
+    public void loadRound(Object url, ImageView target, int def_icon) {
         RequestOptions requestOptions = RequestOptions.circleCropTransform()
                 .error(def_icon)
                 .placeholder(def_icon);
         getRequestManager()
                 .load(url)
                 .apply(requestOptions)
-                .into(target);
-    }
-
-    @Override
-    public void loadResource(int resId, ImageView target, RequestOptions options) {
-        getRequestManager()
-                .load(target)
-                .apply(options)
                 .into(target);
     }
 

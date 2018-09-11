@@ -6,11 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.luck.picture.lib.tools.ToastManage;
 import com.oneway.ui.base.ac.BaseTitleActivity;
 import com.oneway.ui.base.in.TitleContainer;
 import com.oneway.ui.toast.ToastManager;
-import com.xnhb.et.MainActivity;
 import com.xnhb.et.R;
 
 /**

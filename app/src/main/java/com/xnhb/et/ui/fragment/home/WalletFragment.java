@@ -1,4 +1,4 @@
-package com.xnhb.et.ui.fragment;
+package com.xnhb.et.ui.fragment.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.oneway.ui.base.fragment.BaseBarLazyFragment;
+import com.oneway.ui.base.fragment.BaseFragment;
 import com.xnhb.et.R;
 
 import butterknife.BindView;
@@ -22,7 +23,8 @@ import butterknife.Unbinder;
  * 描述:
  * 参考链接:
  */
-public class WalletFragment extends BaseBarLazyFragment {
+public class WalletFragment extends BaseFragment {
+
     @BindView(R.id.title_iv_setting)
     ImageView titleIvSetting;
     @BindView(R.id.title_tv_name)
@@ -36,23 +38,16 @@ public class WalletFragment extends BaseBarLazyFragment {
     @BindView(R.id.title_layout)
     LinearLayout mTitleLayout;
 
-    @Override
-    protected boolean isLazyLoad() {
-        return false;
-    }
 
     @Override
     protected int setLayoutId() {
         return R.layout.fragment_mian_wallet;
     }
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ImmersionBar.setTitleBar(getActivity(), mTitleLayout);
-    }
+
     @Override
     protected void initImmersionBar() {
         super.initImmersionBar();
-        initTitleBar(mTitleLayout);
+        mImmersionBar.titleBar(mTitleLayout)
+                .init();
     }
 }

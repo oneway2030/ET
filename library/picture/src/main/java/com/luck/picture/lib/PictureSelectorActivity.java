@@ -45,7 +45,7 @@ import com.luck.picture.lib.tools.DoubleUtils;
 import com.luck.picture.lib.tools.PictureFileUtils;
 import com.luck.picture.lib.tools.ScreenUtils;
 import com.luck.picture.lib.tools.StringUtils;
-import com.luck.picture.lib.tools.ToastManage;
+import com.luck.picture.lib.tools.MyToastManage;
 import com.luck.picture.lib.widget.FolderPopWindow;
 import com.luck.picture.lib.widget.PhotoPopupWindow;
 import com.yalantis.ucrop.UCrop;
@@ -161,7 +161,7 @@ public class PictureSelectorActivity extends PictureBaseActivity implements View
                                 if (aBoolean) {
                                     onTakePhoto();
                                 } else {
-                                    ToastManage.s(mContext, getString(R.string.picture_camera));
+                                    MyToastManage.s(mContext, getString(R.string.picture_camera));
                                     closeActivity();
                                 }
                             }
@@ -245,7 +245,7 @@ public class PictureSelectorActivity extends PictureBaseActivity implements View
                             mHandler.sendEmptyMessage(SHOW_DIALOG);
                             readLocalMedia();
                         } else {
-                            ToastManage.s(mContext, getString(R.string.picture_jurisdiction));
+                            MyToastManage.s(mContext, getString(R.string.picture_jurisdiction));
                         }
                     }
 
@@ -416,7 +416,7 @@ public class PictureSelectorActivity extends PictureBaseActivity implements View
                         startActivityForResult(cameraIntent, PictureConfig.REQUEST_CAMERA);
                     }
                 } else {
-                    ToastManage.s(mContext, getString(R.string.picture_audio));
+                    MyToastManage.s(mContext, getString(R.string.picture_audio));
                 }
             }
 
@@ -498,7 +498,7 @@ public class PictureSelectorActivity extends PictureBaseActivity implements View
                 if (size < config.minSelectNum) {
                     String str = eqImg ? getString(R.string.picture_min_img_num, config.minSelectNum)
                             : getString(R.string.picture_min_video_num, config.minSelectNum);
-                    ToastManage.s(mContext, str);
+                    MyToastManage.s(mContext, str);
                     return;
                 }
             }
@@ -752,7 +752,7 @@ public class PictureSelectorActivity extends PictureBaseActivity implements View
                 if (aBoolean) {
                     startCamera();
                 } else {
-                    ToastManage.s(mContext, getString(R.string.picture_camera));
+                    MyToastManage.s(mContext, getString(R.string.picture_camera));
                     if (config.camera) {
                         closeActivity();
                     }
@@ -1027,7 +1027,7 @@ public class PictureSelectorActivity extends PictureBaseActivity implements View
             }
         } else if (resultCode == UCrop.RESULT_ERROR) {
             Throwable throwable = (Throwable) data.getSerializableExtra(UCrop.EXTRA_ERROR);
-            ToastManage.s(mContext, throwable.getMessage());
+            MyToastManage.s(mContext, throwable.getMessage());
         }
     }
 

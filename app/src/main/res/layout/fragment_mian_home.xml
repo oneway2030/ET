@@ -5,4 +5,55 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!--<TextView-->
+    <!--android:id="@+id/title_layout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/common_title_bar_hight" />-->
+
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:background="@color/colorPrimary_statbar_bg" />
+
+    <LinearLayout
+        android:id="@+id/notice_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp">
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/notice" />
+
+        <com.oneway.ui.widget.tv.AutoVerticalTextView
+            android:id="@+id/autoVerticalTextview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:textColor="@color/text2b"
+            app:textSise="14sp" />
+
+        <ImageView
+            android:layout_width="7dp"
+            android:layout_height="14dp"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/more_right_blue" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:gravity="center"
+        android:text="11111" />
 </LinearLayout>

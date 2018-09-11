@@ -68,4 +68,12 @@
         <attr name="AnimationDuration" format="integer|reference" />
     </declare-styleable>
     <!--  StateButton  end -->
+
+
+    <!-- ProgressWheel -->
+    <declare-styleable name="AutoVerticalTextView">
+        <attr name="textSise" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="android:gravity" />
+    </declare-styleable>>
 </resources>

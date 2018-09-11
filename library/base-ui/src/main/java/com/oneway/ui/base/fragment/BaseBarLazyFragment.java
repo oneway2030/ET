@@ -3,6 +3,7 @@ package com.oneway.ui.base.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.oneway.ui.R;
 import com.oneway.ui.base.in.IPresenter;
 
 import butterknife.ButterKnife;
@@ -35,10 +37,27 @@ public abstract class BaseBarLazyFragment<P extends IPresenter> extends BaseLazy
         if (mImmersionBar != null)
             mImmersionBar
                     .titleBar(titleView)
+                    .statusBarColor(R.color.colorAccent)
                     .keyboardEnable(true)
                     .navigationBarWithKitkatEnable(false)
                     .init();
     }
 
+    public void setTransparentStatusBar() {
+        if (mImmersionBar != null)
+            mImmersionBar.transparentStatusBar()
+                    .keyboardEnable(true)
+                    .init();
+    }
 
+    /**
+     * 自定义颜色
+     */
+    public void setStatusBarColor(@ColorRes int statusBarColor) {
+        if (mImmersionBar != null)
+            mImmersionBar
+                    .statusBarColor(R.color.colorAccent)
+                    .keyboardEnable(true)
+                    .init();
+    }
 }

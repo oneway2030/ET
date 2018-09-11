@@ -27,7 +27,7 @@ import com.luck.picture.lib.config.PictureSelectionConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.tools.DateUtils;
 import com.luck.picture.lib.tools.StringUtils;
-import com.luck.picture.lib.tools.ToastManage;
+import com.luck.picture.lib.tools.MyToastManage;
 import com.luck.picture.lib.tools.VoiceUtils;
 
 import java.io.File;
@@ -206,7 +206,7 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
                     public void onClick(View v) {
                         // 如原图路径不存在或者路径存在但文件不存在
                         if (!new File(path).exists()) {
-                            ToastManage.s(context, PictureMimeType.s(context, mediaMimeType));
+                            MyToastManage.s(context, PictureMimeType.s(context, mediaMimeType));
                             return;
                         }
                         changeCheckboxState(contentHolder, image);
@@ -218,7 +218,7 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
                 public void onClick(View v) {
                     // 如原图路径不存在或者路径存在但文件不存在
                     if (!new File(path).exists()) {
-                        ToastManage.s(context, PictureMimeType.s(context, mediaMimeType));
+                        MyToastManage.s(context, PictureMimeType.s(context, mediaMimeType));
                         return;
                     }
                     int index = showCamera ? position - 1 : position;
@@ -314,7 +314,7 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (!TextUtils.isEmpty(pictureType)) {
             boolean toEqual = PictureMimeType.mimeToEqual(pictureType, image.getPictureType());
             if (!toEqual) {
-                ToastManage.s(context, context.getString(R.string.picture_rule));
+                MyToastManage.s(context, context.getString(R.string.picture_rule));
                 return;
             }
         }
@@ -322,7 +322,7 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
             boolean eqImg = pictureType.startsWith(PictureConfig.IMAGE);
             String str = eqImg ? context.getString(R.string.picture_message_max_num, maxSelectNum)
                     : context.getString(R.string.picture_message_video_max_num, maxSelectNum);
-            ToastManage.s(context, str);
+            MyToastManage.s(context, str);
             return;
         }
 

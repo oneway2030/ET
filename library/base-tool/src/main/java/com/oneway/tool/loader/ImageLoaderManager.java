@@ -5,7 +5,7 @@ package com.oneway.tool.loader;
  * @author: <a href="http://www.xiaoyaoyou1212.com">DAWI</a>
  * @date: 2016-12-19 15:16
  */
-public class LoaderManager {
+public class ImageLoaderManager {
     private static ILoader innerLoader;
     private static ILoader externalLoader;
 
@@ -17,12 +17,12 @@ public class LoaderManager {
 
     public static ILoader getLoader() {
         if (innerLoader == null) {
-            synchronized (LoaderManager.class) {
+            synchronized (ImageLoaderManager.class) {
                 if (innerLoader == null) {
                     if (externalLoader != null) {
                         innerLoader = externalLoader;
                     } else {
-                        innerLoader = new GlideLoader();
+                        innerLoader = new GlideLoaderMpl();
                     }
                 }
             }

@@ -7,21 +7,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.oneway.ui.base.ac.BaseStatusBarActivity;
-import com.oneway.ui.base.ac.XBaseActivity;
 import com.oneway.ui.widget.BottomNavigationViewEx;
 import com.xnhb.et.constant.GlobalConfiguration;
-import com.xnhb.et.ui.fragment.C2CFragment;
-import com.xnhb.et.ui.fragment.DetailsFragment;
-import com.xnhb.et.ui.fragment.HomeFragment;
-import com.xnhb.et.ui.fragment.OrdersFragment;
-import com.xnhb.et.ui.fragment.WalletFragment;
+import com.xnhb.et.ui.fragment.home.C2CFragment;
+import com.xnhb.et.ui.fragment.home.DetailsFragment;
+import com.xnhb.et.ui.fragment.home.HomeFragment;
+import com.xnhb.et.ui.fragment.home.OrdersFragment;
+import com.xnhb.et.ui.fragment.home.WalletFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+
 /**
  * 作者 oneway on 2018/9/10
  * 描述: 首页

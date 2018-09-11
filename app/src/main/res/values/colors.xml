@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="progress_color">#5588FF</color>
+    <!--主系统状态栏背景色-->
+    <color name="colorPrimary_statbar_bg">#202a33</color>
     <!--主背景色-->
     <color name="colorPrimary_bg">#1f2b32</color>
     <!--主分割线颜色-->
@@ -12,4 +14,6 @@
     <color name="main_bottom_bg_color">#2a343c</color>
     <color name="color_text_press">#5f99da</color>
     <color name="color_text_nomal">#ffffff</color>
+    <color name="text2b">#2b2f3b</color>
+    <color name="text8c">#8c99a6</color>
 </resources>

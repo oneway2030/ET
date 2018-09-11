@@ -10,7 +10,7 @@
         android:layout_height="@dimen/common_title_bar_hight"
         android:background="@color/colorPrimary"
         android:gravity="center"
-        android:text="@string/title_order"
+        android:text="@string/title_c2c_name"
         android:textColor="@color/white"
         android:textSize="14sp" />
 </LinearLayout>

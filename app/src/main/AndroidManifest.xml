@@ -26,6 +26,9 @@
         <activity
             android:name=".ui.ac.setting.SettingActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ac.NoticeActivity"
+            android:screenOrientation="portrait" />
 
 
     </application>

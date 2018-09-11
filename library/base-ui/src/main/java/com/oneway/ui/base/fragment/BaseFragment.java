@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,18 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.oneway.ui.R;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * 当使用viewpager加载Fragment，沉浸式的使用，原理懒加载
+ * 当以show()和hide()方法形式加载Fragment，沉浸式的使用
  * Created by geyifeng on 2017/4/7.
  */
 public abstract class BaseFragment extends Fragment {
 
     protected Activity mActivity;
     protected View mRootView;
+
     protected ImmersionBar mImmersionBar;
     private Unbinder unbinder;
 
@@ -43,11 +44,12 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initView();
-        unbinder = ButterKnife.bind(this, mRootView);
+        unbinder = ButterKnife.bind(this, view);
         if (isImmersionBarEnabled())
             initImmersionBar();
         initData();
+        initView();
+        setListener();
     }
 
     @Override
@@ -58,6 +60,19 @@ public abstract class BaseFragment extends Fragment {
             mImmersionBar.destroy();
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden && mImmersionBar != null)
+            mImmersionBar.init();
+    }
+
+    /**
+     * Sets layout id.
+     *
+     * @return the layout id
+     */
+    protected abstract int setLayoutId();
 
     /**
      * 是否在Fragment使用沉浸式
@@ -65,7 +80,19 @@ public abstract class BaseFragment extends Fragment {
      * @return the boolean
      */
     protected boolean isImmersionBarEnabled() {
-        return false;
+        return true;
+    }
+
+    /**
+     * 初始化沉浸式
+     */
+    protected void initImmersionBar() {
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar
+                .navigationBarColor(R.color.white)
+                .keyboardEnable(true)
+                .navigationBarWithKitkatEnable(false)
+                .init();
     }
 
 
@@ -77,26 +104,28 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * 初始化沉浸式
+     * view与数据绑定
      */
-    protected void initImmersionBar() {
-        mImmersionBar = ImmersionBar.with(this);
-        mImmersionBar.keyboardEnable(true).navigationBarWithKitkatEnable(false).init();
+    protected void initView() {
+
     }
 
     /**
-     * view与数据绑定
+     * 设置监听
      */
-    protected abstract void initView();
+    protected void setListener() {
 
-    protected <E extends View> E F(@IdRes int viewId) {
-        return (E) getView().findViewById(viewId);
     }
 
-    protected <E extends View> E F(@NonNull View view, @IdRes int viewId) {
-        return (E) view.findViewById(viewId);
+    /**
+     * 找到activity的控件
+     *
+     * @param <T> the type parameter
+     * @param id  the id
+     * @return the t
+     */
+    @SuppressWarnings("unchecked")
+    protected <T extends View> T findActivityViewById(@IdRes int id) {
+        return (T) mActivity.findViewById(id);
     }
-
-
-    protected abstract int setLayoutId();
 }

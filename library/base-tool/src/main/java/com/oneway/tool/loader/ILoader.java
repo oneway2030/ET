@@ -16,19 +16,17 @@ import java.io.File;
 public interface ILoader {
     void init(Context context);
 
-    void load(String url, ImageView target);
+    void load(Object url, ImageView target);
 
-    void load(String url, ImageView target, RequestOptions options);
+    void load(Object url, ImageView target, RequestOptions options);
 
-    void loadCorner(String url, ImageView target, int corners);
+    void loadCorner(Object url, ImageView target, int corners);
 
-    void loadCorner(String url, ImageView target, int corners, RequestOptions options);
+    void loadCorner(Object url, ImageView target, int corners, RequestOptions options);
 
-    void loadRound(String url, ImageView target);
+    void loadRound(Object url, ImageView target);
 
-    void loadRound(String url, ImageView target, int def_icon);
-
-    void loadResource(int resId, ImageView target, RequestOptions options);
+    void loadRound(Object url, ImageView target, int def_icon);
 
     void loadAssets(String assetName, ImageView target, RequestOptions options);
 
