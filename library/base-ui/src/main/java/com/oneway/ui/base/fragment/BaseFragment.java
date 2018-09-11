@@ -80,7 +80,7 @@ public abstract class BaseFragment extends Fragment {
      * @return the boolean
      */
     protected boolean isImmersionBarEnabled() {
-        return true;
+        return false;
     }
 
     /**

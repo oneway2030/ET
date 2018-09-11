@@ -73,7 +73,7 @@ public class HintDialog extends BaseDialogFragment {
         tvBottomTwoMsg = contentView.findViewById(R.id.tv_two_msg_bottom);
         tvSingleMsg = contentView.findViewById(R.id.tv_single_msg);
 
-        leftBtn = contentView.findViewById(R.id.cencle);
+        leftBtn = contentView.findViewById(R.id.cancle);
         rightBtn = contentView.findViewById(R.id.confirm);
         singleConfirmBtn = contentView.findViewById(R.id.single_confirm);
         doubleBtnLayout = contentView.findViewById(R.id.double_btn_layout);
@@ -220,7 +220,7 @@ public class HintDialog extends BaseDialogFragment {
         protected void onNoDoubleClick(View v) {
             dismiss();
             int i = v.getId();
-            if (i == R.id.cencle) {
+            if (i == R.id.cancle) {
                 if (l != null) {
                     l.onDailogClose(HintDialog.this, false);
                 }

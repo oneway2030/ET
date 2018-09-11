@@ -43,7 +43,7 @@ public class TipsDialog extends Dialog {
     private CharSequence msgStr = "";
     private TextView tvTwoMsgTop;
     private TextView tvSingleMsg;
-    private Button cencle;
+    private Button cancle;
     private Button confirm;
     private LinearLayout.LayoutParams lp;
     private Button singleConfirm;
@@ -113,21 +113,21 @@ public class TipsDialog extends Dialog {
         tvTwoMsgBottom = findViewById(R.id.tv_two_msg_bottom);
         tvSingleMsg = findViewById(R.id.tv_single_msg);
 
-        cencle = findViewById(R.id.cencle);
+        cancle = findViewById(R.id.cancle);
         confirm = findViewById(R.id.confirm);
         singleConfirm = findViewById(R.id.single_confirm);
         doubleBtnLayout = findViewById(R.id.double_btn_layout);
 
         //设置双按钮
         confirm.setText(positiveBtnName);
-        cencle.setText(negativeBtnName);
+        cancle.setText(negativeBtnName);
         singleConfirm.setText(singleConfirmBtnName);
         confirm.setTextColor(getContext().getResources().getColor(positiveColor));
-        cencle.setTextColor(getContext().getResources().getColor(negativeColor));
+        cancle.setTextColor(getContext().getResources().getColor(negativeColor));
         //设置单按钮
         singleConfirm.setBackgroundColor(getContext().getResources().getColor(positiveColor));
         confirm.setVisibility(isSingle ? View.GONE : View.VISIBLE);
-        cencle.setVisibility(isSingle ? View.GONE : View.VISIBLE);
+        cancle.setVisibility(isSingle ? View.GONE : View.VISIBLE);
         singleConfirm.setVisibility(isSingle ? View.VISIBLE : View.GONE);
         if (TextUtils.isEmpty(titleStr)) {//单文本
             tvSingleMsg.setText(msgStr);
@@ -149,7 +149,7 @@ public class TipsDialog extends Dialog {
         doubleBtnLayout.setVisibility(isSingle ? View.GONE : View.VISIBLE);
         if (!isSingle) {
             //双按钮
-            cencle.setOnClickListener(mPerfectClickListener);
+            cancle.setOnClickListener(mPerfectClickListener);
             confirm.setOnClickListener(mPerfectClickListener);
         } else {
             //单按钮
@@ -266,7 +266,7 @@ public class TipsDialog extends Dialog {
         protected void onNoDoubleClick(View v) {
             dismiss();
             int i = v.getId();
-            if (i == R.id.cencle) {
+            if (i == R.id.cancle) {
                 if (l != null) {
                     l.onDailogClose(TipsDialog.this, false);
                 }

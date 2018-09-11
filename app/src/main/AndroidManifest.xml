@@ -29,6 +29,9 @@
         <activity
             android:name=".ui.ac.NoticeActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ac.NoticeDetailsActivity"
+            android:screenOrientation="portrait" />
 
 
     </application>

@@ -83,7 +83,6 @@ dependencies {
         exclude module: 'support-annotations'
     }
     implementation rootProject.ext.dependencies["banner"]
-//    compile 'com.youth.banner:banner:1.4.9'
-//    compile 'top.zibin:Luban:1.1.3'
-//    compile 'com.androidkun:XTabLayout:1.1.4'
+    implementation rootProject.ext.dependencies["XTabLayout"]
+    implementation rootProject.ext.dependencies["Luban"]
 }

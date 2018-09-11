@@ -1,21 +1,11 @@
 package com.xnhb.et.ui.fragment.home;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.gyf.barlibrary.ImmersionBar;
-import com.oneway.ui.base.fragment.BaseBarLazyFragment;
 import com.oneway.ui.base.fragment.BaseFragment;
-import com.oneway.ui.base.fragment.BaseLazyFragment;
 import com.xnhb.et.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * 作者 oneway on 2018/9/10
@@ -25,7 +15,6 @@ import butterknife.Unbinder;
 public class C2CFragment extends BaseFragment {
     @BindView(R.id.title_layout)
     TextView mTitleLayout;
-
 
     @Override
     protected boolean isImmersionBarEnabled() {

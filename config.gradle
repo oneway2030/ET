@@ -175,5 +175,7 @@ ext {
             "AndPermission"              : 'com.yanzhenjie:permission:2.0.0-rc12',
 //            https://github.com/youth5201314/banner
             "banner"                     : 'com.youth.banner:banner:1.4.9',
+//            https://github.com/AndroidKun/XTabLayout
+            "XTabLayout"                 : 'com.androidkun:XTabLayout:1.1.4'
     ]
 }

@@ -1,7 +1,11 @@
 package com.oneway.tool.utils.convert;
 
 import android.os.Build;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextUtils;
+
+import com.oneway.tool.utils.ui.UiUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -60,6 +64,10 @@ public class StringUtil {
         // 把转换后的货币String类型返回
         String numString = format.format(numDouble);
         return numString;
+    }
+
+    public static Spanned htmlFromat(int format, Object... args){
+       return Html.fromHtml(String.format(UiUtils.getString(format), args));
     }
 
     /**

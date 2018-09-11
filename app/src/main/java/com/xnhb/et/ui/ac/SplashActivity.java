@@ -2,7 +2,6 @@ package com.xnhb.et.ui.ac;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.oneway.ui.base.ac.BaseStatusBarActivity;
@@ -11,7 +10,7 @@ import com.xnhb.et.R;
 
 /**
  * 作者 oneway on 2018/9/6
- * 描述:
+ * 描述: 开屏界面
  * 参考链接:
  */
 public class SplashActivity extends BaseStatusBarActivity {

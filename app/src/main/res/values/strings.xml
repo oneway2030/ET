@@ -8,6 +8,7 @@
     <string name="title_wallet">钱包</string>
     <!--<string name="title_wallet2"><![CDATA[≈%f CNY]]></string>-->
     <string name="total_cny_money">≈%f CNY</string>
-
-
+    <!-- 不用转义 -->
+    <string name="mian_pirce_red"><![CDATA[<font color="#dc2527">%1$s</font><font color="#999999">\/%2$s</font>]]></string>
+    <string name="mian_pirce_green"><![CDATA[<font color="#44c08f">%1$s</font><font color="#999999">\/%2$s</font>]]></string>
 </resources>

@@ -16,4 +16,12 @@
     <color name="color_text_nomal">#ffffff</color>
     <color name="text2b">#2b2f3b</color>
     <color name="text8c">#8c99a6</color>
+    <color name="f5">#f5f5f5</color>
+    <color name="tablayout_bg">#323543</color>
+    <color name="divider_home">#3d4751</color>
+    |
+    <color name="price_red">#dc2527</color>
+    <color name="price_green">#44c08f</color>
+
+
 </resources>

@@ -50,6 +50,33 @@
     </LinearLayout>
 
 
+    <include layout="@layout/common_divider" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/HRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="116dp" />
+
+
+    <com.androidkun.xtablayout.XTabLayout
+        android:id="@+id/xTablayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/tablayout_bg"
+        app:xTabDividerWidthWidthText="true"
+        app:xTabIndicatorColor="@color/color_text_press"
+        app:xTabIndicatorHeight="1dp"
+        app:xTabMode="fixed"
+        app:xTabSelectedTextColor="@color/color_text_press"
+        app:xTabTextColor="@color/text9"
+        app:xTabTextSize="15sp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -9,11 +9,10 @@ import android.widget.FrameLayout;
 
 import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.BaseUiConfig;
+import com.oneway.ui.R;
 import com.oneway.ui.base.in.IPresenter;
 import com.oneway.ui.base.in.TitleContainer;
 import com.oneway.ui.base.title.BaseTitleView;
-
-import com.oneway.ui.R;
 
 /**
  * Created by Administrator on 2018/1/16.
@@ -41,7 +40,7 @@ public abstract class BaseTitleActivity<P extends IPresenter> extends BaseStatus
     public abstract int setLayoutId();
 
     @Override
-    protected boolean bindBefor() {
+    protected void bindBefor() {
         mToolbar = findViewById(R.id.toolbar);
         mFragmentContainer = findViewById(R.id.fragment_container);
         mCustomTitleView = getMyTitleContainer();
@@ -53,7 +52,6 @@ public abstract class BaseTitleActivity<P extends IPresenter> extends BaseStatus
             View contentView = View.inflate(this, setLayoutId(), null);
             mFragmentContainer.addView(contentView);
         }
-        return false;
     }
 
     protected void setDefaultUi(TitleContainer mCustomTitleView) {

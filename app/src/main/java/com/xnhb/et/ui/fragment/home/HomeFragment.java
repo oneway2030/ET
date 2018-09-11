@@ -1,11 +1,13 @@
 package com.xnhb.et.ui.fragment.home;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.androidkun.xtablayout.XTabLayout;
 import com.oneway.ui.base.fragment.BaseFragment;
+import com.oneway.ui.base.fragment.FragmentBaseAdapter;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.tv.AutoVerticalTextView;
@@ -15,6 +17,7 @@ import com.xnhb.et.ui.ac.NoticeActivity;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -30,12 +33,23 @@ public class HomeFragment extends BaseFragment {
     AutoVerticalTextView mAutoVerticalTextview;
     @BindView(R.id.notice_layout)
     LinearLayout noticeLayout;
+    @BindView(R.id.xTablayout)
+    XTabLayout mTabLayout;
+    @BindView(R.id.vp)
+    ViewPager mViewPager;
+    String[] mTitles = {"涨幅榜", "成交榜"};
+    private FragmentBaseAdapter mAdapter;
 
     @Override
     protected int setLayoutId() {
         return R.layout.fragment_mian_home;
     }
 
+
+    @Override
+    protected boolean isImmersionBarEnabled() {
+        return true;
+    }
 
     @Override
     protected void initImmersionBar() {
@@ -51,6 +65,10 @@ public class HomeFragment extends BaseFragment {
         noticeLayout.setOnClickListener(mPerfectClickListener);
         setBanner();
         mAutoVerticalTextview.setTextList(getTvData());//加入显示内容,集合类型
+        mAdapter = new FragmentBaseAdapter(getChildFragmentManager(), getFragmentPage(), mTitles);
+        mViewPager.setOffscreenPageLimit(mTitles.length);
+        mViewPager.setAdapter(mAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
@@ -104,5 +122,16 @@ public class HomeFragment extends BaseFragment {
         super.onPause();
         mAutoVerticalTextview.stopAutoScroll();
         mBanner.stopAutoPlay();
+    }
+
+    public List<Fragment> getFragmentPage() {
+        List<Fragment> fragments = new ArrayList<>();
+        //涨幅
+        HomeSubFragment mZhangFuFragment = new HomeSubFragment();
+        //成交
+        HomeSubFragment mChenJiaoFragment = new HomeSubFragment();
+        fragments.add(mZhangFuFragment);
+        fragments.add(mChenJiaoFragment);
+        return fragments;
     }
 }

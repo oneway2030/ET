@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.adapter.recyclerview.RecyclerViewCreator;
@@ -24,7 +26,7 @@ import butterknife.BindView;
  * 描述:公告列表页面
  * 参考链接:
  */
-public class NoticeActivity extends BaseTitleActivity implements ListLayout.TaskListener, RecyclerViewCreator<NoticeInfo> {
+public class NoticeActivity extends BaseTitleActivity implements ListLayout.TaskListener, RecyclerViewCreator<NoticeInfo>, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.listLayout)
     ListLayout mListLayout;
@@ -52,22 +54,10 @@ public class NoticeActivity extends BaseTitleActivity implements ListLayout.Task
     @Override
     protected void initData(Bundle savedInstanceState) {
         mListLayout.setTaskListener(this);
-        mListLayout.addItemDecoration(new UniversalItemDecoration() {
-            @Override
-            public Decoration getItemOffsets(int position, int childCount) {
-                if (position == 0) {
-                    ColorDecoration decoration = new ColorDecoration();
-                    decoration.top = UiUtils.dp2px(5);
-                    return decoration;
-                } else {
-                    ColorDecoration decoration = new ColorDecoration();
-                    decoration.top = UiUtils.dp2px(1);
-                    return decoration;
-                }
-            }
-        });
+        mListLayout.addItemDecoration(new MyUniversalItemDecoration());
         mListLayout.setEmptyText("暂无公告...");
         mListLayout.setAdaper(new XRecyclerViewAdapter<NoticeInfo>(this));
+        mListLayout.addOnItemClickListener(this);
         mListLayout.showLoadingView();
         mListLayout.pullRefresh();
     }
@@ -75,7 +65,7 @@ public class NoticeActivity extends BaseTitleActivity implements ListLayout.Task
     @Override
     public void task() {
         ArrayList<NoticeInfo> list = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 8; i++) {
             list.add(new NoticeInfo("标题", "2018-9-10", "我是内容"));
         }
         mListLayout.setData(list);
@@ -90,5 +80,33 @@ public class NoticeActivity extends BaseTitleActivity implements ListLayout.Task
     public void bindData(int position, BaseViewHolder holder, NoticeInfo data) {
         holder.setText(R.id.tv1, data.getTitle())
                 .setText(R.id.tv2, data.getTime());
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        try {
+            NoticeInfo info = (NoticeInfo) adapter.getData().get(position);
+            NoticeDetailsActivity.launch(this, info);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 分割线
+     */
+    public class MyUniversalItemDecoration extends UniversalItemDecoration {
+        @Override
+        public Decoration getItemOffsets(int position, int childCount) {
+            if (position == 0) {
+                ColorDecoration decoration = new ColorDecoration();
+                decoration.top = UiUtils.dp2px(5);
+                return decoration;
+            } else {
+                ColorDecoration decoration = new ColorDecoration();
+                decoration.top = UiUtils.dp2px(1);
+                return decoration;
+            }
+        }
     }
 }

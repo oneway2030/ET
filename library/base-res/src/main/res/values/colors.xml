@@ -32,6 +32,10 @@
     <color name="page_bg">#fff6f6f6</color>
     <!--通用文字颜色-->
     <color name="text">#464646</color>
+    <!--通用文字颜色-->
+    <color name="text9">#999999</color>
+    <!--通用文字颜色-->
+    <color name="divider_common_color">#dddddd</color>
 
 
 </resources>

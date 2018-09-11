@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 /**
  * 作者 oneway on 2018/9/11
- * 描述:
+ * 描述: 官方公告信息
  * 参考链接:
  */
 public class NoticeInfo implements Parcelable {

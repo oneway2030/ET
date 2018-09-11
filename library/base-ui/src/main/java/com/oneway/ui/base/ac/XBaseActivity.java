@@ -43,10 +43,11 @@ public abstract class XBaseActivity<P extends IPresenter> extends MVPActivity<P>
                 setContentView(layoutResID);
                 //绑定到butterknife
             }
-            if (bindBefor()) {
+            if (getIntent(getIntent())) {
                 finish();
                 return;
             }
+            bindBefor();
             if (isBindView()) {
                 bind = ButterKnife.bind(this);
             }
@@ -55,20 +56,18 @@ public abstract class XBaseActivity<P extends IPresenter> extends MVPActivity<P>
         }
         initStatusBar();
 //        initDialog();
-        if (initParms(getIntent().getExtras())) {
-            return;
-        }
-        if(isEneableBus())
+        if (isEneableBus())
             BusManager.getBus().register(this);
 //        BusInstant.getBus().register(this);
         registerCommonButton();
         initData(savedInstanceState);
         ActivityManager.getInstance().addActivity(this);
     }
+
+
     protected boolean isEneableBus() {
         return true;
     }
-
 
 
     protected void initStatusBar() {
@@ -78,23 +77,24 @@ public abstract class XBaseActivity<P extends IPresenter> extends MVPActivity<P>
 
     protected abstract void initData(Bundle savedInstanceState);
 
+
     /**
      * 一般用于接收其他界面过来的参数,
      * 默认 false 如果 该函数返回true则不继续走下面的逻辑
      */
-    protected boolean bindBefor() {
+
+    protected boolean getIntent(Intent intent) {
         return false;
     }
 
-    /**
-     * [初始化参数]
-     *
-     * @param parms
-     */
-    protected boolean initParms(Bundle parms) {
-        return false;
+    protected void bindBefor() {
+
     }
 
+    @Override
+    public Intent getIntent() {
+        return super.getIntent();
+    }
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
@@ -242,8 +242,6 @@ public abstract class XBaseActivity<P extends IPresenter> extends MVPActivity<P>
         }
         ActivityManager.getInstance().removeActivity(this);
     }
-
-
 
 
     //    private void initDialog() {
