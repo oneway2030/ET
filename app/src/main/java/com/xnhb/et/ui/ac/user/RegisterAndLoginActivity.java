@@ -3,6 +3,7 @@ package com.xnhb.et.ui.ac.user;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -39,7 +40,11 @@ public class RegisterAndLoginActivity extends BaseTitleActivity {
         }
         context.startActivity(intent);
     }
-
+    @Override
+    protected void setStatusBar() {
+        mToolbar.setBackgroundResource(R.color.black);
+        setTitleBar(mToolbar);
+    }
     @Override
     protected String getTitleText() {
         return "";

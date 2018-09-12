@@ -5,13 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         android:background="@color/login_bg"
         android:orientation="vertical"
         app:cardBackgroundColor="@color/login_bg"
@@ -32,40 +29,53 @@
 
             <com.oneway.ui.widget.et.XEditText
                 android:id="@+id/et_account"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_et_login_bg"
-                android:drawableLeft="@mipmap/account"
-                android:drawablePadding="12dp"
-                android:hint="@string/hint_login_account"
-                android:maxLength="20"
-                android:paddingBottom="10dp"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:paddingTop="10dp"
-                android:textColor="@color/white"
-                android:textColorHint="#cccccc" />
+                style="@style/common_btn_et"
+                android:drawableLeft="@mipmap/phone"
+                android:hint="@string/hint_register_account"
+                android:maxLength="20" />
 
             <com.oneway.ui.widget.et.XEditText
                 android:id="@+id/et_pwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/common_btn_et"
+                android:layout_marginTop="18dp"
+                android:drawableLeft="@mipmap/phone"
+                android:hint="@string/hint_verification_code"
+                android:maxLength="10" />
 
-                android:layout_marginTop="20dp"
-                android:background="@drawable/shape_et_login_bg"
-                android:drawableLeft="@mipmap/pwd"
-                android:drawablePadding="12dp"
+            <com.oneway.ui.widget.et.XEditText
+                style="@style/common_btn_et"
+                android:layout_marginTop="18dp"
+                android:drawableLeft="@mipmap/phone"
+                android:hint="@string/hint_common_mail"
+                android:maxLength="10" />
+
+            <com.oneway.ui.widget.et.XEditText
+                style="@style/common_btn_et"
+                android:layout_marginTop="18dp"
+                android:drawableLeft="@mipmap/phone"
                 android:hint="@string/hint_login_pwd"
-                android:inputType="textPassword"
-                android:maxLength="20"
-                android:paddingBottom="10dp"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:paddingTop="10dp"
-                android:textColor="@color/white"
-                android:textColorHint="#cccccc"
-                app:x_hidePwdDrawable="@mipmap/ic_hide"
-                app:x_showPwdDrawable="@mipmap/ic_show" />
+                android:maxLength="10" />
+
+            <com.oneway.ui.widget.et.XEditText
+                style="@style/common_btn_et"
+                android:layout_marginTop="18dp"
+                android:drawableLeft="@mipmap/phone"
+                android:hint="@string/hint_login_reinput_pwd"
+                android:maxLength="10" />
+
+            <com.oneway.ui.widget.et.XEditText
+                style="@style/common_btn_et"
+                android:layout_marginTop="18dp"
+                android:drawableLeft="@mipmap/phone"
+                android:hint="@string/hint_transaction_pwd"
+                android:maxLength="10" />
+
+            <com.oneway.ui.widget.et.XEditText
+                style="@style/common_btn_et"
+                android:layout_marginTop="18dp"
+                android:drawableLeft="@mipmap/phone"
+                android:hint="@string/hint_referee"
+                android:maxLength="10" />
 
             <com.oneway.ui.widget.btn.StateButton
                 android:id="@+id/stateButton"

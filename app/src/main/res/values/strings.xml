@@ -14,6 +14,12 @@
     <string name="home_item_volum"><![CDATA[Volum:<font color="#FFFFFF"> %1$s</font> %2$s]]></string>
     <string name="hint_login_account">请输入账户</string>
     <string name="hint_login_pwd">请输入登陆密码</string>
+    <string name="hint_login_reinput_pwd">请再次输入登录密码</string>
+    <string name="hint_transaction_pwd">请输入交易密码</string>
+    <string name="hint_register_account">请输入手机或邮箱</string>
+    <string name="hint_verification_code">请输入验证码</string>
+    <string name="hint_common_mail">请输入常用的邮箱</string>
+    <string name="hint_referee">请输入推荐人(选填)</string>
 
 
 </resources>

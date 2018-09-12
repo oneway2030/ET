@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="22dp"
         app:xTabDividerWidthWidthText="true"
         app:xTabIndicatorColor="@color/white"
         app:xTabIndicatorHeight="3dp"
