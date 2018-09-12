@@ -3,11 +3,9 @@ package com.xnhb.et.ui.ac.user;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
 
 import com.androidkun.xtablayout.XTabLayout;
 import com.oneway.ui.base.ac.BaseTitleActivity;
@@ -31,6 +29,7 @@ public class RegisterAndLoginActivity extends BaseTitleActivity {
     ViewPager mViewPager;
     String[] mTitles = {"登录", "注册"};
     private FragmentBaseAdapter mFragmentAdapter;
+
 
     public static void launch(Context context) {
         Intent intent = new Intent();
@@ -58,7 +57,7 @@ public class RegisterAndLoginActivity extends BaseTitleActivity {
     @Override
     protected void initData(Bundle savedInstanceState) {
         mFragmentAdapter = new FragmentBaseAdapter(getSupportFragmentManager(), getFragmentPage(), mTitles);
-        mViewPager.setOffscreenPageLimit(mTitles.length);
+//        mViewPager.setOffscreenPageLimit(mTitles.length);
         mViewPager.setAdapter(mFragmentAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }

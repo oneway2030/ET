@@ -33,9 +33,9 @@
             android:name=".ui.ac.NoticeDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:name=".ui.ac.user.RegisterAndLoginActivity"
             android:screenOrientation="portrait" />
-
 
     </application>
 
