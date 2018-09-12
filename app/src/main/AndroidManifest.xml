@@ -32,6 +32,9 @@
         <activity
             android:name=".ui.ac.NoticeDetailsActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ac.user.RegisterAndLoginActivity"
+            android:screenOrientation="portrait" />
 
 
     </application>

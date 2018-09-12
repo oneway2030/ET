@@ -1,11 +1,14 @@
 package com.xnhb.et.ui.fragment.home;
 
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.oneway.ui.base.fragment.BaseFragment;
+import com.oneway.ui.common.PerfectClickListener;
 import com.xnhb.et.R;
+import com.xnhb.et.ui.ac.user.RegisterAndLoginActivity;
 
 import butterknife.BindView;
 
@@ -29,7 +32,7 @@ public class WalletFragment extends BaseFragment {
     @BindView(R.id.title_layout)
     LinearLayout mTitleLayout;
 
-
+    //    RegisterAndLoginActivity
     @Override
     protected boolean isImmersionBarEnabled() {
         return true;
@@ -46,4 +49,19 @@ public class WalletFragment extends BaseFragment {
         mImmersionBar.titleBar(mTitleLayout)
                 .init();
     }
+
+    @Override
+    protected void initView() {
+        titleIvSetting.setOnClickListener(mPerfectClickListener);
+    }
+
+    PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
+        @Override
+        protected void onNoDoubleClick(View v) {
+            int id = v.getId();
+            if (id == R.id.title_iv_setting) {
+                RegisterAndLoginActivity.launch(getActivity());
+            }
+        }
+    };
 }

@@ -8,7 +8,7 @@
     <!--通用btn高度-->
     <dimen name="common_btn_hight">46dp</dimen>
     <!--通用圆角-->
-    <dimen name="common_radius_6d">6dp</dimen>
+    <dimen name="common_radius_6">6dp</dimen>
 
     <!-- 通用文字大小 -->
     <dimen name="dimen_sp_8">8sp</dimen>

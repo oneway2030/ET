@@ -11,4 +11,9 @@
     <!-- 不用转义 -->
     <string name="mian_pirce_red"><![CDATA[<font color="#dc2527">%1$s</font><font color="#999999">\/%2$s</font>]]></string>
     <string name="mian_pirce_green"><![CDATA[<font color="#44c08f">%1$s</font><font color="#999999">\/%2$s</font>]]></string>
+    <string name="home_item_volum"><![CDATA[Volum:<font color="#FFFFFF"> %1$s</font> %2$s]]></string>
+    <string name="hint_login_account">请输入账户</string>
+    <string name="hint_login_pwd">请输入登陆密码</string>
+
+
 </resources>

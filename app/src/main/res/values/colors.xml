@@ -22,6 +22,9 @@
     |
     <color name="price_red">#dc2527</color>
     <color name="price_green">#44c08f</color>
+    <color name="home_h_item_bg">#293556</color>
+    <color name="login_tab_text_unselect">#8c96af</color>
+    <color name="login_bg">#202b30</color>
 
 
 </resources>

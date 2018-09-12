@@ -9,13 +9,13 @@
     <!--android:id="@+id/title_layout"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="@dimen/common_title_bar_hight" />-->
-
+    <!--banner-->
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="145dp"
         android:background="@color/colorPrimary_statbar_bg" />
-
+    <!--公告-->
     <LinearLayout
         android:id="@+id/notice_layout"
         android:layout_width="match_parent"
@@ -51,11 +51,13 @@
 
 
     <include layout="@layout/common_divider" />
-
+    <!--横向列表-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/HRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="116dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp" />
 
 
     <com.androidkun.xtablayout.XTabLayout
@@ -70,17 +72,11 @@
         app:xTabSelectedTextColor="@color/color_text_press"
         app:xTabTextColor="@color/text9"
         app:xTabTextSize="15sp" />
-
+    <!--涨幅列表-->
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/gray"
-        android:gravity="center"
-        android:text="11111" />
 </LinearLayout>

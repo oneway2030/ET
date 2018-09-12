@@ -2,6 +2,8 @@ package com.xnhb.et.ui.fragment.home;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -12,6 +14,8 @@ import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.tv.AutoVerticalTextView;
 import com.xnhb.et.R;
+import com.xnhb.et.adapter.HomeHAdapter;
+import com.xnhb.et.bean.HomeHDataInfo;
 import com.xnhb.et.common.GlideImageLoader;
 import com.xnhb.et.ui.ac.NoticeActivity;
 import com.youth.banner.Banner;
@@ -37,8 +41,11 @@ public class HomeFragment extends BaseFragment {
     XTabLayout mTabLayout;
     @BindView(R.id.vp)
     ViewPager mViewPager;
+    @BindView(R.id.HRecyclerView)
+    RecyclerView mHRecyclerView;
     String[] mTitles = {"涨幅榜", "成交榜"};
-    private FragmentBaseAdapter mAdapter;
+    private FragmentBaseAdapter mFragmentAdapter;
+    private HomeHAdapter mAdapter;
 
     @Override
     protected int setLayoutId() {
@@ -61,14 +68,24 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData() {
+    protected void initView() {
         noticeLayout.setOnClickListener(mPerfectClickListener);
-        setBanner();
-        mAutoVerticalTextview.setTextList(getTvData());//加入显示内容,集合类型
-        mAdapter = new FragmentBaseAdapter(getChildFragmentManager(), getFragmentPage(), mTitles);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mHRecyclerView.setLayoutManager(linearLayoutManager);
+        mAdapter = new HomeHAdapter();
+        mHRecyclerView.setAdapter(mAdapter);
+        mFragmentAdapter = new FragmentBaseAdapter(getChildFragmentManager(), getFragmentPage(), mTitles);
         mViewPager.setOffscreenPageLimit(mTitles.length);
-        mViewPager.setAdapter(mAdapter);
+        mViewPager.setAdapter(mFragmentAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    protected void initData() {
+        setBanner();
+        mAdapter.setNewData(getHData());
+        mAutoVerticalTextview.setTextList(getTvData());//加入显示内容,集合类型
     }
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
@@ -88,24 +105,6 @@ public class HomeFragment extends BaseFragment {
                 .isAutoPlay(true)
                 .setOnBannerListener(position -> ToastManager.info("点击了 =>" + position));
         mBanner.start();
-    }
-
-    protected ArrayList<Integer> getBannerData() {
-        ArrayList<Integer> pics = new ArrayList<>();
-        pics.add(R.mipmap.banner_bg);
-        pics.add(R.mipmap.banner_bg);
-        pics.add(R.mipmap.banner_bg);
-        pics.add(R.mipmap.test);
-        return pics;
-    }
-
-    protected ArrayList<String> getTvData() {
-        ArrayList<String> titles = new ArrayList<>();
-        titles.add("一条公告");
-        titles.add("二条公告");
-        titles.add("三条公告");
-        titles.add("四条公告");
-        return titles;
     }
 
 
@@ -133,5 +132,31 @@ public class HomeFragment extends BaseFragment {
         fragments.add(mZhangFuFragment);
         fragments.add(mChenJiaoFragment);
         return fragments;
+    }
+
+    protected ArrayList<Integer> getBannerData() {
+        ArrayList<Integer> pics = new ArrayList<>();
+        pics.add(R.mipmap.banner_bg);
+        pics.add(R.mipmap.banner_bg);
+        pics.add(R.mipmap.banner_bg);
+        pics.add(R.mipmap.test);
+        return pics;
+    }
+
+    protected ArrayList<String> getTvData() {
+        ArrayList<String> titles = new ArrayList<>();
+        titles.add("一条公告");
+        titles.add("二条公告");
+        titles.add("三条公告");
+        titles.add("四条公告");
+        return titles;
+    }
+
+    public ArrayList<HomeHDataInfo> getHData() {
+        ArrayList<HomeHDataInfo> infos = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            infos.add(new HomeHDataInfo());
+        }
+        return infos;
     }
 }

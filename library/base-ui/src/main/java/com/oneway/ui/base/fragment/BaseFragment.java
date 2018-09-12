@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.oneway.ui.R;
+import com.oneway.ui.base.in.IPresenter;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -20,7 +21,7 @@ import butterknife.Unbinder;
  * 当以show()和hide()方法形式加载Fragment，沉浸式的使用
  * Created by geyifeng on 2017/4/7.
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<P extends IPresenter> extends MVPFragment<P> {
 
     protected Activity mActivity;
     protected View mRootView;
@@ -47,8 +48,8 @@ public abstract class BaseFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         if (isImmersionBarEnabled())
             initImmersionBar();
-        initData();
         initView();
+        initData();
         setListener();
     }
 

@@ -109,4 +109,8 @@ public class NoticeActivity extends BaseTitleActivity implements ListLayout.Task
             }
         }
     }
+
+   void showConten(){
+
+   }
 }

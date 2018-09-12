@@ -9,6 +9,6 @@
         android:width="1dp"
         android:color="@color/common_btn_bg_brightred" /><!-- 描边，边框宽度、颜色 -->
 
-    <corners android:radius="@dimen/common_radius_6d" /><!-- 边角圆弧的半径 -->
+    <corners android:radius="@dimen/common_radius_6" /><!-- 边角圆弧的半径 -->
 
 </shape>
