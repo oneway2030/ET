@@ -9,10 +9,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.oneway.tool.event.BusManager;
+import com.oneway.tool.utils.common.KeyboardUtils;
 import com.oneway.ui.R;
 import com.oneway.ui.base.fragment.BaseLazyFragment;
 import com.oneway.ui.base.in.IPresenter;
@@ -29,7 +29,6 @@ public abstract class XBaseActivity<P extends IPresenter> extends MVPActivity<P>
     protected Context mContext = XBaseActivity.this;
     private Unbinder bind;
     protected BaseLazyFragment mFragment;
-    private InputMethodManager imm;
     private boolean mIsDestroyed = false;
 
     @Override
@@ -220,23 +219,13 @@ public abstract class XBaseActivity<P extends IPresenter> extends MVPActivity<P>
         }
     }
 
-    public void hideSoftKeyBoard() {
-        View localView = getCurrentFocus();
-        if (this.imm == null) {
-            this.imm = ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE));
-        }
-        if ((localView != null) && (this.imm != null)) {
-            this.imm.hideSoftInputFromWindow(localView.getWindowToken(), 2);
-        }
-    }
-
 
     @Override
     protected void onDestroy() {
+        KeyboardUtils.hideSoftInput(this);
         super.onDestroy();
         BusManager.getBus().unregister(this);
         mIsDestroyed = true;
-        hideSoftKeyBoard();
         if (bind != null) {
             bind.unbind();
         }

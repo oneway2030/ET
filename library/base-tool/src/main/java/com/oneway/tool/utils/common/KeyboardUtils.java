@@ -61,7 +61,8 @@ public class KeyboardUtils {
         if (view == null) view = new View(activity);
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         if (imm == null) return;
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        //这里传2才有效,没太明白.0无效,猜测有可能与界面的windowSoftInputMode 属性有关
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 2);
     }
 
     /**
