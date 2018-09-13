@@ -124,12 +124,12 @@ public class XEditText extends AppCompatEditText {
 
         if (!disableClear) {
             if (mClearResId == -1)
-                mClearResId = R.drawable.x_et_svg_ic_clear_24dp;
+                mClearResId = R.drawable.x_et_svg_ic_clear_20dp;
             mClearDrawable = AppCompatResources.getDrawable(context, mClearResId);
             if (mClearDrawable != null) {
                 mClearDrawable.setBounds(0, 0, mClearDrawable.getIntrinsicWidth(),
                         mClearDrawable.getIntrinsicHeight());
-                if (mClearResId == R.drawable.x_et_svg_ic_clear_24dp)
+                if (mClearResId == R.drawable.x_et_svg_ic_clear_20dp)
                     DrawableCompat.setTint(mClearDrawable, getCurrentHintTextColor());
             }
         }
@@ -187,23 +187,23 @@ public class XEditText extends AppCompatEditText {
             }
 
             if (mShowPwdResId == -1)
-                mShowPwdResId = R.drawable.x_et_svg_ic_show_password_24dp;
+                mShowPwdResId = R.drawable.x_et_svg_ic_show_password_20dp;
             if (mHidePwdResId == -1)
-                mHidePwdResId = R.drawable.x_et_svg_ic_hide_password_24dp;
+                mHidePwdResId = R.drawable.x_et_svg_ic_hide_password_20dp;
             int tId = isPwdShow ? mShowPwdResId : mHidePwdResId;
             mTogglePwdDrawable = ContextCompat.getDrawable(getContext(), tId);
-            if (mShowPwdResId == R.drawable.x_et_svg_ic_show_password_24dp ||
-                    mHidePwdResId == R.drawable.x_et_svg_ic_hide_password_24dp) {
+            if (mShowPwdResId == R.drawable.x_et_svg_ic_show_password_20dp ||
+                    mHidePwdResId == R.drawable.x_et_svg_ic_hide_password_20dp) {
                 DrawableCompat.setTint(mTogglePwdDrawable, getCurrentHintTextColor());
             }
             mTogglePwdDrawable.setBounds(0, 0, mTogglePwdDrawable.getIntrinsicWidth(),
                     mTogglePwdDrawable.getIntrinsicHeight());
 
             if (mClearResId == -1)
-                mClearResId = R.drawable.x_et_svg_ic_clear_24dp;
+                mClearResId = R.drawable.x_et_svg_ic_clear_20dp;
             if (!disableClear) {
                 mBitmap = getBitmapFromVectorDrawable(getContext(), mClearResId,
-                        mClearResId == R.drawable.x_et_svg_ic_clear_24dp); // clearDrawable
+                        mClearResId == R.drawable.x_et_svg_ic_clear_20dp); // clearDrawable
             }
         }
 
@@ -282,8 +282,8 @@ public class XEditText extends AppCompatEditText {
                 setSelection(getSelectionStart(), getSelectionEnd());
                 mTogglePwdDrawable = ContextCompat.getDrawable(getContext(), isPwdShow ?
                         mShowPwdResId : mHidePwdResId);
-                if (mShowPwdResId == R.drawable.x_et_svg_ic_show_password_24dp ||
-                        mHidePwdResId == R.drawable.x_et_svg_ic_hide_password_24dp) {
+                if (mShowPwdResId == R.drawable.x_et_svg_ic_show_password_20dp ||
+                        mHidePwdResId == R.drawable.x_et_svg_ic_hide_password_20dp) {
                     DrawableCompat.setTint(mTogglePwdDrawable, getCurrentHintTextColor());
                 }
                 mTogglePwdDrawable.setBounds(0, 0, mTogglePwdDrawable.getIntrinsicWidth(),
@@ -413,8 +413,8 @@ public class XEditText extends AppCompatEditText {
             }
         } else {
             if (isPwdInputType) {
-                if (mShowPwdResId == R.drawable.x_et_svg_ic_show_password_24dp ||
-                        mHidePwdResId == R.drawable.x_et_svg_ic_hide_password_24dp) {
+                if (mShowPwdResId == R.drawable.x_et_svg_ic_show_password_20dp ||
+                        mHidePwdResId == R.drawable.x_et_svg_ic_hide_password_20dp) {
                     DrawableCompat.setTint(mTogglePwdDrawable, getCurrentHintTextColor());
                 }
                 setCompoundDrawables(getCompoundDrawables()[0], getCompoundDrawables()[1],

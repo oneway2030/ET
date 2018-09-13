@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:paddingBottom="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="10dp">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
         app:contentPaddingBottom="5dp"
         app:contentPaddingLeft="10dp"
         app:contentPaddingRight="10dp"
-        app:contentPaddingTop="20dp">
+        app:contentPaddingTop="24dp">
 
 
         <LinearLayout
@@ -41,6 +41,7 @@
                 android:layout_marginTop="20dp"
                 android:drawableLeft="@mipmap/lock"
                 android:hint="@string/hint_login_pwd"
+                android:inputType="textPassword"
                 android:maxLength="20"
                 app:x_hidePwdDrawable="@mipmap/ic_hide"
                 app:x_showPwdDrawable="@mipmap/ic_show" />

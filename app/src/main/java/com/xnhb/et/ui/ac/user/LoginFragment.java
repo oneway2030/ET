@@ -1,23 +1,17 @@
 package com.xnhb.et.ui.ac.user;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.oneway.ui.base.fragment.BaseFragment;
 import com.oneway.ui.common.PerfectClickListener;
-import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.btn.StateButton;
 import com.oneway.ui.widget.et.XEditText;
 import com.xnhb.et.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * 作者 oneway on 2018/9/12
@@ -60,11 +54,21 @@ public class LoginFragment extends BaseFragment {
                 ivCheck.setImageResource(isChecked ? R.mipmap.checkbox_unchecked : R.mipmap.checkbox_checked);
                 isChecked = !isChecked;
             } else if (id == R.id.tv_forget_pwd) {//忘记密码
-                ToastManager.info("忘记密码");
+                if (listener != null) {
+                    listener.OnLaunchForgetPwdPage(v);
+                }
             } else if (id == R.id.btn_login) {//登录
 
             }
         }
     };
+    OnClickForgetPwdPageListener listener;
 
+    public void setOnClickForgetPwdPageListener(OnClickForgetPwdPageListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnClickForgetPwdPageListener {
+        void OnLaunchForgetPwdPage(View v);
+    }
 }

@@ -20,6 +20,9 @@
     <string name="hint_verification_code">请输入验证码</string>
     <string name="hint_common_mail">请输入常用的邮箱</string>
     <string name="hint_referee">请输入推荐人(选填)</string>
+    <string name="hint_reset_pwd">请输入登录密码</string>
+    <string name="hint_reinput_pwd">请再次输入登陆密码</string>
+    <string name="forget_pwd">忘记密码</string>
 
 
 </resources>

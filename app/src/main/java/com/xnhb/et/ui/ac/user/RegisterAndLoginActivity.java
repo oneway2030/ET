@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.androidkun.xtablayout.XTabLayout;
 import com.oneway.ui.base.ac.BaseTitleActivity;
@@ -22,11 +23,13 @@ import butterknife.BindView;
  * 描述: 注册 登录 忘记密码
  * 参考链接:
  */
-public class RegisterAndLoginActivity extends BaseTitleActivity {
+public class RegisterAndLoginActivity extends BaseTitleActivity implements LoginFragment.OnClickForgetPwdPageListener {
     @BindView(R.id.xTablayout)
     XTabLayout mTabLayout;
     @BindView(R.id.vp)
     ViewPager mViewPager;
+    @BindView(R.id.forget_pwd_layout)
+    View forgetPwdLayout;
     String[] mTitles = {"登录", "注册"};
     private FragmentBaseAdapter mFragmentAdapter;
 
@@ -39,11 +42,13 @@ public class RegisterAndLoginActivity extends BaseTitleActivity {
         }
         context.startActivity(intent);
     }
+
     @Override
     protected void setStatusBar() {
         mToolbar.setBackgroundResource(R.color.black);
         setTitleBar(mToolbar);
     }
+
     @Override
     protected String getTitleText() {
         return "";
@@ -60,16 +65,41 @@ public class RegisterAndLoginActivity extends BaseTitleActivity {
 //        mViewPager.setOffscreenPageLimit(mTitles.length);
         mViewPager.setAdapter(mFragmentAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.addOnTabSelectedListener(new XTabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(XTabLayout.Tab tab) {
+                forgetPwdLayout.setVisibility(View.GONE);
+                mViewPager.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onTabUnselected(XTabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(XTabLayout.Tab tab) {
+                forgetPwdLayout.setVisibility(View.GONE);
+                mViewPager.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     public List<Fragment> getFragmentPage() {
         List<Fragment> fragments = new ArrayList<>();
         //登录
         LoginFragment loginFragment = new LoginFragment();
+        loginFragment.setOnClickForgetPwdPageListener(this);
         //注册
         RegisterFragment registerFragment = new RegisterFragment();
         fragments.add(loginFragment);
         fragments.add(registerFragment);
         return fragments;
+    }
+
+    @Override
+    public void OnLaunchForgetPwdPage(View v) {
+        forgetPwdLayout.setVisibility(View.VISIBLE);
+        mViewPager.setVisibility(View.GONE);
     }
 }

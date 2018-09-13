@@ -5,6 +5,6 @@
 
     <solid android:color="@color/count_down_btn_bg" />
 
-    <corners android:radius="6dp" />
+    <corners android:radius="3dp" />
 
 </shape>

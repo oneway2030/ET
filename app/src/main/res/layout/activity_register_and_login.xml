@@ -18,13 +18,19 @@
         app:xTabIndicatorHeight="3dp"
         app:xTabMode="fixed"
         app:xTabSelectedTextColor="@color/white"
-        app:xTabSelectedTextSize="20sp"
+        app:xTabSelectedTextSize="19sp"
         app:xTabTextBold="true"
         app:xTabTextColor="@color/login_tab_text_unselect"
         app:xTabTextSize="18sp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <include
+        android:id="@+id/forget_pwd_layout"
+        layout="@layout/fragment_forget_pwd_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
