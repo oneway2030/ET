@@ -420,6 +420,7 @@ public class XEditText extends AppCompatEditText {
                 setCompoundDrawables(getCompoundDrawables()[0], getCompoundDrawables()[1],
                         mTogglePwdDrawable, getCompoundDrawables()[3]);
             } else if (!isTextEmpty() && !disableClear) {
+                //TODO 没明白这里为什么要重新设置图片  在et旁边添加验证码btn, et有输入的时候,布局会变高.
                 setCompoundDrawables(getCompoundDrawables()[0], getCompoundDrawables()[1],
                         mClearDrawable, getCompoundDrawables()[3]);
             }

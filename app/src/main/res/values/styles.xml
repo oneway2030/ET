@@ -11,11 +11,11 @@
     <style name="common_btn_et">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">17sp</item>
+        <!--<item name="android:textSize">17sp</item>-->
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textColorHint">@color/gray_c</item>
+        <item name="android:textColorHint">@color/text_hint_gray</item>
         <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingBottom">8dp</item>S
         <item name="android:paddingLeft">12dp</item>
         <item name="android:paddingRight">12dp</item>
         <item name="android:drawablePadding">12dp</item>

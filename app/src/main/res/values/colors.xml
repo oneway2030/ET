@@ -25,6 +25,7 @@
     <color name="home_h_item_bg">#293556</color>
     <color name="login_tab_text_unselect">#8c96af</color>
     <color name="login_bg">#202b30</color>
+    <color name="count_down_btn_bg">#8c96af</color>
 
 
 </resources>

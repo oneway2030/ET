@@ -26,16 +26,64 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_et_login_bg"
+                android:orientation="horizontal">
+
+                <!--<EditText-->
+                <!--android:id="@+id/et_account"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@null"-->
+                <!--android:drawableLeft="@mipmap/phone"-->
+                <!--android:drawablePadding="12dp"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:hint="@string/hint_register_account"-->
+                <!--android:maxLength="20"-->
+                <!--android:paddingBottom="8dp"-->
+                <!--android:paddingLeft="12dp"-->
+                <!--android:paddingRight="12dp"-->
+                <!--android:paddingTop="8dp"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textColorHint="@color/text_hint_gray" />-->
+
+                <com.oneway.ui.widget.et.XEditText
+                    android:id="@+id/et_account"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:drawableLeft="@mipmap/phone"
+                    android:drawablePadding="12dp"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_register_account"
+                    android:maxLength="20"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="8dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/text_hint_gray" />
+
+                <com.oneway.ui.widget.CountDownButton
+                    android:id="@+id/btn_countdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/shape_count_down_bg"
+                    android:gravity="center_vertical"
+
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <com.oneway.ui.widget.et.XEditText
-                android:id="@+id/et_account"
-                style="@style/common_btn_et"
-                android:drawableLeft="@mipmap/phone"
-                android:hint="@string/hint_register_account"
-                android:maxLength="20" />
-
-            <com.oneway.ui.widget.et.XEditText
-                android:id="@+id/et_pwd"
+                android:id="@+id/et_verification_code"
                 style="@style/common_btn_et"
                 android:layout_marginTop="18dp"
                 android:drawableLeft="@mipmap/phone"
@@ -43,42 +91,47 @@
                 android:maxLength="10" />
 
             <com.oneway.ui.widget.et.XEditText
+                android:id="@+id/et_mail"
                 style="@style/common_btn_et"
                 android:layout_marginTop="18dp"
-                android:drawableLeft="@mipmap/phone"
+                android:drawableLeft="@mipmap/email"
                 android:hint="@string/hint_common_mail"
                 android:maxLength="10" />
 
             <com.oneway.ui.widget.et.XEditText
+                android:id="@+id/et_login_pwd"
                 style="@style/common_btn_et"
                 android:layout_marginTop="18dp"
-                android:drawableLeft="@mipmap/phone"
+                android:drawableLeft="@mipmap/lock"
                 android:hint="@string/hint_login_pwd"
                 android:maxLength="10" />
 
             <com.oneway.ui.widget.et.XEditText
+                android:id="@+id/et_reinput_login_pwd"
                 style="@style/common_btn_et"
                 android:layout_marginTop="18dp"
-                android:drawableLeft="@mipmap/phone"
+                android:drawableLeft="@mipmap/lock"
                 android:hint="@string/hint_login_reinput_pwd"
                 android:maxLength="10" />
 
             <com.oneway.ui.widget.et.XEditText
+                android:id="@+id/et_transaction_pwd"
                 style="@style/common_btn_et"
                 android:layout_marginTop="18dp"
-                android:drawableLeft="@mipmap/phone"
+                android:drawableLeft="@mipmap/lock"
                 android:hint="@string/hint_transaction_pwd"
                 android:maxLength="10" />
 
             <com.oneway.ui.widget.et.XEditText
+                android:id="@+id/et_referee"
                 style="@style/common_btn_et"
                 android:layout_marginTop="18dp"
-                android:drawableLeft="@mipmap/phone"
+                android:drawableLeft="@mipmap/account"
                 android:hint="@string/hint_referee"
                 android:maxLength="10" />
 
             <com.oneway.ui.widget.btn.StateButton
-                android:id="@+id/stateButton"
+                android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="center"

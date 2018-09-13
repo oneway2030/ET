@@ -39,7 +39,7 @@
                 android:id="@+id/et_pwd"
                 style="@style/common_btn_et"
                 android:layout_marginTop="20dp"
-                android:drawableLeft="@mipmap/account"
+                android:drawableLeft="@mipmap/lock"
                 android:hint="@string/hint_login_pwd"
                 android:maxLength="20"
                 app:x_hidePwdDrawable="@mipmap/ic_hide"
@@ -47,7 +47,7 @@
 
 
             <com.oneway.ui.widget.btn.StateButton
-                android:id="@+id/stateButton"
+                android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="center"

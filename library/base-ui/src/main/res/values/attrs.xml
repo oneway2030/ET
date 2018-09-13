@@ -75,16 +75,27 @@
         <attr name="textSise" format="dimension" />
         <attr name="textColor" format="color" />
         <attr name="android:gravity" />
-    </declare-styleable>>
+    </declare-styleable>
+    >
 
     <declare-styleable name="XEditText">
-        <attr name="x_separator" format="string"/>
-        <attr name="x_disableClear" format="boolean"/>
-        <attr name="x_clearDrawable" format="reference"/>
-        <attr name="x_showPwdDrawable" format="reference"/>
-        <attr name="x_hidePwdDrawable" format="reference"/>
-        <attr name="x_disableEmoji" format="boolean"/>
-        <attr name="x_togglePwdDrawableEnable" format="boolean"/>
-        <attr name="x_pattern" format="string"/>
+        <attr name="x_separator" format="string" />
+        <attr name="x_disableClear" format="boolean" />
+        <attr name="x_clearDrawable" format="reference" />
+        <attr name="x_showPwdDrawable" format="reference" />
+        <attr name="x_hidePwdDrawable" format="reference" />
+        <attr name="x_disableEmoji" format="boolean" />
+        <attr name="x_togglePwdDrawableEnable" format="boolean" />
+        <attr name="x_pattern" format="string" />
+    </declare-styleable>
+
+    <!--倒计时btn-->
+    <declare-styleable name="CountDownButton">
+        <attr name="millisinfuture" format="integer" />
+        <attr name="countdown_interva" format="integer" />
+        <attr name="android:textColor" format="color" />
+        <attr name="countdown_textColor" format="color" />
+        <attr name="android:background" format="color" />
+        <attr name="countDownBgColor" format="color" />
     </declare-styleable>
 </resources>
