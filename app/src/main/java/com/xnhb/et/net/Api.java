@@ -7,5 +7,20 @@ package com.xnhb.et.net;
  */
 
 
-public class Api {
+public interface Api {
+    String domain = "http://47.106.38.200:8080";
+
+    /**
+     * 获取验证码 (注册,忘记密码 )
+     */
+    String VERIFICATION_CODEURL = "/ajax/sendCode";
+    /**
+     * 注册账户
+     */
+    String REGISTER_ACCOUNT = "/front/register";
+    /**
+     * 忘记密码
+     */
+    String FORGET_PWD = "/front/forgetPassword";
+
 }

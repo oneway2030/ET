@@ -1,5 +1,7 @@
 package com.oneway.ui.base.in;
 
+import com.lzy.okgo.OkGo;
+
 import java.lang.ref.WeakReference;
 
 /**
@@ -17,7 +19,8 @@ public class XPresent<V extends IView> implements IPresenter<V> {
 
     @Override
     public void detachV() {
-        if (v.get() != null) {
+        OkGo.getInstance().cancelTag(getV().getAc());
+        if (v != null && v.get() != null) {
             v.clear();
         }
         v = null;

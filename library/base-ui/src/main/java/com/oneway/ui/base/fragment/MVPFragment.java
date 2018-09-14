@@ -1,6 +1,7 @@
 package com.oneway.ui.base.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,9 +20,15 @@ public abstract class MVPFragment<P extends IPresenter> extends Fragment impleme
 
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        getP();
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getP();
+
     }
 
     @Override

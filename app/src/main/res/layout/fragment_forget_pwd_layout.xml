@@ -97,7 +97,7 @@
                 android:maxLength="10" />
 
             <com.oneway.ui.widget.et.XEditText
-                android:id="@+id/et_mail"
+                android:id="@+id/et_login_pwd"
                 style="@style/common_btn_et"
                 android:layout_marginTop="18dp"
                 android:drawableLeft="@mipmap/lock"
@@ -105,7 +105,7 @@
                 android:maxLength="10" />
 
             <com.oneway.ui.widget.et.XEditText
-                android:id="@+id/et_login_pwd"
+                android:id="@+id/et_reinput_login_pwd"
                 style="@style/common_btn_et"
                 android:layout_marginTop="18dp"
                 android:drawableLeft="@mipmap/lock"
@@ -114,7 +114,7 @@
 
 
             <com.oneway.ui.widget.btn.StateButton
-                android:id="@+id/btn_register"
+                android:id="@+id/btn_retrieve_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="center"

@@ -106,5 +106,9 @@ public class RegexConstants {
      * 正则：负浮点数
      */
     public static final String REGEX_NEGATIVE_FLOAT       = "^-[1-9]\\d*\\.\\d*|-0\\.\\d*[1-9]\\d*$";
+    /**
+     *正则： 6位数字
+     */
+    public static final String REGEX_SIX_DIGITS    = "^\\d{6}$";
 
 }

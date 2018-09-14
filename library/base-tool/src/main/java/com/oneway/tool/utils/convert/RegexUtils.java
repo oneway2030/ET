@@ -18,6 +18,13 @@ public class RegexUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
+    /**
+     * 验证短信验证码  :6位纯数字
+     */
+    public static boolean isVerificationCode(final CharSequence input) {
+        return isMatch(RegexConstants.REGEX_SIX_DIGITS, input);
+    }
+
 
     /**
      * 验证手机号（简单）

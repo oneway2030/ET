@@ -46,6 +46,7 @@ dependencies {
     api rootProject.ext.dependencies["statusbarutil2"]
     api rootProject.ext.dependencies["SmartRefreshLayout"]
     api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+    api rootProject.ext.dependencies["okgo"]
     //
 //    api rootProject.ext.dependencies["lifecyclemodel"]
 //    api(rootProject.ext.dependencies["rxlifecycle2"]) {

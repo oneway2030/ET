@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 
 
-public class ResultInfo<T> implements Serializable{
+public class ResultInfo<T> implements Serializable {
 
     private T result;
     private int code;
@@ -22,6 +22,10 @@ public class ResultInfo<T> implements Serializable{
                 ", code=" + code +
                 ", msg='" + msg + '\'' +
                 '}';
+    }
+
+    public boolean isSuccess() {
+        return 0 == code;
     }
 
     public T getResult() {

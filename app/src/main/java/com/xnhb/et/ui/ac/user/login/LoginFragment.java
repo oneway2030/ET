@@ -1,4 +1,4 @@
-package com.xnhb.et.ui.ac.user;
+package com.xnhb.et.ui.ac.user.login;
 
 import android.view.View;
 import android.widget.ImageView;

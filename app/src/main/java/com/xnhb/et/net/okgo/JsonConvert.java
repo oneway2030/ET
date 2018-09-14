@@ -138,11 +138,10 @@ public class JsonConvert<T> implements Converter<T> {
             response.close();
             if (resultObj == null)
                 throw new IllegalStateException("解析错误");
-            int statusCode = resultObj.getCode();
-            if(1==statusCode){
+            if (resultObj.isSuccess()) {
                 return (T) resultObj;
             } else {
-                throw new CustomIllegalStateException(resultObj.getCode(),resultObj.getMsg());
+                throw new CustomIllegalStateException(resultObj.getCode(), resultObj.getMsg());
             }
         }
     }

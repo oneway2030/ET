@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.gyf.barlibrary.ImmersionBar;
 import com.oneway.ui.R;
 import com.oneway.ui.base.in.IPresenter;
+import com.oneway.ui.base.in.IView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
