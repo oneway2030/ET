@@ -15,6 +15,10 @@ public interface Api {
      */
     String VERIFICATION_CODEURL = "/ajax/sendCode";
     /**
+     * 登录
+     */
+    String ACCOUNT_LOGIN = "/front/login";
+    /**
      * 注册账户
      */
     String REGISTER_ACCOUNT = "/front/register";

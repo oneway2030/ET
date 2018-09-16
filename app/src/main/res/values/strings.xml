@@ -24,5 +24,12 @@
     <string name="hint_reinput_pwd">请再次输入登陆密码</string>
     <string name="forget_pwd">忘记密码</string>
 
+    <string name="setting_about_us">关于我们</string>
+    <string name="setting_service_agreement">服务协议</string>
+    <string name="setting_identity_authentication">身份认证</string>
+    <string name="setting_security_center">安全中心</string>
+    <string name="setting_certified">已认证</string>
+    <string name="log_out">退出登录</string>
+
 
 </resources>

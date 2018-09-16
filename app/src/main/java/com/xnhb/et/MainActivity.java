@@ -4,19 +4,26 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.MenuItem;
 
+import com.flyco.tablayout.CommonTabLayout;
+import com.flyco.tablayout.listener.CustomTabEntity;
+import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.base.ac.BaseStatusBarActivity;
-import com.oneway.ui.widget.BottomNavigationViewEx;
-import com.xnhb.et.constant.GlobalConfiguration;
+import com.xnhb.et.bean.TabEntity;
+import com.xnhb.et.event.EventBusTags;
+import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.ui.fragment.home.C2CFragment;
 import com.xnhb.et.ui.fragment.home.DetailsFragment;
 import com.xnhb.et.ui.fragment.home.HomeFragment;
 import com.xnhb.et.ui.fragment.home.OrdersFragment;
 import com.xnhb.et.ui.fragment.home.WalletFragment;
+
+import org.simple.eventbus.Subscriber;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -25,19 +32,29 @@ import butterknife.BindView;
  * 描述: 首页
  * 参考链接:
  */
-public class MainActivity extends BaseStatusBarActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-    private static final int FRAGMENT_HOME = 0;
-    private static final int FRAGMENT_C2C = 1;
-    private static final int FRAGMENT_DETAILS = 2;
-    private static final int FRAGMENT_ORDERS = 3;
-    private static final int FRAGMENT_WALLET = 5;
-    @BindView(R.id.navigation)
-    BottomNavigationViewEx mNavigation;
+public class MainActivity extends BaseStatusBarActivity implements OnTabSelectListener {
+    public static final int FRAGMENT_HOME = 0;
+    public static final int FRAGMENT_DETAILS = 1;
+    public static final int FRAGMENT_C2C = 2;
+    public static final int FRAGMENT_ORDERS = 3;
+    public static final int FRAGMENT_WALLET = 5;
+    @BindView(R.id.tabLayout)
+    CommonTabLayout mTabLayout;
     private HomeFragment mHomeFragment;
     private DetailsFragment mDetailsFragment;
     private C2CFragment mC2CFragment;
     private OrdersFragment mOrdersFragment;
     private WalletFragment mWalletFragment;
+    private ArrayList<Fragment> mFragments = new ArrayList<>();
+    private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
+    private String[] mTitles = {UiUtils.getString(R.string.title_home), UiUtils.getString(R.string.title_details), UiUtils.getString(R.string.title_c2c), UiUtils.getString(R.string.title_order), UiUtils.getString(R.string.title_wallet)};
+    private int[] mIconUnselectIds = {
+            R.mipmap.navigation_home_unselected, R.mipmap.navigation_details_unselected,
+            R.mipmap.navigation_c2c_unselected, R.mipmap.navigation_order_unselected, R.mipmap.navigation_wallet_unselected};
+    private int[] mIconSelectIds = {
+            R.mipmap.navigation_home_selected, R.mipmap.navigation_details_selected,
+            R.mipmap.navigation_c2c_selected, R.mipmap.navigation_order_selected, R.mipmap.navigation_wallet_selected};
+    private int defaultPosition = FRAGMENT_HOME;
 
     public static void launch(Context context) {
         Intent intent = new Intent();
@@ -55,62 +72,53 @@ public class MainActivity extends BaseStatusBarActivity implements BottomNavigat
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        mNavigation.enableItemShiftingMode(false);
-        mNavigation.enableShiftingMode(false);
-        mNavigation.setOnNavigationItemSelectedListener(this);
-        if (savedInstanceState != null) {
-            mHomeFragment = (HomeFragment) getSupportFragmentManager()
-                    .findFragmentByTag(HomeFragment.class.getName());
-            // 会员模块
-            mDetailsFragment = (DetailsFragment) getSupportFragmentManager()
-                    .findFragmentByTag(DetailsFragment.class.getName());
-            mC2CFragment = (C2CFragment) getSupportFragmentManager()
-                    .findFragmentByTag(C2CFragment.class.getName());
-            mOrdersFragment = (OrdersFragment) getSupportFragmentManager()
-                    .findFragmentByTag(OrdersFragment.class.getName());
-            mWalletFragment = (WalletFragment) getSupportFragmentManager()
-                    .findFragmentByTag(WalletFragment.class.getName());
-            // 屏幕恢复时取出位置
-            int position = savedInstanceState.getInt(GlobalConfiguration.MAIN_SHOW_POSITION);
-            // showFragment(position);
-            mNavigation.setCurrentItem(position);
-        } else {
-            // showFragment(FRAGMENT_HOME);
-            handleShowPosition(getIntent());
-        }
+        mHomeFragment = new HomeFragment();
+        mDetailsFragment = new DetailsFragment();
+        mC2CFragment = new C2CFragment();
+        mOrdersFragment = new OrdersFragment();
+        mWalletFragment = new WalletFragment();
+        mFragments.add(mHomeFragment);
+        mFragments.add(mDetailsFragment);
+        mFragments.add(mC2CFragment);
+        mFragments.add(mOrdersFragment);
+        mFragments.add(mWalletFragment);
+        initTablayout();
     }
 
-    private void handleShowPosition(Intent intent) {
-        if (intent != null) {
-            defaultPosition =
-                    intent.getIntExtra(GlobalConfiguration.MAIN_SHOW_POSITION, FRAGMENT_HOME);
-            mNavigation.setCurrentItem(defaultPosition);
+    private void initTablayout() {
+        for (int i = 0; i < mTitles.length; i++) {
+            mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
+        mTabLayout.setOnTabSelectListener(this);
+        mTabLayout.setTabData(mTabEntities, this, R.id.fl_change, mFragments);
+        mTabLayout.setCurrentTab(0);
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                showFragment(FRAGMENT_HOME);
-                return true;
-            case R.id.navigation_details:
-                showFragment(FRAGMENT_DETAILS);
-                return true;
-            case R.id.navigation_c2c:
-                showFragment(FRAGMENT_C2C);
-                return true;
-            case R.id.navigation_order:
-                showFragment(FRAGMENT_ORDERS);
-                return true;
-            case R.id.navigation_wallet:
-                showFragment(FRAGMENT_WALLET);
-                return true;
-        }
-        return false;
+    public void onTabSelect(int position) {
+        swtichPage(position);
     }
 
-    private int defaultPosition = FRAGMENT_HOME;
+    @Override
+    public void onTabReselect(int position) {
+        swtichPage(position);
+    }
+
+
+    private void swtichPage(int position) {
+        if (position != FRAGMENT_HOME && position != FRAGMENT_DETAILS && !UserInfoHelper.getInstance().checkLogin(this)) {
+            mTabLayout.setCurrentTab(defaultPosition);
+            return;
+        }
+        defaultPosition = position;
+    }
+
+    @Subscriber(tag = EventBusTags.TAG_HOME_SWTICH_PAGE)
+    public void remoteSwtichPage(int position) {
+        showFragment(position);
+        //tab库里 会崩溃     //commit要换成commitAllowingStateLoss,不然在后台切换的时候会报错
+        mTabLayout.setCurrentTab(position);
+    }
 
     private void showFragment(int index) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -166,7 +174,6 @@ public class MainActivity extends BaseStatusBarActivity implements BottomNavigat
         }
         ft.commit();
     }
-
     private void hideFragment(FragmentTransaction ft) {
         // 如果不为空，就先隐藏起来
         if (mHomeFragment != null) {
@@ -192,4 +199,6 @@ public class MainActivity extends BaseStatusBarActivity implements BottomNavigat
     protected void setStatusBar() {
 
     }
+
+
 }

@@ -13,7 +13,7 @@
 
     <color name="main_bottom_bg_color">#2a343c</color>
     <color name="color_text_press">#5f99da</color>
-    <color name="color_text_nomal">#ffffff</color>
+    <color name="color_text_nomal">#a8b4bf</color>
     <color name="text2b">#2b2f3b</color>
     <color name="text8c">#8c99a6</color>
     <color name="f5">#f5f5f5</color>
@@ -26,6 +26,8 @@
     <color name="login_tab_text_unselect">#8c96af</color>
     <color name="login_bg">#202a33</color>
     <color name="count_down_btn_bg">#8c96af</color>
+    <color name="logout_color">#ff6262</color>
+
 
 
 </resources>

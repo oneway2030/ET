@@ -12,7 +12,7 @@ import com.oneway.ui.widget.CountDownButton;
 import com.oneway.ui.widget.btn.StateButton;
 import com.oneway.ui.widget.et.XEditText;
 import com.xnhb.et.R;
-import com.xnhb.et.ui.ac.user.RegisterAndLoginActivity;
+import com.xnhb.et.ui.ac.user.LoginAndRegisterActivity;
 
 import butterknife.BindView;
 
@@ -148,8 +148,8 @@ public class RegisterFragment extends BaseFragment<RegsiterPresent> implements I
         btnCountdown.cancel();
         //跳转到登录界面
         FragmentActivity activity = getActivity();
-        if (activity instanceof RegisterAndLoginActivity) {
-            RegisterAndLoginActivity registerAndLoginActivity = (com.xnhb.et.ui.ac.user.RegisterAndLoginActivity) activity;
+        if (activity instanceof LoginAndRegisterActivity) {
+            LoginAndRegisterActivity registerAndLoginActivity = (LoginAndRegisterActivity) activity;
             registerAndLoginActivity.setCurrentItem(0);
         }
     }

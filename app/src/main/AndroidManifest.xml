@@ -34,7 +34,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:windowSoftInputMode="stateVisible|adjustResize"
-            android:name=".ui.ac.user.RegisterAndLoginActivity"
+            android:name=".ui.ac.user.LoginAndRegisterActivity"
             android:screenOrientation="portrait" />
 
     </application>

@@ -11,14 +11,14 @@ import java.io.Serializable;
 
 public class ResultInfo<T> implements Serializable {
 
-    private T result;
+    private T obj;
     private int code;
     private String msg;
 
     @Override
     public String toString() {
         return "ResultInfo{" +
-                "result=" + result +
+                "result=" + obj +
                 ", code=" + code +
                 ", msg='" + msg + '\'' +
                 '}';
@@ -29,11 +29,11 @@ public class ResultInfo<T> implements Serializable {
     }
 
     public T getResult() {
-        return result;
+        return obj;
     }
 
     public void setResult(T result) {
-        this.result = result;
+        this.obj = result;
     }
 
     public int getCode() {

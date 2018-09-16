@@ -1,5 +1,6 @@
 package com.oneway.ui.base.ac;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.Iterator;
@@ -11,7 +12,7 @@ import java.util.Stack;
  */
 public class ActivityManager {
 
-    static Stack<AppCompatActivity> stack;
+    static Stack<FragmentActivity> stack;
     static ActivityManager instace;
 
     private ActivityManager() {
@@ -38,8 +39,8 @@ public class ActivityManager {
      * 获取当前Activity（堆栈中最后压入的）
      * @return
      */
-    public AppCompatActivity getCurrentActivity() {
-        AppCompatActivity activity = stack.lastElement();
+    public FragmentActivity getCurrentActivity() {
+        FragmentActivity activity = stack.lastElement();
         return activity;
     }
 
@@ -47,7 +48,7 @@ public class ActivityManager {
      * 移除指定activity并finish
      * @param activity
      */
-    public void removeActivity(AppCompatActivity activity) {
+    public void removeActivity(FragmentActivity activity) {
         stack.remove(activity);
         if (activity != null && !activity.isFinishing())
             activity.finish();
@@ -60,7 +61,7 @@ public class ActivityManager {
      */
     public void removeActivity(Class<?> clazz) {
         for (int i = 0; i < stack.size(); i++) {
-            AppCompatActivity activity = stack.get(i);
+            FragmentActivity activity = stack.get(i);
             if (activity.getClass().equals(clazz)) {
                 removeActivity(activity);
             }
@@ -71,7 +72,7 @@ public class ActivityManager {
      * 结束当前Activity
      */
     public void finishActivity() {
-        AppCompatActivity activity = stack.lastElement();
+        FragmentActivity activity = stack.lastElement();
         removeActivity(activity);
     }
 
@@ -90,9 +91,9 @@ public class ActivityManager {
      * 除了指定的ac, 其他的都关闭
      */
     public void finishAll(Class clazz) {
-        Iterator<AppCompatActivity> iterator = stack.iterator();
+        Iterator<FragmentActivity> iterator = stack.iterator();
         while (iterator.hasNext()) {
-            AppCompatActivity activity = iterator.next();
+            FragmentActivity activity = iterator.next();
             if (!activity.getClass().equals(clazz)) {
                 if (activity != null && !activity.isFinishing()) {
                     activity.finish();
@@ -106,9 +107,9 @@ public class ActivityManager {
     /**
      * 获取指定的Activity
      */
-    public AppCompatActivity getActivity(Class<?> cls) {
+    public FragmentActivity getActivity(Class<?> cls) {
         if (stack != null)
-            for (AppCompatActivity activity : stack) {
+            for (FragmentActivity activity : stack) {
                 if (activity.getClass().equals(cls)) {
                     return activity;
                 }

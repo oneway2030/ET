@@ -8,7 +8,8 @@ import android.widget.TextView;
 import com.oneway.ui.base.fragment.BaseFragment;
 import com.oneway.ui.common.PerfectClickListener;
 import com.xnhb.et.R;
-import com.xnhb.et.ui.ac.user.RegisterAndLoginActivity;
+import com.xnhb.et.helper.UserInfoHelper;
+import com.xnhb.et.ui.ac.setting.SettingActivity;
 
 import butterknife.BindView;
 
@@ -53,6 +54,9 @@ public class WalletFragment extends BaseFragment {
     @Override
     protected void initView() {
         titleIvSetting.setOnClickListener(mPerfectClickListener);
+        titleTvHistorical.setOnClickListener(mPerfectClickListener);
+        String accountName = UserInfoHelper.getInstance().getAccountName();
+        titleTvName.setText(accountName);
     }
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
@@ -60,7 +64,9 @@ public class WalletFragment extends BaseFragment {
         protected void onNoDoubleClick(View v) {
             int id = v.getId();
             if (id == R.id.title_iv_setting) {
-                RegisterAndLoginActivity.launch(getActivity());
+                SettingActivity.launch(getActivity());
+            } else if (id == R.id.title_tv_historical) {
+
             }
         }
     };

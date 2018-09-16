@@ -9,11 +9,11 @@ import com.xnhb.et.net.Api;
  * 描述:
  * 参考链接:
  */
-public class OkGoHelper {
+public class OkGoHelper<T> {
 
 
-    public static PostRequest<String> getOkGo(String url, Object tag) {
-        return OkGo.<String>post(getNetWorkUrl(url))
+    public static <T> PostRequest<T> getOkGo(String url, Object tag) {
+        return OkGo.<T>post(getNetWorkUrl(url))
                 .tag(tag);
     }
 

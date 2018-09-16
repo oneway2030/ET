@@ -7,21 +7,36 @@
     tools:context="com.xnhb.et.MainActivity">
 
     <FrameLayout
-        android:id="@+id/content"
+        android:id="@+id/fl_change"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/navigation"
+        android:layout_above="@+id/tabLayout"
         android:orientation="vertical" />
 
 
-    <com.oneway.ui.widget.BottomNavigationViewEx
-        android:id="@+id/navigation"
+    <!--<com.oneway.ui.widget.BottomNavigationViewExv-->
+    <!--android:id="@+id/navigation"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:background="@color/main_bottom_bg_color"-->
+    <!--android:visibility="gone"-->
+    <!--app:itemIconTint="@drawable/nav_item_color_state"-->
+    <!--app:itemTextColor="@drawable/nav_item_color_state"-->
+    <!--app:menu="@menu/navigation" />-->
+
+
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="54dp"
         android:layout_alignParentBottom="true"
         android:background="@color/main_bottom_bg_color"
-        app:itemIconTint="@drawable/nav_item_color_state"
-        app:itemTextColor="@drawable/nav_item_color_state"
-        app:menu="@menu/navigation" />
+        app:tl_iconHeight="23dp"
+        app:tl_iconWidth="23dp"
+        app:tl_indicator_height="0dp"
+        app:tl_textSelectColor="@color/color_text_press"
+        app:tl_textUnselectColor="@color/color_text_nomal"
+        app:tl_textsize="12sp" />
 
 </RelativeLayout>

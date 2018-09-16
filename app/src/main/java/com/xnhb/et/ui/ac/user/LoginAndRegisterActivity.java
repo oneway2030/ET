@@ -34,7 +34,7 @@ import butterknife.BindView;
  * 描述: 注册 登录 忘记密码
  * 参考链接:
  */
-public class RegisterAndLoginActivity extends BaseTitleActivity<RegsiterPresent> implements LoginFragment.OnClickForgetPwdPageListener, IRegisterView {
+public class LoginAndRegisterActivity extends BaseTitleActivity<RegsiterPresent> implements LoginFragment.OnClickForgetPwdPageListener, IRegisterView {
     @BindView(R.id.xTablayout)
     XTabLayout mTabLayout;
     @BindView(R.id.vp)
@@ -59,7 +59,7 @@ public class RegisterAndLoginActivity extends BaseTitleActivity<RegsiterPresent>
 
     public static void launch(Context context) {
         Intent intent = new Intent();
-        intent.setClass(context, RegisterAndLoginActivity.class);
+        intent.setClass(context, LoginAndRegisterActivity.class);
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }

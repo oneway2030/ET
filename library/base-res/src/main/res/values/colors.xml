@@ -37,6 +37,6 @@
     <color name="text9">#999999</color>
     <!--通用文字颜色-->
     <color name="divider_common_color">#dddddd</color>
-
-
+    <!--通用线-->
+    <color name="common_underline">#181d22</color>
 </resources>
