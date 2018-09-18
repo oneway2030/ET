@@ -1,7 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/common_margin_space_20"
+    android:paddingRight="@dimen/common_margin_space_20">
+
+    <com.oneway.ui.widget.CommomHorizontalLayout
+        android:id="@+id/modify_login_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        app:left_text="@string/safe_login_pwd"
+        app:left_text_color="@color/white"
+        app:moreIcon="@mipmap/more_right_black"
+        app:right_text="@string/goto_modify"
+        app:right_text_color="@color/white" />
+
+    <com.oneway.ui.widget.CommomHorizontalLayout
+        android:id="@+id/modify_transaction_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        app:left_text="@string/safe_transaction_pwd"
+        app:left_text_color="@color/white"
+        app:moreIcon="@mipmap/more_right_black"
+        app:right_text="@string/goto_modify"
+        app:right_text_color="@color/white" />
+
+    <com.oneway.ui.widget.CommomHorizontalLayout
+        android:id="@+id/modify_fingerprint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        app:left_text="@string/safe_fingerprint"
+        app:left_text_color="@color/white"
+        app:moreIcon="@mipmap/more_right_black"
+        app:right_text="@string/hint_open"
+        app:right_text_color="@color/white"
+        app:underline_color="@color/white" />
+
+    <com.oneway.ui.widget.CommomHorizontalLayout
+        android:id="@+id/modify_gesture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        app:left_text="@string/safe_gesture"
+        app:left_text_color="@color/white"
+        app:moreIcon="@mipmap/more_right_black"
+        app:right_text="@string/hint_open"
+        app:right_text_color="@color/white" />
 
 </LinearLayout>

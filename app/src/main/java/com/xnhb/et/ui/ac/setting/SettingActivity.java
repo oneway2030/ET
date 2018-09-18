@@ -57,7 +57,7 @@ public class SettingActivity extends BaseTitleActivity {
 
     @Override
     public int setLayoutId() {
-        return R.layout.activity_setting2;
+        return R.layout.activity_setting;
     }
 
     @Override

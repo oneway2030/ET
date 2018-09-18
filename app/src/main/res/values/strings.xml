@@ -41,4 +41,20 @@
     <string name="hint_idcard_select1">请选择身份证反面照</string>
     <string name="hint_idcard_select2">请选择身份证正面照</string>
     <string name="hint_idcard_select3">请选择手持身份证及ID照</string>
+
+    <string name="safe_login_pwd">登录密码</string>
+    <string name="safe_transaction_pwd">交易密码</string>
+    <string name="safe_fingerprint">指纹</string>
+    <string name="safe_gesture">手势</string>
+    <string name="goto_modify">去修改</string>
+    <string name="hint_close">关闭</string>
+    <string name="hint_open">开启</string>
+    <string name="old_pwd">旧密码</string>
+    <string name="new_pwd">新密码</string>
+    <string name="confirm_pwd">确认密码</string>
+    <string name="input_old_pwd">请输入旧密码</string>
+    <string name="input_new_pwd">请输入新密码</string>
+    <string name="reinput_new_pwd">请再次输入新密码</string>
+    <string name="confirm">确定</string>
+
 </resources>

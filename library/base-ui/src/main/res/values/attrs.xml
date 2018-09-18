@@ -99,7 +99,7 @@
         <attr name="countDownBgColor" format="color" />
     </declare-styleable>
 
-    <!--倒计时btn-->
+    <!--自定横向条目-->
     <declare-styleable name="CommomHorizontalLayout">
         <attr name="moreIcon" format="reference" />
         <attr name="underline_color" format="color" />

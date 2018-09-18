@@ -3,6 +3,7 @@ package com.oneway.ui.widget;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -33,6 +34,7 @@ public class CommomHorizontalLayout extends FrameLayout {
     private int rightTextSize;
     private int leftTextSize;
     private int moreIcon;
+    private boolean isRightTextIcon;
 
     public CommomHorizontalLayout(@NonNull Context context) {
         this(context, null);
@@ -62,10 +64,11 @@ public class CommomHorizontalLayout extends FrameLayout {
         rightTextColor = typedArray.getColor(R.styleable.CommomHorizontalLayout_right_text_color, R.color.text);
         rightTextSize = typedArray.getDimensionPixelSize(R.styleable.CommomHorizontalLayout_right_text_size, UiUtils.sp2px(12));
         underlineColor = typedArray.getColor(R.styleable.CommomHorizontalLayout_underline_color, R.color.text);
-        moreIcon = typedArray.getResourceId(R.styleable.CommomHorizontalLayout_moreIcon, R.mipmap.more_right_black);
+        moreIcon = typedArray.getResourceId(R.styleable.CommomHorizontalLayout_moreIcon, 0);
         typedArray.recycle();
     }
 
+    //    R.mipmap.more_right_black
     private void initView() {
         TextView tvLeft = findViewById(R.id.tv_left);
         TextView tvRight = findViewById(R.id.tv_right);
@@ -73,14 +76,13 @@ public class CommomHorizontalLayout extends FrameLayout {
         tvLeft.setText(leftText);
         tvLeft.setTextColor(leftTextColor);
         tvLeft.setTextSize(UiUtils.px2sp(leftTextSize));
-        if (TextUtils.isEmpty(rightText)) {
-            ivMore.setImageResource(moreIcon);
-            ivMore.setVisibility(TextUtils.isEmpty(rightText) ? View.VISIBLE : View.GONE);
-        } else {
+        ivMore.setVisibility(moreIcon > 0 ? View.VISIBLE : View.GONE);
+        tvRight.setVisibility(TextUtils.isEmpty(rightText) ? View.GONE : View.VISIBLE);
+        ivMore.setImageResource(moreIcon);
+        if (!TextUtils.isEmpty(rightText)) {
             tvRight.setText(rightText);
             tvRight.setTextColor(rightTextColor);
             tvRight.setTextSize(UiUtils.px2sp(rightTextSize));
-            tvRight.setVisibility(TextUtils.isEmpty(rightText) ? View.GONE : View.VISIBLE);
         }
     }
 

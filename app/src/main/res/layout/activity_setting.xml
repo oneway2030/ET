@@ -1,43 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/common_margin_space_20"
-    android:paddingRight="@dimen/common_margin_space_20"
-    android:paddingTop="26dp">
+    android:paddingRight="@dimen/common_margin_space_20">
 
     <com.oneway.ui.widget.CommomHorizontalLayout
+        android:id="@+id/about_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="26dp"
+        android:paddingTop="16dp"
         app:left_text="@string/setting_about_us"
-        app:left_text_color="@color/white" />
+        app:left_text_color="@color/white"
+        app:moreIcon="@mipmap/more_right_black" />
 
     <com.oneway.ui.widget.CommomHorizontalLayout
+        android:id="@+id/service_agreement_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="26dp"
+        android:paddingTop="16dp"
         app:left_text="@string/setting_service_agreement"
-        app:left_text_color="@color/white" />
+        app:left_text_color="@color/white"
+        app:moreIcon="@mipmap/more_right_black" />
 
     <com.oneway.ui.widget.CommomHorizontalLayout
+        android:id="@+id/identity_authentication_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="26dp"
+        android:paddingTop="16dp"
         app:left_text="@string/setting_identity_authentication"
-        app:left_text_color="@color/white" />
+        app:left_text_color="@color/white"
+        app:moreIcon="@mipmap/more_right_black" />
 
     <com.oneway.ui.widget.CommomHorizontalLayout
+        android:id="@+id/security_center_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="26dp"
+        android:paddingTop="16dp"
         app:left_text="@string/setting_security_center"
-        app:left_text_color="@color/white" />
+        app:left_text_color="@color/white"
+        app:right_text="@string/setting_certified"
+        app:right_text_color="@color/white" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_logout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -47,4 +57,4 @@
         android:text="@string/log_out"
         android:textColor="@color/logout_color"
         android:textSize="12sp" />
-</RelativeLayout>
+</LinearLayout>
