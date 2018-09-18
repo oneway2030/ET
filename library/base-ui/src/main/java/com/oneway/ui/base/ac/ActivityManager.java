@@ -9,6 +9,7 @@ import java.util.Stack;
 
 /**
  * Created by Leo on 2016/7/15.
+ * activity 管理类
  */
 public class ActivityManager {
 
@@ -37,6 +38,7 @@ public class ActivityManager {
 
     /**
      * 获取当前Activity（堆栈中最后压入的）
+     *
      * @return
      */
     public FragmentActivity getCurrentActivity() {
@@ -46,6 +48,7 @@ public class ActivityManager {
 
     /**
      * 移除指定activity并finish
+     *
      * @param activity
      */
     public void removeActivity(FragmentActivity activity) {
@@ -64,6 +67,7 @@ public class ActivityManager {
             FragmentActivity activity = stack.get(i);
             if (activity.getClass().equals(clazz)) {
                 removeActivity(activity);
+                return;
             }
         }
     }
@@ -80,11 +84,7 @@ public class ActivityManager {
      * 结束所有Activity
      */
     public void finishAll() {
-        int size = stack.size();
-        for (int i = 0; i < size; i++) {
-            removeActivity(stack.get(i));
-        }
-        stack.clear();
+        finishAll(null);
     }
 
     /**
@@ -94,7 +94,7 @@ public class ActivityManager {
         Iterator<FragmentActivity> iterator = stack.iterator();
         while (iterator.hasNext()) {
             FragmentActivity activity = iterator.next();
-            if (!activity.getClass().equals(clazz)) {
+            if (clazz == null || !activity.getClass().equals(clazz)) {
                 if (activity != null && !activity.isFinishing()) {
                     activity.finish();
                 }
