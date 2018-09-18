@@ -24,12 +24,21 @@
     <string name="hint_reinput_pwd">请再次输入登陆密码</string>
     <string name="forget_pwd">忘记密码</string>
 
+    <string name="next_step">下一步</string>
+    <string name="submit_audit">提交审核</string>
     <string name="setting_about_us">关于我们</string>
     <string name="setting_service_agreement">服务协议</string>
     <string name="setting_identity_authentication">身份认证</string>
     <string name="setting_security_center">安全中心</string>
     <string name="setting_certified">已认证</string>
     <string name="log_out">退出登录</string>
-
-
+    <string name="hint_identity_authentication">注: ETT团队重视保障用户的个人信息，用户的个人信息将被严格保密。\n此实名认证系统仅限于ETT团队认证身份信息，保证不对外公开或向第三方提供用户个人信息.</string>
+    <string name="hint_input_name">请输入您的姓名</string>
+    <string name="hint_input_idcard">请输入正确的身份证号</string>
+    <string name="hint_idcard_1">上传身份证反面照</string>
+    <string name="hint_idcard_2">上传身份证正面照</string>
+    <string name="hint_idcard_3">上传手持身份证及ID照</string>
+    <string name="hint_idcard_select1">请选择身份证反面照</string>
+    <string name="hint_idcard_select2">请选择身份证正面照</string>
+    <string name="hint_idcard_select3">请选择手持身份证及ID照</string>
 </resources>

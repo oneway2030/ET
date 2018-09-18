@@ -10,7 +10,7 @@ import com.xnhb.et.R;
 
 /**
  * @author oneway
- * @describe
+ * @describe  安全中心
  * @since 2018/9/15 0015
  */
 

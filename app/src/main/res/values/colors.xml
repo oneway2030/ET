@@ -27,6 +27,8 @@
     <color name="login_bg">#202a33</color>
     <color name="count_down_btn_bg">#8c96af</color>
     <color name="logout_color">#ff6262</color>
+    <color name="color_6">#666666</color>
+    <color name="red_btn">#ff7070</color>
 
 
 

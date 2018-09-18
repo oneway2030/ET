@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.widget.Toast;
 
+import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.BaseUiConfig;
 
 /**
@@ -23,6 +24,10 @@ public class ToastManager {
 
     public static void info(String msg) {
         Toasty.info(BaseUiConfig.getContext(), msg, Toast.LENGTH_SHORT, true).show();
+    }
+
+    public static void info(int strId) {
+        Toasty.info(BaseUiConfig.getContext(), UiUtils.getString(strId), Toast.LENGTH_SHORT, true).show();
     }
 
     public static void warning(String msg) {
