@@ -98,11 +98,8 @@ public class SettingActivity extends BaseTitleActivity {
             @Override
             public void onDailogClose(Dialog dialog, boolean confirm) {
                 if (confirm) {
-                    UserInfoHelper.getInstance().logout();
                     ToastManager.success("退出登录成功");
-                    LoginAndRegisterActivity.launch(SettingActivity.this);
-                    ActivityManager.getInstance().removeActivity(SettingActivity.this);
-                    BusManager.getBus().post(EventBusTags.TAG_HOME_SWTICH_PAGE, MainActivity.FRAGMENT_HOME);
+                    UserInfoHelper.getInstance().logoutAndfinishAll();
                 }
             }
         }).showDialog();

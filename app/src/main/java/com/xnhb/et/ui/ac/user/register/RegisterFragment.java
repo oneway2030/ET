@@ -83,11 +83,11 @@ public class RegisterFragment extends BaseFragment<RegsiterPresent> implements I
         String tradePassword = etTradePwd.getTextEx().toString().trim();
         String referee = etReferee.getTextEx().toString().trim();
         if (!RegexUtils.isMobileSimple(account) && !RegexUtils.isEmail(account)) {
-            ToastManager.info("请填写正确手机号或者邮箱");
+            ToastManager.info(R.string.toast_hint_account);
             return;
         }
         if (!RegexUtils.isVerificationCode(verificationCode)) {
-            ToastManager.info("请输入正确的验证码");
+            ToastManager.info(R.string.toast_hint_verification_code);
             return;
         }
         if (!RegexUtils.isEmail(eamil)) {

@@ -26,5 +26,13 @@ public interface Api {
      * 忘记密码
      */
     String FORGET_PWD = "/front/forgetPassword";
+    /**
+     * 修改登录密码
+     */
+    String MODIFY_LOGIN_PWD = "/front/changePwd";
+    /**
+     * 修改交易密码
+     */
+    String MODIFY_TRANSACTION_PWD = "/front/changeTradePwd";
 
 }

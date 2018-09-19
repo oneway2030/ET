@@ -33,7 +33,7 @@
         android:paddingTop="16dp"
         app:left_text="@string/setting_identity_authentication"
         app:left_text_color="@color/white"
-        app:moreIcon="@mipmap/more_right_black" />
+        app:right_text="@string/setting_certified" />
 
     <com.oneway.ui.widget.CommomHorizontalLayout
         android:id="@+id/security_center_layout"
@@ -42,7 +42,7 @@
         android:paddingTop="16dp"
         app:left_text="@string/setting_security_center"
         app:left_text_color="@color/white"
-        app:right_text="@string/setting_certified"
+        app:moreIcon="@mipmap/more_right_black"
         app:right_text_color="@color/white" />
 
     <TextView

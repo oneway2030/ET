@@ -10,6 +10,7 @@ import com.oneway.ui.base.ac.BaseTitleActivity;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.widget.CommomHorizontalLayout;
 import com.xnhb.et.R;
+import com.xnhb.et.helper.UserInfoHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,13 +65,17 @@ public class SecurityCenterActivity extends BaseTitleActivity {
         protected void onNoDoubleClick(View v) {
             int id = v.getId();
             if (id == R.id.modify_login_pwd) { //修改登录密码
-
+                ModifyPasswordActivity.launch(SecurityCenterActivity.this, ModifyPasswordActivity.TITLE_MODIFY_LOGIN_PWD);
             } else if (id == R.id.modify_transaction_pwd) {//修改交易密码
-
+                ModifyPasswordActivity.launch(SecurityCenterActivity.this, ModifyPasswordActivity.TITLE_MODIFY_TRANSACTION_PWD);
             } else if (id == R.id.modify_fingerprint) { //开启关闭 指纹
 
             } else if (id == R.id.modify_gesture) {//开启关闭 手势
-
+                //TODO  开启手势登录  需求
+                // 1.每次登录后這里 设置是否开启
+                // 2.每次登录后,在退出后,重新登录的时候,判断是否开启了手势
+                // 3.如果开启,则跳转手势界面,3次错误后,跳转到登录界面
+                // 4.如果不开启,则跳转登录界面
             }
         }
     };

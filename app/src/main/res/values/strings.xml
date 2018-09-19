@@ -56,5 +56,8 @@
     <string name="input_new_pwd">请输入新密码</string>
     <string name="reinput_new_pwd">请再次输入新密码</string>
     <string name="confirm">确定</string>
+    <string name="verification_code">验证码</string>
 
+    <string name="toast_hint_verification_code">请输入正确的验证码</string>
+    <string name="toast_hint_account">请填写正确手机号或者邮箱</string>
 </resources>

@@ -106,7 +106,7 @@ public class MainActivity extends BaseStatusBarActivity implements OnTabSelectLi
 
 
     private void swtichPage(int position) {
-        if (position != FRAGMENT_HOME && position != FRAGMENT_DETAILS && !UserInfoHelper.getInstance().checkLogin(this)) {
+        if (position != FRAGMENT_HOME && position != FRAGMENT_DETAILS && !UserInfoHelper.getInstance().checkLogin()) {
             mTabLayout.setCurrentTab(defaultPosition);
             return;
         }

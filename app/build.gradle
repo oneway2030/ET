@@ -85,4 +85,6 @@ dependencies {
     implementation rootProject.ext.dependencies["XTabLayout"]
     implementation rootProject.ext.dependencies["Luban"]
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    //手势解锁
+//    https://github.com/sinawangnan7/GestureLockView
 }

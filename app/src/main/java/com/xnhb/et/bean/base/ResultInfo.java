@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class ResultInfo<T> implements Serializable {
 
     private T obj;
-    private int code;
+    private int code; //0成功 -1错误  -2 登录失效 -3未认证 -4冻结
     private String msg;
 
     @Override

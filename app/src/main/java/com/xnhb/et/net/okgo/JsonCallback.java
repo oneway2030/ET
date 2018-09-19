@@ -19,7 +19,9 @@ import com.google.gson.JsonSyntaxException;
 import com.lzy.okgo.callback.AbsCallback;
 import com.lzy.okgo.exception.HttpException;
 import com.lzy.okgo.request.base.Request;
+import com.oneway.tool.ToolConfig;
 import com.oneway.ui.toast.ToastManager;
+import com.xnhb.et.helper.UserInfoHelper;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -106,6 +108,15 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
      * 如果只是处理服务器错误回调,可以只重写该方法
      */
     public void onCustomError(CustomIllegalStateException customException) {
+        int errorCode = customException.getErrorCode();
+        //0成功 -1错误  -2 登录失效 -3未认证 -4冻结
         ToastManager.warning(customException.getMessage());
+        if (errorCode == -2) {
+            //去登录
+            //清除本地信息,跳转到登录界面
+            UserInfoHelper.getInstance().logoutAndfinishAll();
+            return;
+        }
+
     }
 }
