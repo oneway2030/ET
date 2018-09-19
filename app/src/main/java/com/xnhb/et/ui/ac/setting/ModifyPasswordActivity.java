@@ -74,8 +74,8 @@ public class ModifyPasswordActivity extends BaseTitleActivity<ModifyPwdPresent> 
     @Override
     protected void initData(Bundle savedInstanceState) {
 //        llOldPwdLayout.setVisibility(TITLE_MOdify_LOGIN_PWD.equals(pageType) ? View.VISIBLE : View.GONE);
-//        tvConfirm.setOnClickListener(mPerfectClickListener);
-//        btnCountdown.setOnClickListener(mPerfectClickListener);
+        tvConfirm.setOnClickListener(mPerfectClickListener);
+        btnCountdown.setOnClickListener(mPerfectClickListener);
     }
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
@@ -99,7 +99,7 @@ public class ModifyPasswordActivity extends BaseTitleActivity<ModifyPwdPresent> 
                     return;
                 }
                 if (!newPwd.equals(reInputNewPwd)) {
-                    ToastManager.info(R.string.reinput_new_pwd);
+                    ToastManager.info(R.string.toast_hint_pwd_inconsistent);//
                     return;
                 }
 

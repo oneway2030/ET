@@ -98,12 +98,8 @@ public class RegisterFragment extends BaseFragment<RegsiterPresent> implements I
             ToastManager.info("请输入登录密码");
             return;
         }
-        if (EmptyUtils.isEmpty(reInputLoginPwd)) {
-            ToastManager.info("请再次输入登录密码");
-            return;
-        }
         if (!loginPwd.equals(reInputLoginPwd)) {
-            ToastManager.info("两次输入的密码不一致");
+            ToastManager.info(R.string.toast_hint_pwd_inconsistent);
             return;
         }
         if (EmptyUtils.isEmpty(tradePassword)) {

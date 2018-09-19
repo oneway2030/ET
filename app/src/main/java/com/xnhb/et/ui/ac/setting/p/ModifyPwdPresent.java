@@ -62,6 +62,7 @@ public class ModifyPwdPresent extends XPresent<IModifyView> {
         map.put("newPwd", newPwd);
         map.put("reNewPwd", reinputNewPwd);
         map.put("code", verificationCode);
+        map.put("token", UserInfoHelper.getInstance().getToken());
         OkGoHelper.getOkGo(Api.MODIFY_LOGIN_PWD, getV().getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<Void>>(getV().getAc()) {

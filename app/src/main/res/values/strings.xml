@@ -60,4 +60,5 @@
 
     <string name="toast_hint_verification_code">请输入正确的验证码</string>
     <string name="toast_hint_account">请填写正确手机号或者邮箱</string>
+    <string name="toast_hint_pwd_inconsistent">两次输入的密码不一致</string>
 </resources>
