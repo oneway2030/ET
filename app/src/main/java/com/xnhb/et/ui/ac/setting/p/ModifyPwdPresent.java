@@ -1,18 +1,13 @@
 package com.xnhb.et.ui.ac.setting.p;
 
 import com.lzy.okgo.model.Response;
-import com.oneway.tool.utils.convert.EmptyUtils;
-import com.oneway.tool.utils.convert.RegexUtils;
 import com.oneway.tool.utils.log.LogUtil;
 import com.oneway.ui.base.in.XPresent;
-import com.oneway.ui.toast.ToastManager;
-import com.xnhb.et.bean.UserInfo;
 import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.net.Api;
 import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.net.okgo.OkGoHelper;
-import com.xnhb.et.ui.ac.user.register.IRegisterView;
 
 import java.util.HashMap;
 import java.util.Map;

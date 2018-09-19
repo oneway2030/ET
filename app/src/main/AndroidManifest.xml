@@ -51,6 +51,10 @@
             android:name=".ui.ac.setting.ModifyPasswordActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".ui.ac.setting.BankCardInfoActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
     </application>
 
 </manifest>

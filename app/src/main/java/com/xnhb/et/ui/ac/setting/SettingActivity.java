@@ -38,6 +38,8 @@ public class SettingActivity extends BaseTitleActivity {
     CommomHorizontalLayout identityAuthenticationLayout;
     @BindView(R.id.security_center_layout)
     CommomHorizontalLayout securityCenterLayout;
+    @BindView(R.id.bank_card_info_layout)
+    CommomHorizontalLayout bankCardInfoLayout;
     @BindView(R.id.tv_logout)
     TextView tvLogout;
 
@@ -66,6 +68,7 @@ public class SettingActivity extends BaseTitleActivity {
         serviceAgreementLayout.setOnClickListener(mPerfectClickListener);
         identityAuthenticationLayout.setOnClickListener(mPerfectClickListener);
         securityCenterLayout.setOnClickListener(mPerfectClickListener);
+        bankCardInfoLayout.setOnClickListener(mPerfectClickListener);
         tvLogout.setOnClickListener(mPerfectClickListener);
     }
 
@@ -83,6 +86,8 @@ public class SettingActivity extends BaseTitleActivity {
                 SecurityCenterActivity.launch(SettingActivity.this);
             } else if (id == R.id.tv_logout) {//退出登录
                 logout();
+            } else if (id == R.id.bank_card_info_layout) {//银行卡信息
+                BankCardInfoActivity.launch(SettingActivity.this);
             }
         }
 

@@ -25,10 +25,12 @@
     <string name="forget_pwd">忘记密码</string>
 
     <string name="next_step">下一步</string>
+    <string name="save">保存</string>
     <string name="submit_audit">提交审核</string>
     <string name="setting_about_us">关于我们</string>
     <string name="setting_service_agreement">服务协议</string>
     <string name="setting_identity_authentication">身份认证</string>
+    <string name="setting_bank_card">银行卡信息</string>
     <string name="setting_security_center">安全中心</string>
     <string name="setting_certified">已认证</string>
     <string name="log_out">退出登录</string>

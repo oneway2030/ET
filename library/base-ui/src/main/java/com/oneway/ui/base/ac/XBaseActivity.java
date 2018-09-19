@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.lzy.okgo.OkGo;
 import com.oneway.tool.event.BusManager;
 import com.oneway.tool.utils.common.KeyboardUtils;
 import com.oneway.ui.R;
@@ -224,6 +225,7 @@ public abstract class XBaseActivity<P extends IPresenter> extends MVPActivity<P>
     protected void onDestroy() {
         KeyboardUtils.hideSoftInput(this);
         super.onDestroy();
+        OkGo.getInstance().cancelTag(this);
         BusManager.getBus().unregister(this);
         mIsDestroyed = true;
         if (bind != null) {

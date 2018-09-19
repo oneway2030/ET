@@ -75,7 +75,6 @@ dependencies {
     api project(':library:base-ui')
     api project(':library:picture')
     implementation rootProject.ext.dependencies["multidex"]
-    implementation rootProject.ext.dependencies["sweetalert"]
     implementation rootProject.ext.dependencies["AndPermission"]
     api rootProject.ext.dependencies["butterknife"]
     annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {

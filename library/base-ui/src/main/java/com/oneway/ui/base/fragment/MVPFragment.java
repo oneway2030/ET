@@ -2,12 +2,17 @@ package com.oneway.ui.base.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.lzy.okgo.OkGo;
 import com.oneway.ui.base.in.IPresenter;
 import com.oneway.ui.base.in.IView;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by ww on 2018/9/9.
@@ -17,7 +22,7 @@ public abstract class MVPFragment<P extends IPresenter> extends Fragment impleme
 
     private P p;
     protected Activity context;
-
+    public SweetAlertDialog dialog;
 
     @Override
     public void onAttach(Context context) {
@@ -77,13 +82,42 @@ public abstract class MVPFragment<P extends IPresenter> extends Fragment impleme
 
     }
 
+
     @Override
     public void showProgress() {
+        if (dialog == null) {
+            initDialog();
+        }
+        dialog.setCancelable(true);
+        dialog.show();
+    }
 
+    @Override
+    public void showProgress(boolean isCancel) {
+        if (dialog == null) {
+            initDialog();
+        }
+        dialog.setCancelable(isCancel);
+        dialog.show();
+    }
+
+    void initDialog() {
+        dialog = new SweetAlertDialog(getAc(), SweetAlertDialog.PROGRESS_TYPE);
+        dialog.getProgressHelper().setBarColor(Color.parseColor("#5588FF"));
+        dialog.setTitleText("加载中...");
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                OkGo.getInstance().cancelTag(MVPFragment.this);
+            }
+        });
     }
 
     @Override
     public void closeProgress() {
-
+        if (dialog != null) {
+            dialog.dismiss();
+        }
     }
 }

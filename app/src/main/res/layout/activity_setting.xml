@@ -33,7 +33,17 @@
         android:paddingTop="16dp"
         app:left_text="@string/setting_identity_authentication"
         app:left_text_color="@color/white"
-        app:right_text="@string/setting_certified" />
+        app:right_text="@string/setting_certified"
+        app:right_text_color="@color/white" />
+
+    <com.oneway.ui.widget.CommomHorizontalLayout
+        android:id="@+id/bank_card_info_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        app:left_text="@string/setting_bank_card"
+        app:left_text_color="@color/white"
+        app:moreIcon="@mipmap/more_right_black" />
 
     <com.oneway.ui.widget.CommomHorizontalLayout
         android:id="@+id/security_center_layout"
@@ -42,8 +52,7 @@
         android:paddingTop="16dp"
         app:left_text="@string/setting_security_center"
         app:left_text_color="@color/white"
-        app:moreIcon="@mipmap/more_right_black"
-        app:right_text_color="@color/white" />
+        app:moreIcon="@mipmap/more_right_black" />
 
     <TextView
         android:id="@+id/tv_logout"

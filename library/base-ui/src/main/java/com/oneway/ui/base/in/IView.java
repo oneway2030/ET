@@ -21,5 +21,7 @@ public interface IView<P> {
 
     void showProgress();
 
+    void showProgress(boolean isCancel);
+
     void closeProgress();
 }

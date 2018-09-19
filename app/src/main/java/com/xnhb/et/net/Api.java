@@ -34,5 +34,12 @@ public interface Api {
      * 修改交易密码
      */
     String MODIFY_TRANSACTION_PWD = "/front/changeTradePwd";
-
+    /**
+     * 保存银行卡信息
+     */
+    String SAVE_BANK_CARD_INFO = "/front/modifyBank";
+    /**
+     * 获取用户信息
+     */
+    String GET_USER_INFO = "/front/userInfo";
 }

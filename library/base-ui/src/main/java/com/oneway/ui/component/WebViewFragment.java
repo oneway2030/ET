@@ -71,5 +71,4 @@ public class WebViewFragment extends BaseLazyFragment {
         return false;
     }
 
-
 }

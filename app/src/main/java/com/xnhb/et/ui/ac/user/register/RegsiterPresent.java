@@ -6,7 +6,7 @@ import com.oneway.tool.utils.convert.RegexUtils;
 import com.oneway.tool.utils.log.LogUtil;
 import com.oneway.ui.base.in.XPresent;
 import com.oneway.ui.toast.ToastManager;
-import com.xnhb.et.bean.UserInfo;
+import com.xnhb.et.bean.LoginInfo;
 import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.net.Api;
@@ -64,13 +64,13 @@ public class RegsiterPresent extends XPresent<IRegisterView> {
         map.put("password", pwd); //验证码
         OkGoHelper.getOkGo(Api.ACCOUNT_LOGIN, getV().getAc())
                 .params(map)
-                .execute(new DialogCallback<ResultInfo<UserInfo>>(getV().getAc()) {
+                .execute(new DialogCallback<ResultInfo<LoginInfo>>(getV().getAc()) {
                     @Override
-                    public void onSuccess(Response<ResultInfo<UserInfo>> response) {
-                        ResultInfo<UserInfo> body = response.body();
-                        UserInfo info = body.getResult();
+                    public void onSuccess(Response<ResultInfo<LoginInfo>> response) {
+                        ResultInfo<LoginInfo> body = response.body();
+                        LoginInfo info = body.getResult();
                         if (EmptyUtils.isNotEmpty(info)) {
-                            UserInfoHelper.getInstance().saveUserInfo(info);
+                            UserInfoHelper.getInstance().saveLoginInfo(info);
                             ToastManager.success(body.getMsg());
                             getV().submit();
                         }
