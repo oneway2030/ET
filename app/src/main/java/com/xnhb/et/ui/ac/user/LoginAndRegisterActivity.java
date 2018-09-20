@@ -9,16 +9,20 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.androidkun.xtablayout.XTabLayout;
+import com.oneway.tool.event.BusManager;
 import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.convert.RegexUtils;
 import com.oneway.ui.base.ac.BaseTitleActivity;
 import com.oneway.ui.base.fragment.FragmentBaseAdapter;
+import com.oneway.ui.base.in.TitleContainer;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.CountDownButton;
 import com.oneway.ui.widget.btn.StateButton;
 import com.oneway.ui.widget.et.XEditText;
+import com.xnhb.et.MainActivity;
 import com.xnhb.et.R;
+import com.xnhb.et.event.EventBusTags;
 import com.xnhb.et.ui.ac.user.login.LoginFragment;
 import com.xnhb.et.ui.ac.user.register.IRegisterView;
 import com.xnhb.et.ui.ac.user.register.RegisterFragment;
@@ -55,6 +59,7 @@ public class LoginAndRegisterActivity extends BaseTitleActivity<RegsiterPresent>
     @BindView(R.id.btn_retrieve_pwd)
     StateButton btnRetrievePwd;
     private FragmentBaseAdapter mFragmentAdapter;
+
 
 
     public static void launch(Context context) {

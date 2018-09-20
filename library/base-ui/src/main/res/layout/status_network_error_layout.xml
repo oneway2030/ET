@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#000"
     android:gravity="center">
 
     <LinearLayout
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/status_net_error" />
 
         <TextView
             android:id="@+id/tv_error_str"
@@ -30,6 +30,7 @@
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:text="网络错误"
+            android:textColor="@color/white"
             android:textSize="14sp" />
 
         <Button
@@ -38,13 +39,13 @@
             android:layout_height="36dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="6dp"
-            android:background="#ffffff"
+            android:background="@null"
             android:paddingBottom="8dp"
             android:paddingLeft="36dp"
             android:paddingRight="36dp"
             android:paddingTop="8dp"
             android:text="点击刷新"
-            android:textColor="#3a3a3a"
+            android:textColor="@color/white"
             android:textSize="14sp" />
     </LinearLayout>
 

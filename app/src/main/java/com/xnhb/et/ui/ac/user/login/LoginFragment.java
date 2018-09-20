@@ -5,12 +5,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.oneway.tool.event.BusManager;
 import com.oneway.ui.base.ac.ActivityManager;
 import com.oneway.ui.base.fragment.BaseFragment;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.widget.btn.StateButton;
 import com.oneway.ui.widget.et.XEditText;
+import com.xnhb.et.MainActivity;
 import com.xnhb.et.R;
+import com.xnhb.et.event.EventBusTags;
 import com.xnhb.et.ui.ac.user.register.IRegisterView;
 import com.xnhb.et.ui.ac.user.register.RegsiterPresent;
 
@@ -36,10 +39,12 @@ public class LoginFragment extends BaseFragment<RegsiterPresent> implements IReg
     @BindView(R.id.remember_account_layout)
     RelativeLayout rememberAccountLayout;
     private boolean isChecked;
+
     @Override
     public RegsiterPresent newP() {
         return new RegsiterPresent();
     }
+
     @Override
     protected int setLayoutId() {
         return R.layout.fragment_login;
@@ -90,6 +95,7 @@ public class LoginFragment extends BaseFragment<RegsiterPresent> implements IReg
     public void submit() {
         //登录成功
         ActivityManager.getInstance().removeActivity(getActivity());
+        BusManager.getBus().post(EventBusTags.TAG_LOGIN_SUCDESS, 0);
     }
 
     public interface OnClickForgetPwdPageListener {

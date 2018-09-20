@@ -172,8 +172,9 @@ public class MainActivity extends BaseStatusBarActivity implements OnTabSelectLi
                 }
                 break;
         }
-        ft.commit();
+        ft.commitAllowingStateLoss();
     }
+
     private void hideFragment(FragmentTransaction ft) {
         // 如果不为空，就先隐藏起来
         if (mHomeFragment != null) {

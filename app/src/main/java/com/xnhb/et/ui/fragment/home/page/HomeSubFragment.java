@@ -1,4 +1,4 @@
-package com.xnhb.et.ui.fragment.home;
+package com.xnhb.et.ui.fragment.home.page;
 
 import android.view.View;
 import android.widget.TextView;

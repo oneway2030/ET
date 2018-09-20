@@ -38,6 +38,7 @@ public class ListLayout extends FrameLayout implements BaseQuickAdapter.RequestL
     //    private RecyclerView.LayoutManager layoutManger;
     private String emptyStr;
     private int emptyImg;
+    private int otherErrorView; //其他错误界面
 
     public ListLayout(@NonNull Context context) {
         this(context, null);
@@ -165,6 +166,7 @@ public class ListLayout extends FrameLayout implements BaseQuickAdapter.RequestL
 
     /**
      * 设置adapter 并初始化
+     * 此方法一定要放在最后
      */
     public void setAdaper(BaseQuickAdapter adapter) {
         this.mAdapter = adapter;
@@ -630,6 +632,7 @@ public class ListLayout extends FrameLayout implements BaseQuickAdapter.RequestL
                 .contentView(content)
                 .emptyText(emptyStr)
                 .emptyImg(emptyImg)
+                .otherErrorRetryViewId(otherErrorView)
                 .onRetryListener(new OnRetryListener() {
                     @Override
                     public void onRetry(int type) {
@@ -661,6 +664,7 @@ public class ListLayout extends FrameLayout implements BaseQuickAdapter.RequestL
         if (mStatusLayoutManager != null)
             mStatusLayoutManager.showOtherErrorView(str, imgId);
     }
+
 
     public void showOtherErrorView(String str) {
         showOtherErrorView(str, 0);
@@ -697,6 +701,10 @@ public class ListLayout extends FrameLayout implements BaseQuickAdapter.RequestL
             if (mStatusLayoutManager != null)
                 mStatusLayoutManager.showContentView();
         }
+    }
+
+    public void setOtherErrorView(int otherErrorViewId) {
+        this.otherErrorView = otherErrorViewId;
     }
 
 

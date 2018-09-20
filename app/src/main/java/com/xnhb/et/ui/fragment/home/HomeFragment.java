@@ -18,6 +18,7 @@ import com.xnhb.et.adapter.HomeHAdapter;
 import com.xnhb.et.bean.HomeHDataInfo;
 import com.xnhb.et.common.GlideImageLoader;
 import com.xnhb.et.ui.ac.NoticeActivity;
+import com.xnhb.et.ui.fragment.home.page.HomeSubFragment;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
