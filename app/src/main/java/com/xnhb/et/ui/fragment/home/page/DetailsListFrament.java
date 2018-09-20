@@ -50,8 +50,6 @@ public class DetailsListFrament extends BaseFragment implements ListLayout.TaskL
         mListLayout.setAdaper(new XRecyclerViewAdapter<OrderInfo>(this));
         mListLayout.showLoadingView();
         mListLayout.pullRefresh();
-
-
     }
 
     @Override
