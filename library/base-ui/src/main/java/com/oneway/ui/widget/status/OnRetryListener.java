@@ -6,5 +6,8 @@ package com.oneway.ui.widget.status;
  * @date: 2017-03-08 15:47
  */
 public interface OnRetryListener {
+    /**
+     * @param type 类型参考{@link StatusType}
+     */
     void onRetry(int type);
 }

@@ -2,7 +2,6 @@ package com.oneway.ui.widget.status;
 
 /**
  * @Description: 视图显示类型
- * @author: <a href="http://xiaoyaoyou1212.360doc.com">DAWI</a>
  * @date: 2017-03-08 15:53
  */
 public enum StatusType {
@@ -16,6 +15,15 @@ public enum StatusType {
 
     StatusType(int type) {
         this.type = type;
+    }
+
+    public static StatusType fromTypeName(int type) {
+        for (StatusType t : StatusType.values()) {
+            if (t.getType() == type) {
+                return t;
+            }
+        }
+        return null;
     }
 
     public int getType() {

@@ -26,6 +26,7 @@ import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.util.PageStateHelper;
 import com.oneway.ui.widget.status.OnRetryListener;
 import com.oneway.ui.widget.status.StatusLayoutManager;
+import com.oneway.ui.widget.status.StatusType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -479,7 +480,6 @@ public class WebLayout extends RelativeLayout implements OnRetryListener {
         return TextUtils.isEmpty(mTitle) ? defTitleStr : mTitle;
     }
 
-
     /**
      * 错误页面的点击回调
      */
@@ -517,6 +517,7 @@ public class WebLayout extends RelativeLayout implements OnRetryListener {
     }
 
     private StatusLayoutManager mStatusLayoutManager;
+
 
 
     /**

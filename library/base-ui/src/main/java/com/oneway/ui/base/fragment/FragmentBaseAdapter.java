@@ -2,6 +2,7 @@ package com.oneway.ui.base.fragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by Administrator on 2017/7/18 0018.
  */
 
-public class FragmentBaseAdapter<T> extends FragmentStatePagerAdapter {
+public class FragmentBaseAdapter<T> extends FragmentPagerAdapter {
 
     private List<Fragment> fragments;
     ArrayList<T> mTitleList;

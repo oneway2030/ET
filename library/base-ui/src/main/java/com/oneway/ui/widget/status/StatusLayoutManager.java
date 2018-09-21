@@ -2,7 +2,6 @@ package com.oneway.ui.widget.status;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
@@ -14,12 +13,12 @@ import com.oneway.tool.utils.common.Network;
  * @Description: 各种状态视图显示管理，可配置网络异常显示视图、无数据显示视图等
  * 使用示例：
  * mStatusLayoutManager = StatusLayoutManager.newBuilder(mContext)
- * .contentView(R.layout.status_switch_content_layout)//配置内容视图
+ * .addContentView(R.layout.status_switch_content_layout)//配置内容视图
  * .loadingView(R.layout.loading_layout)//配置加载视图
- * .emptyView(R.layout.empty_layout)//配置空视图
+ * .addEmptyView(R.layout.empty_layout)//配置空视图
  * .networkErrorView(R.layout.network_error_layout)//配置网络异常视图
  * .otherErrorView(R.layout.other_error_layout)//配置其他异常视图
- * .retryViewId(R.id.reload_view)//配置重试ViewID
+ * .setRetryViewId(R.id.reload_view)//配置重试ViewID
  * .onStatusViewListener(new OnStatusViewListener() {//配置状态监听
  * @Override public void onShowView(View view, int id) {//显示
  * }
@@ -36,14 +35,15 @@ import com.oneway.tool.utils.common.Network;
 public class StatusLayoutManager {
     private final Context mContext;
     private final ViewStub mEmptyView;
-    private final int mEmptyRetryViewId;
+    private final ViewStub mLoadingView;
     private final ViewStub mNetworkErrorView;
-    private final int mNetworkErrorRetryViewId;
     private final ViewStub mOtherErrorView;
-    private final int mOtherErrorRetryViewId;
-    private final int mLoadingLayoutResId;
     private final View mContentView;
-    private int mRetryViewId;
+    private int mRetryIdCommon;
+    private final int mRetryIdEmpty;
+    private final int mRetryIdNetworkError;
+    private final int mRetryIdOtherError;
+    //    private final int mLoadingLayoutResId;
     private final StatusLayout mStatusLayout;
     private final OnStatusViewListener mStatusViewListener;
     private final OnRetryListener mRetryListener;
@@ -58,59 +58,58 @@ public class StatusLayoutManager {
     public StatusLayoutManager(Builder builder) {
         this.mContext = builder.mContext;
         this.mContentView = builder.mContentView;
+        //添加空界面文本
+        this.mEmptyText = builder.mEmptyText;
+        //添加空界面图片
+        this.mEmptyImg = builder.mEmptyImg;
+        //添加错误界面文本
+        this.mErrorText = builder.mErrorText;
+        //添加错误界面图片
+        this.mErrorImg = builder.mErrorImg;
+        //添加错误界面文本
+        this.mOtherText = builder.mOtherText;
+        //添加错误界面图片
+        this.mOtherImg = builder.mOtherImg;
+        //空页面是否可以点击
+        this.isEmptyViewClick = builder.isEnableEmptyClick;
+        //添加  加载页面   如果未设置自定义界面则使用默认界面
+        if (builder.mLoadingView == null) {
+            this.mLoadingView = new ViewStub(mContext);
+            mLoadingView.setLayoutResource(StatusConfig.DEF_VIEW_ID_LOADING);
+        } else {
+            this.mLoadingView = builder.mLoadingView;
+        }
+        //添加  空页面
         if (builder.mEmptyView == null) {
             this.mEmptyView = new ViewStub(mContext);
-            mEmptyView.setLayoutResource(StatusConfig.mEmptyViewId);
+            mEmptyView.setLayoutResource(StatusConfig.DEF_VIEW_ID_EMPTY);
         } else {
             this.mEmptyView = builder.mEmptyView;
         }
-        //添加空界面文本
-        if (!TextUtils.isEmpty(builder.mEmptyText)) {
-            this.mEmptyText = builder.mEmptyText;
-        }
-        //添加空界面图片
-        if (builder.mEmptyImg != 0) {
-            this.mEmptyImg = builder.mEmptyImg;
-        }
-        //添加错误界面文本
-        if (!TextUtils.isEmpty(builder.mErrorText)) {
-            this.mErrorText = builder.mErrorText;
-        }
-        //添加错误界面图片
-        if (builder.mErrorImg != 0) {
-            this.mErrorImg = builder.mErrorImg;
-        }
-
-        //添加错误界面文本
-        if (!TextUtils.isEmpty(builder.mOtherText)) {
-            this.mOtherText = builder.mOtherText;
-        }
-        //添加错误界面图片
-        if (builder.mOtherImg != 0) {
-            this.mOtherImg = builder.mOtherImg;
-        }
-        this.isEmptyViewClick = builder.isEmptyViewClick;
-        this.mEmptyRetryViewId = builder.mEmptyRetryViewId;
+        //添加  错误页面
         if (builder.mNetworkErrorView == null) {
             this.mNetworkErrorView = new ViewStub(mContext);
-            mNetworkErrorView.setLayoutResource(StatusConfig.mNetworkErrorId);
+            mNetworkErrorView.setLayoutResource(StatusConfig.DEF_VIEW_ID_NETWORKERROR);
         } else {
             this.mNetworkErrorView = builder.mNetworkErrorView;
         }
-        this.mNetworkErrorRetryViewId = builder.mNetworkErrorRetryViewId;
+        //添加  其他错误页面
         if (builder.mOtherErrorView == null) {
             this.mOtherErrorView = new ViewStub(mContext);
-            mOtherErrorView.setLayoutResource(StatusConfig.mOtherErrorViewId);
+            mOtherErrorView.setLayoutResource(StatusConfig.DEF_VIEW_ID_OTHERERROR);
         } else {
             this.mOtherErrorView = builder.mOtherErrorView;
         }
-        this.mOtherErrorRetryViewId = builder.mOtherErrorRetryViewId;
-        if (builder.mLoadingLayoutResId == 0) {
-            this.mLoadingLayoutResId = StatusConfig.mLoadingLayoutResId;
-        } else {
-            this.mLoadingLayoutResId = builder.mLoadingLayoutResId;
-        }
-        this.mRetryViewId = builder.mRetryViewId;
+//        if (builder.mLoadingLayoutResId == 0) {
+//            this.mLoadingLayoutResId = StatusConfig.DEF_VIEW_ID_LOADING;
+//        } else {
+//            this.mLoadingLayoutResId = builder.mLoadingLayoutResId;
+//        }
+        //设置重试按钮id
+        this.mRetryIdCommon = builder.mRetryIdCommon;
+        this.mRetryIdOtherError = builder.mRetryIdOtherError;
+        this.mRetryIdEmpty = builder.mRetryIdEmpty;
+        this.mRetryIdNetworkError = builder.mRetryIdNetworkError;
         this.mStatusViewListener = builder.mStatusViewListener;
         this.mRetryListener = builder.mRetryListener;
 
@@ -257,43 +256,75 @@ public class StatusLayoutManager {
         return mContext;
     }
 
+
+    public ViewStub getView(StatusType type) {
+        if (type.getType() == StatusType.LOADING.getType()) {
+            return mLoadingView;
+        } else if (type.getType() == StatusType.EMPTY.getType()) {
+            return mEmptyView;
+        } else if (type.getType() == StatusType.NETWORK_ERROR.getType()) {
+            return mNetworkErrorView;
+        } else if (type.getType() == StatusType.OTHER_ERROR.getType()) {
+            return mOtherErrorView;
+        }
+        return null;
+    }
+
+    /**
+     * 获取loading
+     */
+    public ViewStub getLoadingView() {
+        return mLoadingView;
+    }
+
+    /**
+     * 获取空视图
+     */
     public ViewStub getEmptyView() {
         return mEmptyView;
     }
 
-    public int getEmptyRetryViewId() {
-        return mEmptyRetryViewId;
-    }
-
-    public ViewStub getNetworkErrorView() {
-        return mNetworkErrorView;
-    }
-
-    public int getNetworkErrorRetryViewId() {
-        return mNetworkErrorRetryViewId;
-    }
-
+    /**
+     * 获取其他视图
+     */
     public ViewStub getOtherErrorView() {
         return mOtherErrorView;
     }
 
-    public int getOtherErrorRetryViewId() {
-        return mOtherErrorRetryViewId;
+    /**
+     * 获取网络错误视图
+     */
+    public ViewStub getNetworkErrorView() {
+        return mNetworkErrorView;
     }
 
-    public int getLoadingLayoutResId() {
-        return mLoadingLayoutResId;
+    public int getEmptyRetryViewId() {
+        return mRetryIdEmpty;
     }
+
+
+    public int getNetworkErrorRetryViewId() {
+        return mRetryIdNetworkError;
+    }
+
+
+    public int getOtherErrorRetryViewId() {
+        return mRetryIdOtherError;
+    }
+
+//    public int getLoadingLayoutResId() {
+//        return mLoadingLayoutResId;
+//    }
 
     public View getContentView() {
         return mContentView;
     }
 
     public int getRetryViewId() {
-        if (mRetryViewId == 0) {
-            mRetryViewId = StatusConfig.mRetryViewId;
+        if (mRetryIdCommon == 0) {
+            mRetryIdCommon = StatusConfig.mRetryViewId;
         }
-        return mRetryViewId;
+        return mRetryIdCommon;
     }
 
     public StatusLayout getStatusLayout() {
@@ -310,38 +341,149 @@ public class StatusLayoutManager {
 
     public static final class Builder {
         private Context mContext;
-        private ViewStub mEmptyView;
         private String mEmptyText;
         private String mErrorText;
         private String mOtherText;
         private int mEmptyImg;
         private int mErrorImg;
         private int mOtherImg;
-        private int mEmptyRetryViewId;
-        private ViewStub mNetworkErrorView;
-        private int mNetworkErrorRetryViewId;
-        private ViewStub mOtherErrorView;
-        private int mOtherErrorRetryViewId;
         private int mLoadingLayoutResId;
-        private int mRetryViewId;
+        //视图
         private View mContentView;
+        private ViewStub mLoadingView;
+        private ViewStub mEmptyView;
+        private ViewStub mNetworkErrorView;
+        private ViewStub mOtherErrorView;
+        //重试按钮id
+        private int mRetryIdEmpty;
+        private int mRetryIdNetworkError;
+        private int mRetryIdOtherError;
+        private int mRetryIdCommon;
+
         private OnStatusViewListener mStatusViewListener;
         private OnRetryListener mRetryListener;
-        private boolean isEmptyViewClick = true; //默认启用空页面点击加载
+        private boolean isEnableEmptyClick = true; //默认启用空页面点击加载
 
         public Builder(Context context) {
             this.mContext = context;
         }
 
-        public Builder emptyView(@LayoutRes int mEmptyViewId) {
-            if (mEmptyViewId > 0) {
-                mEmptyView = new ViewStub(mContext);
-                mEmptyView.setLayoutResource(mEmptyViewId);
-            }
+        /**
+         * 添加内容视图
+         *
+         * @param mContentView 内容视图
+         */
+        public Builder addContentView(View mContentView) {
+            this.mContentView = mContentView;
             return this;
         }
 
-        public Builder emptyText(String mEmptyText) {
+        /**
+         * 添加loading页面
+         */
+        public Builder addloadingView(@LayoutRes int loadingViewId) {
+            mLoadingView = new ViewStub(mContext);
+            mLoadingView.setLayoutResource(loadingViewId);
+            return this;
+        }
+
+        /**
+         * 添加新的 空页面
+         */
+        public Builder addEmptyView(@LayoutRes int mEmptyViewId) {
+            mEmptyView = new ViewStub(mContext);
+            mEmptyView.setLayoutResource(mEmptyViewId);
+            return this;
+        }
+
+        /**
+         * 添加新的 网络错误页面
+         */
+        public Builder addNetworkErrorView(@LayoutRes int mNetworkErrorId) {
+            mNetworkErrorView = new ViewStub(mContext);
+            mNetworkErrorView.setLayoutResource(mNetworkErrorId);
+            return this;
+        }
+
+        /**
+         * 添加新的 网络错误页面
+         */
+        public Builder addOtherErrorView(@LayoutRes int mOtherErrorViewId) {
+            mOtherErrorView = new ViewStub(mContext);
+            mOtherErrorView.setLayoutResource(mOtherErrorViewId);
+            return this;
+        }
+
+        /**
+         * 添加新的 加载界面
+         *
+         * @param mLoadingLayoutResId
+         * @return
+         */
+        public Builder loadingView(@LayoutRes int mLoadingLayoutResId) {
+            this.mLoadingLayoutResId = mLoadingLayoutResId;
+            return this;
+        }
+
+        /**
+         * 添加空页面 重试id
+         */
+        public Builder setRetryIdEmpty(int mEmptyRetryViewId) {
+            this.mRetryIdEmpty = mEmptyRetryViewId;
+            return this;
+        }
+
+        /**
+         * 添加网络错误页面 重试id
+         */
+        public Builder setRetryIdNetworkError(int mNetworkErrorRetryViewId) {
+            this.mRetryIdNetworkError = mNetworkErrorRetryViewId;
+            return this;
+        }
+
+        /**
+         * 添加其他错误页面 重试id
+         */
+        public Builder setRetryIdOtherError(int mOtherErrorRetryViewId) {
+            this.mRetryIdOtherError = mOtherErrorRetryViewId;
+            return this;
+        }
+
+        /**
+         * 添加所有页面的通用 重试按钮,
+         * 优先级低于addRetryIdEmpty,setRetryIdOtherError,ddRetryIdNetworkError
+         */
+        public Builder setRetryViewId(int commonRetryViewId) {
+            this.mRetryIdCommon = commonRetryViewId;
+            return this;
+        }
+
+        /**
+         * @param isEnableEmptyClick 是否启用空页面 重试点击
+         *                           默认true 启用空页面点击加载
+         */
+        public Builder isEnableEmptyRetry(boolean isEnableEmptyClick) {
+            this.isEnableEmptyClick = isEnableEmptyClick;
+            return this;
+        }
+
+        /**
+         * 视图状态监听
+         */
+        public Builder onStatusViewListener(OnStatusViewListener mStatusViewListener) {
+            this.mStatusViewListener = mStatusViewListener;
+            return this;
+        }
+
+        /**
+         * 视图 重试点击按钮监听
+         */
+        public Builder onRetryListener(OnRetryListener mRetryListener) {
+            this.mRetryListener = mRetryListener;
+            return this;
+        }
+
+        public Builder setEmptyText(String mEmptyText) {
             this.mEmptyText = mEmptyText;
             return this;
         }
@@ -371,62 +513,6 @@ public class StatusLayoutManager {
             return this;
         }
 
-        public Builder emptyRetryViewId(int mEmptyRetryViewId) {
-            this.mEmptyRetryViewId = mEmptyRetryViewId;
-            return this;
-        }
-
-        public Builder networkErrorView(@LayoutRes int mNetworkErrorId) {
-            mNetworkErrorView = new ViewStub(mContext);
-            mNetworkErrorView.setLayoutResource(mNetworkErrorId);
-            return this;
-        }
-
-        public Builder networkErrorRetryViewId(int mNetworkErrorRetryViewId) {
-            this.mNetworkErrorRetryViewId = mNetworkErrorRetryViewId;
-            return this;
-        }
-
-        public Builder otherErrorView(@LayoutRes int mOtherErrorViewId) {
-            mOtherErrorView = new ViewStub(mContext);
-            mOtherErrorView.setLayoutResource(mOtherErrorViewId);
-            return this;
-        }
-
-        public Builder otherErrorRetryViewId(int mOtherErrorRetryViewId) {
-            this.mOtherErrorRetryViewId = mOtherErrorRetryViewId;
-            return this;
-        }
-
-        public Builder loadingView(@LayoutRes int mLoadingLayoutResId) {
-            this.mLoadingLayoutResId = mLoadingLayoutResId;
-            return this;
-        }
-
-        public Builder setEVClickEnable(boolean isEmptyViewClick) {
-            this.isEmptyViewClick = isEmptyViewClick;
-            return this;
-        }
-
-        public Builder contentView(View mContentView) {
-            this.mContentView = mContentView;
-            return this;
-        }
-
-        public Builder retryViewId(int mRetryViewId) {
-            this.mRetryViewId = mRetryViewId;
-            return this;
-        }
-
-        public Builder onStatusViewListener(OnStatusViewListener mStatusViewListener) {
-            this.mStatusViewListener = mStatusViewListener;
-            return this;
-        }
-
-        public Builder onRetryListener(OnRetryListener mRetryListener) {
-            this.mRetryListener = mRetryListener;
-            return this;
-        }
 
         public StatusLayoutManager build() {
             return new StatusLayoutManager(this);

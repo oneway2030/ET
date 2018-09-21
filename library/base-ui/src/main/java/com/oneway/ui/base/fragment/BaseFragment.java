@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.oneway.tool.event.BusManager;
 import com.oneway.ui.R;
 import com.oneway.ui.base.in.IPresenter;
 import com.oneway.ui.base.in.IView;
@@ -49,9 +50,19 @@ public abstract class BaseFragment<P extends IPresenter> extends MVPFragment<P> 
         unbinder = ButterKnife.bind(this, view);
         if (isImmersionBarEnabled())
             initImmersionBar();
+        initArguments(getArguments());
         initView();
         initData();
         setListener();
+        if (isEneableBus())
+            BusManager.getBus().register(this);
+    }
+
+    protected void initArguments(Bundle arguments) {
+
+    }
+    protected boolean isEneableBus() {
+        return true;
     }
 
     @Override

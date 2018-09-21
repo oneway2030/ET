@@ -10,6 +10,7 @@ import com.oneway.ui.R;
 import com.oneway.ui.widget.AutoSwipeRefreshLayout;
 import com.oneway.ui.widget.status.OnRetryListener;
 import com.oneway.ui.widget.status.StatusLayoutManager;
+import com.oneway.ui.widget.status.StatusType;
 
 /**
  * 作者 oneway on 2018/7/13
@@ -41,7 +42,7 @@ public class NativeViewLayout implements RxListView {
         mRootView = rooView.findViewById(R.id.rootView);
         //错误页面回调
         mStatusLayoutManager = StatusLayoutManager.newBuilder(rooView.getContext())
-                .contentView(mAutoSwipeRefreshLayout)
+                .addContentView(mAutoSwipeRefreshLayout)
                 .onRetryListener(new OnRetryListener() {
                     @Override
                     public void onRetry(int type) {

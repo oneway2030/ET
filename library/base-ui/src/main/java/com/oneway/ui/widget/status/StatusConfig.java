@@ -9,10 +9,10 @@ import com.oneway.ui.R;
  * 作者:oneway
  */
 public class StatusConfig {
-    static final int mEmptyViewId = R.layout.status_empty_layout;         //空页面
-    static final int mLoadingLayoutResId = R.layout.status_loading_layout;   //正在加载页面
-    static final int mNetworkErrorId = R.layout.status_network_error_layout;     //没有网页面
-    static final int mOtherErrorViewId = R.layout.status_other_error_layout;   //
+    static final int DEF_VIEW_ID_EMPTY = R.layout.status_empty_layout;         //空页面
+    static final int DEF_VIEW_ID_LOADING = R.layout.status_loading_layout;   //正在加载页面
+    static final int DEF_VIEW_ID_NETWORKERROR = R.layout.status_network_error_layout;     //没有网页面
+    static final int DEF_VIEW_ID_OTHERERROR = R.layout.status_other_error_layout;   //
 
     //文本
     static final int tv_empty = R.id.tv_empty_str;

@@ -17,17 +17,16 @@ public class PageStateHelper {
 
     protected StatusLayoutManager mStatusLayoutManager;
 
-    public PageStateHelper(Context context, View content) {
-        this(context, content, null);
+    public PageStateHelper(Context context, View contentView) {
+        this(context, contentView, null);
     }
 
     public PageStateHelper(Context context, View content, OnRetryListener mRetryListener) {
         if (mStatusLayoutManager == null) {
             //错误页面回调
             mStatusLayoutManager = StatusLayoutManager.newBuilder(context)
-                    .contentView(content)
-                    .retryViewId(R.id.reload)
-                    .setEVClickEnable(false)
+                    .addContentView(content)
+                    .isEnableEmptyRetry(false)
                     .onRetryListener(mRetryListener)
                     .build();
         }

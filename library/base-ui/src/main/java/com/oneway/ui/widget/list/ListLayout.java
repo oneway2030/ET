@@ -629,10 +629,10 @@ public class ListLayout extends FrameLayout implements BaseQuickAdapter.RequestL
     public void initStatusPage(View content) {
         //错误页面回调
         mStatusLayoutManager = StatusLayoutManager.newBuilder(mContext)
-                .contentView(content)
-                .emptyText(emptyStr)
+                .addContentView(content)
+                .setEmptyText(emptyStr)
                 .emptyImg(emptyImg)
-                .otherErrorRetryViewId(otherErrorView)
+                .addOtherErrorView(otherErrorView)
                 .onRetryListener(new OnRetryListener() {
                     @Override
                     public void onRetry(int type) {
@@ -660,6 +660,12 @@ public class ListLayout extends FrameLayout implements BaseQuickAdapter.RequestL
      * @param str   不传则使用默认值
      * @param imgId 不传则使用默认值
      */
+    /**
+     */
+    public void showOtherErrorView() {
+        showOtherErrorView("", 0);
+    }
+
     public void showOtherErrorView(String str, int imgId) {
         if (mStatusLayoutManager != null)
             mStatusLayoutManager.showOtherErrorView(str, imgId);
