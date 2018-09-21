@@ -10,7 +10,6 @@ import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.adapter.recyclerview.RecyclerViewCreator;
 import com.oneway.ui.adapter.recyclerview.XRecyclerViewAdapter;
 import com.oneway.ui.base.fragment.BaseFragment;
-import com.oneway.ui.common.LinearItemDecoration;
 import com.oneway.ui.widget.list.ListLayout;
 import com.oneway.ui.widget.status.StatusType;
 import com.xnhb.et.R;
@@ -30,7 +29,7 @@ import butterknife.BindView;
  * 描述: 详情的列表
  * 参考链接:
  */
-public class DetailsListFrament extends BaseFragment implements ListLayout.TaskListener, BaseQuickAdapter.OnItemClickListener, RecyclerViewCreator<OrderInfo>, ListLayout.PageStatusListener {
+public class DetailsListFrament4 extends BaseFragment implements ListLayout.TaskListener, BaseQuickAdapter.OnItemClickListener, RecyclerViewCreator<OrderInfo>, ListLayout.PageStatusListener {
     public final static String BUNDLE_ARGUMENTS = "PageType";
     public final static int PAGE_TYPE_ECNY = 1;//ECNY
     public final static int PAGE_TYPE_ETH = 2;//ETH
@@ -69,8 +68,7 @@ public class DetailsListFrament extends BaseFragment implements ListLayout.TaskL
     @Override
     public void onResume() {
         super.onResume();
-//        LogUtil.i("0000" + PageType);
-        LogUtil.i("onResume==>" + PageType);
+        LogUtil.i("3333");
     }
 
     @Override

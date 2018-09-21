@@ -61,6 +61,7 @@ public abstract class BaseFragment<P extends IPresenter> extends MVPFragment<P> 
     protected void initArguments(Bundle arguments) {
 
     }
+
     protected boolean isEneableBus() {
         return true;
     }
@@ -68,7 +69,8 @@ public abstract class BaseFragment<P extends IPresenter> extends MVPFragment<P> 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unbinder.unbind();
+        if (unbinder != null)
+            unbinder.unbind();
         if (mImmersionBar != null)
             mImmersionBar.destroy();
     }

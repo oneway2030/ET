@@ -43,17 +43,6 @@ public class DetailsFragment extends BaseFragment implements TabLayout.OnTabSele
     @Override
     protected void initView() {
         FragmentBaseAdapter mFragmentAdapter = new FragmentBaseAdapter(getChildFragmentManager(), getFragments(), titles);
-        vp.setAdapter(new PagerAdapter() {
-            @Override
-            public int getCount() {
-                return 0;
-            }
-
-            @Override
-            public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-                return false;
-            }
-        });
         vp.setAdapter(mFragmentAdapter);
         tablayout.setupWithViewPager(vp);
 //        tablayout.addOnTabSelectedListener(this);
@@ -75,25 +64,25 @@ public class DetailsFragment extends BaseFragment implements TabLayout.OnTabSele
     public List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
         //ECNY
-        Bundle bundle = new Bundle();
         DetailsListFrament ECNYFrament = new DetailsListFrament();
+        Bundle bundle = new Bundle();
         bundle.putInt(DetailsListFrament.BUNDLE_ARGUMENTS, DetailsListFrament.PAGE_TYPE_ECNY);
         ECNYFrament.setArguments(bundle);
         //ETH
         DetailsListFrament ETHFrament = new DetailsListFrament();
-        bundle = new Bundle();
-        bundle.putInt(DetailsListFrament.BUNDLE_ARGUMENTS, DetailsListFrament.PAGE_TYPE_ETH);
-        ETHFrament.setArguments(bundle);
+        Bundle bundle2 = new Bundle();
+        bundle2.putInt(DetailsListFrament.BUNDLE_ARGUMENTS, DetailsListFrament.PAGE_TYPE_ETH);
+        ETHFrament.setArguments(bundle2);
         //BTC
         DetailsListFrament BTCFrament = new DetailsListFrament();
-        bundle = new Bundle();
-        bundle.putInt(DetailsListFrament.BUNDLE_ARGUMENTS, DetailsListFrament.PAGE_TYPE_BTC);
-        BTCFrament.setArguments(bundle);
+        Bundle bundle3 = new Bundle();
+        bundle3.putInt(DetailsListFrament.BUNDLE_ARGUMENTS, DetailsListFrament.PAGE_TYPE_BTC);
+        BTCFrament.setArguments(bundle3);
         //自选
         DetailsListFrament customFrament = new DetailsListFrament();
-        bundle = new Bundle();
-        bundle.putInt(DetailsListFrament.BUNDLE_ARGUMENTS, DetailsListFrament.PAGE_TYPE_CUSTOM);
-        customFrament.setArguments(bundle);
+        Bundle bundle4 = new Bundle();
+        bundle4.putInt(DetailsListFrament.BUNDLE_ARGUMENTS, DetailsListFrament.PAGE_TYPE_CUSTOM);
+        customFrament.setArguments(bundle4);
         fragments.add(ECNYFrament);
         fragments.add(ETHFrament);
         fragments.add(BTCFrament);
