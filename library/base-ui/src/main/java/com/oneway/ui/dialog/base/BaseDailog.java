@@ -13,6 +13,9 @@ import android.view.WindowManager;
 
 import com.oneway.ui.R;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * Created by wanwei on 2018/5/22.
  */
@@ -23,6 +26,7 @@ public abstract class BaseDailog extends Dialog {
     protected OnCloseListener mCloseListener;
     protected Window mWindow;
     protected Context mContext;
+    private Unbinder bind;
 
     public BaseDailog(@NonNull Context context) {
         super(context, R.style.Custom_Progress);
@@ -40,6 +44,7 @@ public abstract class BaseDailog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setLayoutId());
+        bind = ButterKnife.bind(this);
         //点击外部关闭
         setCanceledOnTouchOutside(setIsCanceledOnTouchOutside());
         // 按返回键是否取消
@@ -54,6 +59,7 @@ public abstract class BaseDailog extends Dialog {
         getWindow().setAttributes(lp);
         initData();
     }
+
     protected <E extends View> E F(@IdRes int viewId) {
         return (E) super.findViewById(viewId);
     }
@@ -97,5 +103,7 @@ public abstract class BaseDailog extends Dialog {
         if (mCloseListener != null) {
             mCloseListener.onDailogClose(this, isConfirm);
         }
+        if (bind != null)
+            bind.unbind();
     }
 }

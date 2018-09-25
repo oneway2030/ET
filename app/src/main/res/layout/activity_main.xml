@@ -11,8 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/tabLayout"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        android:visibility="gone" />
 
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tabLayout"
+        android:orientation="vertical" />
 
     <!--<com.oneway.ui.widget.BottomNavigationViewExv-->
     <!--android:id="@+id/navigation"-->

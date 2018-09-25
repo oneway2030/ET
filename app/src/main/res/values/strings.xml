@@ -44,6 +44,7 @@
     <string name="hint_idcard_select2">请选择身份证正面照</string>
     <string name="hint_idcard_select3">请选择手持身份证及ID照</string>
 
+
     <string name="safe_login_pwd">登录密码</string>
     <string name="safe_transaction_pwd">交易密码</string>
     <string name="safe_fingerprint">指纹</string>
@@ -63,4 +64,8 @@
     <string name="toast_hint_verification_code">请输入正确的验证码</string>
     <string name="toast_hint_account">请填写正确手机号或者邮箱</string>
     <string name="toast_hint_pwd_inconsistent">两次输入的密码不一致</string>
+
+    <string name="c2c_btn">%1$s(%2$s)</string>
+    <string name="hint_buy_count">请输入数量</string>
+
 </resources>

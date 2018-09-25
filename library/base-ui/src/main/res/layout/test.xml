@@ -3,10 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
+    <com.oneway.ui.widget.AutoSwipeRefreshLayout
+        android:id="@+id/AutoSwipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#f00"
-        android:text="内容" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#f00"
+            android:text="内容" />
+    </com.oneway.ui.widget.AutoSwipeRefreshLayout>
+
 
 </LinearLayout>

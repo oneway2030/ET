@@ -4,22 +4,17 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.oneway.ui.base.ac.BaseTitleActivity;
 import com.oneway.ui.base.fragment.FragmentBaseAdapter;
-import com.oneway.ui.util.PageStateHelper;
 import com.xnhb.et.R;
-import com.xnhb.et.ui.fragment.home.page.DetailsListFrament;
+import com.xnhb.et.ui.fragment.home.page.DetailsSubListFrament;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * 作者 oneway on 2018/9/21
@@ -56,23 +51,23 @@ public class TestActivity extends BaseTitleActivity {
         List<Fragment> fragments = new ArrayList<>();
         //ECNY
         Bundle bundle = new Bundle();
-        DetailsListFrament ECNYFrament = new DetailsListFrament();
-        bundle.putInt(DetailsListFrament.BUNDLE_ARGUMENTS, DetailsListFrament.PAGE_TYPE_ECNY);
+        DetailsSubListFrament ECNYFrament = new DetailsSubListFrament();
+        bundle.putInt(DetailsSubListFrament.BUNDLE_ARGUMENTS, DetailsSubListFrament.PAGE_TYPE_ECNY);
         ECNYFrament.setArguments(bundle);
         //ETH
-        DetailsListFrament ETHFrament = new DetailsListFrament();
+        DetailsSubListFrament ETHFrament = new DetailsSubListFrament();
         bundle = new Bundle();
-        bundle.putInt(DetailsListFrament.BUNDLE_ARGUMENTS, DetailsListFrament.PAGE_TYPE_ETH);
+        bundle.putInt(DetailsSubListFrament.BUNDLE_ARGUMENTS, DetailsSubListFrament.PAGE_TYPE_ETH);
         ETHFrament.setArguments(bundle);
         //BTC
-        DetailsListFrament BTCFrament = new DetailsListFrament();
+        DetailsSubListFrament BTCFrament = new DetailsSubListFrament();
         bundle = new Bundle();
-        bundle.putInt(DetailsListFrament.BUNDLE_ARGUMENTS, DetailsListFrament.PAGE_TYPE_BTC);
+        bundle.putInt(DetailsSubListFrament.BUNDLE_ARGUMENTS, DetailsSubListFrament.PAGE_TYPE_BTC);
         BTCFrament.setArguments(bundle);
         //自选
-        DetailsListFrament customFrament = new DetailsListFrament();
+        DetailsSubListFrament customFrament = new DetailsSubListFrament();
         bundle = new Bundle();
-        bundle.putInt(DetailsListFrament.BUNDLE_ARGUMENTS, DetailsListFrament.PAGE_TYPE_CUSTOM);
+        bundle.putInt(DetailsSubListFrament.BUNDLE_ARGUMENTS, DetailsSubListFrament.PAGE_TYPE_CUSTOM);
         customFrament.setArguments(bundle);
         fragments.add(ECNYFrament);
         fragments.add(ETHFrament);

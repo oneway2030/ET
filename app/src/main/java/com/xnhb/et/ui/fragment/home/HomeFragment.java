@@ -1,5 +1,6 @@
 package com.xnhb.et.ui.fragment.home;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import com.androidkun.xtablayout.XTabLayout;
 import com.oneway.ui.base.fragment.BaseFragment;
 import com.oneway.ui.base.fragment.FragmentBaseAdapter;
+import com.oneway.ui.base.fragment.XFragment;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.tv.AutoVerticalTextView;
@@ -31,7 +33,7 @@ import butterknife.BindView;
  * 描述:
  * 参考链接:
  */
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends XFragment {
     @BindView(R.id.banner)
     Banner mBanner;
     @BindView(R.id.autoVerticalTextview)
@@ -53,9 +55,15 @@ public class HomeFragment extends BaseFragment {
         return R.layout.fragment_mian_home;
     }
 
+    public static HomeFragment newInstance() {
+        Bundle args = new Bundle();
+        HomeFragment fragment = new HomeFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
-    protected boolean isImmersionBarEnabled() {
+    protected boolean isBarEnabled() {
         return true;
     }
 

@@ -15,4 +15,6 @@ public interface EventBusTags {
     String TAG_HOME_SWTICH_PAGE = "home_swtich_page";
     //登录
     String TAG_LOGIN_SUCDESS = "login_sucdess";
+    //搜索结果
+    String TAG_SEARCH_RESULT= "search_result";
 }

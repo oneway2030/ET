@@ -48,6 +48,8 @@ dependencies {
     api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
     api rootProject.ext.dependencies["okgo"]
     api rootProject.ext.dependencies["sweetalert"]
+    // Fragment框架
+    api 'me.yokeyword:fragmentation:1.3.6'
     //
 //    api rootProject.ext.dependencies["lifecyclemodel"]
 //    api(rootProject.ext.dependencies["rxlifecycle2"]) {

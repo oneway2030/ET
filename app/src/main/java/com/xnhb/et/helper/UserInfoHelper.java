@@ -122,7 +122,7 @@ public class UserInfoHelper {
      */
     public void cleanUpUserInfo() {
         //
-//        SpCache.getInstance().remove(SP_KEY_USER_ACCOUNT_NAME);
+//        SpCache.newInstance().remove(SP_KEY_USER_ACCOUNT_NAME);
         SpCache.getInstance().remove(SP_KEY_USER_TOKEN);
         SpCache.getInstance().remove(SP_KEY_USER_STUTAS);
     }

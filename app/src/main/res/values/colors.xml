@@ -32,6 +32,7 @@
     <color name="red_btn">#ff7070</color>
     <color name="tabIndicatorColor">#3bc9ff</color>
     <color name="green_dark">#0fc29f</color>
+    <color name="c2c_text_color">#8f93ac</color>
 
 
 </resources>

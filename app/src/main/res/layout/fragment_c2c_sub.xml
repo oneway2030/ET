@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="left"
+            android:paddingLeft="@dimen/common_margin_space_20"
+            android:text="买入价"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tv_title1"
+            android:layout_marginBottom="18dp"
+            android:layout_marginTop="18dp"
+            android:background="@color/colorPrimary_divider_line" />
+
+        <TextView
+            android:id="@+id/tv_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line1"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            android:paddingLeft="@dimen/common_margin_space_20"
+            android:text="买入量"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tv_title2"
+            android:layout_marginBottom="18dp"
+            android:layout_marginTop="18dp"
+            android:background="@color/colorPrimary_divider_line" />
+
+        <TextView
+            android:id="@+id/tv_title3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line2"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            android:paddingLeft="@dimen/common_margin_space_20"
+            android:text="限价交易"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+
+        <View
+            android:id="@+id/line3"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tv_title3"
+            android:layout_marginBottom="18dp"
+            android:layout_marginTop="18dp"
+            android:background="@color/colorPrimary_divider_line" />
+
+        <TextView
+            android:id="@+id/tv_title4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line3"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            android:paddingLeft="@dimen/common_margin_space_20"
+            android:text="交易方式"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+
+        <View
+            android:id="@+id/line4"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tv_title4"
+            android:layout_marginTop="18dp"
+            android:background="@color/colorPrimary_divider_line" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/et3"
+            android:layout_alignTop="@+id/tv_title4"
+            android:layout_toRightOf="@+id/tv_title4"
+            android:background="@null"
+            android:drawableLeft="@mipmap/bankcard"
+            android:drawablePadding="10dp"
+            android:text="银行卡"
+            android:textColor="@color/c2c_text_color"
+            android:textColorHint="@color/c2c_text_color"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/et3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_title3"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="80dp"
+            android:layout_toRightOf="@+id/tv_title3"
+            android:background="@null"
+            android:textColor="@color/c2c_text_color"
+            android:textColorHint="@color/c2c_text_color"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/et2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/et3"
+            android:layout_alignTop="@+id/tv_title2"
+            android:layout_marginRight="80dp"
+            android:layout_toRightOf="@+id/tv_title2"
+            android:background="@null"
+            android:hint="@string/hint_buy_count"
+            android:textColor="@color/c2c_text_color"
+            android:textColorHint="@color/c2c_text_color"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/et1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/et3"
+            android:layout_alignTop="@+id/tv_title1"
+            android:layout_marginRight="80dp"
+            android:layout_toRightOf="@+id/tv_title1"
+            android:background="@null"
+            android:textColor="@color/c2c_text_color"
+            android:textColorHint="@color/c2c_text_color"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_right1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/et1"
+            android:background="@null"
+            android:paddingRight="@dimen/common_margin_space_20"
+            android:text="CNY"
+            android:textColor="@color/c2c_text_color"
+            android:textColorHint="@color/c2c_text_color"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_right2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/et2"
+            android:background="@null"
+            android:paddingRight="@dimen/common_margin_space_20"
+            android:text="ETH"
+            android:textColor="@color/c2c_text_color"
+            android:textColorHint="@color/c2c_text_color"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_right3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/et3"
+            android:background="@null"
+            android:paddingRight="@dimen/common_margin_space_20"
+            android:text="CNY"
+            android:textColor="@color/c2c_text_color"
+            android:textColorHint="@color/c2c_text_color"
+            android:textSize="14sp" />
+
+        <com.oneway.ui.widget.btn.StateButton
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_btn_hight"
+            android:layout_below="@+id/line4"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="30dp"
+            android:text="买入 (ETH)"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:normalBackgroundColor="#f6ba03"
+            app:normalTextColor="@android:color/white"
+            app:pressedBackgroundColor="#f6ba03"
+            app:pressedTextColor="@android:color/white"
+            app:radius="5dp" />
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -22,7 +22,7 @@ import butterknife.BindView;
  * 描述: 订单里的列表
  * 参考链接:
  */
-public class OrderListFrament extends BaseFragment implements ListLayout.TaskListener, BaseQuickAdapter.OnItemClickListener, RecyclerViewCreator<OrderInfo> {
+public class OrderSubListFrament extends BaseFragment implements ListLayout.TaskListener, BaseQuickAdapter.OnItemClickListener, RecyclerViewCreator<OrderInfo> {
     public final static int PageType = 0;
     public final static int PAGE_TYPE_EXECUTION_ = 1;//委托记录
     public final static int PAGE_TYPE_complete_ = 2;//成交记录

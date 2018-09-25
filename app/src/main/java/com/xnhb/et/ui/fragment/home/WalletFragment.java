@@ -1,11 +1,13 @@
 package com.xnhb.et.ui.fragment.home;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.oneway.ui.base.fragment.BaseFragment;
+import com.oneway.ui.base.fragment.XFragment;
 import com.oneway.ui.common.PerfectClickListener;
 import com.xnhb.et.R;
 import com.xnhb.et.helper.UserInfoHelper;
@@ -18,7 +20,7 @@ import butterknife.BindView;
  * 描述:
  * 参考链接:
  */
-public class WalletFragment extends BaseFragment {
+public class WalletFragment extends XFragment {
 
     @BindView(R.id.title_iv_setting)
     ImageView titleIvSetting;
@@ -35,8 +37,15 @@ public class WalletFragment extends BaseFragment {
 
     //    RegisterAndLoginActivity
     @Override
-    protected boolean isImmersionBarEnabled() {
+    protected boolean isBarEnabled() {
         return true;
+    }
+
+    public static WalletFragment newInstance() {
+        Bundle args = new Bundle();
+        WalletFragment fragment = new WalletFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override

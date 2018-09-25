@@ -5,12 +5,11 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.oneway.tool.utils.log.LogUtil;
 import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.adapter.recyclerview.RecyclerViewCreator;
 import com.oneway.ui.adapter.recyclerview.XRecyclerViewAdapter;
-import com.oneway.ui.base.fragment.BaseFragment;
-import com.oneway.ui.common.LinearItemDecoration;
+import com.oneway.ui.base.fragment.XFragment;
+import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.list.ListLayout;
 import com.oneway.ui.widget.status.StatusType;
 import com.xnhb.et.R;
@@ -30,30 +29,39 @@ import butterknife.BindView;
  * 描述: 详情的列表
  * 参考链接:
  */
-public class DetailsListFrament extends BaseFragment implements ListLayout.TaskListener, BaseQuickAdapter.OnItemClickListener, RecyclerViewCreator<OrderInfo>, ListLayout.PageStatusListener {
+public class DetailsSubListFrament extends XFragment implements ListLayout.TaskListener, BaseQuickAdapter.OnItemClickListener, RecyclerViewCreator<OrderInfo>, ListLayout.PageStatusListener {
     public final static String BUNDLE_ARGUMENTS = "PageType";
-    public final static int PAGE_TYPE_ECNY = 1;//ECNY
-    public final static int PAGE_TYPE_ETH = 2;//ETH
-    public final static int PAGE_TYPE_BTC = 3;//BTC
-    public final static int PAGE_TYPE_CUSTOM = 4;//自定义
-    public static int PageType = 0;
+    public final static int PAGE_TYPE_ECNY = 0;//ECNY
+    public final static int PAGE_TYPE_ETH = 1;//ETH
+    public final static int PAGE_TYPE_BTC = 2;//BTC
+    public final static int PAGE_TYPE_CUSTOM = 3;//自定义
+    public int PageType = 0;
     @BindView(R.id.listLayout)
     ListLayout mListLayout;
 
+
+    public static DetailsSubListFrament newInstance(int tag) {
+        DetailsSubListFrament frament = new DetailsSubListFrament();
+        Bundle bundle = new Bundle();
+        bundle.putInt(DetailsSubListFrament.BUNDLE_ARGUMENTS, tag);
+        frament.setArguments(bundle);
+        return frament;
+    }
 
     @Override
     protected int setLayoutId() {
         return R.layout.common_list_layout;
     }
 
-    @Override
-    protected void initArguments(Bundle arguments) {
-        PageType = arguments.getInt(BUNDLE_ARGUMENTS);
-    }
+//    @Override
+//    protected void initArguments(Bundle arguments) {
+//
+//    }
 
     @Override
     protected void initView() {
         super.initView();
+        PageType = getArguments().getInt(BUNDLE_ARGUMENTS, -1);
         mListLayout.setBackgroundColor(UiUtils.getColor(R.color.black));
         mListLayout.setTaskListener(this);
         mListLayout.setEmptyText("暂无信息...");
@@ -67,18 +75,10 @@ public class DetailsListFrament extends BaseFragment implements ListLayout.TaskL
 
 
     @Override
-    public void onResume() {
-        super.onResume();
-//        LogUtil.i("0000" + PageType);
-        LogUtil.i("onResume==>" + PageType);
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         if (PageType == PAGE_TYPE_CUSTOM) {
             if (!UserInfoHelper.getInstance().isLogin()) {//如果没登陆则显示其他错误界面
-                LogUtil.i("设置其他页面");
                 mListLayout.showOtherErrorView();
                 return;
             }
@@ -92,9 +92,6 @@ public class DetailsListFrament extends BaseFragment implements ListLayout.TaskL
                 mListLayout.showOtherErrorView();
                 return;
             }
-        } else if (PageType == PAGE_TYPE_BTC) {
-            mListLayout.showEmptyView();
-            return;
         }
         ArrayList<OrderInfo> list = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
@@ -106,7 +103,7 @@ public class DetailsListFrament extends BaseFragment implements ListLayout.TaskL
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        ToastManager.info("跳转详情");
     }
 
     @Override
@@ -121,15 +118,12 @@ public class DetailsListFrament extends BaseFragment implements ListLayout.TaskL
 
 
     @Subscriber(tag = EventBusTags.TAG_LOGIN_SUCDESS)
-    public void remoteSwtichPage(int position) { //返回第0个
+    public void remoteSwtichPage(int position) {
         if (getUserVisibleHint()) {
             //刷新当前界面
-            LogUtil.i("下拉刷新0==>" + PageType);
             if (PageType == PAGE_TYPE_CUSTOM) {
-                LogUtil.i("下拉刷新1");
                 mListLayout.showLoadingView();
                 mListLayout.pullRefresh();
-                LogUtil.i("下拉刷新2");
             }
         }
     }

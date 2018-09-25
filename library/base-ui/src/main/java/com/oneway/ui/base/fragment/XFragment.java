@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,21 +12,19 @@ import android.view.ViewGroup;
 import com.gyf.barlibrary.ImmersionBar;
 import com.oneway.tool.event.BusManager;
 import com.oneway.ui.R;
-import com.oneway.ui.base.in.IPresenter;
-import com.oneway.ui.base.in.IView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import me.yokeyword.fragmentation.SupportFragment;
 
 /**
- * 当以show()和hide()方法形式加载Fragment，沉浸式的使用
- * Created by geyifeng on 2017/4/7.
+ * 作者 oneway on 2018/9/25
+ * 描述:
+ * 参考链接:
  */
-public abstract class BaseFragment<P extends IPresenter> extends MVPFragment<P> {
-
+public abstract class XFragment extends XMVPFragment {
     protected Activity mActivity;
     protected View mRootView;
-
     protected ImmersionBar mImmersionBar;
     private Unbinder unbinder;
 
@@ -48,9 +45,6 @@ public abstract class BaseFragment<P extends IPresenter> extends MVPFragment<P> 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
-        if (isImmersionBarEnabled())
-            initImmersionBar();
-        initArguments(getArguments());
         initView();
         initData();
         setListener();
@@ -58,44 +52,24 @@ public abstract class BaseFragment<P extends IPresenter> extends MVPFragment<P> 
             BusManager.getBus().register(this);
     }
 
-    protected void initArguments(Bundle arguments) {
-
-    }
-
     protected boolean isEneableBus() {
         return true;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        BusManager.getBus().unregister(this);
-        if (unbinder != null)
-            unbinder.unbind();
-        if (mImmersionBar != null)
-            mImmersionBar.destroy();
+    protected int setStatusBarView() {
+        return 0;
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden && mImmersionBar != null)
-            mImmersionBar.init();
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        //如果要在Fragment单独使用沉浸式，请在onSupportVisible实现沉浸式
+        if (isBarEnabled()) {
+            initImmersionBar();
+        }
     }
 
-    /**
-     * Sets layout id.
-     *
-     * @return the layout id
-     */
-    protected abstract int setLayoutId();
-
-    /**
-     * 是否在Fragment使用沉浸式
-     *
-     * @return the boolean
-     */
-    protected boolean isImmersionBarEnabled() {
+    protected boolean isBarEnabled() {
         return false;
     }
 
@@ -111,6 +85,22 @@ public abstract class BaseFragment<P extends IPresenter> extends MVPFragment<P> 
                 .init();
     }
 
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        BusManager.getBus().unregister(this);
+        unbinder.unbind();
+        if (mImmersionBar != null)
+            mImmersionBar.destroy();
+    }
+
+    /**
+     * Sets layout id.
+     *
+     * @return the layout id
+     */
+    protected abstract int setLayoutId();
 
     /**
      * 初始化数据
@@ -143,5 +133,18 @@ public abstract class BaseFragment<P extends IPresenter> extends MVPFragment<P> 
     @SuppressWarnings("unchecked")
     protected <T extends View> T findActivityViewById(@IdRes int id) {
         return (T) mActivity.findViewById(id);
+    }
+
+    /**
+     * start other BrotherFragment
+     */
+    public void startBrotherFragment(SupportFragment targetFragment) {
+        start(targetFragment);
+    }
+
+    @Override
+    public void onSupportInvisible() {
+        super.onSupportInvisible();
+        hideSoftInput();
     }
 }
