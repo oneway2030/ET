@@ -72,9 +72,9 @@ public class WalletFragment extends XFragment {
         @Override
         protected void onNoDoubleClick(View v) {
             int id = v.getId();
-            if (id == R.id.title_iv_setting) {
+            if (id == R.id.title_iv_setting) { //设置
                 SettingActivity.launch(getActivity());
-            } else if (id == R.id.title_tv_historical) {
+            } else if (id == R.id.title_tv_historical) {//充提历史
 
             }
         }
