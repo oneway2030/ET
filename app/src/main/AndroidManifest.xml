@@ -60,6 +60,10 @@
             android:name=".ui.ac.search.SearchActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".ui.ac.c2c.C2CBillActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
     </application>
 
 </manifest>

@@ -20,6 +20,7 @@ import com.oneway.ui.widget.dialog.TipLabelBottomSelectDialog;
 import com.oneway.ui.widget.vp.CustomViewPager;
 import com.xnhb.et.MainFragment;
 import com.xnhb.et.R;
+import com.xnhb.et.ui.ac.c2c.C2CBillActivity;
 import com.xnhb.et.ui.fragment.home.page.C2CSubFragment;
 
 import java.util.ArrayList;
@@ -101,7 +102,7 @@ public class C2CFragment extends XFragment implements TabLayout.OnTabSelectedLis
         protected void onNoDoubleClick(View v) {
             int id = v.getId();
             if (id == R.id.tv_bill) {//跳转c2c账单
-
+                C2CBillActivity.launch(getActivity());
             } else if (id == R.id.tv_select_coin) {//弹出选择币类型
                 showCoinSelector();
             }
@@ -167,7 +168,6 @@ public class C2CFragment extends XFragment implements TabLayout.OnTabSelectedLis
                 tvSelectCoin.setText(coinTypes.get(position));
                 updateCoinType(coinTypes.get(position));
             }
-
 
         }).show();
     }

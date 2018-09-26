@@ -2,12 +2,16 @@ package com.xnhb.et.ui.fragment.home.page;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.oneway.tool.utils.calculate.BigDecimalUtils;
+import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.ui.base.fragment.XFragment;
+import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.widget.btn.StateButton;
 import com.xnhb.et.R;
 
@@ -18,7 +22,7 @@ import butterknife.BindView;
  * 描述:
  * 参考链接:
  */
-public class C2CSubFragment extends XFragment {
+public class C2CSubFragment extends XFragment implements TextWatcher {
     @BindView(R.id.tv_title1)
     TextView tvTitle1;
     @BindView(R.id.line1)
@@ -75,7 +79,19 @@ public class C2CSubFragment extends XFragment {
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initUi();
+        et2.addTextChangedListener(this);
+        submit.setOnClickListener(mPerfectClickListener);
     }
+
+    PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
+        @Override
+        protected void onNoDoubleClick(View v) {
+            int id = v.getId();
+            if (id == R.id.submit) {
+                //提交
+            }
+        }
+    };
 
     private void initUi() {
         title = getArguments().getString(ARG_TAG);
@@ -108,5 +124,32 @@ public class C2CSubFragment extends XFragment {
         return BigDecimalUtils.multiply(count, UNIT_PRICE, 4);
     }
 
-    //TODO 监听et输入数量,计算总价
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        //TODO 监听et输入数量,计算总价
+        String count = s.toString().trim();
+        if (EmptyUtils.isEmpty(count)) {
+            et3.setText("0.0000");
+            return;
+        }
+        try {
+            double v = calculationCoin(Double.valueOf(count));
+            et3.setText(v == 0 ? "0.0000" : v + "");
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
