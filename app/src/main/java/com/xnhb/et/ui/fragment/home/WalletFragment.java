@@ -11,6 +11,7 @@ import com.oneway.ui.base.fragment.XFragment;
 import com.oneway.ui.common.PerfectClickListener;
 import com.xnhb.et.R;
 import com.xnhb.et.helper.UserInfoHelper;
+import com.xnhb.et.ui.ac.bill.HistoricalActivity;
 import com.xnhb.et.ui.ac.setting.SettingActivity;
 
 import butterknife.BindView;
@@ -75,7 +76,7 @@ public class WalletFragment extends XFragment {
             if (id == R.id.title_iv_setting) { //设置
                 SettingActivity.launch(getActivity());
             } else if (id == R.id.title_tv_historical) {//充提历史
-
+                HistoricalActivity.launch(getActivity());
             }
         }
     };
