@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/library/base-tool" />
             <option value="$PROJECT_DIR$/library/base-ui" />
             <option value="$PROJECT_DIR$/library/picture" />
+            <option value="$PROJECT_DIR$/library/qr-lib" />
             <option value="$PROJECT_DIR$/library/ucrop" />
           </set>
         </option>

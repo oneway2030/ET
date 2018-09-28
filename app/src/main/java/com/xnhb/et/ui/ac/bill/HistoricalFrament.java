@@ -1,4 +1,4 @@
-package com.xnhb.et.ui.fragment;
+package com.xnhb.et.ui.ac.bill;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,8 +13,6 @@ import com.oneway.ui.common.LinearItemDecoration;
 import com.oneway.ui.widget.list.ListLayout;
 import com.xnhb.et.R;
 import com.xnhb.et.bean.OrderInfo;
-import com.xnhb.et.ui.ac.bill.HistoricalDetailsActivity;
-import com.xnhb.et.ui.fragment.home.page.C2CSubFragment;
 
 import java.util.ArrayList;
 

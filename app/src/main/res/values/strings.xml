@@ -67,5 +67,14 @@
 
     <string name="c2c_btn">%1$s(%2$s)</string>
     <string name="hint_buy_count">请输入数量</string>
+    <string name="hint_dialog_title">%1$s 充值或者提现</string>
 
+    <string name="item_coin_list_text1"><![CDATA[<font color="#ffffff">%1$s</font><font color="#8c99a6"> 全部</font>]]></string>
+    <string name="item_coin_list_text2"><![CDATA[<font color="#ffffff">≈%1$s</font><font color="#8c99a6"> CNY</font>]]></string>
+    <string name="item_coin_list_text3"><![CDATA[<font color="#ffffff">%1$s</font><font color="#8c99a6"> 冻结</font>]]></string>
+
+
+    <string name="item_withdrawal_text1"><![CDATA[<font color="#ffffff">%1$s %2$s</font><font color="#8c99a6"> 可用</font>]]></string>
+    <string name="item_withdrawal_text2"><![CDATA[<font color="#ffffff">%1$s %2$s</font><font color="#8c99a6"> 冻结</font>]]></string>
+    <string name="item_withdrawal_text3"><![CDATA[<font color="#ffffff">%1$s %2$s</font><font color="#8c99a6"> 全部</font>]]></string>
 </resources>

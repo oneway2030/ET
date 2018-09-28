@@ -37,8 +37,8 @@ public class UiUtils {
         return LayoutInflater.from(context).inflate(resId, (ViewGroup) null);
     }
 
-    public static void setViewVisibility(View v,boolean isShow){
-        v.setVisibility(isShow?View.VISIBLE:View.GONE);
+    public static void setViewVisibility(View v, boolean isShow) {
+        v.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -49,6 +49,10 @@ public class UiUtils {
      */
     public static String getString(int strId) {
         return ToolConfig.getContext().getResources().getString(strId);
+    }
+
+    public static String getString(int strId, Object... formatArgs) {
+        return ToolConfig.getContext().getResources().getString(strId, formatArgs);
     }
 
     /**

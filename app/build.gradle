@@ -74,6 +74,7 @@ dependencies {
     //
     api project(':library:base-ui')
     api project(':library:picture')
+    api project(':library:qr-lib')
     implementation rootProject.ext.dependencies["multidex"]
     implementation rootProject.ext.dependencies["AndPermission"]
     api rootProject.ext.dependencies["butterknife"]

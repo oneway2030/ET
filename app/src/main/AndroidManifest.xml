@@ -72,6 +72,14 @@
             android:name=".ui.ac.bill.HistoricalDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".ui.ac.RechargeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".ui.ac.WithdrawalActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
     </application>
 
 </manifest>

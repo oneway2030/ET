@@ -11,9 +11,6 @@ import android.support.v4.view.ViewPager;
 import com.oneway.ui.base.ac.BaseTitleActivity;
 import com.oneway.ui.base.fragment.FragmentBaseAdapter;
 import com.xnhb.et.R;
-import com.xnhb.et.ui.ac.c2c.C2CBillActivity;
-import com.xnhb.et.ui.fragment.HistoricalFrament;
-import com.xnhb.et.ui.fragment.home.page.OrderSubListFrament;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +19,7 @@ import butterknife.BindView;
 
 /**
  * 作者 oneway on 2018/9/26
- * 描述: 历史记录
+ * 描述: 充提 历史记录
  * 参考链接:
  */
 public class HistoricalActivity extends BaseTitleActivity {
