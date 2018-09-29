@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.androidkun.xtablayout.XTabLayout;
-import com.oneway.ui.base.fragment.BaseFragment;
 import com.oneway.ui.base.fragment.FragmentBaseAdapter;
 import com.oneway.ui.base.fragment.XFragment;
 import com.oneway.ui.common.PerfectClickListener;
@@ -18,9 +17,12 @@ import com.oneway.ui.widget.tv.AutoVerticalTextView;
 import com.xnhb.et.R;
 import com.xnhb.et.adapter.HomeHAdapter;
 import com.xnhb.et.bean.HomeHDataInfo;
+import com.xnhb.et.bean.NoticeInfo2;
 import com.xnhb.et.common.GlideImageLoader;
 import com.xnhb.et.ui.ac.NoticeActivity;
 import com.xnhb.et.ui.fragment.home.page.HomeSubFragment;
+import com.xnhb.et.ui.fragment.home.present.HomePresent;
+import com.xnhb.et.ui.fragment.home.view.IHomeView;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ import butterknife.BindView;
  * 描述:
  * 参考链接:
  */
-public class HomeFragment extends XFragment {
+public class HomeFragment extends XFragment<HomePresent> implements IHomeView {
     @BindView(R.id.banner)
     Banner mBanner;
     @BindView(R.id.autoVerticalTextview)
@@ -63,6 +65,11 @@ public class HomeFragment extends XFragment {
     }
 
     @Override
+    public HomePresent newP() {
+        return new HomePresent();
+    }
+
+    @Override
     protected boolean isBarEnabled() {
         return true;
     }
@@ -78,7 +85,6 @@ public class HomeFragment extends XFragment {
 
     @Override
     protected void initView() {
-        noticeLayout.setOnClickListener(mPerfectClickListener);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mHRecyclerView.setLayoutManager(linearLayoutManager);
@@ -92,28 +98,9 @@ public class HomeFragment extends XFragment {
 
     @Override
     protected void initData() {
-        setBanner();
-        mAdapter.setNewData(getHData());
-        mAutoVerticalTextview.setTextList(getTvData());//加入显示内容,集合类型
-    }
-
-    PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
-        @Override
-        protected void onNoDoubleClick(View v) {
-            int id = v.getId();
-            if (id == R.id.notice_layout) {
-                NoticeActivity.launch(getActivity());
-            }
-        }
-    };
-
-    private void setBanner() {
-        mBanner.setImages(getBannerData())
-                .setImageLoader(new GlideImageLoader())
-                .setDelayTime(3000)
-                .isAutoPlay(true)
-                .setOnBannerListener(position -> ToastManager.info("点击了 =>" + position));
-        mBanner.start();
+        getP().getBanner(); //获取轮播图信息
+        getP().getNotice(); //获取公告信息
+        getP().getHData(); //获取公告信息
     }
 
 
@@ -134,38 +121,49 @@ public class HomeFragment extends XFragment {
 
     public List<Fragment> getFragmentPage() {
         List<Fragment> fragments = new ArrayList<>();
-        //涨幅
-        HomeSubFragment mZhangFuFragment = new HomeSubFragment();
-        //成交
-        HomeSubFragment mChenJiaoFragment = new HomeSubFragment();
-        fragments.add(mZhangFuFragment);
-        fragments.add(mChenJiaoFragment);
+        for (int i = 0; i < 2; i++) {
+            HomeSubFragment fragment = HomeSubFragment.newInstance(i);
+            fragments.add(fragment);
+        }
         return fragments;
     }
 
-    protected ArrayList<Integer> getBannerData() {
-        ArrayList<Integer> pics = new ArrayList<>();
-        pics.add(R.mipmap.banner_bg);
-        pics.add(R.mipmap.banner_bg);
-        pics.add(R.mipmap.banner_bg);
-        pics.add(R.mipmap.test);
-        return pics;
+
+    @Override
+    public void setBanner(ArrayList<String> banners) {
+        mBanner.setImages(banners)
+                .setImageLoader(new GlideImageLoader())
+                .setDelayTime(3000)
+                .isAutoPlay(true)
+                .setOnBannerListener(position -> ToastManager.info("点击了 =>" + position));
+        mBanner.start();
     }
 
-    protected ArrayList<String> getTvData() {
+
+    @Override
+    public void setNotice(ArrayList<NoticeInfo2> banners) {
+        mAutoVerticalTextview.setTextList(getTvData(banners));//加入显示内容,集合类型
+        noticeLayout.setEnabled(true);
+        noticeLayout.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                NoticeActivity.launch(getActivity());
+            }
+        });
+    }
+
+    protected ArrayList<String> getTvData(ArrayList<NoticeInfo2> banners) {
         ArrayList<String> titles = new ArrayList<>();
-        titles.add("一条公告");
-        titles.add("二条公告");
-        titles.add("三条公告");
-        titles.add("四条公告");
+        for (NoticeInfo2 banner : banners) {
+            titles.add(banner.getTitle());
+        }
         return titles;
     }
 
-    public ArrayList<HomeHDataInfo> getHData() {
-        ArrayList<HomeHDataInfo> infos = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            infos.add(new HomeHDataInfo());
-        }
-        return infos;
+
+    @Override
+    public void setHorizontalList(ArrayList<HomeHDataInfo> datas) {
+        mAdapter.setNewData(datas);
     }
+
 }

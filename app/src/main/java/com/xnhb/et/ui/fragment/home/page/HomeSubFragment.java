@@ -1,10 +1,14 @@
 package com.xnhb.et.ui.fragment.home.page;
 
+import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.lzy.okgo.model.Response;
+import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.adapter.recyclerview.RecyclerViewCreator;
 import com.oneway.ui.adapter.recyclerview.XRecyclerViewAdapter;
@@ -12,9 +16,16 @@ import com.oneway.ui.base.fragment.BaseLazyFragment;
 import com.oneway.ui.common.UniversalItemDecoration;
 import com.oneway.ui.widget.list.ListLayout;
 import com.xnhb.et.R;
+import com.xnhb.et.bean.RankingInfo;
 import com.xnhb.et.bean.TransactionInfo;
+import com.xnhb.et.bean.base.ResultInfo;
+import com.xnhb.et.net.Api;
+import com.xnhb.et.net.okgo.DialogCallback;
+import com.xnhb.et.net.okgo.OkGoHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -25,9 +36,20 @@ import butterknife.BindView;
  */
 
 
-public class HomeSubFragment extends BaseLazyFragment implements ListLayout.TaskListener, BaseQuickAdapter.OnItemClickListener, RecyclerViewCreator<TransactionInfo> {
+public class HomeSubFragment extends BaseLazyFragment implements ListLayout.TaskListener, BaseQuickAdapter.OnItemClickListener, RecyclerViewCreator<RankingInfo> {
     @BindView(R.id.ListLayout)
     ListLayout mListLayout;
+
+    public final static String ARG_PAGE_TYPE = "PageType";
+    public int pageType;
+
+    public static HomeSubFragment newInstance(int tag) {
+        HomeSubFragment frament = new HomeSubFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(ARG_PAGE_TYPE, tag);
+        frament.setArguments(bundle);
+        return frament;
+    }
 
     @Override
     protected boolean isLazyLoad() {
@@ -41,10 +63,12 @@ public class HomeSubFragment extends BaseLazyFragment implements ListLayout.Task
 
     @Override
     protected void initLazyData() {
+        pageType = getArguments().getInt(ARG_PAGE_TYPE);
         mListLayout.setTaskListener(this);
         mListLayout.addItemDecoration(new MyUniversalItemDecoration());
         mListLayout.setEmptyText("暂无信息...");
-        mListLayout.setAdaper(new XRecyclerViewAdapter<TransactionInfo>(this));
+        mListLayout.setLoadMoreEnabled(false);
+        mListLayout.setAdaper(new XRecyclerViewAdapter<RankingInfo>(this));
         mListLayout.addOnItemClickListener(this);
         mListLayout.showLoadingView();
         mListLayout.pullRefresh();
@@ -52,17 +76,18 @@ public class HomeSubFragment extends BaseLazyFragment implements ListLayout.Task
 
     @Override
     public void task() {
-        ArrayList<TransactionInfo> infos = new ArrayList<>();
-        infos.add(new TransactionInfo("市场", "最新价", "24h涨跌幅", "24h涨跌幅", true));
-        infos.add(new TransactionInfo("BTC", "300", "1.014", "+0.32", true));
-        infos.add(new TransactionInfo("BTQ", "1.01", "0.61", "-0.33", false));
-        infos.add(new TransactionInfo("NEO", "0.31", "3.20", "+0.34", true));
-        infos.add(new TransactionInfo("BOS", "3.01", "10.2", "-0.35", false));
-        infos.add(new TransactionInfo("QXS", "11.11", "3.06", "+0.36", true));
-        infos.add(new TransactionInfo("BAS", "414.41", "0.9842", "-0.37", false));
-        infos.add(new TransactionInfo("BXX", "14.141", "0.0006", "+0.38", true));
-        infos.add(new TransactionInfo("CBX", "0.0099", "3.0015", "-0.39", false));
-        mListLayout.setData(infos);
+        getRankingInfo(pageType);
+//        ArrayList<TransactionInfo> infos = new ArrayList<>();
+//        infos.add(new TransactionInfo("市场", "最新价", "24h涨跌幅", "24h涨跌幅", true));
+//        infos.add(new TransactionInfo("BTC", "300", "1.014", "+0.32", true));
+//        infos.add(new TransactionInfo("BTQ", "1.01", "0.61", "-0.33", false));
+//        infos.add(new TransactionInfo("NEO", "0.31", "3.20", "+0.34", true));
+//        infos.add(new TransactionInfo("BOS", "3.01", "10.2", "-0.35", false));
+//        infos.add(new TransactionInfo("QXS", "11.11", "3.06", "+0.36", true));
+//        infos.add(new TransactionInfo("BAS", "414.41", "0.9842", "-0.37", false));
+//        infos.add(new TransactionInfo("BXX", "14.141", "0.0006", "+0.38", true));
+//        infos.add(new TransactionInfo("CBX", "0.0099", "3.0015", "-0.39", false));
+//        mListLayout.setData(infos);
 
     }
 
@@ -78,36 +103,51 @@ public class HomeSubFragment extends BaseLazyFragment implements ListLayout.Task
     }
 
     @Override
-    public void bindData(int position, BaseViewHolder holder, TransactionInfo data) {
+    public void bindData(int position, BaseViewHolder holder, RankingInfo data) {
         if (position == 0) {
             holder.getView(R.id.center).setVisibility(View.VISIBLE);
             holder.getView(R.id.center_layout).setVisibility(View.GONE);
-
-            holder.setVisible(R.id.center, true);
-            holder.setText(R.id.left, data.getName())
-                    .setText(R.id.center, data.getUnitPrice())
-                    .setText(R.id.right, data.getIncrease());
+            holder.setText(R.id.left, "市场")
+                    .setText(R.id.center, "最新价")
+                    .setText(R.id.right, pageType == 0 ? "24h涨跌幅" : "24h成交额");
             holder.setTextColor(R.id.left, UiUtils.getColor(R.color.white))
                     .setTextColor(R.id.center, UiUtils.getColor(R.color.white))
                     .setTextColor(R.id.right, UiUtils.getColor(R.color.white));
         } else {
             holder.getView(R.id.center).setVisibility(View.GONE);
             holder.getView(R.id.center_layout).setVisibility(View.VISIBLE);
-            holder.setText(R.id.left, position + " " + data.getName())
-                    .setText(R.id.right, data.getIncrease() + "%")
-                    .setText(R.id.tv_unit_price, data.getUnitPrice())
-                    .setText(R.id.tv_rmb_unit_price, data.getRmbUnitPrice());
-            TextView tv = holder.getView(R.id.center);
+            holder.setText(R.id.left, position + " " + data.getCurrencyName())
+                    .setText(R.id.tv_unit_price, data.getCurrentPrice() + "")
+                    .setText(R.id.tv_rmb_unit_price, data.getEncyMoeny() + "");
+//            TextView tv = holder.getView(R.id.center);
             holder.setTextColor(R.id.left, UiUtils.getColor(R.color.white));
-            if (data.isAdd()) {
-//                tv.setText(StringUtil.htmlFromat(R.string.mian_pirce_red, data.getUnitPrice(), data.getRmbUnitPrice()));
+            if (pageType == 0) {//涨幅
+                holder.setText(R.id.right, data.getRise() + "%");
+                if (EmptyUtils.isNotEmpty(data.getRise())) {
+                    if (data.getRise().startsWith("+")) {
+                        holder.setTextColor(R.id.right, UiUtils.getColor(R.color.price_red))
+                                .setTextColor(R.id.tv_unit_price, UiUtils.getColor(R.color.price_red));
+                    } else {
+                        holder.setTextColor(R.id.right, UiUtils.getColor(R.color.price_green))
+                                .setTextColor(R.id.tv_unit_price, UiUtils.getColor(R.color.price_green));
+                    }
+                }
+            } else {//成交额
+                holder.setText(R.id.right, data.getTradeMoney() + "k");
                 holder.setTextColor(R.id.right, UiUtils.getColor(R.color.price_red))
                         .setTextColor(R.id.tv_unit_price, UiUtils.getColor(R.color.price_red));
-            } else {
-//                tv.setText(StringUtil.htmlFromat(R.string.mian_pirce_green, data.getUnitPrice(), data.getRmbUnitPrice()));
-                holder.setTextColor(R.id.right, UiUtils.getColor(R.color.price_green))
-                        .setTextColor(R.id.tv_unit_price, UiUtils.getColor(R.color.price_green));
             }
+
+
+//            if (data.isAdd()) {
+//                tv.setText(StringUtil.htmlFromat(R.string.mian_pirce_red, data.getUnitPrice(), data.getRmbUnitPrice()));
+//                holder.setTextColor(R.id.right, UiUtils.getColor(R.color.price_red))
+//                        .setTextColor(R.id.tv_unit_price, UiUtils.getColor(R.color.price_red));
+//            } else {
+////                tv.setText(StringUtil.htmlFromat(R.string.mian_pirce_green, data.getUnitPrice(), data.getRmbUnitPrice()));
+//                holder.setTextColor(R.id.right, UiUtils.getColor(R.color.price_green))
+//                        .setTextColor(R.id.tv_unit_price, UiUtils.getColor(R.color.price_green));
+//            }
 
         }
     }
@@ -124,4 +164,31 @@ public class HomeSubFragment extends BaseLazyFragment implements ListLayout.Task
             return decoration;
         }
     }
+
+    /**
+     * 网络获取 涨幅列表
+     *
+     * @param index 0涨幅  1成交
+     */
+    public void getRankingInfo(int index) {
+        Map map = new HashMap();
+        map.put("index", index + "");
+        OkGoHelper.getOkGo(Api.HOME_RANKING, getAc())
+                .params(map)
+                .execute(new DialogCallback<ResultInfo<ArrayList<RankingInfo>>>() {
+                    @Override
+                    public void onSuccess(Response<ResultInfo<ArrayList<RankingInfo>>> response) {
+                        ResultInfo<ArrayList<RankingInfo>> body = response.body();
+                        if (EmptyUtils.isNotEmpty(body)) {
+                            ArrayList<RankingInfo> result = body.getResult();
+                            if (EmptyUtils.isNotEmpty(result)) {
+                                result.add(0,new RankingInfo());
+                                mListLayout.setData(body.getResult());
+                            }
+                        }
+
+                    }
+                });
+    }
+
 }

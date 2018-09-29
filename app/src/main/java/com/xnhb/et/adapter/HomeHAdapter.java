@@ -24,9 +24,12 @@ public class HomeHAdapter extends BaseQuickAdapter<HomeHDataInfo, BaseViewHolder
 
     @Override
     protected void convert(BaseViewHolder helper, HomeHDataInfo item) {
-
-        helper.setText(R.id.tv_volum, StringUtil.htmlFromat(R.string.home_item_volum, "99.0009", "et"))
-//        .setText(R.id.tv_volum,);
-        ;
+        helper.setText(R.id.tv_title, item.getTradeCurrencyName() + "/" + item.getCurrencyName());
+        //TODO 这里得判断 涨跌 然后设置颜色
+        helper.setText(R.id.tv_percent, item.getRise() + "↓↑");
+        helper.setText(R.id.tv_currentPrice, item.getCurrentPrice() + "");
+        //TODO item.getCurrencyName() 这里的字体大小需要改一下
+        helper.setText(R.id.tv_price, item.getCurrencyName() + "/￥1");
+        helper.setText(R.id.tv_volum, StringUtil.htmlFromat(R.string.home_item_volum, item.getTradeNums(), item.getTradeCurrencyName()));
     }
 }

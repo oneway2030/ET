@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.gyf.barlibrary.ImmersionBar;
 import com.oneway.tool.event.BusManager;
 import com.oneway.ui.R;
+import com.oneway.ui.base.in.IPresenter;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -22,7 +23,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  * 描述:
  * 参考链接:
  */
-public abstract class XFragment extends XMVPFragment {
+public abstract class XFragment<P extends IPresenter> extends XMVPFragment<P> {
     protected Activity mActivity;
     protected View mRootView;
     protected ImmersionBar mImmersionBar;

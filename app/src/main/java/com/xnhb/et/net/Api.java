@@ -40,6 +40,34 @@ public interface Api {
     String SAVE_BANK_CARD_INFO = "/front/modifyBank";
     /**
      * 获取用户信息
+     * //front/personal
      */
     String GET_USER_INFO = "/front/userInfo";
+
+    /**
+     * 滚动公告
+     */
+    String NOTICE_INFO = "/search/indexContent";
+
+    String NOTICE_LIST_INFO = "/search/getContent";
+
+
+    /**
+     * 涨幅榜  index  0涨幅  1成交
+     */
+    String HOME_RANKING = "/search/indexRanking";
+
+    /**
+     * 轮播图
+     */
+    String BANNER_INFO = "/search/indexSlides";
+    /**
+     * 下载图片
+     */
+    String DOWNLOAD_IMAGE = "/search/download";
+    /**
+     * 横向 列表数据 horizontal_list
+     */
+    String HOME_HORIZONTAL_LIST_DATA = "/search/indexCommTrade";
+
 }

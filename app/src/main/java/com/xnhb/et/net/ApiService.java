@@ -1,8 +1,9 @@
-package com.xnhb.et.bean;
+package com.xnhb.et.net;
 
 import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.model.Response;
 import com.oneway.tool.utils.convert.EmptyUtils;
+import com.xnhb.et.bean.UserInfo;
 import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.net.Api;

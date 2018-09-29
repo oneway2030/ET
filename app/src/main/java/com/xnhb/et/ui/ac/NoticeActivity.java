@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.lzy.okgo.model.Response;
+import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.adapter.recyclerview.RecyclerViewCreator;
 import com.oneway.ui.adapter.recyclerview.XRecyclerViewAdapter;
@@ -16,8 +19,18 @@ import com.oneway.ui.common.UniversalItemDecoration;
 import com.oneway.ui.widget.list.ListLayout;
 import com.xnhb.et.R;
 import com.xnhb.et.bean.NoticeInfo;
+import com.xnhb.et.bean.NoticeInfo2;
+import com.xnhb.et.bean.WrapNoticeInfo;
+import com.xnhb.et.bean.base.LimitPage;
+import com.xnhb.et.bean.base.ResultInfo;
+import com.xnhb.et.net.Api;
+import com.xnhb.et.net.okgo.DialogCallback;
+import com.xnhb.et.net.okgo.OkGoHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -26,10 +39,12 @@ import butterknife.BindView;
  * 描述:公告列表页面
  * 参考链接:
  */
-public class NoticeActivity extends BaseTitleActivity implements ListLayout.TaskListener, RecyclerViewCreator<NoticeInfo>, BaseQuickAdapter.OnItemClickListener {
+public class NoticeActivity extends BaseTitleActivity implements ListLayout.TaskListener, RecyclerViewCreator<NoticeInfo2>, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.listLayout)
     ListLayout mListLayout;
+    public static final String INTENT_ARG = "intent_arg";
+    private ArrayList<NoticeInfo2> infos;
 
     public static void launch(Context context) {
         Intent intent = new Intent();
@@ -52,11 +67,17 @@ public class NoticeActivity extends BaseTitleActivity implements ListLayout.Task
     }
 
     @Override
+    protected boolean getIntent(Intent intent) {
+        infos = intent.getParcelableArrayListExtra(INTENT_ARG);
+        return false;
+    }
+
+    @Override
     protected void initData(Bundle savedInstanceState) {
         mListLayout.setTaskListener(this);
         mListLayout.addItemDecoration(new MyUniversalItemDecoration());
         mListLayout.setEmptyText("暂无公告...");
-        mListLayout.setAdaper(new XRecyclerViewAdapter<NoticeInfo>(this));
+        mListLayout.setAdaper(new XRecyclerViewAdapter<NoticeInfo2>(this));
         mListLayout.addOnItemClickListener(this);
         mListLayout.showLoadingView();
         mListLayout.pullRefresh();
@@ -64,11 +85,35 @@ public class NoticeActivity extends BaseTitleActivity implements ListLayout.Task
 
     @Override
     public void task() {
-        ArrayList<NoticeInfo> list = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            list.add(new NoticeInfo("标题", "2018-9-10", "我是内容"));
-        }
-        mListLayout.setData(list);
+        Map map = new HashMap();
+        map.put("title", "");
+        map.put("pageNum", mListLayout.getCurrentPageNumber() + "");
+        map.put("numPerPage", "20");
+        OkGoHelper.getOkGo(Api.NOTICE_LIST_INFO, this)
+                .params(map)
+                .execute(new DialogCallback<ResultInfo<LimitPage<NoticeInfo2>>>() {
+                    @Override
+                    public void onSuccess(Response<ResultInfo<LimitPage<NoticeInfo2>>> response) {
+                        ResultInfo<LimitPage<NoticeInfo2>> body = response.body();
+                        if (EmptyUtils.isEmpty(body)) {
+                            return;
+                        }
+                        LimitPage<NoticeInfo2> result = body.getResult();
+                        if (EmptyUtils.isEmpty(result)) {
+                            return;
+                        }
+                        ArrayList<NoticeInfo2> list = result.getList();
+                        mListLayout.setData(list);
+                        mListLayout.setTotalPageNumber(result.getPages());
+                    }
+
+                    @Override
+                    public void onError(Response<ResultInfo<LimitPage<NoticeInfo2>>> response) {
+                        super.onError(response);
+                        mListLayout.showErrorView();
+                    }
+                });
+
     }
 
     @Override
@@ -77,15 +122,15 @@ public class NoticeActivity extends BaseTitleActivity implements ListLayout.Task
     }
 
     @Override
-    public void bindData(int position, BaseViewHolder holder, NoticeInfo data) {
+    public void bindData(int position, BaseViewHolder holder, NoticeInfo2 data) {
         holder.setText(R.id.tv1, data.getTitle())
-                .setText(R.id.tv2, data.getTime());
+                .setText(R.id.tv2, data.getCreateTime());
     }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         try {
-            NoticeInfo info = (NoticeInfo) adapter.getData().get(position);
+            NoticeInfo2 info = (NoticeInfo2) adapter.getData().get(position);
             NoticeDetailsActivity.launch(this, info);
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,7 +155,4 @@ public class NoticeActivity extends BaseTitleActivity implements ListLayout.Task
         }
     }
 
-   void showConten(){
-
-   }
 }

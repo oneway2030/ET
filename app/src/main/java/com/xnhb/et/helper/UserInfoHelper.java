@@ -7,7 +7,7 @@ import com.oneway.tool.event.BusManager;
 import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.ui.base.ac.ActivityManager;
 import com.xnhb.et.MainActivity;
-import com.xnhb.et.bean.ApiService;
+import com.xnhb.et.net.ApiService;
 import com.xnhb.et.bean.LoginInfo;
 import com.xnhb.et.bean.UserInfo;
 import com.xnhb.et.bean.base.ResultInfo;
@@ -150,7 +150,7 @@ public class UserInfoHelper {
     }
 
     /**
-     * 获取服务器上的用户ixnxi
+     * 获取服务器上的用户信息
      */
     public void gotoRemoteServerGetUserInfo(Object tag, CallBack callBack) {
         ApiService.getUserInfo(tag, new DialogCallback<ResultInfo<UserInfo>>() {

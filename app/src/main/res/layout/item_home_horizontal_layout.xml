@@ -29,6 +29,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="BTC/ECNY"
@@ -36,9 +37,10 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/tv_percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-25.68%向上↓↑"
+                android:text="-25.68%↓↑"
                 android:textColor="@color/price_green"
                 android:textSize="8sp" />
         </LinearLayout>
@@ -53,6 +55,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_currentPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="26.11"
@@ -60,6 +63,7 @@
                 android:textSize="10sp" />
 
             <TextView
+                android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ECY/￥6.1"
