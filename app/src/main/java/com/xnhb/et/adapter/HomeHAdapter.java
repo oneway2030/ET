@@ -1,7 +1,5 @@
 package com.xnhb.et.adapter;
 
-import android.support.annotation.Nullable;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.oneway.tool.utils.convert.EmptyUtils;
@@ -9,8 +7,6 @@ import com.oneway.tool.utils.convert.StringUtil;
 import com.oneway.tool.utils.ui.UiUtils;
 import com.xnhb.et.R;
 import com.xnhb.et.bean.HomeHDataInfo;
-
-import java.util.List;
 
 /**
  * 作者 oneway on 2018/9/12
@@ -26,7 +22,6 @@ public class HomeHAdapter extends BaseQuickAdapter<HomeHDataInfo, BaseViewHolder
     @Override
     protected void convert(BaseViewHolder helper, HomeHDataInfo item) {
         helper.setText(R.id.tv_title, item.getTradeCurrencyName() + "/" + item.getCurrencyName());
-        //TODO 这里得判断 涨跌 然后设置颜色
         if (EmptyUtils.isEmpty(item.getCon())) {
             helper.setText(R.id.tv_percent, item.getRise() + "↑");
             helper.setTextColor(R.id.tv_percent, UiUtils.getColor(R.color.price_red))

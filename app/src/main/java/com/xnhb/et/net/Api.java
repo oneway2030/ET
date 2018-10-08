@@ -78,5 +78,14 @@ public interface Api {
      * 自选 列表
      */
     String CUSTOM_SELECT_LIST = "/front/collect/tradeInfo";
+    /**
+     * 添加 自选
+     */
+    String ADD_CUSTOM_SELECT = "/front/collect/collect";
+    /**
+     * 取消 自选
+     */
+    String CANCEL_ADD_CUSTOM_SELECT = "/front/collect/cancel";
+
 
 }

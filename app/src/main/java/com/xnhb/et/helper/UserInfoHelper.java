@@ -75,6 +75,8 @@ public class UserInfoHelper {
 
     /**
      * 是否登录
+     * 登陆了 true
+     * 未登录 false
      */
     public boolean isLogin() {
         String account = SpCache.getInstance().getString(SP_KEY_USER_ACCOUNT_NAME);

@@ -17,8 +17,8 @@ import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.toast.ToastManager;
 import com.xnhb.et.MainFragment;
 import com.xnhb.et.R;
-import com.xnhb.et.bean.NoticeInfo2;
 import com.xnhb.et.bean.QuotationInfo;
+import com.xnhb.et.bean.QuotationListInfo;
 import com.xnhb.et.bean.WrapNoticeInfo;
 import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.event.EventBusTags;
@@ -56,6 +56,7 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
     //    String[] titles = {"ECNY", "ETH", "BTC", "自选"};
     public static final String KEY_RESULT = "key_result";
     private static final int REQ_SEARCH_FRAGMENT = 100;
+    public static ArrayList<QuotationListInfo> customListInfo;
 
     @Override
     protected int setLayoutId() {
@@ -139,6 +140,9 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
     }
 
 
+    /**
+     * 获取tab 列表
+     */
     public void getNotice() {
         Map map = new HashMap();
         OkGoHelper.getOkGo(Api.NOTICE_INFO, this)
@@ -156,7 +160,12 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
                         }
                         ArrayList<QuotationInfo> areaList = result.getAreaList();
                         areaList.add(new QuotationInfo("自选"));
-                        setData(areaList);
+                        if (UserInfoHelper.getInstance().isLogin()) { //已登录
+                            reqCustomSelectNetData(areaList);
+                        } else { //未登录
+                            setData(areaList);
+                        }
+
                     }
                 });
     }
@@ -185,5 +194,28 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
             titles.add(quotationInfo.getName());
         }
         return titles;
+    }
+
+    /**
+     * 获取自选信息
+     *
+     * @param areaList
+     */
+    private void reqCustomSelectNetData(ArrayList<QuotationInfo> areaList) {
+        Map map = new HashMap();
+        map.put("token", UserInfoHelper.getInstance().getToken());
+        OkGoHelper.getOkGo(Api.CUSTOM_SELECT_LIST, getAc())
+                .params(map)
+                .execute(new DialogCallback<ResultInfo<ArrayList<QuotationListInfo>>>() {
+                    @Override
+                    public void onSuccess(Response<ResultInfo<ArrayList<QuotationListInfo>>> response) {
+                        ResultInfo<ArrayList<QuotationListInfo>> body = response.body();
+                        if (EmptyUtils.isEmpty(body)) {
+                            return;
+                        }
+                        customListInfo = body.getResult();
+                        setData(areaList);
+                    }
+                });
     }
 }
