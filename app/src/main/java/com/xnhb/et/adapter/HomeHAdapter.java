@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.convert.StringUtil;
 import com.oneway.tool.utils.ui.UiUtils;
 import com.xnhb.et.R;
@@ -26,10 +27,18 @@ public class HomeHAdapter extends BaseQuickAdapter<HomeHDataInfo, BaseViewHolder
     protected void convert(BaseViewHolder helper, HomeHDataInfo item) {
         helper.setText(R.id.tv_title, item.getTradeCurrencyName() + "/" + item.getCurrencyName());
         //TODO 这里得判断 涨跌 然后设置颜色
-        helper.setText(R.id.tv_percent, item.getRise() + "↓↑");
-        helper.setText(R.id.tv_currentPrice, item.getCurrentPrice() + "");
-        //TODO item.getCurrencyName() 这里的字体大小需要改一下
-        helper.setText(R.id.tv_price, item.getCurrencyName() + "/￥1");
+        if (EmptyUtils.isEmpty(item.getCon())) {
+            helper.setText(R.id.tv_percent, item.getRise() + "↑");
+            helper.setTextColor(R.id.tv_percent, UiUtils.getColor(R.color.price_red))
+                    .setTextColor(R.id.tv_currentPrice, UiUtils.getColor(R.color.price_red));
+        } else {
+            helper.setText(R.id.tv_percent, item.getRise() + "↓");
+            helper.setTextColor(R.id.tv_percent, UiUtils.getColor(R.color.price_green))
+                    .setTextColor(R.id.tv_currentPrice, UiUtils.getColor(R.color.price_green));
+        }
+        helper.setText(R.id.tv_currentPrice, item.getCurrentPrice() + "")
+                .setText(R.id.tv_price1, item.getCurrencyName() + "/")
+                .setText(R.id.tv_price2, "￥1");
         helper.setText(R.id.tv_volum, StringUtil.htmlFromat(R.string.home_item_volum, item.getTradeNums(), item.getTradeCurrencyName()));
     }
 }
