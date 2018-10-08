@@ -70,4 +70,13 @@ public interface Api {
      */
     String HOME_HORIZONTAL_LIST_DATA = "/search/indexCommTrade";
 
+    /**
+     * 行情 列表
+     */
+    String QUOTATION_LIST_DATA = "/search/indexTrade";
+    /**
+     * 自选 列表
+     */
+    String CUSTOM_SELECT_LIST = "/front/collect/tradeInfo";
+
 }

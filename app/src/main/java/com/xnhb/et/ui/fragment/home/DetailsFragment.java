@@ -1,6 +1,7 @@
 package com.xnhb.et.ui.fragment.home;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -8,21 +9,32 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.lzy.okgo.model.Response;
+import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.ui.base.fragment.FragmentBaseAdapter;
 import com.oneway.ui.base.fragment.XFragment;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.toast.ToastManager;
 import com.xnhb.et.MainFragment;
 import com.xnhb.et.R;
+import com.xnhb.et.bean.NoticeInfo2;
+import com.xnhb.et.bean.QuotationInfo;
+import com.xnhb.et.bean.WrapNoticeInfo;
+import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.event.EventBusTags;
 import com.xnhb.et.helper.UserInfoHelper;
+import com.xnhb.et.net.Api;
+import com.xnhb.et.net.okgo.DialogCallback;
+import com.xnhb.et.net.okgo.OkGoHelper;
 import com.xnhb.et.ui.fragment.home.page.DetailsSubListFrament;
 import com.xnhb.et.ui.fragment.search.SearchFragment;
 
 import org.simple.eventbus.Subscriber;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -41,7 +53,7 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
     TabLayout tablayout;
     @BindView(R.id.vp)
     ViewPager vp;
-    String[] titles = {"ECNY", "ETH", "BTC", "自选"};
+    //    String[] titles = {"ECNY", "ETH", "BTC", "自选"};
     public static final String KEY_RESULT = "key_result";
     private static final int REQ_SEARCH_FRAGMENT = 100;
 
@@ -63,13 +75,11 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
     }
 
     @Override
-    protected void initView() {
-        FragmentBaseAdapter mFragmentAdapter = new FragmentBaseAdapter(getChildFragmentManager(), getFragments(), titles);
-        vp.setOffscreenPageLimit(4);
-        vp.setAdapter(mFragmentAdapter);
-        tablayout.setupWithViewPager(vp);
-        ivSearch.setOnClickListener(mPerfectClickListener);
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        getNotice();
     }
+
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
         @Override
@@ -90,18 +100,6 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
                 .init();
     }
 
-    public List<Fragment> getFragments() {
-        List<Fragment> fragments = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            DetailsSubListFrament frament = DetailsSubListFrament.newInstance(i);
-//            DetailsSubListFrament frament = new DetailsSubListFrament();
-//            Bundle bundle = new Bundle();
-//            bundle.putInt(DetailsSubListFrament.BUNDLE_ARGUMENTS, i);
-//            frament.setArguments(bundle);
-            fragments.add(frament);
-        }
-        return fragments;
-    }
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
@@ -120,7 +118,7 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
 
     private void setViewPosition(TabLayout.Tab tab) {
         String tabTitle = tab.getText().toString().trim();
-        if (titles[titles.length - 1].equals(tabTitle)) {//如果是自选,则判断是否登陆
+        if ("自选".equals(tabTitle)) {//如果是自选,则判断是否登陆
             // 判断是否登陆
             if (!UserInfoHelper.getInstance().checkLogin()) {
                 tablayout.setScrollPosition(0, 0f, true);
@@ -141,4 +139,51 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
     }
 
 
+    public void getNotice() {
+        Map map = new HashMap();
+        OkGoHelper.getOkGo(Api.NOTICE_INFO, this)
+                .params(map)
+                .execute(new DialogCallback<ResultInfo<WrapNoticeInfo>>() {
+                    @Override
+                    public void onSuccess(Response<ResultInfo<WrapNoticeInfo>> response) {
+                        ResultInfo<WrapNoticeInfo> body = response.body();
+                        if (EmptyUtils.isEmpty(body)) {
+                            return;
+                        }
+                        WrapNoticeInfo result = body.getResult();
+                        if (EmptyUtils.isEmpty(result)) {
+                            return;
+                        }
+                        ArrayList<QuotationInfo> areaList = result.getAreaList();
+                        areaList.add(new QuotationInfo("自选"));
+                        setData(areaList);
+                    }
+                });
+    }
+
+    public void setData(ArrayList<QuotationInfo> areaList) {
+        ArrayList<String> titles = getTitles(areaList);
+        FragmentBaseAdapter mFragmentAdapter = new FragmentBaseAdapter(getChildFragmentManager(), getFragments(areaList), titles);
+        vp.setOffscreenPageLimit(4);
+        vp.setAdapter(mFragmentAdapter);
+        tablayout.setupWithViewPager(vp);
+        ivSearch.setOnClickListener(mPerfectClickListener);
+    }
+
+    public List<Fragment> getFragments(ArrayList<QuotationInfo> areaList) {
+        List<Fragment> fragments = new ArrayList<>();
+        for (QuotationInfo info : areaList) {
+            DetailsSubListFrament frament = DetailsSubListFrament.newInstance(info);
+            fragments.add(frament);
+        }
+        return fragments;
+    }
+
+    public ArrayList<String> getTitles(ArrayList<QuotationInfo> areaList) {
+        ArrayList<String> titles = new ArrayList();
+        for (QuotationInfo quotationInfo : areaList) {
+            titles.add(quotationInfo.getName());
+        }
+        return titles;
+    }
 }

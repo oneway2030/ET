@@ -17,4 +17,6 @@ public interface EventBusTags {
     String TAG_LOGIN_SUCDESS = "login_sucdess";
     //搜索结果
     String TAG_SEARCH_RESULT= "search_result";
+    //自选 刷新
+    String TAG_CUSTOM_SELECT= "custom_select";
 }
