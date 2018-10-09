@@ -24,7 +24,7 @@ public class MyCoinListAdapter extends BaseQuickAdapter<CoinInfo, BaseViewHolder
 
     @Override
     protected void convert(BaseViewHolder helper, CoinInfo item) {
-        //TODO 设置对应参数
+        //TODO 设置对应参数   currencyName    using  freeze
         helper.setText(R.id.item_coin_list_text1, StringUtil.htmlFromat(R.string.item_coin_list_text1, "0.000000"))
                 .setText(R.id.item_coin_list_text2, StringUtil.htmlFromat(R.string.item_coin_list_text2, "0.0"))
                 .setText(R.id.item_coin_list_text3, StringUtil.htmlFromat(R.string.item_coin_list_text3, "0.000000"));
