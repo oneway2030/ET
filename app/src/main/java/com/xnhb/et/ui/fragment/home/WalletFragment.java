@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +15,26 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gyf.barlibrary.OnKeyboardListener;
+import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.ui.base.fragment.XFragment;
 import com.oneway.ui.common.PerfectClickListener;
+import com.oneway.ui.helper.PageStateHelper;
+import com.oneway.ui.widget.status.OnRetryListener;
 import com.xnhb.et.MainFragment;
 import com.xnhb.et.R;
 import com.xnhb.et.adapter.MyCoinListAdapter;
 import com.xnhb.et.bean.CoinInfo;
+import com.xnhb.et.bean.WrapCoinInfo;
+import com.xnhb.et.event.EventBusTags;
 import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.ui.ac.bill.HistoricalActivity;
 import com.xnhb.et.ui.ac.setting.SettingActivity;
+import com.xnhb.et.ui.fragment.home.present.HomePresent;
+import com.xnhb.et.ui.fragment.home.present.WalletPresent;
+import com.xnhb.et.ui.fragment.home.view.IWalletView;
 import com.xnhb.et.widget.dialog.RechargeAndWithdrawalDialog;
+
+import org.simple.eventbus.Subscriber;
 
 import java.util.ArrayList;
 
@@ -36,7 +47,7 @@ import butterknife.Unbinder;
  * 描述:
  * 参考链接:
  */
-public class WalletFragment extends XFragment implements BaseQuickAdapter.OnItemClickListener {
+public class WalletFragment extends XFragment<WalletPresent> implements BaseQuickAdapter.OnItemClickListener, OnRetryListener, IWalletView {
 
     @BindView(R.id.title_iv_setting)
     ImageView titleIvSetting;
@@ -60,12 +71,20 @@ public class WalletFragment extends XFragment implements BaseQuickAdapter.OnItem
     LinearLayout llTipHintMoney;
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
+    @BindView(R.id.content)
+    LinearLayout content;
     private MyCoinListAdapter mAdapter;
+    private PageStateHelper mPageStateHelper;
 
     //    RegisterAndLoginActivity
     @Override
     protected boolean isBarEnabled() {
         return true;
+    }
+
+    @Override
+    public WalletPresent newP() {
+        return new WalletPresent();
     }
 
     public static WalletFragment newInstance() {
@@ -100,6 +119,8 @@ public class WalletFragment extends XFragment implements BaseQuickAdapter.OnItem
 
     @Override
     protected void initView() {
+        mPageStateHelper = new PageStateHelper(getActivity(), content, this);
+        mPageStateHelper.showLoadingView();
         titleIvSetting.setOnClickListener(mPerfectClickListener);
         titleTvHistorical.setOnClickListener(mPerfectClickListener);
         String accountName = UserInfoHelper.getInstance().getAccountName();
@@ -108,11 +129,7 @@ public class WalletFragment extends XFragment implements BaseQuickAdapter.OnItem
         mAdapter = new MyCoinListAdapter();
         mAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
-        ArrayList<CoinInfo> coinInfos = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            coinInfos.add(new CoinInfo());
-        }
-        mAdapter.setNewData(coinInfos);
+        getP().reqWalletInfo();
     }
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
@@ -131,8 +148,44 @@ public class WalletFragment extends XFragment implements BaseQuickAdapter.OnItem
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         //弹出底部dialog
         CoinInfo info = (CoinInfo) adapter.getData().get(position);
-        RechargeAndWithdrawalDialog mDialog = new RechargeAndWithdrawalDialog(getActivity(), info.getCoinType());
+        RechargeAndWithdrawalDialog mDialog = new RechargeAndWithdrawalDialog(getActivity(), info.getCurrencyName());
         mDialog.showDialog();
 
     }
+
+    @Override
+    public void onRetry(int type) {
+        getP().reqWalletInfo();
+    }
+
+
+    @Override
+    public void showErrorPage() {
+        mPageStateHelper.showErrorView();
+    }
+
+    @Override
+    public void showLoadingPage() {
+        mPageStateHelper.showLoadingView();
+    }
+
+    @Override
+    public void showListInfo(WrapCoinInfo data) {
+        totalBtcMoney.setText(data.getTotal());
+        if (EmptyUtils.isNotEmpty(data.getCurrencyList())) {
+            mPageStateHelper.showContentView();
+            mAdapter.setNewData(data.getCurrencyList());
+        } else {
+            mPageStateHelper.showEmptyView();
+        }
+    }
+
+    /**
+     * 登陆后 刷新
+     */
+    @Subscriber(tag = EventBusTags.TAG_LOGIN_SUCDESS)
+    public void loginRefresh(int position) {
+        getP().reqWalletInfo();
+    }
+
 }

@@ -87,5 +87,8 @@ public interface Api {
      */
     String CANCEL_ADD_CUSTOM_SELECT = "/front/collect/cancel";
 
-
+    /**
+     * 钱包列表信息
+     */
+    String WALLET_INFO = "/front/financial/assets";
 }
