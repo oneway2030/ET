@@ -87,6 +87,10 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
     @Override
     public void onError(com.lzy.okgo.model.Response<T> response) {
         super.onError(response);
+        handleError(response);
+    }
+
+    private void handleError(com.lzy.okgo.model.Response<T> response) {
         Throwable exception = response.getException();
         if (response != null) exception.printStackTrace();
         if (exception instanceof UnknownHostException || exception instanceof ConnectException) {

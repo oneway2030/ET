@@ -23,10 +23,9 @@ import com.oneway.tool.utils.common.TimeUtils;
 import com.oneway.tool.utils.log.LogUtil;
 import com.oneway.ui.R;
 import com.oneway.ui.toast.ToastManager;
-import com.oneway.ui.util.PageStateHelper;
+import com.oneway.ui.helper.PageStateHelper;
 import com.oneway.ui.widget.status.OnRetryListener;
 import com.oneway.ui.widget.status.StatusLayoutManager;
-import com.oneway.ui.widget.status.StatusType;
 
 import java.util.HashMap;
 import java.util.Map;
