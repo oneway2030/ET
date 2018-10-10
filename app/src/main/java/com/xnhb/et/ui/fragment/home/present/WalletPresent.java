@@ -2,7 +2,6 @@ package com.xnhb.et.ui.fragment.home.present;
 
 import com.lzy.okgo.model.Response;
 import com.oneway.ui.base.in.XPresent;
-import com.xnhb.et.bean.CoinInfo;
 import com.xnhb.et.bean.WrapCoinInfo;
 import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.helper.UserInfoHelper;
@@ -26,7 +25,7 @@ public class WalletPresent extends XPresent<IWalletView> {
         Map map = new HashMap();
         map.put("token", UserInfoHelper.getInstance().getToken());
         map.put("currencyName", "");
-        OkGoHelper.getOkGo(Api.WALLET_INFO, getV().getAc())
+        OkGoHelper.postOkGo(Api.WALLET_INFO, getV().getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<WrapCoinInfo>>() {
                     @Override

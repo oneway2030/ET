@@ -1,7 +1,6 @@
 package com.xnhb.et.ui.ac.setting.p;
 
 import com.lzy.okgo.model.Response;
-import com.oneway.tool.utils.log.LogUtil;
 import com.oneway.ui.base.in.XPresent;
 import com.oneway.ui.toast.ToastManager;
 import com.xnhb.et.bean.UserInfo;
@@ -11,7 +10,6 @@ import com.xnhb.et.interfaces.CallBack;
 import com.xnhb.et.net.Api;
 import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.net.okgo.OkGoHelper;
-import com.xnhb.et.ui.ac.setting.BankCardInfoActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +35,7 @@ public class BankInfoPresent extends XPresent<IBankView> {
         map.put("bankName", bankName);
         map.put("bankNo", bankcardId);
         map.put("bankAddress", bankAddress);
-        OkGoHelper.getOkGo(Api.SAVE_BANK_CARD_INFO, this)
+        OkGoHelper.postOkGo(Api.SAVE_BANK_CARD_INFO, this)
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<Void>>() {
                     @Override

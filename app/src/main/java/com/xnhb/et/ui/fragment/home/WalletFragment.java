@@ -4,10 +4,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,7 +28,6 @@ import com.xnhb.et.event.EventBusTags;
 import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.ui.ac.bill.HistoricalActivity;
 import com.xnhb.et.ui.ac.setting.SettingActivity;
-import com.xnhb.et.ui.fragment.home.present.HomePresent;
 import com.xnhb.et.ui.fragment.home.present.WalletPresent;
 import com.xnhb.et.ui.fragment.home.view.IWalletView;
 import com.xnhb.et.widget.dialog.RechargeAndWithdrawalDialog;
@@ -37,17 +35,16 @@ import com.xnhb.et.widget.dialog.RechargeAndWithdrawalDialog;
 import org.simple.eventbus.Subscriber;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * 作者 oneway on 2018/9/10
  * 描述:
  * 参考链接:
  */
-public class WalletFragment extends XFragment<WalletPresent> implements BaseQuickAdapter.OnItemClickListener, OnRetryListener, IWalletView {
+public class WalletFragment extends XFragment<WalletPresent> implements BaseQuickAdapter.OnItemClickListener, OnRetryListener, IWalletView, TextWatcher {
 
     @BindView(R.id.title_iv_setting)
     ImageView titleIvSetting;
@@ -71,10 +68,11 @@ public class WalletFragment extends XFragment<WalletPresent> implements BaseQuic
     LinearLayout llTipHintMoney;
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
-    @BindView(R.id.content)
-    LinearLayout content;
+    //    @BindView(R.id.content)
+//    LinearLayout content;
     private MyCoinListAdapter mAdapter;
     private PageStateHelper mPageStateHelper;
+    private List<CoinInfo> datas;
 
     //    RegisterAndLoginActivity
     @Override
@@ -119,8 +117,10 @@ public class WalletFragment extends XFragment<WalletPresent> implements BaseQuic
 
     @Override
     protected void initView() {
-        mPageStateHelper = new PageStateHelper(getActivity(), content, this);
+        mPageStateHelper = new PageStateHelper(getActivity(), mRecyclerView, this);
         mPageStateHelper.showLoadingView();
+        etSearch.addTextChangedListener(this);
+        llTipHintMoney.setOnClickListener(mPerfectClickListener);
         titleIvSetting.setOnClickListener(mPerfectClickListener);
         titleTvHistorical.setOnClickListener(mPerfectClickListener);
         String accountName = UserInfoHelper.getInstance().getAccountName();
@@ -140,9 +140,14 @@ public class WalletFragment extends XFragment<WalletPresent> implements BaseQuic
                 SettingActivity.launch(getActivity());
             } else if (id == R.id.title_tv_historical) {//充提历史
                 HistoricalActivity.launch(getActivity());
+            } else if (id == R.id.ll_tip_hint_money) {//隐藏资产
+                checkBox.setImageResource(isHideMoney ? R.mipmap.checkbox_unchecked_32 : R.mipmap.checkbox_checked_32);
+                isHideMoney = !isHideMoney;
+                mAdapter.hideMoney();
             }
         }
     };
+    private boolean isHideMoney = false;
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -173,6 +178,7 @@ public class WalletFragment extends XFragment<WalletPresent> implements BaseQuic
     public void showListInfo(WrapCoinInfo data) {
         totalBtcMoney.setText(data.getTotal());
         if (EmptyUtils.isNotEmpty(data.getCurrencyList())) {
+            datas = data.getCurrencyList();
             mPageStateHelper.showContentView();
             mAdapter.setNewData(data.getCurrencyList());
         } else {
@@ -188,4 +194,39 @@ public class WalletFragment extends XFragment<WalletPresent> implements BaseQuic
         getP().reqWalletInfo();
     }
 
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        String keyWord = etSearch.getText().toString().trim();
+        if (EmptyUtils.isNotEmpty(etSearch)) {
+            searchKeyWord(keyWord);
+        } else {
+            mAdapter.setNewData(datas);
+        }
+
+    }
+
+    private void searchKeyWord(String keyWord) {
+        List<CoinInfo> tempData = new ArrayList<>();
+        for (CoinInfo info : datas) {
+            //TODO 最好处理不区分大小写
+            if (info.getCurrencyName().contains(keyWord))
+                tempData.add(info);
+        }
+        if (EmptyUtils.isEmpty(tempData)) {
+            mPageStateHelper.showEmptyView();
+        } else {
+            mPageStateHelper.showContentView();
+            mAdapter.setNewData(tempData);
+        }
+    }
 }

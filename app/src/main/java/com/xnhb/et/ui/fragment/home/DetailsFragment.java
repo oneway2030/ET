@@ -19,7 +19,6 @@ import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.helper.PageStateHelper;
 import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.status.OnRetryListener;
-import com.oneway.ui.widget.webview.WebLayout;
 import com.xnhb.et.MainFragment;
 import com.xnhb.et.R;
 import com.xnhb.et.bean.QuotationInfo;
@@ -186,7 +185,7 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
     public void getNotice() {
         mPageStateHelper.showLoadingView();
         Map map = new HashMap();
-        OkGoHelper.getOkGo(Api.NOTICE_INFO, this)
+        OkGoHelper.postOkGo(Api.NOTICE_INFO, this)
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<WrapNoticeInfo>>() {
                     @Override
@@ -224,7 +223,7 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
     private void reqCustomSelectNetData(ArrayList<QuotationInfo> areaList) {
         Map map = new HashMap();
         map.put("token", UserInfoHelper.getInstance().getToken());
-        OkGoHelper.getOkGo(Api.CUSTOM_SELECT_LIST, getAc())
+        OkGoHelper.postOkGo(Api.CUSTOM_SELECT_LIST, getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<ArrayList<QuotationListInfo>>>() {
                     @Override

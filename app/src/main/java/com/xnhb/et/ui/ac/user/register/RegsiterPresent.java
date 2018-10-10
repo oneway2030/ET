@@ -29,7 +29,7 @@ public class RegsiterPresent extends XPresent<IRegisterView> {
     public void getVerificationCode(String mobile) {
         Map map = new HashMap();
         map.put("mobile", mobile);
-        OkGoHelper.getOkGo(Api.VERIFICATION_CODEURL, getV().getAc())
+        OkGoHelper.postOkGo(Api.VERIFICATION_CODEURL, getV().getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<Void>>(getV().getAc()) {
                     @Override
@@ -62,7 +62,7 @@ public class RegsiterPresent extends XPresent<IRegisterView> {
         Map map = new HashMap();
         map.put("phone", account);  //手机号或者邮箱
         map.put("password", pwd); //验证码
-        OkGoHelper.getOkGo(Api.ACCOUNT_LOGIN, getV().getAc())
+        OkGoHelper.postOkGo(Api.ACCOUNT_LOGIN, getV().getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<LoginInfo>>(getV().getAc()) {
                     @Override
@@ -96,7 +96,7 @@ public class RegsiterPresent extends XPresent<IRegisterView> {
         map.put("pwd", loginPwd); //登录密码
         map.put("tradePassword", tradePassword);//交易密码
         map.put("leaderName", referee);//推荐人
-        OkGoHelper.getOkGo(Api.REGISTER_ACCOUNT, getV().getAc())
+        OkGoHelper.postOkGo(Api.REGISTER_ACCOUNT, getV().getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<Void>>(getV().getAc()) {
                     @Override
@@ -120,7 +120,7 @@ public class RegsiterPresent extends XPresent<IRegisterView> {
         map.put("phone", account);
         map.put("code", verificationCode);
         map.put("pwd", loginPwd);
-        OkGoHelper.getOkGo(Api.FORGET_PWD, getV().getAc())
+        OkGoHelper.postOkGo(Api.FORGET_PWD, getV().getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<Void>>(getV().getAc()) {
                     @Override

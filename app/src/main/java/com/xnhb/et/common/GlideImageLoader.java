@@ -2,21 +2,14 @@ package com.xnhb.et.common;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
 import android.widget.ImageView;
 
-import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.BitmapCallback;
 import com.lzy.okgo.model.Response;
-import com.oneway.tool.loader.ImageLoaderManager;
 import com.xnhb.et.R;
 import com.xnhb.et.net.Api;
-import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.net.okgo.OkGoHelper;
 import com.youth.banner.loader.ImageLoader;
-
-import java.io.ByteArrayOutputStream;
 
 /**
  * Created by 阿禹 on 2017/12/28.
@@ -43,7 +36,7 @@ public class GlideImageLoader extends ImageLoader {
     }
 
     public void getBitmap(ImageView imageView, String id) {
-        OkGoHelper.<Bitmap>getOkGo(Api.DOWNLOAD_IMAGE, this)
+        OkGoHelper.<Bitmap>postOkGo(Api.DOWNLOAD_IMAGE, this)
                 .params("id", id)
                 .execute(new BitmapCallback() {
                     @Override

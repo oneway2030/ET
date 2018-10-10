@@ -29,7 +29,7 @@ public class HomePresent extends XPresent<IHomeView> {
      */
     public void getHData() {
         Map map = new HashMap();
-        OkGoHelper.getOkGo(Api.HOME_HORIZONTAL_LIST_DATA, getV().getAc())
+        OkGoHelper.postOkGo(Api.HOME_HORIZONTAL_LIST_DATA, getV().getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<ArrayList<HomeHDataInfo>>>() {
                     @Override
@@ -50,7 +50,7 @@ public class HomePresent extends XPresent<IHomeView> {
 
     public void getNotice() {
         Map map = new HashMap();
-        OkGoHelper.getOkGo(Api.NOTICE_INFO, getV().getAc())
+        OkGoHelper.postOkGo(Api.NOTICE_INFO, getV().getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<WrapNoticeInfo>>() {
                     @Override
@@ -77,7 +77,7 @@ public class HomePresent extends XPresent<IHomeView> {
      */
     public void getBanner() {
         Map map = new HashMap();
-        OkGoHelper.getOkGo(Api.BANNER_INFO, getV().getAc())
+        OkGoHelper.postOkGo(Api.BANNER_INFO, getV().getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<ArrayList<BannerInfo>>>() {
                     @Override

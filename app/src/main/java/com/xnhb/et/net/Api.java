@@ -91,4 +91,8 @@ public interface Api {
      * 钱包列表信息
      */
     String WALLET_INFO = "/front/financial/assets";
+    /**
+     * 获取图片地址
+     */
+    String GET_IMAGE_URL = "/search/currency?name=";
 }

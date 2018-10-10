@@ -1,9 +1,7 @@
 package com.xnhb.et.ui.fragment.home.page;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -17,7 +15,6 @@ import com.oneway.ui.common.UniversalItemDecoration;
 import com.oneway.ui.widget.list.ListLayout;
 import com.xnhb.et.R;
 import com.xnhb.et.bean.RankingInfo;
-import com.xnhb.et.bean.TransactionInfo;
 import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.net.Api;
 import com.xnhb.et.net.okgo.DialogCallback;
@@ -173,7 +170,7 @@ public class HomeSubFragment extends BaseLazyFragment implements ListLayout.Task
     public void getRankingInfo(int index) {
         Map map = new HashMap();
         map.put("index", index + "");
-        OkGoHelper.getOkGo(Api.HOME_RANKING, getAc())
+        OkGoHelper.postOkGo(Api.HOME_RANKING, getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<ArrayList<RankingInfo>>>() {
                     @Override

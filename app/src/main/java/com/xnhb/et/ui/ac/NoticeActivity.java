@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -18,9 +17,7 @@ import com.oneway.ui.base.ac.BaseTitleActivity;
 import com.oneway.ui.common.UniversalItemDecoration;
 import com.oneway.ui.widget.list.ListLayout;
 import com.xnhb.et.R;
-import com.xnhb.et.bean.NoticeInfo;
 import com.xnhb.et.bean.NoticeInfo2;
-import com.xnhb.et.bean.WrapNoticeInfo;
 import com.xnhb.et.bean.base.LimitPage;
 import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.net.Api;
@@ -29,7 +26,6 @@ import com.xnhb.et.net.okgo.OkGoHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -89,7 +85,7 @@ public class NoticeActivity extends BaseTitleActivity implements ListLayout.Task
         map.put("title", "");
         map.put("pageNum", mListLayout.getCurrentPageNumber() + "");
         map.put("numPerPage", "20");
-        OkGoHelper.getOkGo(Api.NOTICE_LIST_INFO, this)
+        OkGoHelper.postOkGo(Api.NOTICE_LIST_INFO, this)
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<LimitPage<NoticeInfo2>>>() {
                     @Override

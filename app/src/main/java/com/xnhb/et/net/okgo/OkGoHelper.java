@@ -1,6 +1,7 @@
 package com.xnhb.et.net.okgo;
 
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.request.GetRequest;
 import com.lzy.okgo.request.PostRequest;
 import com.xnhb.et.net.Api;
 
@@ -12,8 +13,12 @@ import com.xnhb.et.net.Api;
 public class OkGoHelper<T> {
 
 
-    public static <T> PostRequest<T> getOkGo(String url, Object tag) {
+    public static <T> PostRequest<T> postOkGo(String url, Object tag) {
         return OkGo.<T>post(getNetWorkUrl(url))
+                .tag(tag);
+    }
+    public static <T> GetRequest<T> getOkGo(String url, Object tag) {
+        return OkGo.<T>get(getNetWorkUrl(url))
                 .tag(tag);
     }
 

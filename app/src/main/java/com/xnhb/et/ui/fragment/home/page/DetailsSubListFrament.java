@@ -177,7 +177,7 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
         }
         Map map = new HashMap();
         map.put("areaId", mQuotationInfo.getId());
-        OkGoHelper.getOkGo(Api.QUOTATION_LIST_DATA, getAc())
+        OkGoHelper.postOkGo(Api.QUOTATION_LIST_DATA, getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<ArrayList<QuotationListInfo>>>() {
                     @Override
@@ -196,7 +196,7 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
     private void reqCustomSelectNetData() {
         Map map = new HashMap();
         map.put("token", UserInfoHelper.getInstance().getToken());
-        OkGoHelper.getOkGo(Api.CUSTOM_SELECT_LIST, getAc())
+        OkGoHelper.postOkGo(Api.CUSTOM_SELECT_LIST, getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<ArrayList<QuotationListInfo>>>(getActivity()) {
                     @Override
@@ -304,7 +304,7 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
         Map map = new HashMap();
         map.put("token", UserInfoHelper.getInstance().getToken());
         map.put("tradeId", updateInfo.getTradeId());
-        OkGoHelper.getOkGo(url, getAc())
+        OkGoHelper.postOkGo(url, getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<Void>>(getActivity()) {
                     @Override

@@ -25,7 +25,7 @@ public class ModifyPwdPresent extends XPresent<IModifyView> {
     public void getVerificationCode(String mobile) {
         Map map = new HashMap();
         map.put("mobile", mobile);
-        OkGoHelper.getOkGo(Api.VERIFICATION_CODEURL, getV().getAc())
+        OkGoHelper.postOkGo(Api.VERIFICATION_CODEURL, getV().getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<Void>>(getV().getAc()) {
                     @Override
@@ -58,7 +58,7 @@ public class ModifyPwdPresent extends XPresent<IModifyView> {
         map.put("reNewPwd", reinputNewPwd);
         map.put("code", verificationCode);
         map.put("token", UserInfoHelper.getInstance().getToken());
-        OkGoHelper.getOkGo(Api.MODIFY_LOGIN_PWD, getV().getAc())
+        OkGoHelper.postOkGo(Api.MODIFY_LOGIN_PWD, getV().getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<Void>>(getV().getAc()) {
                     @Override
@@ -79,7 +79,7 @@ public class ModifyPwdPresent extends XPresent<IModifyView> {
         map.put("phone", UserInfoHelper.getInstance().getAccountName());
         map.put("code", verificationCode);
         map.put("pwd", newLoginPwd);
-        OkGoHelper.getOkGo(Api.FORGET_PWD, getV().getAc())
+        OkGoHelper.postOkGo(Api.FORGET_PWD, getV().getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<Void>>(getV().getAc()) {
                     @Override
@@ -100,7 +100,7 @@ public class ModifyPwdPresent extends XPresent<IModifyView> {
         map.put("newTradePassword", newTradePassword);
         map.put("reNewTradePassword", reNewTradePassword);
         map.put("code", verificationCode);
-        OkGoHelper.getOkGo(Api.MODIFY_TRANSACTION_PWD, getV().getAc())
+        OkGoHelper.postOkGo(Api.MODIFY_TRANSACTION_PWD, getV().getAc())
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<Void>>(getV().getAc()) {
                     @Override
