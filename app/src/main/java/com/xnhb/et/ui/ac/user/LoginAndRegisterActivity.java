@@ -9,24 +9,20 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.androidkun.xtablayout.XTabLayout;
-import com.oneway.tool.event.BusManager;
 import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.convert.RegexUtils;
 import com.oneway.ui.base.ac.BaseTitleActivity;
 import com.oneway.ui.base.fragment.FragmentBaseAdapter;
-import com.oneway.ui.base.in.TitleContainer;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.CountDownButton;
 import com.oneway.ui.widget.btn.StateButton;
 import com.oneway.ui.widget.et.XEditText;
-import com.xnhb.et.MainActivity;
 import com.xnhb.et.R;
-import com.xnhb.et.event.EventBusTags;
 import com.xnhb.et.ui.ac.user.login.LoginFragment;
 import com.xnhb.et.ui.ac.user.register.IRegisterView;
 import com.xnhb.et.ui.ac.user.register.RegisterFragment;
-import com.xnhb.et.ui.ac.user.register.RegsiterPresent;
+import com.xnhb.et.ui.ac.user.register.RegsiterPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +34,7 @@ import butterknife.BindView;
  * 描述: 注册 登录 忘记密码
  * 参考链接:
  */
-public class LoginAndRegisterActivity extends BaseTitleActivity<RegsiterPresent> implements LoginFragment.OnClickForgetPwdPageListener, IRegisterView {
+public class LoginAndRegisterActivity extends BaseTitleActivity<RegsiterPresenter> implements LoginFragment.OnClickForgetPwdPageListener, IRegisterView {
     @BindView(R.id.xTablayout)
     XTabLayout mTabLayout;
     @BindView(R.id.vp)
@@ -46,7 +42,7 @@ public class LoginAndRegisterActivity extends BaseTitleActivity<RegsiterPresent>
     @BindView(R.id.forget_pwd_layout)
     View forgetPwdLayout;
     String[] mTitles = {"登录", "注册"};
-    @BindView(R.id.et_account)
+    @BindView(R.id.et_sms)
     XEditText etAccount;
     @BindView(R.id.btn_countdown)
     CountDownButton btnCountdown;
@@ -130,8 +126,8 @@ public class LoginAndRegisterActivity extends BaseTitleActivity<RegsiterPresent>
     };
 
     @Override
-    public RegsiterPresent newP() {
-        return new RegsiterPresent();
+    public RegsiterPresenter newP() {
+        return new RegsiterPresenter();
     }
 
     public List<Fragment> getFragmentPage() {

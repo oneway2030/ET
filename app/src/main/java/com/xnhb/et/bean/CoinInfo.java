@@ -1,5 +1,8 @@
 package com.xnhb.et.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -7,7 +10,7 @@ import java.util.List;
  * 描述:
  * 参考链接:
  */
-public class CoinInfo {
+public class CoinInfo implements Parcelable {
 
     /**
      * id : 73
@@ -27,27 +30,27 @@ public class CoinInfo {
      * total : null
      */
 
-    private int id;
+    private String id;
     private String createTime;
     private String updateTime;
-    private Object remark;
-    private int version;
-    private int userId;
-    private int currencyId;
-    private int using;
-    private int freeze;
+    //    private Object remark;
+    private String version;
+    private String userId;
+    private String currencyId;
+    private String using;
+    private String freeze;
     private String phone;
-    private Object realName;
+    private String realName;
     private String currencyName;
     private int extract;
     private int rechargeSwitch;
-    private Object total;
+    private String total;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -67,51 +70,44 @@ public class CoinInfo {
         this.updateTime = updateTime;
     }
 
-    public Object getRemark() {
-        return remark;
-    }
 
-    public void setRemark(Object remark) {
-        this.remark = remark;
-    }
-
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public int getCurrencyId() {
+    public String getCurrencyId() {
         return currencyId;
     }
 
-    public void setCurrencyId(int currencyId) {
+    public void setCurrencyId(String currencyId) {
         this.currencyId = currencyId;
     }
 
-    public int getUsing() {
+    public String getUsing() {
         return using;
     }
 
-    public void setUsing(int using) {
+    public void setUsing(String using) {
         this.using = using;
     }
 
-    public int getFreeze() {
+    public String getFreeze() {
         return freeze;
     }
 
-    public void setFreeze(int freeze) {
+    public void setFreeze(String freeze) {
         this.freeze = freeze;
     }
 
@@ -127,9 +123,6 @@ public class CoinInfo {
         return realName;
     }
 
-    public void setRealName(Object realName) {
-        this.realName = realName;
-    }
 
     public String getCurrencyName() {
         return currencyName;
@@ -159,7 +152,59 @@ public class CoinInfo {
         return total;
     }
 
-    public void setTotal(Object total) {
-        this.total = total;
+
+    public CoinInfo() {
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.createTime);
+        dest.writeString(this.updateTime);
+        dest.writeString(this.version);
+        dest.writeString(this.userId);
+        dest.writeString(this.currencyId);
+        dest.writeString(this.using);
+        dest.writeString(this.freeze);
+        dest.writeString(this.phone);
+        dest.writeString(this.realName);
+        dest.writeString(this.currencyName);
+        dest.writeInt(this.extract);
+        dest.writeInt(this.rechargeSwitch);
+        dest.writeString(this.total);
+    }
+
+    protected CoinInfo(Parcel in) {
+        this.id = in.readString();
+        this.createTime = in.readString();
+        this.updateTime = in.readString();
+        this.version = in.readString();
+        this.userId = in.readString();
+        this.currencyId = in.readString();
+        this.using = in.readString();
+        this.freeze = in.readString();
+        this.phone = in.readString();
+        this.realName = in.readString();
+        this.currencyName = in.readString();
+        this.extract = in.readInt();
+        this.rechargeSwitch = in.readInt();
+        this.total = in.readString();
+    }
+
+    public static final Creator<CoinInfo> CREATOR = new Creator<CoinInfo>() {
+        @Override
+        public CoinInfo createFromParcel(Parcel source) {
+            return new CoinInfo(source);
+        }
+
+        @Override
+        public CoinInfo[] newArray(int size) {
+            return new CoinInfo[size];
+        }
+    };
 }

@@ -19,7 +19,7 @@ import com.oneway.ui.widget.CountDownButton;
 import com.xnhb.et.R;
 import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.ui.ac.setting.p.IModifyView;
-import com.xnhb.et.ui.ac.setting.p.ModifyPwdPresent;
+import com.xnhb.et.ui.ac.setting.p.ModifyPwdPresenter;
 
 import butterknife.BindView;
 
@@ -28,7 +28,7 @@ import butterknife.BindView;
  * 描述:
  * 参考链接:
  */
-public class ModifyPasswordActivity extends BaseTitleActivity<ModifyPwdPresent> implements IModifyView {
+public class ModifyPasswordActivity extends BaseTitleActivity<ModifyPwdPresenter> implements IModifyView {
     public static String PAGE_TITLE = "page_title";
     public static String TITLE_MODIFY_LOGIN_PWD = "修改登陆密码";
     public static String TITLE_MODIFY_TRANSACTION_PWD = "修改交易密码";
@@ -129,8 +129,8 @@ public class ModifyPasswordActivity extends BaseTitleActivity<ModifyPwdPresent> 
     }
 
     @Override
-    public ModifyPwdPresent newP() {
-        return new ModifyPwdPresent();
+    public ModifyPwdPresenter newP() {
+        return new ModifyPwdPresenter();
     }
 
     @Override

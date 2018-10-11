@@ -92,7 +92,41 @@ public interface Api {
      */
     String WALLET_INFO = "/front/financial/assets";
     /**
-     * 获取图片地址
+     * 图片 拼接 地址
      */
     String GET_IMAGE_URL = "/search/currency?name=";
+    /**
+     * 充值
+     */
+    String RECHARGE_URL = "/front/financial/getRechargeAddress";
+    /**
+     * 提现的币 的条件 信息  如是否需要输入安全吗
+     */
+    String WITHDRAWAL_CONDITION_INFO_URL = "/front/financial/extractPoundageAndAddress";
+    /**
+     * 提现
+     */
+    String WITHDRAWAL_URL = "/front/financial/coin/apply";
+    /**
+     * 提现的短信验证码
+     */
+    String WITHDRAWAL_SMS_CODE_URL = "/ajax/sendMyCode";
+    /**
+     * 充提记录  type（记录类型，1 充值 2提现 7买入手续费 8卖出手续费 10系统赠送）
+     */
+    String RECHARGE_AND_WITHDRAWALS_HISTORICAL_URL = "/front/financial/queryLog";
+    /**
+     * 订单  type: 0 委托   1成交
+     */
+    String ORDER_INFO_URL = "/front/trade/userAll";
+    /**
+     *  取消挂单
+     */
+    String ORDER_CANCEL_URL = "/front/trade/cancel";
+//    /**
+//     * 订单  type: 0 委托   1成交
+//     */
+//    String ORDER_INFO_URL = "/front/ctc/list";
+
+
 }

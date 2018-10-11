@@ -1,4 +1,4 @@
-package com.xnhb.et.ui.fragment.home.present;
+package com.xnhb.et.ui.fragment.home.presenter;
 
 import com.lzy.okgo.model.Response;
 import com.oneway.tool.utils.convert.EmptyUtils;
@@ -22,7 +22,7 @@ import java.util.Map;
  * 描述:
  * 参考链接:
  */
-public class HomePresent extends XPresent<IHomeView> {
+public class HomePresenter extends XPresent<IHomeView> {
 
     /**
      * 横向列表数据

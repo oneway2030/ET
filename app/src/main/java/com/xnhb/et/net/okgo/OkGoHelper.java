@@ -17,6 +17,7 @@ public class OkGoHelper<T> {
         return OkGo.<T>post(getNetWorkUrl(url))
                 .tag(tag);
     }
+
     public static <T> GetRequest<T> getOkGo(String url, Object tag) {
         return OkGo.<T>get(getNetWorkUrl(url))
                 .tag(tag);
@@ -30,4 +31,12 @@ public class OkGoHelper<T> {
         }
         return url;
     }
+
+    //TODO 设置对应参数   currencyName    using  freeze
+    //TODO 這里测试暂时写死 图片名字为ET
+    public static String getImageUrl(String iamgeName) {
+//        return getNetWorkUrl(Api.GET_IMAGE_URL + iamgeName);
+        return getNetWorkUrl(Api.GET_IMAGE_URL + "ET");
+    }
+
 }

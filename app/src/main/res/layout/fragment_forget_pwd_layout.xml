@@ -58,7 +58,7 @@
 
                 <com.oneway.ui.widget.et.XEditText
                     android:textSize="17sp"
-                    android:id="@+id/et_account"
+                    android:id="@+id/et_sms"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

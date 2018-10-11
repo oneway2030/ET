@@ -73,11 +73,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name=".ui.ac.RechargeActivity"
+            android:name=".ui.ac.money.RechargeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name=".ui.ac.WithdrawalActivity"
+            android:name=".ui.ac.money.WithdrawalActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize" />
     </application>

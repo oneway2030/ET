@@ -14,11 +14,16 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gyf.barlibrary.OnKeyboardListener;
+import com.luck.picture.lib.tools.StringUtils;
 import com.oneway.tool.utils.convert.EmptyUtils;
+import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.base.fragment.XFragment;
+import com.oneway.ui.common.CommonDivider;
+import com.oneway.ui.common.CommonDividerItemDecoration;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.helper.PageStateHelper;
 import com.oneway.ui.widget.status.OnRetryListener;
+import com.oneway.ui.widget.status.StatusType;
 import com.xnhb.et.MainFragment;
 import com.xnhb.et.R;
 import com.xnhb.et.adapter.MyCoinListAdapter;
@@ -28,8 +33,10 @@ import com.xnhb.et.event.EventBusTags;
 import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.ui.ac.bill.HistoricalActivity;
 import com.xnhb.et.ui.ac.setting.SettingActivity;
-import com.xnhb.et.ui.fragment.home.present.WalletPresent;
+import com.xnhb.et.ui.ac.user.LoginAndRegisterActivity;
+import com.xnhb.et.ui.fragment.home.presenter.WalletPresenter;
 import com.xnhb.et.ui.fragment.home.view.IWalletView;
+import com.xnhb.et.util.MoneyUtils;
 import com.xnhb.et.widget.dialog.RechargeAndWithdrawalDialog;
 
 import org.simple.eventbus.Subscriber;
@@ -44,7 +51,7 @@ import butterknife.BindView;
  * 描述:
  * 参考链接:
  */
-public class WalletFragment extends XFragment<WalletPresent> implements BaseQuickAdapter.OnItemClickListener, OnRetryListener, IWalletView, TextWatcher {
+public class WalletFragment extends XFragment<WalletPresenter> implements BaseQuickAdapter.OnItemClickListener, OnRetryListener, IWalletView, TextWatcher {
 
     @BindView(R.id.title_iv_setting)
     ImageView titleIvSetting;
@@ -73,6 +80,7 @@ public class WalletFragment extends XFragment<WalletPresent> implements BaseQuic
     private MyCoinListAdapter mAdapter;
     private PageStateHelper mPageStateHelper;
     private List<CoinInfo> datas;
+    private boolean isHideMoney = false;
 
     //    RegisterAndLoginActivity
     @Override
@@ -81,8 +89,8 @@ public class WalletFragment extends XFragment<WalletPresent> implements BaseQuic
     }
 
     @Override
-    public WalletPresent newP() {
-        return new WalletPresent();
+    public WalletPresenter newP() {
+        return new WalletPresenter();
     }
 
     public static WalletFragment newInstance() {
@@ -117,7 +125,7 @@ public class WalletFragment extends XFragment<WalletPresent> implements BaseQuic
 
     @Override
     protected void initView() {
-        mPageStateHelper = new PageStateHelper(getActivity(), mRecyclerView, this);
+        mPageStateHelper = new PageStateHelper(getActivity(), mRecyclerView, R.layout.unlogin_layout, this);
         mPageStateHelper.showLoadingView();
         etSearch.addTextChangedListener(this);
         llTipHintMoney.setOnClickListener(mPerfectClickListener);
@@ -126,10 +134,15 @@ public class WalletFragment extends XFragment<WalletPresent> implements BaseQuic
         String accountName = UserInfoHelper.getInstance().getAccountName();
         titleTvName.setText(accountName);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(new CommonDivider(getActivity(), LinearLayoutManager.VERTICAL, UiUtils.dp2px(10), UiUtils.getColor(R.color.black)));
         mAdapter = new MyCoinListAdapter();
         mAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
-        getP().reqWalletInfo();
+        if (UserInfoHelper.getInstance().isLogin()) {
+            getP().reqWalletInfo();
+        } else {
+            showErrorPage();
+        }
     }
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
@@ -147,20 +160,30 @@ public class WalletFragment extends XFragment<WalletPresent> implements BaseQuic
             }
         }
     };
-    private boolean isHideMoney = false;
+
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         //弹出底部dialog
         CoinInfo info = (CoinInfo) adapter.getData().get(position);
-        RechargeAndWithdrawalDialog mDialog = new RechargeAndWithdrawalDialog(getActivity(), info.getCurrencyName());
+        if ("ECNY".equals(info.getCurrencyName())) {
+            //ENCY 默认不可充值提现
+            return;
+        }
+        RechargeAndWithdrawalDialog mDialog = new RechargeAndWithdrawalDialog(getActivity(), info);
         mDialog.showDialog();
 
     }
 
     @Override
     public void onRetry(int type) {
-        getP().reqWalletInfo();
+        if (type == StatusType.OTHER_ERROR.getType()) {
+            //跳转到登陆界面
+            LoginAndRegisterActivity.launch(getActivity());
+        } else {
+            getP().reqWalletInfo();
+        }
+
     }
 
 
@@ -176,7 +199,7 @@ public class WalletFragment extends XFragment<WalletPresent> implements BaseQuic
 
     @Override
     public void showListInfo(WrapCoinInfo data) {
-        totalBtcMoney.setText(data.getTotal());
+        totalBtcMoney.setText(MoneyUtils.formatMoney(data.getTotal()));
         if (EmptyUtils.isNotEmpty(data.getCurrencyList())) {
             datas = data.getCurrencyList();
             mPageStateHelper.showContentView();
@@ -186,11 +209,24 @@ public class WalletFragment extends XFragment<WalletPresent> implements BaseQuic
         }
     }
 
+    @Override
+    public void loginExpires() {
+        mPageStateHelper.showOtherErrorView("");
+    }
+
     /**
      * 登陆后 刷新
      */
     @Subscriber(tag = EventBusTags.TAG_LOGIN_SUCDESS)
     public void loginRefresh(int position) {
+        getP().reqWalletInfo();
+    }
+
+    /**
+     * 提现成功
+     */
+    @Subscriber(tag = EventBusTags.TAG_WITHDRAWALS_SUCCESS)
+    public void loginRefresh(String tag) {
         getP().reqWalletInfo();
     }
 
@@ -215,7 +251,13 @@ public class WalletFragment extends XFragment<WalletPresent> implements BaseQuic
 
     }
 
+    /**
+     * 检索关键词
+     */
     private void searchKeyWord(String keyWord) {
+        if (datas == null) {
+            return;
+        }
         List<CoinInfo> tempData = new ArrayList<>();
         for (CoinInfo info : datas) {
             //TODO 最好处理不区分大小写

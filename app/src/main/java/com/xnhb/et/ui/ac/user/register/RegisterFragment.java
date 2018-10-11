@@ -21,8 +21,8 @@ import butterknife.BindView;
  * 描述:
  * 参考链接:
  */
-public class RegisterFragment extends BaseFragment<RegsiterPresent> implements IRegisterView {
-    @BindView(R.id.et_account)
+public class RegisterFragment extends BaseFragment<RegsiterPresenter> implements IRegisterView {
+    @BindView(R.id.et_sms)
     XEditText etAccount;
     @BindView(R.id.btn_countdown)
     CountDownButton btnCountdown;
@@ -42,8 +42,8 @@ public class RegisterFragment extends BaseFragment<RegsiterPresent> implements I
     StateButton btnRegister;
 
     @Override
-    public RegsiterPresent newP() {
-        return new RegsiterPresent();
+    public RegsiterPresenter newP() {
+        return new RegsiterPresenter();
     }
 
     @Override

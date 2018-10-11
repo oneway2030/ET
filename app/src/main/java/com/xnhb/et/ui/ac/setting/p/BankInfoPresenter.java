@@ -19,7 +19,7 @@ import java.util.Map;
  * 描述: 银行卡信息
  * 参考链接:
  */
-public class BankInfoPresent extends XPresent<IBankView> {
+public class BankInfoPresenter extends XPresent<IBankView> {
 
     /**
      * 保存银行卡信息到 服务器

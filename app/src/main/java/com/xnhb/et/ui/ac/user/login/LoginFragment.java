@@ -11,11 +11,10 @@ import com.oneway.ui.base.fragment.BaseFragment;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.widget.btn.StateButton;
 import com.oneway.ui.widget.et.XEditText;
-import com.xnhb.et.MainActivity;
 import com.xnhb.et.R;
 import com.xnhb.et.event.EventBusTags;
 import com.xnhb.et.ui.ac.user.register.IRegisterView;
-import com.xnhb.et.ui.ac.user.register.RegsiterPresent;
+import com.xnhb.et.ui.ac.user.register.RegsiterPresenter;
 
 import butterknife.BindView;
 
@@ -24,9 +23,9 @@ import butterknife.BindView;
  * 描述:
  * 参考链接:
  */
-public class LoginFragment extends BaseFragment<RegsiterPresent> implements IRegisterView {
+public class LoginFragment extends BaseFragment<RegsiterPresenter> implements IRegisterView {
 
-    @BindView(R.id.et_account)
+    @BindView(R.id.et_sms)
     XEditText etAccount;
     @BindView(R.id.et_pwd)
     XEditText etPwd;
@@ -41,8 +40,8 @@ public class LoginFragment extends BaseFragment<RegsiterPresent> implements IReg
     private boolean isChecked;
 
     @Override
-    public RegsiterPresent newP() {
-        return new RegsiterPresent();
+    public RegsiterPresenter newP() {
+        return new RegsiterPresenter();
     }
 
     @Override

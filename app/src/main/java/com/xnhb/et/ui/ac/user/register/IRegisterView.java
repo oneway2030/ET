@@ -1,14 +1,13 @@
 package com.xnhb.et.ui.ac.user.register;
 
 import com.oneway.ui.base.in.IView;
-import com.xnhb.et.ui.ac.user.register.RegsiterPresent;
 
 /**
  * 作者 oneway on 2018/9/14
  * 描述:
  * 参考链接:
  */
-public interface IRegisterView extends IView<RegsiterPresent> {
+public interface IRegisterView extends IView<RegsiterPresenter> {
     /**
      * 启动倒计时
      */

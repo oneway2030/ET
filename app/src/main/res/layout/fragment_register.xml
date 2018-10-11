@@ -52,7 +52,7 @@
                 <!--android:textColorHint="@color/text_hint_gray" />-->
 
                 <com.oneway.ui.widget.et.XEditText
-                    android:id="@+id/et_account"
+                    android:id="@+id/et_sms"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

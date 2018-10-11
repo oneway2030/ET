@@ -17,7 +17,7 @@ import java.util.Map;
  * 描述: 安全中心->修改密码
  * 参考链接:
  */
-public class ModifyPwdPresent extends XPresent<IModifyView> {
+public class ModifyPwdPresenter extends XPresent<IModifyView> {
 
     /**
      * 获取短信验证码

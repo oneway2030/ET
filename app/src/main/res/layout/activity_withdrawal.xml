@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,220 +9,284 @@
     android:paddingLeft="@dimen/common_margin_space_20"
     android:paddingRight="@dimen/common_margin_space_20">
 
+
     <LinearLayout
+        android:id="@+id/contentView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="26dp">
-
-        <ImageView
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:src="@mipmap/coin" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_coin_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BTC"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/tv_coin_sub_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="BitCoin"
-                android:textColor="@color/text8c"
-                android:textSize="15sp" />
-
-        </LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:gravity="right"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_available"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text8c"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/tv_frozen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/text8c"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/tv_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/text8c"
-                android:textSize="13sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:text="提现地址"
-        android:textColor="@color/text8c"
-        android:textSize="12sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:background="@drawable/shape_withdrawal_item_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="16dp">
-
-        <EditText
-            android:id="@+id/et_address"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="请输入地址或扫描二维码"
-            android:textColor="@color/white"
-            android:textColorHint="@color/text8c"
-            android:textSize="14sp" />
-
-
-        <RelativeLayout
-            android:id="@+id/ll_qr_layout"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:background="@drawable/shape_qr_icon_bg">
+            android:orientation="horizontal"
+            android:paddingTop="26dp">
 
             <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@mipmap/coin" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:src="@mipmap/qr_icon" />
-        </RelativeLayout>
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/tv_coin_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BTC"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_coin_sub_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="BitCoin"
+                    android:textColor="@color/text8c"
+                    android:textSize="15sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:layout_marginTop="6dp"
-        android:text="数量"
-        android:textColor="@color/text8c"
-        android:textSize="12sp" />
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:background="@drawable/shape_withdrawal_item_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:gravity="right"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/et_count"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="请输入提现数量"
-            android:inputType="numberDecimal"
-            android:textColor="@color/white"
-            android:textColorHint="@color/text8c"
-            android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tv_available"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text8c"
+                    android:textSize="13sp" />
 
+                <TextView
+                    android:id="@+id/tv_frozen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/text8c"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/text8c"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="BTC"
-            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="提现地址"
+            android:textColor="@color/text8c"
             android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/shape_withdrawal_item_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp">
+
+            <EditText
+                android:id="@+id/et_address"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入地址或扫描二维码"
+                android:textColor="@color/white"
+                android:textColorHint="@color/text8c"
+                android:textSize="14sp" />
+
+
+            <RelativeLayout
+                android:id="@+id/ll_qr_layout"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/shape_qr_icon_bg">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/qr_icon" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:text="数量"
+            android:textColor="@color/text8c"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/shape_withdrawal_item_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp">
+
+            <EditText
+                android:id="@+id/et_count"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入提现数量"
+                android:inputType="numberDecimal"
+                android:textColor="@color/white"
+                android:textColorHint="@color/text8c"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="BTC"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="12dp"
+                android:background="@color/divider_common_color" />
+
+            <TextView
+                android:id="@+id/btn_total"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:text="全部"
+                android:textColor="#5f99da"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_hint_safe_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:text="资金安全码"
+            android:textColor="@color/text8c"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/ll_safe_code_layout"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/shape_withdrawal_item_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/et_pwd"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入密码"
+                android:textColor="@color/white"
+                android:textColorHint="@color/text8c"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_hint_sms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:text="短信验证码"
+            android:textColor="@color/text8c"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/ll_sms_code_layout"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/shape_withdrawal_item_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:visibility="gone">
+
+
+            <com.oneway.ui.widget.et.XEditText
+                android:id="@+id/et_sms"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入短信验证码"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/text8c"
+                android:textSize="14sp"
+                app:x_disableClear="true" />
+
+            <com.oneway.ui.widget.CountDownButton
+                android:id="@+id/btn_countdown"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:layout_marginRight="6dp"
+                android:background="@drawable/shape_count_down_bg"
+                android:gravity="center"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
 
         <View
-            android:layout_width="1dp"
-            android:layout_height="12dp"
-            android:layout_marginLeft="12dp"
-            android:background="@color/divider_common_color" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            android:text="全部"
-            android:textColor="#5f99da"
-            android:textSize="12sp" />
+        <com.oneway.ui.widget.btn.StateButton
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_btn_hight"
+            android:layout_marginBottom="30dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="提交"
+            android:textSize="11sp"
+            app:normalBackgroundColor="@color/color_text_press"
+            app:normalTextColor="@android:color/white"
+            app:pressedBackgroundColor="@color/color_text_press"
+            app:pressedTextColor="@android:color/white"
+            app:radius="5dp" />
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:layout_marginTop="6dp"
-        android:text="备注(选题)"
-        android:textColor="@color/text8c"
-        android:textSize="12sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:background="@drawable/shape_withdrawal_item_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="16dp">
-
-        <EditText
-            android:id="@+id/et_remarks"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="请填写备注..."
-            android:textColor="@color/white"
-            android:textColorHint="@color/text8c"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <com.oneway.ui.widget.btn.StateButton
-        android:id="@+id/submit"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/common_btn_hight"
-        android:layout_marginBottom="30dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="提交"
-        android:textSize="11sp"
-        app:normalBackgroundColor="@color/color_text_press"
-        app:normalTextColor="@android:color/white"
-        app:pressedBackgroundColor="@color/color_text_press"
-        app:pressedTextColor="@android:color/white"
-        app:radius="5dp" />
-
-</LinearLayout>
+</FrameLayout>

@@ -21,7 +21,7 @@ import java.util.Map;
  * 描述:
  * 参考链接:
  */
-public class RegsiterPresent extends XPresent<IRegisterView> {
+public class RegsiterPresenter extends XPresent<IRegisterView> {
 
     /**
      * 获取短信验证码

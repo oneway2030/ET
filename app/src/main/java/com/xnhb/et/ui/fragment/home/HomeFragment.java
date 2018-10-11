@@ -21,7 +21,7 @@ import com.xnhb.et.bean.NoticeInfo2;
 import com.xnhb.et.common.GlideImageLoader;
 import com.xnhb.et.ui.ac.NoticeActivity;
 import com.xnhb.et.ui.fragment.home.page.HomeSubFragment;
-import com.xnhb.et.ui.fragment.home.present.HomePresent;
+import com.xnhb.et.ui.fragment.home.presenter.HomePresenter;
 import com.xnhb.et.ui.fragment.home.view.IHomeView;
 import com.youth.banner.Banner;
 
@@ -35,7 +35,7 @@ import butterknife.BindView;
  * 描述:
  * 参考链接:
  */
-public class HomeFragment extends XFragment<HomePresent> implements IHomeView {
+public class HomeFragment extends XFragment<HomePresenter> implements IHomeView {
     @BindView(R.id.banner)
     Banner mBanner;
     @BindView(R.id.autoVerticalTextview)
@@ -65,8 +65,8 @@ public class HomeFragment extends XFragment<HomePresent> implements IHomeView {
     }
 
     @Override
-    public HomePresent newP() {
-        return new HomePresent();
+    public HomePresenter newP() {
+        return new HomePresenter();
     }
 
     @Override

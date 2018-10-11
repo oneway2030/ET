@@ -68,15 +68,10 @@ public class OrdersFragment extends XFragment {
 
     public List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
-        //委托记录
-        OrderSubListFrament executionFrament = new OrderSubListFrament();
-        //成交记录
-        OrderSubListFrament completeFrament = new OrderSubListFrament();
-//        //已取消
-//        OrderSubListFrament cancelFrament = new OrderSubListFrament();
-        fragments.add(executionFrament);
-        fragments.add(completeFrament);
-//        fragments.add(cancelFrament);
+        for (int i = 0; i < 2; i++) {
+            OrderSubListFrament frament = OrderSubListFrament.newInstance(i);
+            fragments.add(frament);
+        }
         return fragments;
     }
 

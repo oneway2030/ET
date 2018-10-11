@@ -77,4 +77,7 @@
     <string name="item_withdrawal_text1"><![CDATA[<font color="#ffffff">%1$s %2$s</font><font color="#8c99a6"> 可用</font>]]></string>
     <string name="item_withdrawal_text2"><![CDATA[<font color="#ffffff">%1$s %2$s</font><font color="#8c99a6"> 冻结</font>]]></string>
     <string name="item_withdrawal_text3"><![CDATA[<font color="#ffffff">%1$s %2$s</font><font color="#8c99a6"> 全部</font>]]></string>
+
+    <string name="item_order_text1"><![CDATA[<font color="#ffffff">%1$s  </font><font color="#8c99a6">%2$s</font>]]></string>
+    <string name="item_order_text2"><![CDATA[<font color="#ffffff">%1$s  </font><font color="#8c99a6">%2$s</font>]]></string>
 </resources>

@@ -23,10 +23,10 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_order_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="888888888"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>
@@ -48,10 +48,10 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_create_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="2018-09-27 18:11:22"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>
@@ -73,10 +73,10 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_type_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="充值"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>
@@ -98,10 +98,10 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_coin_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="BTC"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>
@@ -123,10 +123,10 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="1110"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>
@@ -148,10 +148,10 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="完成"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>
@@ -173,12 +173,12 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_transaction_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:drawablePadding="10dp"
             android:drawableRight="@mipmap/block_chain"
-            android:text="abcad-ddd-asd-ad-ada-da-ad-fasdfasd-fad-fasd-f-asdfasd-fadf-asd-"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>
@@ -200,10 +200,10 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_remarks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="我是备注信息"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>

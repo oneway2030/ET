@@ -18,7 +18,7 @@ import com.xnhb.et.R;
 import com.xnhb.et.bean.UserInfo;
 import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.interfaces.CallBack;
-import com.xnhb.et.ui.ac.setting.p.BankInfoPresent;
+import com.xnhb.et.ui.ac.setting.p.BankInfoPresenter;
 import com.xnhb.et.ui.ac.setting.p.IBankView;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import butterknife.BindView;
  * 描述:
  * 参考链接:
  */
-public class BankCardInfoActivity extends BaseTitleActivity<BankInfoPresent> implements IBankView {
+public class BankCardInfoActivity extends BaseTitleActivity<BankInfoPresenter> implements IBankView {
     @BindView(R.id.et_bank_name)
     TextView tvBankName;
     @BindView(R.id.et_bankcard_id)
@@ -67,8 +67,8 @@ public class BankCardInfoActivity extends BaseTitleActivity<BankInfoPresent> imp
     }
 
     @Override
-    public BankInfoPresent newP() {
-        return new BankInfoPresent();
+    public BankInfoPresenter newP() {
+        return new BankInfoPresenter();
     }
 
     @Override

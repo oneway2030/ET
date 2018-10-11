@@ -7,7 +7,7 @@ import com.oneway.ui.base.in.IView;
  * 描述:
  * 参考链接:
  */
-public interface IBankView extends IView<BankInfoPresent> {
+public interface IBankView extends IView<BankInfoPresenter> {
 
 
     void saveSuccess();

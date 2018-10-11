@@ -7,7 +7,7 @@ import com.oneway.ui.base.in.IView;
  * 描述:
  * 参考链接:
  */
-public interface IModifyView extends IView<ModifyPwdPresent> {
+public interface IModifyView extends IView<ModifyPwdPresenter> {
 
     /**
      * 启动倒计时

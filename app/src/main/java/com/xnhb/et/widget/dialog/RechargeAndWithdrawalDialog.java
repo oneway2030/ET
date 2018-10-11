@@ -9,9 +9,11 @@ import android.widget.TextView;
 import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.dialog.base.BaseDailog;
+import com.oneway.ui.toast.ToastManager;
 import com.xnhb.et.R;
-import com.xnhb.et.ui.ac.RechargeActivity;
-import com.xnhb.et.ui.ac.WithdrawalActivity;
+import com.xnhb.et.bean.CoinInfo;
+import com.xnhb.et.ui.ac.money.RechargeActivity;
+import com.xnhb.et.ui.ac.money.WithdrawalActivity;
 
 import butterknife.BindView;
 
@@ -21,7 +23,6 @@ import butterknife.BindView;
  * 参考链接:
  */
 public class RechargeAndWithdrawalDialog extends BaseDailog {
-
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.tv_recharge)
@@ -30,18 +31,19 @@ public class RechargeAndWithdrawalDialog extends BaseDailog {
     TextView tvWithdrawal;
     @BindView(R.id.tv_cancel)
     TextView tvCancel;
-    String coinType;
+    //    String coinType;
+    CoinInfo info;
 
-    public RechargeAndWithdrawalDialog(@NonNull Context context, String coinType) {
+    public RechargeAndWithdrawalDialog(@NonNull Context context, CoinInfo info) {
         super(context);
-        this.coinType = coinType;
+        this.info = info;
     }
 
     @Override
     protected void initData() {
         mWindow.setGravity(Gravity.BOTTOM);
         mWindow.setWindowAnimations(R.style.BottomAnim);
-        tvTitle.setText(UiUtils.getString(R.string.hint_dialog_title, coinType));
+        tvTitle.setText(UiUtils.getString(R.string.hint_dialog_title, info.getCurrencyName()));
         tvRecharge.setOnClickListener(mPerfectClickListener);
         tvWithdrawal.setOnClickListener(mPerfectClickListener);
         tvCancel.setOnClickListener(mPerfectClickListener);
@@ -58,12 +60,20 @@ public class RechargeAndWithdrawalDialog extends BaseDailog {
         @Override
         protected void onNoDoubleClick(View v) {
             int id = v.getId();
-            if (id == R.id.tv_recharge) {
-                RechargeActivity.launch(mContext, coinType);
-                dismiss(false);
-            } else if (id == R.id.tv_withdrawal) {
-                WithdrawalActivity.launch(mContext, coinType);
-                dismiss(false);
+            if (id == R.id.tv_recharge) {//充值
+                if (info.getRechargeSwitch() == 1) {
+                    RechargeActivity.launch(mContext, info);
+                    dismiss(false);
+                } else {
+                    ToastManager.info("暂未开放");
+                }
+            } else if (id == R.id.tv_withdrawal) {//提现
+                if (info.getExtract() == 1) {
+                    WithdrawalActivity.launch(mContext, info);
+                    dismiss(false);
+                } else {
+                    ToastManager.info("暂未开放");
+                }
             } else if (id == R.id.tv_cancel) {
                 dismiss(false);
             }

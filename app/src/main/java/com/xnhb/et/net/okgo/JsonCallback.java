@@ -109,6 +109,7 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
     }
 
     /**
+     * 处理自定错误回调
      * 如果只是处理服务器错误回调,可以只重写该方法
      */
     public void onCustomError(CustomIllegalStateException customException) {
@@ -116,11 +117,18 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
         //0成功 -1错误  -2 登录失效 -3未认证 -4冻结
         ToastManager.warning(customException.getMessage());
         if (errorCode == -2) {
-            //去登录
-            //清除本地信息,跳转到登录界面
-            UserInfoHelper.getInstance().logoutAndfinishAll();
+            handleLoginExpires();
             return;
         }
 
+    }
+
+    /**
+     * 处理登录过期逻辑
+     */
+    protected void handleLoginExpires() {
+        //去登录
+        //清除本地信息,跳转到登录界面
+        UserInfoHelper.getInstance().logoutAndfinishAll();
     }
 }

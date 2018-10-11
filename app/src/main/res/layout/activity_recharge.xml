@@ -12,8 +12,7 @@
         android:layout_height="210dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="35dp"
-        android:layout_marginTop="60dp"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_marginTop="60dp" />
 
 
     <LinearLayout
@@ -41,7 +40,6 @@
             android:paddingLeft="20dp"
             android:paddingRight="@dimen/common_margin_space_20"
             android:paddingTop="10dp"
-            android:text="sfjajh-fjsdfj-fdsafsd-faghegr-ncvn-xn-bvcbvcbD_D-bxcv-bxvbx-fdssaf-fdsaf-fadf-fad"
             android:textColor="@color/white"
             android:textSize="11sp" />
 

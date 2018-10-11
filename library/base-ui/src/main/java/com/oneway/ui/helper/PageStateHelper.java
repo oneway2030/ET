@@ -1,6 +1,7 @@
 package com.oneway.ui.helper;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.view.View;
 
 import com.oneway.ui.R;
@@ -26,6 +27,18 @@ public class PageStateHelper {
             //错误页面回调
             mStatusLayoutManager = StatusLayoutManager.newBuilder(context)
                     .addContentView(content)
+                    .isEnableEmptyRetry(false)
+                    .onRetryListener(mRetryListener)
+                    .build();
+        }
+    }
+
+    public PageStateHelper(Context context, View content, @LayoutRes int mOtherErrorViewId, OnRetryListener mRetryListener) {
+        if (mStatusLayoutManager == null) {
+            //错误页面回调
+            mStatusLayoutManager = StatusLayoutManager.newBuilder(context)
+                    .addContentView(content)
+                    .addOtherErrorView(mOtherErrorViewId)
                     .isEnableEmptyRetry(false)
                     .onRetryListener(mRetryListener)
                     .build();

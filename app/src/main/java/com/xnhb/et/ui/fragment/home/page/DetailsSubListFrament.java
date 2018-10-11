@@ -28,6 +28,7 @@ import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.net.okgo.OkGoHelper;
 import com.xnhb.et.ui.ac.user.LoginAndRegisterActivity;
 import com.xnhb.et.ui.fragment.home.DetailsFragment;
+import com.xnhb.et.util.MoneyUtils;
 
 import org.simple.eventbus.Subscriber;
 
@@ -140,10 +141,10 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
             }
         }
         holder.setText(R.id.tv_coin_name1, data.getTradeCurrencyName())
-                .setText(R.id.tv_coin_name2, data.getCurrencyName())
+                .setText(R.id.tv_coin_name2, "/" + data.getCurrencyName())
                 .setText(R.id.tv_total, "24h量  " + data.getTradeNums())
-                .setText(R.id.tv_price1, data.getCurrentPrice())
-                .setText(R.id.tv_price2, "≈" + data.getShowEncyMoeny() + "  ENCY ");
+                .setText(R.id.tv_price1, MoneyUtils.getPrettyNumber(data.getCurrentPrice()))
+                .setText(R.id.tv_price2, "≈" + MoneyUtils.getPrettyNumber(data.getShowEncyMoeny()) + "  ENCY ");
         StateButton btnRiseAndFallRange = holder.getView(R.id.btn_rise_and_fall_range);
         btnRiseAndFallRange.setText(data.getRise() + "%");
         if (EmptyUtils.isEmpty(data.getCon())) {
@@ -217,14 +218,12 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
      */
     @Subscriber(tag = EventBusTags.TAG_LOGIN_SUCDESS)
     public void remoteSwtichPage(int position) {
-        if (getUserVisibleHint()) {
-            //刷新当前界面
-            if (CUSTOM_STR.equals(mQuotationInfo.getName())) {
-                mListLayout.showLoadingView();
-                mListLayout.pullRefresh();
-            } else {
-                mListLayout.notifyDataSetChanged();
-            }
+        //刷新当前界面
+        if (CUSTOM_STR.equals(mQuotationInfo.getName())) {
+            mListLayout.showLoadingView();
+            mListLayout.pullRefresh();
+        } else {
+            mListLayout.notifyDataSetChanged();
         }
     }
 

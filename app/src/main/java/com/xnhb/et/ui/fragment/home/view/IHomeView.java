@@ -3,7 +3,7 @@ package com.xnhb.et.ui.fragment.home.view;
 import com.oneway.ui.base.in.IView;
 import com.xnhb.et.bean.HomeHDataInfo;
 import com.xnhb.et.bean.NoticeInfo2;
-import com.xnhb.et.ui.fragment.home.present.HomePresent;
+import com.xnhb.et.ui.fragment.home.presenter.HomePresenter;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * 描述:
  * 参考链接:
  */
-public interface IHomeView extends IView<HomePresent> {
+public interface IHomeView extends IView<HomePresenter> {
     /**
      * 设置横向列表数据
      */

@@ -17,6 +17,7 @@ import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.net.Api;
 import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.net.okgo.OkGoHelper;
+import com.xnhb.et.util.MoneyUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,15 +36,11 @@ public class MyCoinListAdapter extends BaseQuickAdapter<CoinInfo, BaseViewHolder
 
     @Override
     protected void convert(BaseViewHolder helper, CoinInfo item) {
-        //TODO 设置对应参数   currencyName    using  freeze
-        //TODO 這里测试暂时写死 图片名字为ET
-        String imageUrl = OkGoHelper.getNetWorkUrl(Api.GET_IMAGE_URL + "ET");
-//        String imageUrl = OkGoHelper.getNetWorkUrl(Api.GET_IMAGE_URL + item.getCurrencyName());
-        ImageLoaderManager.getLoader().load(imageUrl, helper.getView(R.id.icon));
+        ImageLoaderManager.getLoader().load(OkGoHelper.getImageUrl(item.getCurrencyName()), helper.getView(R.id.icon));
         helper.setText(R.id.tv_coin_name, item.getCurrencyName())
-                .setText(R.id.item_coin_list_text1, StringUtil.htmlFromat(R.string.item_coin_list_text1, isHideMoney ? "***" : item.getUsing()))
+                .setText(R.id.item_coin_list_text1, StringUtil.htmlFromat(R.string.item_coin_list_text1, isHideMoney ? "***" : MoneyUtils.formatMoney(item.getUsing())))
 //                .setText(R.id.item_coin_list_text2, StringUtil.htmlFromat(R.string.item_coin_list_text2, "0.0"))
-                .setText(R.id.item_coin_list_text3, StringUtil.htmlFromat(R.string.item_coin_list_text3, isHideMoney ? "***" : item.getFreeze()));
+                .setText(R.id.item_coin_list_text3, StringUtil.htmlFromat(R.string.item_coin_list_text3, isHideMoney ? "***" : MoneyUtils.formatMoney(item.getFreeze())));
     }
 
     public void hideMoney() {

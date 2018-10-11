@@ -29,7 +29,7 @@
             android:orientation="vertical">
 
             <com.oneway.ui.widget.et.XEditText
-                android:id="@+id/et_account"
+                android:id="@+id/et_sms"
                 style="@style/common_btn_et"
                 android:drawableLeft="@mipmap/account"
                 android:hint="@string/hint_login_account"

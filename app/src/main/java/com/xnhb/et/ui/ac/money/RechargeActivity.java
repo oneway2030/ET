@@ -1,14 +1,18 @@
-package com.xnhb.et.ui.ac;
+package com.xnhb.et.ui.ac.money;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lzy.okgo.model.Response;
+import com.oneway.qrlib.helper.QRCodeHelper;
 import com.oneway.tool.utils.common.ClipboardUtils;
+import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.ui.base.ac.BaseTitleActivity;
 import com.oneway.ui.base.in.TitleContainer;
 import com.oneway.ui.base.title.RightViewType;
@@ -17,10 +21,18 @@ import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.btn.StateButton;
 import com.xnhb.et.R;
+import com.xnhb.et.bean.CoinInfo;
+import com.xnhb.et.bean.base.ResultInfo;
+import com.xnhb.et.helper.UserInfoHelper;
+import com.xnhb.et.net.Api;
+import com.xnhb.et.net.okgo.DialogCallback;
+import com.xnhb.et.net.okgo.OkGoHelper;
 import com.xnhb.et.ui.ac.bill.HistoricalActivity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 作者 oneway on 2018/9/28
@@ -28,7 +40,7 @@ import butterknife.ButterKnife;
  * 参考链接:
  */
 public class RechargeActivity extends BaseTitleActivity {
-    private static String ARG_COIN_TYPE = "coinType";
+    private static String ARG_COIN_INFO = "coinInfo";
     @BindView(R.id.iv_qr)
     ImageView ivQr;
     @BindView(R.id.tv_sub_title)
@@ -37,15 +49,17 @@ public class RechargeActivity extends BaseTitleActivity {
     TextView tvAddress;
     @BindView(R.id.btn_copy)
     StateButton btnCopy;
+    private CoinInfo mCoinInfo;
+    private Bitmap mBitmap;
 
 
-    public static void launch(Context context, String coinType) {
+    public static void launch(Context context, CoinInfo info) {
         Intent intent = new Intent();
         intent.setClass(context, RechargeActivity.class);
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
-        intent.putExtra(ARG_COIN_TYPE, coinType);
+        intent.putExtra(ARG_COIN_INFO, info);
         context.startActivity(intent);
     }
 
@@ -55,9 +69,14 @@ public class RechargeActivity extends BaseTitleActivity {
     }
 
     @Override
+    protected boolean getIntent(Intent intent) {
+        mCoinInfo = getIntent().getParcelableExtra(ARG_COIN_INFO);
+        return mCoinInfo == null;
+    }
+
+    @Override
     protected String getTitleText() {
-        String title = getIntent().getStringExtra(ARG_COIN_TYPE);
-        return "充值" + title;
+        return "充值" + mCoinInfo.getCurrencyName();
     }
 
     @Override
@@ -74,10 +93,11 @@ public class RechargeActivity extends BaseTitleActivity {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        tvSubTitle.setText("BitCoin" + " 充值地址");
-//        tvAddress.setText("");
+        tvSubTitle.setText(mCoinInfo.getCurrencyName() + " 充值地址");
         btnCopy.setOnClickListener(mPerfectClickListener);
+        reqRechargeInfo();
     }
+
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
         @Override
@@ -90,4 +110,36 @@ public class RechargeActivity extends BaseTitleActivity {
         }
     };
 
+    public void reqRechargeInfo() {
+        Map map = new HashMap();
+        map.put("token", UserInfoHelper.getInstance().getToken());
+        map.put("currencyId", mCoinInfo.getCurrencyId());
+        OkGoHelper.postOkGo(Api.RECHARGE_URL, this)
+                .params(map)
+                .execute(new DialogCallback<ResultInfo<String>>(this, true, false) {
+                    @Override
+                    public void onSuccess(Response<ResultInfo<String>> response) {
+                        ResultInfo<String> body = response.body();
+                        String address = body.getResult();
+                        tvAddress.setText("" + address);
+                        //生成二维码
+                        makeQR(address);
+                    }
+                });
+    }
+
+    private void makeQR(String address) {
+        if (EmptyUtils.isEmpty(address)) {
+            return;
+        }
+        mBitmap = QRCodeHelper.creatQRCode(address);
+        ivQr.setImageBitmap(mBitmap);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mBitmap != null)
+            mBitmap.recycle();
+    }
 }
