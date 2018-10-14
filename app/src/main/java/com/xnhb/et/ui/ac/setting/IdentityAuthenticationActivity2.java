@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.lzy.okgo.model.Response;
 import com.oneway.tool.loader.ImageLoaderManager;
 import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.ui.base.ac.ActivityManager;
@@ -18,10 +19,20 @@ import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.btn.StateButton;
 import com.xnhb.et.R;
+import com.xnhb.et.bean.UserInfo;
+import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.common.GlideImageLoader;
 import com.xnhb.et.helper.AlbumHelper;
+import com.xnhb.et.helper.UserInfoHelper;
+import com.xnhb.et.interfaces.CallBack;
+import com.xnhb.et.net.Api;
+import com.xnhb.et.net.okgo.DialogCallback;
+import com.xnhb.et.net.okgo.OkGoHelper;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -126,11 +137,9 @@ public class IdentityAuthenticationActivity2 extends BaseTitleActivity {
 //        String image_path_other_side; //反面照片
 //        String image_path_positive;  //正面照片
 //        String image_path_hold_idcard;//手持照片
+        uploadImage(image_path_other_side, image_path_positive, image_path_hold_idcard);
+
         //TODO 上传照片 到服务器
-        ToastManager.success("上传成功");
-        //关闭 两个身份认证界面 并刷新 设置界面
-        ActivityManager.getInstance().removeActivity(IdentityAuthenticationActivity2.class);
-        ActivityManager.getInstance().removeActivity(this);
         //TODO  去刷新设置界面的显示状态
     }
 
@@ -164,5 +173,37 @@ public class IdentityAuthenticationActivity2 extends BaseTitleActivity {
 
             }
         }
+    }
+
+    public void uploadImage(String path1, String path2, String path3) {
+        OkGoHelper.<ResultInfo<Void>>postOkGo(Api.SUMIT_IDCARD_IAMGE_URL, this)
+                .isMultipart(true)
+                .params("file1", new File(path1))
+                .params("file2", new File(path2))
+                .params("file3", new File(path3))
+                .params("token", UserInfoHelper.getInstance().getToken())
+                .execute(new DialogCallback<ResultInfo<Void>>(this) {
+                    @Override
+                    public void onSuccess(Response<ResultInfo<Void>> response) {
+                        //上传成功
+                        ActivityManager.getInstance().removeActivity(IdentityAuthenticationActivity.class);
+                        getUserInfo();
+                    }
+
+                });
+    }
+
+    /**
+     * 获取用户信息
+     */
+    public void getUserInfo() {
+        UserInfoHelper.getInstance().gotoRemoteServerGetUserInfo(IdentityAuthenticationActivity2.this, new CallBack() {
+            @Override
+            public void success(UserInfo userInfo) {
+                ToastManager.success("上传成功");
+//        //关闭 两个身份认证界面 并刷新 设置界面
+                ActivityManager.getInstance().removeActivity(IdentityAuthenticationActivity2.this);
+            }
+        });
     }
 }

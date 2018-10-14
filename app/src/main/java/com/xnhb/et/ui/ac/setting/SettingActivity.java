@@ -18,15 +18,17 @@ import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.CommomHorizontalLayout;
 import com.xnhb.et.MainActivity;
 import com.xnhb.et.R;
+import com.xnhb.et.bean.UserInfo;
 import com.xnhb.et.event.EventBusTags;
 import com.xnhb.et.helper.UserInfoHelper;
+import com.xnhb.et.interfaces.CallBack;
 import com.xnhb.et.ui.ac.user.LoginAndRegisterActivity;
 
 import butterknife.BindView;
 
 /**
  * 作者 oneway on 2018/9/10
- * 描述:
+ * 描述: 设置
  * 参考链接:
  */
 public class SettingActivity extends BaseTitleActivity {
@@ -53,6 +55,12 @@ public class SettingActivity extends BaseTitleActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        getUserInfo();
+    }
+
+    @Override
     protected String getTitleText() {
         return "设置";
     }
@@ -66,10 +74,20 @@ public class SettingActivity extends BaseTitleActivity {
     protected void initData(Bundle savedInstanceState) {
         aboutLayout.setOnClickListener(mPerfectClickListener);
         serviceAgreementLayout.setOnClickListener(mPerfectClickListener);
-        identityAuthenticationLayout.setOnClickListener(mPerfectClickListener);
+
         securityCenterLayout.setOnClickListener(mPerfectClickListener);
         bankCardInfoLayout.setOnClickListener(mPerfectClickListener);
         tvLogout.setOnClickListener(mPerfectClickListener);
+        UserInfoHelper.getInstance().gotoRemoteServerGetUserInfo(this, new CallBack() {
+            @Override
+            public void success(UserInfo userInfo) {
+                //authStatus( 1未认证  2认证中 3已认证  4认证失败)
+                identityAuthenticationLayout.setTextRight(userInfo.getAuthStatusStr() + "");
+                if (!"已认证".equals(userInfo.getAuthStatusStr()) && !"认证中".equals(userInfo.getAuthStatusStr())) {
+                    identityAuthenticationLayout.setOnClickListener(mPerfectClickListener);
+                }
+            }
+        });
     }
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
@@ -110,4 +128,16 @@ public class SettingActivity extends BaseTitleActivity {
         }).showDialog();
     }
 
+    public void getUserInfo() {
+        UserInfoHelper.getInstance().getUserInfo(this, new CallBack() {
+            @Override
+            public void success(UserInfo userInfo) {
+                //authStatus( 1未认证  2认证中 3已认证  4认证失败)
+                identityAuthenticationLayout.setTextRight(userInfo.getAuthStatusStr() + "");
+                if (!"已认证".equals(userInfo.getAuthStatusStr()) && !"认证中".equals(userInfo.getAuthStatusStr())) {
+                    identityAuthenticationLayout.setOnClickListener(mPerfectClickListener);
+                }
+            }
+        });
+    }
 }

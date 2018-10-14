@@ -54,56 +54,56 @@ public class UserInfo {
      * robotStr : 否
      */
 
-    private int id;
-    private int authStatus; //1未认证  2认证中 3已认证  4认证失败\
+    private String id;
+    private String authStatus; //1未认证  2认证中 3已认证  4认证失败\
     private String bankName;  //开户行
     private String bankAddress; //银行卡地址
     private String bankNo;  //银行卡号
     private String createTime;
     private String updateTime;
-    private Object remark;
-    private Object version;
+    private String remark;
+    private String version;
     private String pwd;
     private String phone;
     private String phoneStr;
     private String email;
     private String emailStr;
-    private Object realName;
-    private Object realNameStr;
-    private Object idcart;
-    private int parentId;
-    private int treeLevel;
+    private String realName;
+    private String realNameStr;
+    private String idcart;
+    private String parentId;
+    private String treeLevel;
     private String treeInfo;
-    private int status;
-    private String authStatusStr;
-    private int phoneAuth;
+    private String status;
+    private String authStatusStr;//authStatus( 1未认证  2认证中 3已认证  4认证失败)
+    private String phoneAuth;
     private String phoneAuthStr;
-    private int emailAuth;
+    private String emailAuth;
     private String emailAuthStr;
-    private int pwdStrength;
+    private String pwdStrength;
     private String pwdStrengthStr;
     private String tradePassword;
-    private Object leaderName;
-    private Object leaderRealName;
-    private int special;
-    private int whiteIf;
+    private String leaderName;
+    private String leaderRealName;
+    private String special;
+    private String whiteIf;
     private String statusStr;
     private String specialStr;
     private String whiteIfStr;
-    private int priority;
-    private int verifytypeLogin;
-    private int verifytypeTrade;
-    private int verifytypeWithdrawal;
+    private String priority;
+    private String verifytypeLogin;
+    private String verifytypeTrade;
+    private String verifytypeWithdrawal;
     private String lastloginIp;
     private String lastloginCity;
-    private int robot;
+    private String robot;
     private String robotStr;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -123,19 +123,19 @@ public class UserInfo {
         this.updateTime = updateTime;
     }
 
-    public Object getRemark() {
+    public String getRemark() {
         return remark;
     }
 
-    public void setRemark(Object remark) {
+    public void setRemark(String remark) {
         this.remark = remark;
     }
 
-    public Object getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(Object version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 
@@ -179,27 +179,27 @@ public class UserInfo {
         this.emailStr = emailStr;
     }
 
-    public Object getRealName() {
+    public String getRealName() {
         return realName;
     }
 
-    public void setRealName(Object realName) {
+    public void setRealName(String realName) {
         this.realName = realName;
     }
 
-    public Object getRealNameStr() {
+    public String getRealNameStr() {
         return realNameStr;
     }
 
-    public void setRealNameStr(Object realNameStr) {
+    public void setRealNameStr(String realNameStr) {
         this.realNameStr = realNameStr;
     }
 
-    public Object getIdcart() {
+    public String getIdcart() {
         return idcart;
     }
 
-    public void setIdcart(Object idcart) {
+    public void setIdcart(String idcart) {
         this.idcart = idcart;
     }
 
@@ -227,19 +227,19 @@ public class UserInfo {
         this.bankNo = bankNo;
     }
 
-    public int getParentId() {
+    public String getParentId() {
         return parentId;
     }
 
-    public void setParentId(int parentId) {
+    public void setParentId(String parentId) {
         this.parentId = parentId;
     }
 
-    public int getTreeLevel() {
+    public String getTreeLevel() {
         return treeLevel;
     }
 
-    public void setTreeLevel(int treeLevel) {
+    public void setTreeLevel(String treeLevel) {
         this.treeLevel = treeLevel;
     }
 
@@ -251,19 +251,19 @@ public class UserInfo {
         this.treeInfo = treeInfo;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public int getAuthStatus() {
+    public String getAuthStatus() {
         return authStatus;
     }
 
-    public void setAuthStatus(int authStatus) {
+    public void setAuthStatus(String authStatus) {
         this.authStatus = authStatus;
     }
 
@@ -275,11 +275,11 @@ public class UserInfo {
         this.authStatusStr = authStatusStr;
     }
 
-    public int getPhoneAuth() {
+    public String getPhoneAuth() {
         return phoneAuth;
     }
 
-    public void setPhoneAuth(int phoneAuth) {
+    public void setPhoneAuth(String phoneAuth) {
         this.phoneAuth = phoneAuth;
     }
 
@@ -291,11 +291,11 @@ public class UserInfo {
         this.phoneAuthStr = phoneAuthStr;
     }
 
-    public int getEmailAuth() {
+    public String getEmailAuth() {
         return emailAuth;
     }
 
-    public void setEmailAuth(int emailAuth) {
+    public void setEmailAuth(String emailAuth) {
         this.emailAuth = emailAuth;
     }
 
@@ -307,11 +307,11 @@ public class UserInfo {
         this.emailAuthStr = emailAuthStr;
     }
 
-    public int getPwdStrength() {
+    public String getPwdStrength() {
         return pwdStrength;
     }
 
-    public void setPwdStrength(int pwdStrength) {
+    public void setPwdStrength(String pwdStrength) {
         this.pwdStrength = pwdStrength;
     }
 
@@ -331,35 +331,35 @@ public class UserInfo {
         this.tradePassword = tradePassword;
     }
 
-    public Object getLeaderName() {
+    public String getLeaderName() {
         return leaderName;
     }
 
-    public void setLeaderName(Object leaderName) {
+    public void setLeaderName(String leaderName) {
         this.leaderName = leaderName;
     }
 
-    public Object getLeaderRealName() {
+    public String getLeaderRealName() {
         return leaderRealName;
     }
 
-    public void setLeaderRealName(Object leaderRealName) {
+    public void setLeaderRealName(String leaderRealName) {
         this.leaderRealName = leaderRealName;
     }
 
-    public int getSpecial() {
+    public String getSpecial() {
         return special;
     }
 
-    public void setSpecial(int special) {
+    public void setSpecial(String special) {
         this.special = special;
     }
 
-    public int getWhiteIf() {
+    public String getWhiteIf() {
         return whiteIf;
     }
 
-    public void setWhiteIf(int whiteIf) {
+    public void setWhiteIf(String whiteIf) {
         this.whiteIf = whiteIf;
     }
 
@@ -387,35 +387,35 @@ public class UserInfo {
         this.whiteIfStr = whiteIfStr;
     }
 
-    public int getPriority() {
+    public String getPriority() {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
 
-    public int getVerifytypeLogin() {
+    public String getVerifytypeLogin() {
         return verifytypeLogin;
     }
 
-    public void setVerifytypeLogin(int verifytypeLogin) {
+    public void setVerifytypeLogin(String verifytypeLogin) {
         this.verifytypeLogin = verifytypeLogin;
     }
 
-    public int getVerifytypeTrade() {
+    public String getVerifytypeTrade() {
         return verifytypeTrade;
     }
 
-    public void setVerifytypeTrade(int verifytypeTrade) {
+    public void setVerifytypeTrade(String verifytypeTrade) {
         this.verifytypeTrade = verifytypeTrade;
     }
 
-    public int getVerifytypeWithdrawal() {
+    public String getVerifytypeWithdrawal() {
         return verifytypeWithdrawal;
     }
 
-    public void setVerifytypeWithdrawal(int verifytypeWithdrawal) {
+    public void setVerifytypeWithdrawal(String verifytypeWithdrawal) {
         this.verifytypeWithdrawal = verifytypeWithdrawal;
     }
 
@@ -435,11 +435,11 @@ public class UserInfo {
         this.lastloginCity = lastloginCity;
     }
 
-    public int getRobot() {
+    public String getRobot() {
         return robot;
     }
 
-    public void setRobot(int robot) {
+    public void setRobot(String robot) {
         this.robot = robot;
     }
 

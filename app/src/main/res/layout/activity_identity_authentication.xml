@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
@@ -9,108 +10,272 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="30dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/common_margin_space_20"
-        android:paddingRight="@dimen/common_margin_space_20">
-
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:gravity="left|center_vertical"
-            android:text="姓名"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <EditText
-            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:ignore="Suspicious0dp" />
+
+        <LinearLayout
+            android:id="@+id/rootView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:background="@null"
-            android:gravity="left"
-            android:hint="请输入您的姓名"
-            android:textColor="@color/white"
-            android:textColorHint="@color/color_6"
-            android:textSize="16sp" />
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="30dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/common_margin_space_20"
+            android:paddingRight="@dimen/common_margin_space_20">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="姓名"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimary" />
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:background="@null"
+                android:gravity="left"
+                android:hint="请输入您的姓名"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_6"
+                android:textSize="16sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="30dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/common_margin_space_20"
-        android:paddingRight="@dimen/common_margin_space_20">
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/common_margin_space_20"
+            android:paddingRight="@dimen/common_margin_space_20">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="身份证"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_idcard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:background="@null"
+                android:gravity="left"
+                android:hint="请输入您的身份证"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_6"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/common_margin_space_20"
+            android:paddingRight="@dimen/common_margin_space_20">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="邮箱"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:background="@null"
+                android:gravity="left"
+                android:hint="请输入您的邮箱"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_6"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary" />
+
+        <LinearLayout
+            android:id="@+id/ll_bankname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/common_margin_space_20"
+            android:paddingRight="@dimen/common_margin_space_20">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="收款银行"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/et_bankname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:background="@null"
+                android:gravity="left"
+                android:hint="请输入您的身份证"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_6"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/common_margin_space_20"
+            android:paddingRight="@dimen/common_margin_space_20">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="银行卡号"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_bankcard_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:background="@null"
+                android:gravity="left"
+                android:hint="请输入您的银行卡号"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_6"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/common_margin_space_20"
+            android:paddingRight="@dimen/common_margin_space_20">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="银行地址"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_bank_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:background="@null"
+                android:gravity="left"
+                android:hint="请输入您的收款行地址"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_6"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary" />
+
 
         <TextView
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:gravity="left|center_vertical"
-            android:text="身份证"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/et_idcard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:background="@null"
-            android:gravity="left"
-            android:hint="请输入您的身份证"
-            android:textColor="@color/white"
-            android:textColorHint="@color/color_6"
-            android:textSize="16sp" />
+            android:layout_marginTop="24dp"
+            android:paddingLeft="@dimen/common_margin_space_20"
+            android:paddingRight="@dimen/common_margin_space_20"
+            android:text="@string/hint_identity_authentication"
+            android:textColor="@color/color_6"
+            android:textSize="13dp" />
 
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:minHeight="10dp" />
+
+        <com.oneway.ui.widget.btn.StateButton
+            android:id="@+id/btn_next_step"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_btn_hight"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="@dimen/common_margin_space_20"
+            android:layout_marginRight="@dimen/common_margin_space_20"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/next_step"
+            app:normalBackgroundColor="@color/red_btn"
+            app:normalTextColor="@android:color/white"
+            app:pressedBackgroundColor="@color/red_btn"
+            app:pressedTextColor="@android:color/white"
+            app:radius="6dp" />
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimary" />
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:paddingLeft="@dimen/common_margin_space_20"
-        android:paddingRight="@dimen/common_margin_space_20"
-        android:text="@string/hint_identity_authentication"
-        android:textColor="@color/color_6"
-        android:textSize="13dp" />
-
-    <android.support.v4.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <com.oneway.ui.widget.btn.StateButton
-        android:id="@+id/btn_next_step"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/common_btn_hight"
-        android:layout_marginBottom="25dp"
-        android:layout_marginLeft="@dimen/common_margin_space_20"
-        android:layout_marginRight="@dimen/common_margin_space_20"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="@string/next_step"
-        app:normalBackgroundColor="@color/red_btn"
-        app:normalTextColor="@android:color/white"
-        app:pressedBackgroundColor="@color/red_btn"
-        app:pressedTextColor="@android:color/white"
-        app:radius="6dp" />
 
 
 </LinearLayout>

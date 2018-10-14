@@ -120,9 +120,17 @@ public interface Api {
      */
     String ORDER_INFO_URL = "/front/trade/userAll";
     /**
-     *  取消挂单
+     * 取消挂单
      */
     String ORDER_CANCEL_URL = "/front/trade/cancel";
+    /**
+     * 提交用户信息表单
+     */
+    String SUMIT_USER_INFO_FORM_URL = "/front/approveOne";
+    /**
+     * 提交身份证照片
+     */
+    String SUMIT_IDCARD_IAMGE_URL = "/front/approveTwo";
 //    /**
 //     * 订单  type: 0 委托   1成交
 //     */

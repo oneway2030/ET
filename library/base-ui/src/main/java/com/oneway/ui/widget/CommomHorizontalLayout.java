@@ -3,6 +3,7 @@ package com.oneway.ui.widget;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -35,6 +36,9 @@ public class CommomHorizontalLayout extends FrameLayout {
     private int leftTextSize;
     private int moreIcon;
     private boolean isRightTextIcon;
+    private TextView tvLeft;
+    private TextView tvRight;
+    private ImageView ivMore;
 
     public CommomHorizontalLayout(@NonNull Context context) {
         this(context, null);
@@ -70,9 +74,9 @@ public class CommomHorizontalLayout extends FrameLayout {
 
     //    R.mipmap.more_right_black
     private void initView() {
-        TextView tvLeft = findViewById(R.id.tv_left);
-        TextView tvRight = findViewById(R.id.tv_right);
-        ImageView ivMore = findViewById(R.id.iv_more);
+        tvLeft = findViewById(R.id.tv_left);
+        tvRight = findViewById(R.id.tv_right);
+        ivMore = findViewById(R.id.iv_more);
         tvLeft.setText(leftText);
         tvLeft.setTextColor(leftTextColor);
         tvLeft.setTextSize(UiUtils.px2sp(leftTextSize));
@@ -84,6 +88,11 @@ public class CommomHorizontalLayout extends FrameLayout {
             tvRight.setTextColor(rightTextColor);
             tvRight.setTextSize(UiUtils.px2sp(rightTextSize));
         }
+    }
+
+    public void setTextRight(String str) {
+        tvRight.setText(str);
+        tvRight.setVisibility(VISIBLE);
     }
 
 

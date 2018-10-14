@@ -33,9 +33,8 @@
         android:paddingTop="16dp"
         app:left_text="@string/setting_identity_authentication"
         app:left_text_color="@color/white"
-        app:right_text="@string/setting_certified"
         app:right_text_color="@color/white" />
-
+    <!--app:right_text="@string/setting_certified"-->
     <com.oneway.ui.widget.CommomHorizontalLayout
         android:id="@+id/bank_card_info_layout"
         android:layout_width="match_parent"

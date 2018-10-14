@@ -132,7 +132,7 @@ public class UserInfoHelper {
     /**
      * 保存用户信息
      */
-    private void cacheUserInfo(UserInfo userInfo) {
+    public void cacheUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
     }
 
