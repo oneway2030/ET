@@ -81,11 +81,7 @@ public class SettingActivity extends BaseTitleActivity {
         UserInfoHelper.getInstance().gotoRemoteServerGetUserInfo(this, new CallBack() {
             @Override
             public void success(UserInfo userInfo) {
-                //authStatus( 1未认证  2认证中 3已认证  4认证失败)
-                identityAuthenticationLayout.setTextRight(userInfo.getAuthStatusStr() + "");
-                if (!"已认证".equals(userInfo.getAuthStatusStr()) && !"认证中".equals(userInfo.getAuthStatusStr())) {
-                    identityAuthenticationLayout.setOnClickListener(mPerfectClickListener);
-                }
+                setupUi(userInfo);
             }
         });
     }
@@ -132,12 +128,22 @@ public class SettingActivity extends BaseTitleActivity {
         UserInfoHelper.getInstance().getUserInfo(this, new CallBack() {
             @Override
             public void success(UserInfo userInfo) {
-                //authStatus( 1未认证  2认证中 3已认证  4认证失败)
-                identityAuthenticationLayout.setTextRight(userInfo.getAuthStatusStr() + "");
-                if (!"已认证".equals(userInfo.getAuthStatusStr()) && !"认证中".equals(userInfo.getAuthStatusStr())) {
-                    identityAuthenticationLayout.setOnClickListener(mPerfectClickListener);
-                }
+                setupUi(userInfo);
             }
         });
+    }
+
+    private void setupUi(UserInfo userInfo) {
+        //authStatus( 1未认证  2认证中 3已认证  4认证失败)
+        identityAuthenticationLayout.setTextRight(userInfo.getAuthStatusStr() + "");
+        if ("已认证".equals(userInfo.getAuthStatusStr())) {
+            identityAuthenticationLayout.setTextColorRight(R.color.green_dark);
+        }
+        if ("认证中".equals(userInfo.getAuthStatusStr()) || "认证失败".equals(userInfo.getAuthStatusStr())) {
+            identityAuthenticationLayout.setTextColorRight(R.color.logout_color);
+        }
+        if (!"已认证".equals(userInfo.getAuthStatusStr()) && !"认证中".equals(userInfo.getAuthStatusStr())) {
+            identityAuthenticationLayout.setOnClickListener(mPerfectClickListener);
+        }
     }
 }

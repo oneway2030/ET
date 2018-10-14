@@ -95,5 +95,9 @@ public class CommomHorizontalLayout extends FrameLayout {
         tvRight.setVisibility(VISIBLE);
     }
 
+    public void setTextColorRight(int color) {
+        tvRight.setTextColor(UiUtils.getColor(color));
+    }
+
 
 }
