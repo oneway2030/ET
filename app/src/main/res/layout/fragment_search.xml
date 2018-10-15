@@ -28,15 +28,23 @@
                 android:layout_height="match_parent"
                 android:src="@mipmap/search" />
 
-
             <EditText
                 android:id="@+id/et_content"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:background="@null"
-                android:hint="请输入搜索关键词"
+                android:drawablePadding="10dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="请输入您想住的社区"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
                 android:textColor="@color/white"
                 android:textColorHint="@color/text_hint_gray"
                 android:textSize="14sp" />
@@ -63,6 +71,18 @@
             android:textSize="11sp" />
 
     </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </FrameLayout>
 
 
 </LinearLayout>

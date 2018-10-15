@@ -91,7 +91,8 @@ public abstract class XFragment<P extends IPresenter> extends XMVPFragment<P> {
     public void onDestroy() {
         super.onDestroy();
         BusManager.getBus().unregister(this);
-        unbinder.unbind();
+        if (unbinder != null)
+            unbinder.unbind();
         if (mImmersionBar != null)
             mImmersionBar.destroy();
     }

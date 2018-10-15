@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * 作者 oneway on 2018/9/28
- * 描述:
+ * 描述: 币信息
  * 参考链接:
  */
 public class CoinInfo implements Parcelable {

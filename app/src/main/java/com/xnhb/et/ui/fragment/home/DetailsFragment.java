@@ -23,6 +23,7 @@ import com.xnhb.et.MainFragment;
 import com.xnhb.et.R;
 import com.xnhb.et.bean.QuotationInfo;
 import com.xnhb.et.bean.QuotationListInfo;
+import com.xnhb.et.bean.SearchInfo;
 import com.xnhb.et.bean.WrapNoticeInfo;
 import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.event.EventBusTags;
@@ -147,7 +148,7 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
      * @param searchResultStr
      */
     @Subscriber(tag = EventBusTags.TAG_SEARCH_RESULT)
-    public void searchResult(String searchResultStr) {
+    public void searchResult(SearchInfo searchResultStr) {
         ToastManager.info("" + searchResultStr);
     }
 

@@ -131,6 +131,10 @@ public interface Api {
      * 提交身份证照片
      */
     String SUMIT_IDCARD_IAMGE_URL = "/front/approveTwo";
+    /**
+     * 搜索
+     */
+    String SEARCH_URL = "/search/huntArea";
 //    /**
 //     * 订单  type: 0 委托   1成交
 //     */

@@ -70,6 +70,7 @@ public class KeyboardUtils {
      * 强制隐藏输入法键盘
      */
     public static void hideSoftInput(final View view) {
+        if (view == null) return;
         InputMethodManager imm = (InputMethodManager) ToolConfig.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) return;
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
