@@ -32,6 +32,7 @@ public class SearchPresenter extends XPresent<ISearchView> {
         map.put("param ", keyWord);
         OkGoHelper.postOkGo(Api.SEARCH_URL, this)
                 .params(map)
+                .isMultipart(true)
                 .execute(new DialogCallback<ResultInfo<ArrayList<WrapSearchResult<SearchInfo>>>>(getV().getAc()) {
 
                     @Override
