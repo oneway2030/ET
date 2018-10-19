@@ -1,6 +1,5 @@
 package com.xnhb.et.util;
 
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 /**
@@ -37,11 +36,27 @@ public class MoneyUtils {
     /**
      * 使用java正则表达式去掉多余的.与0   這里如果是0 则会显示0
      */
-    public static String getPrettyNumber(String s){
-        if(s.indexOf(".") > 0){
+    public static String getPrettyNumber(String s) {
+        if (s.indexOf(".") > 0) {
             s = s.replaceAll("0+?$", "");//去掉多余的0
             s = s.replaceAll("[.]$", "");//如最后一位是.则去掉
         }
         return s;
+    }
+
+    /**
+     *
+     */
+    public static String check0(String s) {
+        if ("0E-8".equals(s)) {
+            return "0";
+        }
+        return s;
+    }
+
+    public String foramt(double d) {
+        java.text.NumberFormat nf = java.text.NumberFormat.getInstance();
+        nf.setGroupingUsed(false);
+        return nf.format(d);
     }
 }

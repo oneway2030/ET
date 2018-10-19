@@ -19,6 +19,8 @@ public interface IView<P> {
 
     void showContentPage();
 
+    void showOtherError();
+
     void showProgress();
 
     void showProgress(boolean isCancel);

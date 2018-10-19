@@ -86,7 +86,7 @@ public class IdentityAuthenticationActivity extends BaseTitleActivity {
     protected void initData(Bundle savedInstanceState) {
         btnNextStep.setOnClickListener(mPerfectClickListener);
         llBankname.setOnClickListener(mPerfectClickListener);
-        UserInfoHelper.getInstance().getUserInfo(this, new CallBack() {
+        UserInfoHelper.getInstance().getUserInfo(this, new CallBack<UserInfo>() {
             @Override
             public void success(UserInfo userInfo) {
                 etName.setText(userInfo.getRealName());

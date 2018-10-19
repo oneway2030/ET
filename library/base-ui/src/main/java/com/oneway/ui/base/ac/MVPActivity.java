@@ -75,6 +75,11 @@ public abstract class MVPActivity<P extends IPresenter> extends AppCompatActivit
     }
 
     @Override
+    public void showOtherError() {
+
+    }
+
+    @Override
     public void showProgress() {
         if (dialog == null) {
             initDialog();

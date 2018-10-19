@@ -7,8 +7,8 @@ import com.xnhb.et.bean.UserInfo;
  * 描述:
  * 参考链接:
  */
-public interface CallBack {
-    void success(UserInfo userInfo);
+public interface CallBack<T> {
+    void success(T t);
 
     default void fail() {
     }

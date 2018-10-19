@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +14,31 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gyf.barlibrary.OnKeyboardListener;
+import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.base.fragment.FragmentBaseAdapter;
 import com.oneway.ui.base.fragment.XFragment;
 import com.oneway.ui.common.PerfectClickListener;
+import com.oneway.ui.helper.PageStateHelper;
 import com.oneway.ui.widget.dialog.TipLabelBottomSelectDialog;
+import com.oneway.ui.widget.status.OnRetryListener;
+import com.oneway.ui.widget.status.StatusLayoutManager;
+import com.oneway.ui.widget.status.StatusType;
 import com.oneway.ui.widget.vp.CustomViewPager;
 import com.xnhb.et.MainFragment;
 import com.xnhb.et.R;
+import com.xnhb.et.bean.C2CCoinInfo;
+import com.xnhb.et.bean.C2CListInfo;
+import com.xnhb.et.event.EventBusTags;
+import com.xnhb.et.interfaces.CallBack;
 import com.xnhb.et.ui.ac.c2c.C2CBillActivity;
+import com.xnhb.et.ui.ac.user.LoginAndRegisterActivity;
 import com.xnhb.et.ui.fragment.home.page.C2CSubFragment;
+import com.xnhb.et.ui.fragment.home.presenter.C2CPresenter;
+import com.xnhb.et.ui.fragment.home.view.IC2CView;
+import com.xnhb.et.util.MoneyUtils;
+
+import org.simple.eventbus.Subscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,25 +52,37 @@ import butterknife.Unbinder;
  * 描述:
  * 参考链接:
  */
-public class C2CFragment extends XFragment implements TabLayout.OnTabSelectedListener {
+public class C2CFragment extends XFragment<C2CPresenter> implements TabLayout.OnTabSelectedListener, OnRetryListener, IC2CView {
     @BindView(R.id.title_layout)
     LinearLayout mTitleLayout;
     @BindView(R.id.tv_bill)
     ImageView tvBill;
     @BindView(R.id.tablayout)
     TabLayout tablayout;
+    @BindView(R.id.content)
+    NestedScrollView contentView;
     @BindView(R.id.vp)
     CustomViewPager vp;
     String[] titles = {"我要买", "我要卖"};
     @BindView(R.id.tv_select_coin)
     TextView tvSelectCoin;
     List<C2CSubFragment> fragments = new ArrayList<>();
+    @BindView(R.id.tv_using)
+    TextView tvUsing;
+    @BindView(R.id.tv_freeze)
+    TextView tvFreeze;
+    private PageStateHelper mPageStateHelper;
 
     public static C2CFragment newInstance() {
         Bundle args = new Bundle();
         C2CFragment fragment = new C2CFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public C2CPresenter newP() {
+        return new C2CPresenter();
     }
 
     @Override
@@ -85,7 +114,10 @@ public class C2CFragment extends XFragment implements TabLayout.OnTabSelectedLis
     }
 
     @Override
-    protected void initView() {
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        mPageStateHelper = new PageStateHelper(getActivity(), contentView, R.layout.unlogin_layout, this);
+        mPageStateHelper.showLoadingView();
         initFragments();
         tablayout.addOnTabSelectedListener(this);
         tablayout.setupWithViewPager(vp);
@@ -94,6 +126,12 @@ public class C2CFragment extends XFragment implements TabLayout.OnTabSelectedLis
         vp.setAdapter(mFragmentAdapter);
         tvBill.setOnClickListener(mPerfectClickListener);
         tvSelectCoin.setOnClickListener(mPerfectClickListener);
+        onRetry(0);
+    }
+
+    @Override
+    protected void initView() {
+
     }
 
 
@@ -109,17 +147,11 @@ public class C2CFragment extends XFragment implements TabLayout.OnTabSelectedLis
         }
     };
 
-    @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
-
-    }
-
 
     //TODO 网络获取单价 及种类
     public void initFragments() {
         for (int i = 0; i < 2; i++) {
-            C2CSubFragment frament = C2CSubFragment.newInstance(titles[i], 1.00);
+            C2CSubFragment frament = C2CSubFragment.newInstance(titles[i]);
             fragments.add(frament);
         }
     }
@@ -148,33 +180,96 @@ public class C2CFragment extends XFragment implements TabLayout.OnTabSelectedLis
 
     private int lastPosition = 0;
 
-    ArrayList<String> coinTypes = new ArrayList<String>() {{
-        add("ENCY");
-        add("ETH");
-    }};
 
     private void showCoinSelector() {
-        TipLabelBottomSelectDialog<String> mDialog = new TipLabelBottomSelectDialog<String>(getAc(), coinTypes, lastPosition);
+        ArrayList<C2CListInfo> coinListInfo = getP().getCoinListInfo(new CallBack<ArrayList<C2CListInfo>>() {
+            @Override
+            public void success(ArrayList<C2CListInfo> infos) {
+                showDialog(infos);
+            }
+        });
+        if (EmptyUtils.isEmpty(coinListInfo)) {
+            return;
+        }
+        showDialog(coinListInfo);
+    }
+
+    public void showDialog(ArrayList<C2CListInfo> infos) {
+        TipLabelBottomSelectDialog<C2CListInfo> mDialog = new TipLabelBottomSelectDialog<C2CListInfo>(getAc(), infos, lastPosition);
         mDialog.setData(new TipLabelBottomSelectDialog.DataListener() {
             @Override
             public String setData(int position) {
-                return coinTypes.get(position);
+                return infos.get(position).getCurrencyName();
             }
         }).setItemClick(new TipLabelBottomSelectDialog.ItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 lastPosition = position;
                 mDialog.dismiss();
-                tvSelectCoin.setText(coinTypes.get(position));
-                updateCoinType(coinTypes.get(position));
+                tvSelectCoin.setText(infos.get(position).getCurrencyName());
+                // 请求币种具体信息
+                getP().reqCionInfoData(infos.get(position), true);
             }
 
         }).show();
     }
 
-    private void updateCoinType(String coinType) {
-        for (C2CSubFragment fragment : fragments) {
-            fragment.updateCoinType(coinType);
+
+    @Override
+    public void onRetry(int type) {
+        if (type == StatusType.OTHER_ERROR.getType()) {
+            //跳转到登陆界面
+            LoginAndRegisterActivity.launch(getActivity());
+        } else {
+            getP().getData();
         }
+    }
+
+    /**
+     * 登陆后 刷新
+     */
+    @Subscriber(tag = EventBusTags.TAG_LOGIN_SUCDESS)
+    public void remoteSwtichPage(int position) {
+        getP().getData();
+    }
+
+
+    @Override
+    public void showOtherError() {
+        mPageStateHelper.showOtherErrorView();
+    }
+
+    @Override
+    public void showLoadingPage() {
+        mPageStateHelper.showLoadingView();
+    }
+
+    @Override
+    public void showContentPage() {
+        mPageStateHelper.showContentView();
+    }
+
+
+    @Override
+    public void setupUi(C2CListInfo c2cListInfo, C2CCoinInfo c2CCoinInfo) {
+        showContentPage();
+        tvSelectCoin.setText(c2cListInfo.getCurrencyName());
+        C2CCoinInfo.WalletBean wallet = c2CCoinInfo.getWallet();
+        if (wallet != null) {
+            tvUsing.setText(MoneyUtils.check0(wallet.getUsing()));
+            tvFreeze.setText(MoneyUtils.check0(wallet.getFreeze()));
+        } else {
+            tvUsing.setText("");
+            tvFreeze.setText("");
+        }
+        //更新子界面
+        for (C2CSubFragment fragment : fragments) {
+            fragment.updataUi(c2cListInfo, c2CCoinInfo);
+        }
+    }
+
+    @Override
+    public void loginExpires() {
+        mPageStateHelper.showOtherErrorView("");
     }
 }

@@ -91,6 +91,10 @@ public class PageStateHelper {
         showOtherErrorView(str, 0);
     }
 
+    public void showOtherErrorView() {
+        showOtherErrorView("", 0);
+    }
+
 
     /**
      * 显示网络错误

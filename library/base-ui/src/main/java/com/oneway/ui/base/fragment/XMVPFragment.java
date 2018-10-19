@@ -77,6 +77,11 @@ public abstract class XMVPFragment<P extends IPresenter> extends SupportFragment
 
     }
 
+    @Override
+    public void showOtherError() {
+
+    }
+
 
     @Override
     public void showProgress() {

@@ -78,7 +78,7 @@ public class SettingActivity extends BaseTitleActivity {
         securityCenterLayout.setOnClickListener(mPerfectClickListener);
         bankCardInfoLayout.setOnClickListener(mPerfectClickListener);
         tvLogout.setOnClickListener(mPerfectClickListener);
-        UserInfoHelper.getInstance().gotoRemoteServerGetUserInfo(this, new CallBack() {
+        UserInfoHelper.getInstance().gotoRemoteServerGetUserInfo(this, new CallBack<UserInfo>() {
             @Override
             public void success(UserInfo userInfo) {
                 setupUi(userInfo);
@@ -125,7 +125,7 @@ public class SettingActivity extends BaseTitleActivity {
     }
 
     public void getUserInfo() {
-        UserInfoHelper.getInstance().getUserInfo(this, new CallBack() {
+        UserInfoHelper.getInstance().getUserInfo(this, new CallBack<UserInfo>() {
             @Override
             public void success(UserInfo userInfo) {
                 setupUi(userInfo);

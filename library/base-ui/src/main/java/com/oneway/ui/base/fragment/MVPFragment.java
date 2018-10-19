@@ -81,6 +81,10 @@ public abstract class MVPFragment<P extends IPresenter> extends Fragment impleme
     public void showContentPage() {
 
     }
+    @Override
+    public void showOtherError() {
+
+    }
 
 
     @Override

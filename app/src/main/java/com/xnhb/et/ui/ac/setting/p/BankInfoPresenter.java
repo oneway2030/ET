@@ -60,7 +60,7 @@ public class BankInfoPresenter extends XPresent<IBankView> {
      * @param bankAddress
      */
     private void getUserInfo(String bankName, String bankcardId, String bankAddress) {
-        UserInfoHelper.getInstance().gotoRemoteServerGetUserInfo(getV().getAc(), new CallBack() {
+        UserInfoHelper.getInstance().gotoRemoteServerGetUserInfo(getV().getAc(), new CallBack<UserInfo>() {
             @Override
             public void success(UserInfo userInfo) {
                 ToastManager.info("保存成功");

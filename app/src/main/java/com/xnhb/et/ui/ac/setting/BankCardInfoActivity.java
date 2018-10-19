@@ -86,7 +86,7 @@ public class BankCardInfoActivity extends BaseTitleActivity<BankInfoPresenter> i
         tvBankName.setOnClickListener(mPerfectClickListener);
         btnSave.setOnClickListener(mPerfectClickListener);
         //回显 信用卡信息
-        UserInfoHelper.getInstance().getUserInfo(this, new CallBack() {
+        UserInfoHelper.getInstance().getUserInfo(this, new CallBack<UserInfo>() {
             @Override
             public void success(UserInfo userInfo) {
                 tvBankName.setText(userInfo.getBankName());

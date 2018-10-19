@@ -139,6 +139,22 @@ public interface Api {
 //     * 订单  type: 0 委托   1成交
 //     */
 //    String ORDER_INFO_URL = "/front/ctc/list";
+    /**
+     * c2c  的币种信息
+     */
+    String C2C_COIN_INFO_URL = "/front/ctc/search";
+    /**
+     * c2c  的币种列表
+     */
+    String C2C_COIN_LIST_URL = "/front/ctc/search/currencyList";
+    /**
+     * 买
+     */
+    String C2C_BUY_URL = "/front/ctc/trade/0";
+    /**
+     * 卖
+     */
+    String C2C_SELL_URL = "/front/ctc/trade/1";
 
 
 }

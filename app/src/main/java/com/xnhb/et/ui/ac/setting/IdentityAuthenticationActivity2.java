@@ -197,7 +197,7 @@ public class IdentityAuthenticationActivity2 extends BaseTitleActivity {
      * 获取用户信息
      */
     public void getUserInfo() {
-        UserInfoHelper.getInstance().gotoRemoteServerGetUserInfo(IdentityAuthenticationActivity2.this, new CallBack() {
+        UserInfoHelper.getInstance().gotoRemoteServerGetUserInfo(IdentityAuthenticationActivity2.this, new CallBack<UserInfo>() {
             @Override
             public void success(UserInfo userInfo) {
                 ToastManager.success("上传成功");

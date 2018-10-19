@@ -8,12 +8,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.lzy.okgo.model.Response;
 import com.oneway.tool.utils.calculate.BigDecimalUtils;
 import com.oneway.tool.utils.convert.EmptyUtils;
+import com.oneway.tool.utils.log.LogUtil;
 import com.oneway.ui.base.fragment.XFragment;
 import com.oneway.ui.common.PerfectClickListener;
+import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.btn.StateButton;
 import com.xnhb.et.R;
+import com.xnhb.et.bean.C2CCoinInfo;
+import com.xnhb.et.bean.C2CListInfo;
+import com.xnhb.et.net.ApiService;
+import com.xnhb.et.net.okgo.DialogCallback;
+import com.xnhb.et.util.MoneyUtils;
 
 import butterknife.BindView;
 
@@ -54,34 +62,32 @@ public class C2CSubFragment extends XFragment implements TextWatcher {
     @BindView(R.id.submit)
     StateButton submit;
     private static String ARG_TAG = "title";
-    private static String ARG_TAG_PRICE = "unit_price";
-    private static String ARG_COIN_TYPE_ = "ENCY";  //默认ENCY
-    private static double UNIT_PRICE = 0;  //单价
     private String title;
-
+    private C2CListInfo mCoinInfo;
+    //TODO 交易方式暂时写死
+    private String tradeModus = "1";
 
     @Override
     protected int setLayoutId() {
         return R.layout.fragment_c2c_sub;
     }
 
-    public static C2CSubFragment newInstance(String title, double unitPrice) {
+    public static C2CSubFragment newInstance(String title) {
         C2CSubFragment frament = new C2CSubFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ARG_TAG, title);
-        bundle.putDouble(ARG_TAG_PRICE, unitPrice);
         frament.setArguments(bundle);
         return frament;
     }
 
-
     @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
+    protected void initView() {
+        super.initView();
         initUi();
         et2.addTextChangedListener(this);
         submit.setOnClickListener(mPerfectClickListener);
     }
+
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
         @Override
@@ -89,39 +95,50 @@ public class C2CSubFragment extends XFragment implements TextWatcher {
             int id = v.getId();
             if (id == R.id.submit) {
                 //提交
+                submit();
             }
         }
+
     };
 
     private void initUi() {
         title = getArguments().getString(ARG_TAG);
-        UNIT_PRICE = getArguments().getDouble(ARG_TAG_PRICE);
-        et1.setText(UNIT_PRICE + "");
+        et1.setText("0");
         et3.setText("0.0000");
         if ("我要买".equals(title)) {
             tvTitle1.setText("买入价");
             tvTitle2.setText("买入量");
-            submit.setText(getString(R.string.c2c_btn, "买入", ARG_COIN_TYPE_));
+            submit.setText(getString(R.string.c2c_btn, "买入", ""));
         } else if ("我要卖".equals(title)) {
             tvTitle1.setText("卖出价");
             tvTitle2.setText("卖出量");
-            submit.setText(getString(R.string.c2c_btn, "卖出", ARG_COIN_TYPE_));
+            submit.setText(getString(R.string.c2c_btn, "卖出", ""));
         }
-    }
-
-    /**
-     *
-     */
-    public void updateCoinType(String type) {
-        ARG_COIN_TYPE_ = type;
-        initUi();
     }
 
     /**
      * TODO 买入个数限制 买入单价限制 总价限制 需要探讨
      */
     public double calculationCoin(double count) {
-        return BigDecimalUtils.multiply(count, UNIT_PRICE, 4);
+        try {
+            return BigDecimalUtils.multiply(count, getUnitPrice(), 4);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return 0.0;
+        }
+    }
+
+    public Double getUnitPrice() {
+        String unitPrice = et1.getText().toString().trim();
+        if ("0E-8".equals(unitPrice)) {
+            return 0.0;
+        }
+        try {
+            return Double.valueOf(unitPrice);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return 0.0;
+        }
     }
 
 
@@ -145,11 +162,84 @@ public class C2CSubFragment extends XFragment implements TextWatcher {
         }
         try {
             double v = calculationCoin(Double.valueOf(count));
-            et3.setText(v == 0 ? "0.0000" : v + "");
+            et3.setText(v == 0 ? "0.0000" : BigDecimalUtils.format(v) + "");
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * 更新页面ui
+     *
+     * @param c2cListInfo
+     * @param c2CCoinInfo
+     */
+    public void updataUi(C2CListInfo c2cListInfo, C2CCoinInfo c2CCoinInfo) {
+        if ("我要买".equals(title)) {
+            et1.setText(MoneyUtils.check0(c2CCoinInfo.getBuyPrice()));
+            submit.setText(getString(R.string.c2c_btn, "买入", c2cListInfo.getCurrencyName()));
+        } else {
+            et1.setText(MoneyUtils.check0(c2CCoinInfo.getSellPrice()));
+            submit.setText(getString(R.string.c2c_btn, "卖出", c2cListInfo.getCurrencyName()));
+        }
+        this.mCoinInfo = c2cListInfo;
+    }
 
+
+    /**
+     * 交易
+     */
+    private void submit() {
+        if (mCoinInfo != null) {
+            String totalCount = et2.getText().toString().trim();
+            String unitPrice = et1.getText().toString().trim();
+            if (EmptyUtils.isEmpty(unitPrice) || "0".equals(unitPrice) || "0.0".equals(unitPrice)) {
+                return;
+            }
+            //TODO 这里 web并未做校验
+            // 校验数量
+//            if (checkCount(stringToDouble(totalCount))) {
+//                return;
+//            }
+            ApiService.buyOrSell(this, "我要买".equals(title), totalCount, unitPrice, tradeModus, mCoinInfo.getCurrencyId(), new DialogCallback<String>() {
+                @Override
+                public void onSuccess(Response<String> response) {
+                    //交易回掉
+                    LogUtil.i("交易成功");
+                }
+            });
+        }
+    }
+
+    /**
+     * 校验数量是否超出或低于限制
+     */
+    private boolean checkCount(Double aDoubleCount) {
+        Double maxCount = stringToDouble("我要买".equals(title) ? mCoinInfo.getBuyMax() : mCoinInfo.getSellMin());
+        Double minCount = stringToDouble("我要买".equals(title) ? mCoinInfo.getBuyMin() : mCoinInfo.getSellMin());
+        if (aDoubleCount < minCount) {
+            ToastManager.info(getString(R.string.hint_min, mCoinInfo.getBuyMin()));
+            return true;
+        }
+        if (aDoubleCount > maxCount) {
+            ToastManager.info(getString(R.string.hint_max, mCoinInfo.getBuyMax()));
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 将 金额 String 转double
+     *
+     * @param price
+     * @return
+     */
+    public double stringToDouble(String price) {
+        try {
+            return Double.valueOf(price);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return 0.0;
+        }
+    }
 }

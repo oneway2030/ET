@@ -142,7 +142,7 @@ public class UserInfoHelper {
      * @param tag
      * @param callBack
      */
-    public void getUserInfo(Object tag, CallBack callBack) {
+    public void getUserInfo(Object tag, CallBack<UserInfo> callBack) {
         if (userInfo == null) {
             gotoRemoteServerGetUserInfo(tag, callBack);
         } else {

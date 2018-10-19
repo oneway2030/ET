@@ -29,4 +29,24 @@ public class ApiService {
                 .params(map)
                 .execute(callback);
     }
+
+
+    public static void buyOrSell(Object tag, boolean isBuy, String quantity, String price, String tradeModus, String currencyId, Callback<String> callback) {
+        Map map = new HashMap();
+        map.put("token", UserInfoHelper.getInstance().getToken());
+        map.put("quantity", quantity);//买入数量
+        map.put("price", price); //买入价格
+        map.put("tradeModus", tradeModus);//交易方式
+        map.put("currencyId", currencyId);//币种id
+        String url = "";
+        if (isBuy) {
+            url = Api.C2C_BUY_URL;
+        } else {
+            url = Api.C2C_SELL_URL;
+        }
+        OkGoHelper.postOkGo(url, tag)
+                .params(map)
+                .execute(callback);
+    }
+
 }

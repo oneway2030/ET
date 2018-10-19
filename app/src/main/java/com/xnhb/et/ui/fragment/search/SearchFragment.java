@@ -142,11 +142,11 @@ public class SearchFragment extends XFragment<SearchPresenter> implements ISearc
 
     @Override
     public void searchResult(ArrayList<WrapSearchResult<SearchInfo>> datas) {
-        ArrayList<WrapSearchResult<SearchInfo>> tempDatas=new ArrayList<>();
+        ArrayList<WrapSearchResult<SearchInfo>> tempDatas = new ArrayList<>();
         for (WrapSearchResult<SearchInfo> tempData : datas) {
-           if(EmptyUtils.isNotEmpty( tempData.getTrade())){
-               tempDatas.add(tempData);
-           }
+            if (EmptyUtils.isNotEmpty(tempData.getTrade())) {
+                tempDatas.add(tempData);
+            }
         }
         if (EmptyUtils.isEmpty(tempDatas)) {
             mAdapter.setNewData(null);
