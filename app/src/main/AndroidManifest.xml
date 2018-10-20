@@ -83,6 +83,14 @@
             android:name=".ui.ac.money.WithdrawalActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".ui.ac.detal.CoinDetailsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".ui.ac.detal.CoinBillActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
     </application>
 
 </manifest>

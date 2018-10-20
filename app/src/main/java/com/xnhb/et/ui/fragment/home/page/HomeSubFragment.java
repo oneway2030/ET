@@ -19,6 +19,7 @@ import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.net.Api;
 import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.net.okgo.OkGoHelper;
+import com.xnhb.et.ui.ac.detal.CoinDetailsActivity;
 import com.xnhb.et.util.MoneyUtils;
 
 import java.util.ArrayList;
@@ -79,8 +80,8 @@ public class HomeSubFragment extends BaseLazyFragment implements ListLayout.Task
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        //条目点击
-
+        //TODO 条目点击 跳转到详情页面
+        CoinDetailsActivity.launch(getAc());
     }
 
     @Override
@@ -103,7 +104,7 @@ public class HomeSubFragment extends BaseLazyFragment implements ListLayout.Task
             holder.getView(R.id.center).setVisibility(View.GONE);
             holder.getView(R.id.center_layout).setVisibility(View.VISIBLE);
             holder.setText(R.id.left, position + " " + data.getCurrencyName())
-                    .setText(R.id.tv_unit_price,  MoneyUtils.getPrettyNumber(data.getCurrentPrice()) + "")
+                    .setText(R.id.tv_unit_price, MoneyUtils.getPrettyNumber(data.getCurrentPrice()) + "")
                     .setText(R.id.tv_rmb_unit_price, MoneyUtils.getPrettyNumber(data.getEncyMoeny()) + "");
 //            TextView tv = holder.getView(R.id.center);
             holder.setTextColor(R.id.left, UiUtils.getColor(R.color.white));
@@ -157,7 +158,7 @@ public class HomeSubFragment extends BaseLazyFragment implements ListLayout.Task
                         if (EmptyUtils.isNotEmpty(body)) {
                             ArrayList<RankingInfo> result = body.getResult();
                             if (EmptyUtils.isNotEmpty(result)) {
-                                result.add(0,new RankingInfo());
+                                result.add(0, new RankingInfo());
                                 mListLayout.setData(body.getResult());
                             }
                         }
