@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:text="汇款订单"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/close" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="1请按提示信息向该卖家汇款"
+        android:textSize="9sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/grid_layer_list_bg_lfte"
+                android:gravity="right|center_vertical"
+                android:paddingRight="15dp"
+                android:text="收款方姓名"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/grid_layer_list_bg_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/grid_layer_list_bg_lfte"
+                android:gravity="right|center_vertical"
+                android:paddingRight="15dp"
+                android:text="收款方开户行"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tv_bank_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/grid_layer_list_bg_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/grid_layer_list_bg_lfte"
+                android:gravity="right|center_vertical"
+                android:paddingRight="15dp"
+                android:text="收款方账号"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tv_account"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/grid_layer_list_bg_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/grid_layer_list_bg_lfte"
+                android:gravity="right|center_vertical"
+                android:paddingRight="15dp"
+                android:text="转账金额"
+                android:textSize="10sp" />
+
+            <TextView
+                android:textColor="@color/price_red"
+                android:id="@+id/tv_money"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/grid_layer_list_bg_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/grid_layer_list_bg_lfte"
+                android:gravity="right|center_vertical"
+                android:paddingRight="15dp"
+                android:text="汇款备注内容"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tv_mark"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/grid_layer_list_bg_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_time_layout"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/grid_layer_list_bg_lfte"
+                android:gravity="right|center_vertical"
+                android:paddingRight="15dp"
+                android:text="剩余时间"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/grid_layer_list_bg_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/grid_layer_list_bg_lfte"
+                android:gravity="right|center_vertical"
+                android:paddingRight="15dp"
+                android:text="状态"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/grid_layer_list_bg_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="2汇款时请一定要填写备注信息"
+            android:textSize="9sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="3卖加确认收款后,自动充值,如果超过24小时未收到币,请向客服反馈解决."
+            android:textSize="9sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="4务必使用本人绑定的银行卡通过手机用户或网银进行汇款"
+            android:textColor="@color/price_red"
+            android:textSize="9sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

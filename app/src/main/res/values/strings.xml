@@ -82,4 +82,5 @@
     <string name="item_order_text2"><![CDATA[<font color="#ffffff">%1$s  </font><font color="#8c99a6">%2$s</font>]]></string>
     <string name="hint_max">交易数量不能超过%1$s</string>
     <string name="hint_min">交易数量不能低于%1$s</string>
+    <string name="c2c_order_details_remark"><![CDATA[<font color="#dc2527">%1$s</font>(请务必填写)</font>]]></string>
 </resources>

@@ -7,7 +7,6 @@ import android.view.View;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.gyf.barlibrary.OnKeyboardListener;
 import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.base.fragment.XFragment;
 import com.xnhb.et.bean.TabEntity;
@@ -41,11 +40,6 @@ public class MainFragment extends XFragment implements OnTabSelectListener {
     public static final int FRAGMENT_WALLET = 4;
     @BindView(R.id.tabLayout)
     CommonTabLayout mTabLayout;
-    private HomeFragment mHomeFragment;
-    private DetailsFragment mDetailsFragment;
-    private C2CFragment mC2CFragment;
-    private OrdersFragment mOrdersFragment;
-    private WalletFragment mWalletFragment;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private String[] mTitles = {UiUtils.getString(R.string.title_home), UiUtils.getString(R.string.title_details), UiUtils.getString(R.string.title_c2c), UiUtils.getString(R.string.title_order), UiUtils.getString(R.string.title_wallet)};
     private int[] mIconUnselectIds = {

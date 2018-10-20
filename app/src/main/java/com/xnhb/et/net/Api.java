@@ -120,6 +120,14 @@ public interface Api {
      */
     String ORDER_INFO_URL = "/front/trade/userAll";
     /**
+     * C2C 订单  type: 0 执行中   1已成交 2 已取消
+     */
+    String C2C_ORDER_INFO_URL = "/front/ctc/list";
+    /**
+     * C2C 订单
+     */
+    String C2C_ORDER_DETAILS_URL = "/front/ctc/tradeInfo";
+    /**
      * 取消挂单
      */
     String ORDER_CANCEL_URL = "/front/trade/cancel";
@@ -135,10 +143,6 @@ public interface Api {
      * 搜索
      */
     String SEARCH_URL = "/search/huntArea";
-//    /**
-//     * 订单  type: 0 委托   1成交
-//     */
-//    String ORDER_INFO_URL = "/front/ctc/list";
     /**
      * c2c  的币种信息
      */

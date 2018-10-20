@@ -13,6 +13,7 @@ import com.oneway.ui.base.fragment.FragmentBaseAdapter;
 import com.xnhb.et.R;
 import com.xnhb.et.bean.NoticeInfo;
 import com.xnhb.et.ui.ac.NoticeDetailsActivity;
+import com.xnhb.et.ui.fragment.home.page.C2COrderSubListFrament;
 import com.xnhb.et.ui.fragment.home.page.OrderSubListFrament;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import butterknife.BindView;
 
 /**
  * 作者 oneway on 2018/9/26
- * 描述:
+ * 描述: //TODO
  * 参考链接:
  */
 public class C2CBillActivity extends BaseTitleActivity {
@@ -61,7 +62,7 @@ public class C2CBillActivity extends BaseTitleActivity {
     public List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            OrderSubListFrament frament = OrderSubListFrament.newInstance(i);
+            C2COrderSubListFrament frament = C2COrderSubListFrament.newInstance(i);
             fragments.add(frament);
         }
         return fragments;

@@ -113,9 +113,12 @@ public class C2CFragment extends XFragment<C2CPresenter> implements TabLayout.On
         return R.layout.fragment_mian_c2c;
     }
 
+    boolean isInit = false;
+
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
+        isInit = true;
         mPageStateHelper = new PageStateHelper(getActivity(), contentView, R.layout.unlogin_layout, this);
         mPageStateHelper.showLoadingView();
         initFragments();
@@ -127,6 +130,7 @@ public class C2CFragment extends XFragment<C2CPresenter> implements TabLayout.On
         tvBill.setOnClickListener(mPerfectClickListener);
         tvSelectCoin.setOnClickListener(mPerfectClickListener);
         onRetry(0);
+
     }
 
     @Override
@@ -230,7 +234,8 @@ public class C2CFragment extends XFragment<C2CPresenter> implements TabLayout.On
      */
     @Subscriber(tag = EventBusTags.TAG_LOGIN_SUCDESS)
     public void remoteSwtichPage(int position) {
-        getP().getData();
+        if (isInit)
+            getP().getData();
     }
 
 

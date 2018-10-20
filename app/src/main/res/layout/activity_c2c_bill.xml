@@ -16,6 +16,16 @@
         app:tabSelectedTextColor="@android:color/white"
         app:tabTextColor="@color/text8c" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:text="(点击即可查看付款信息)"
+        android:textColor="@color/text8c" />
+
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"

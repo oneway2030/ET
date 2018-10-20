@@ -80,12 +80,32 @@ public class C2CSubFragment extends XFragment implements TextWatcher {
         return frament;
     }
 
+    private boolean isInit = false;
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        isInit = true;
+        title = getArguments().getString(ARG_TAG);
+        et1.setText("0");
+        et3.setText("0.0000");
+        if ("我要买".equals(title)) {
+            tvTitle1.setText("买入价");
+            tvTitle2.setText("买入量");
+            submit.setText(getString(R.string.c2c_btn, "买入", ""));
+        } else if ("我要卖".equals(title)) {
+            tvTitle1.setText("卖出价");
+            tvTitle2.setText("卖出量");
+            submit.setText(getString(R.string.c2c_btn, "卖出", ""));
+        }
+        et2.addTextChangedListener(this);
+        submit.setOnClickListener(mPerfectClickListener);
+    }
+
     @Override
     protected void initView() {
         super.initView();
-        initUi();
-        et2.addTextChangedListener(this);
-        submit.setOnClickListener(mPerfectClickListener);
+
     }
 
 
@@ -101,20 +121,6 @@ public class C2CSubFragment extends XFragment implements TextWatcher {
 
     };
 
-    private void initUi() {
-        title = getArguments().getString(ARG_TAG);
-        et1.setText("0");
-        et3.setText("0.0000");
-        if ("我要买".equals(title)) {
-            tvTitle1.setText("买入价");
-            tvTitle2.setText("买入量");
-            submit.setText(getString(R.string.c2c_btn, "买入", ""));
-        } else if ("我要卖".equals(title)) {
-            tvTitle1.setText("卖出价");
-            tvTitle2.setText("卖出量");
-            submit.setText(getString(R.string.c2c_btn, "卖出", ""));
-        }
-    }
 
     /**
      * TODO 买入个数限制 买入单价限制 总价限制 需要探讨
@@ -175,6 +181,9 @@ public class C2CSubFragment extends XFragment implements TextWatcher {
      * @param c2CCoinInfo
      */
     public void updataUi(C2CListInfo c2cListInfo, C2CCoinInfo c2CCoinInfo) {
+        if (!isInit) {
+            onLazyInitView(null);
+        }
         if ("我要买".equals(title)) {
             et1.setText(MoneyUtils.check0(c2CCoinInfo.getBuyPrice()));
             submit.setText(getString(R.string.c2c_btn, "买入", c2cListInfo.getCurrencyName()));
