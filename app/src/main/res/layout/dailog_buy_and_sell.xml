@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_buy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="25dp"
+            android:paddingTop="15dp">
+
+            <TextView
+                android:id="@+id/tv_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="买入"
+                android:textColor="@color/green_dark"
+                android:textSize="13sp" />
+
+            <View
+                android:id="@+id/view_buy_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/green_dark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_sell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingRight="25dp"
+            android:paddingTop="15dp">
+
+            <TextView
+                android:id="@+id/tv_sell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="卖出"
+                android:textColor="@color/red_btn"
+                android:textSize="13sp" />
+
+            <View
+                android:id="@+id/view_sell_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/red_btn" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="15dp"
+            android:text="取消"
+            android:textColor="@color/gray62"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+
+    <com.xnhb.et.widget.BuyAndSellLayout
+        android:id="@+id/buy_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/common_margin_space_20"
+        android:paddingRight="@dimen/common_margin_space_20" />
+
+    <com.xnhb.et.widget.BuyAndSellLayout
+        android:id="@+id/sell_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/common_margin_space_20"
+        android:paddingRight="@dimen/common_margin_space_20"
+        android:visibility="gone" />
+</LinearLayout>

@@ -246,6 +246,7 @@ public class C2CFragment extends XFragment<C2CPresenter> implements TabLayout.On
 
     @Override
     public void showLoadingPage() {
+//        if(mPageStateHelper!=null)
         mPageStateHelper.showLoadingView();
     }
 

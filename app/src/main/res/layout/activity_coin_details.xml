@@ -1,7 +1,268 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:orientation="vertical">
 
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_margin_space_20"
+                android:paddingRight="@dimen/common_margin_space_20"
+                android:paddingTop="12dp">
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="0.00003223"
+                    android:textColor="@color/green_dark"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_range"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="+88.88%"
+                    android:textColor="@color/black"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tv_price2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="≈0,198 CNY"
+                    android:textColor="@color/text8c"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_margin_space_20"
+                android:paddingRight="@dimen/common_margin_space_20"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="24h最高"
+                    android:textColor="@color/gray52"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="24h最低"
+                    android:textColor="@color/gray52"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="24h成交"
+                    android:textColor="@color/gray52"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="12dp"
+                android:paddingLeft="@dimen/common_margin_space_20"
+                android:paddingRight="@dimen/common_margin_space_20"
+                android:paddingTop="4dp">
+
+                <TextView
+                    android:id="@+id/tv_max"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="0.0000000"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tv_min"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="0.0000000"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tv_volume"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="0.00 1ST"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="39dp"
+                        android:background="@color/colorPrimary" />
+
+                    <com.androidkun.xtablayout.XTabLayout
+                        android:id="@+id/xTablayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:xTabDividerWidthWidthText="true"
+                        app:xTabIndicatorColor="@color/color_text_press"
+                        app:xTabIndicatorHeight="1dp"
+                        app:xTabMode="fixed"
+                        app:xTabSelectedTextColor="@color/color_text_press"
+                        app:xTabTextColor="@color/text9"
+                        app:xTabTextSize="15sp" />
+                </RelativeLayout>
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp"
+                    android:layout_width="match_parent"
+                    android:layout_height="326dp"
+                    android:background="@color/colorPrimary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="39dp"
+                        android:background="@color/colorPrimary" />
+
+                    <com.androidkun.xtablayout.XTabLayout
+                        android:id="@+id/xTablayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:xTabDividerWidthWidthText="true"
+                        app:xTabIndicatorColor="@color/color_text_press"
+                        app:xTabIndicatorHeight="1dp"
+                        app:xTabMode="fixed"
+                        app:xTabSelectedTextColor="@color/color_text_press"
+                        app:xTabTextColor="@color/text9"
+                        app:xTabTextSize="15sp" />
+                </RelativeLayout>
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp2"
+                    android:layout_width="match_parent"
+                    android:layout_height="326dp"
+                    android:background="@color/colorPrimary" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.oneway.ui.widget.btn.StateButton
+            android:id="@+id/btn_buy"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/common_btn_hight"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="买入"
+            app:normalBackgroundColor="@color/green_dark"
+            app:normalTextColor="@android:color/white"
+            app:pressedBackgroundColor="@color/green_dark"
+            app:pressedTextColor="@android:color/white"
+            app:radius="6dp" />
+
+        <com.oneway.ui.widget.btn.StateButton
+            android:id="@+id/btn_sell"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/common_btn_hight"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="卖出"
+            app:normalBackgroundColor="@color/red_btn"
+            app:normalTextColor="@android:color/white"
+            app:pressedBackgroundColor="@color/red_btn"
+            app:pressedTextColor="@android:color/white"
+            app:radius="6dp" />
+
+        <LinearLayout
+            android:id="@+id/ll_collection"
+            android:layout_width="43dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/stars_selected" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="自选"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 </LinearLayout>

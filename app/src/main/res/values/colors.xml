@@ -33,6 +33,9 @@
     <color name="tabIndicatorColor">#3bc9ff</color>
     <color name="green_dark">#0fc29f</color>
     <color name="c2c_text_color">#8f93ac</color>
+    <color name="gray52">#52616d</color>
+    <color name="gray62">#627381</color>
+    <color name="line_d1">#d1dae2</color>
 
 
 </resources>

@@ -103,6 +103,8 @@ public class MainFragment extends XFragment implements OnTabSelectListener {
 
     @Subscriber(tag = EventBusTags.TAG_HOME_SWTICH_PAGE)
     public void remoteSwtichPage(int position) {
+        lastPosition = 0;
+        showHideFragment(mFragments[0]);
         mTabLayout.setCurrentTab(position);
     }
 

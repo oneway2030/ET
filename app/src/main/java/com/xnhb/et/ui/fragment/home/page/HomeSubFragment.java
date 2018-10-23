@@ -19,7 +19,7 @@ import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.net.Api;
 import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.net.okgo.OkGoHelper;
-import com.xnhb.et.ui.ac.detal.CoinDetailsActivity;
+import com.xnhb.et.ui.ac.detail.CoinDetailsActivity;
 import com.xnhb.et.util.MoneyUtils;
 
 import java.util.ArrayList;

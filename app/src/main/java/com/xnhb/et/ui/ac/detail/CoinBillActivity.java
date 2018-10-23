@@ -1,4 +1,4 @@
-package com.xnhb.et.ui.ac.detal;
+package com.xnhb.et.ui.ac.detail;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,14 +11,12 @@ import android.support.v4.view.ViewPager;
 import com.oneway.ui.base.ac.BaseTitleActivity;
 import com.oneway.ui.base.fragment.FragmentBaseAdapter;
 import com.xnhb.et.R;
-import com.xnhb.et.ui.ac.c2c.C2CBillActivity;
 import com.xnhb.et.ui.fragment.home.page.OrderSubListFrament;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 作者 oneway on 2018/10/20

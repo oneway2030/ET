@@ -119,6 +119,7 @@ public class SettingActivity extends BaseTitleActivity {
                 if (confirm) {
                     ToastManager.success("退出登录成功");
                     UserInfoHelper.getInstance().logoutAndfinishAll();
+                    //首页
                 }
             }
         }).showDialog();
