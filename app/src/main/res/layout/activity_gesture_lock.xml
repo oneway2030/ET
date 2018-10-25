@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="35dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="请再次设置手势密码" />
+
+    <com.wangnan.library.GestureLockView
+        android:id="@+id/glv"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        app:error_color="#F43355"
+        app:line_thickness="2dp"
+        app:normal_color="#CED4DF"
+        app:press_color="#4772DF" />
+
+
+    <TextView
+        android:id="@+id/tv_switch_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="切换到密码登录"
+        android:textColor="@color/progress_color" />
+
+    <com.oneway.ui.widget.btn.StateButton
+        android:id="@+id/btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/common_btn_hight"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:padding="10dp"
+        android:text="重置密码"
+        app:normalBackgroundColor="@color/progress_color"
+        app:normalTextColor="@android:color/white"
+        app:pressedBackgroundColor="@color/progress_color"
+        app:pressedTextColor="@android:color/white"
+        app:radius="6dp" />
+</RelativeLayout>

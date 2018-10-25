@@ -14,6 +14,7 @@ import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.event.EventBusTags;
 import com.xnhb.et.interfaces.CallBack;
 import com.xnhb.et.net.okgo.DialogCallback;
+import com.xnhb.et.ui.ac.setting.GestureLockActivity;
 import com.xnhb.et.ui.ac.user.LoginAndRegisterActivity;
 
 /**
@@ -26,8 +27,11 @@ import com.xnhb.et.ui.ac.user.LoginAndRegisterActivity;
 public class UserInfoHelper {
     private static UserInfoHelper instance;
     public final static String SP_KEY_USER_ACCOUNT_NAME = "user_accountName";//用户名字
+    public final static String SP_KEY_USER_ACCOUNT_PWD = "user_accountPWD";//用户密码
     public final static String SP_KEY_USER_TOKEN = "user_token"; //token
     public final static String SP_KEY_USER_STUTAS = "user_status"; //状态
+
+    public final static String SP_KEY_USER_GESTURE_LOCK_PWD = "user_gesture_lock_pwd"; //用户手势锁密码
 
 
     public final static String SP_KEY_USER_IDENTITY_AUTHENTICATION_STATUS = "user_identity authentication_status"; //身份认证
@@ -56,11 +60,11 @@ public class UserInfoHelper {
      * 保存 登录 信息
      */
     public void saveLoginInfo(LoginInfo info) {
+        SpCache.getInstance().put(SP_KEY_USER_ACCOUNT_PWD, info.getPwd());
         SpCache.getInstance().put(SP_KEY_USER_ACCOUNT_NAME, info.getPhone());
         SpCache.getInstance().put(SP_KEY_USER_TOKEN, info.getToken());
         SpCache.getInstance().put(SP_KEY_USER_STUTAS, info.getStatus());
     }
-
 
     /**
      * 校验是否登录 ,没有则跳转到登录界面
@@ -79,7 +83,6 @@ public class UserInfoHelper {
      * 未登录 false
      */
     public boolean isLogin() {
-        String account = SpCache.getInstance().getString(SP_KEY_USER_ACCOUNT_NAME);
         String token = SpCache.getInstance().getString(SP_KEY_USER_TOKEN);
 //        return EmptyUtils.isNotEmpty(account) && EmptyUtils.isNotEmpty(token);
         return EmptyUtils.isNotEmpty(token);
@@ -91,6 +94,15 @@ public class UserInfoHelper {
      */
     public String getAccountName() {
         return SpCache.getInstance().getString(SP_KEY_USER_ACCOUNT_NAME, "");
+    }
+
+    /**
+     * 用户密码
+     *
+     * @return
+     */
+    public String getAccountPwd() {
+        return SpCache.getInstance().getString(SP_KEY_USER_ACCOUNT_PWD, "");
     }
 
 
@@ -109,14 +121,23 @@ public class UserInfoHelper {
     }
 
     /**
+     * 退出登录 直接跳转登录界面 不做手势校验
      * 退出登录并关闭所有界面 主界面除外
      * 清空登录信息--->跳转登录界面-->关闭所有界面-->home切换到第一页
      */
     public void logoutAndfinishAll() {
+        logoutAndfinishAll(false);
+    }
+
+    /**
+     * 退出登录并关闭所有界面 主界面除外
+     * 清空登录信息--->跳转登录界面-->关闭所有界面-->home切换到第一页
+     */
+    public void logoutAndfinishAll(boolean isCheckGestureLock) {
         cleanUpUserInfo();
         ActivityManager.getInstance().finishAll(MainActivity.class);
-        LoginAndRegisterActivity.launch(ToolConfig.getContext());
         BusManager.getBus().post(EventBusTags.TAG_HOME_SWTICH_PAGE, MainActivity.FRAGMENT_HOME);
+        jumpLoginPage(false);
     }
 
     /**
@@ -199,4 +220,77 @@ public class UserInfoHelper {
             userInfo.setBankAddress(bankAddress);
         }
     }
+
+    /**
+     * 保存用户手势锁 设置的密码
+     *
+     * @param gesturelockPwd 手势锁密码
+     */
+    public void saveGestureLockPwd(String gesturelockPwd) {
+        SpCache.getInstance().put(SP_KEY_USER_GESTURE_LOCK_PWD, gesturelockPwd);
+    }
+
+    /**
+     * 获取手势锁密码
+     *
+     * @return 手势锁密码
+     */
+    public String getGestureLockPwd() {
+        return SpCache.getInstance().getString(SP_KEY_USER_GESTURE_LOCK_PWD);
+    }
+
+    /**
+     * 是否启用手势锁
+     * true 启用
+     * false 未启用
+     */
+    public boolean isEnableGestureLock() {
+        return EmptyUtils.isNotEmpty(getGestureLockPwd());
+    }
+
+    /**
+     * 不启用手势锁
+     */
+    public void unEnabledGestureLock() {
+        saveGestureLockPwd("");
+    }
+
+
+    /**
+     * 是否 优先跳转手势解锁 登录
+     * 只有3个条件都满足才跳转到手势解锁
+     * 条件
+     * 1.开启了手势解锁
+     * 2.账号不为空
+     * 3.密码不为空
+     */
+    public boolean isJumpGestureLock() {
+        if (isEnableGestureLock()
+                && EmptyUtils.isNotEmpty(getAccountName())
+                && EmptyUtils.isNotEmpty(getAccountPwd())) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 跳转到登录界面
+     *
+     * @param isCheckGestureLock 是否校验手势解锁
+     *                           是 则校验 是否优先跳转到手势解锁
+     *                           否 直接直接跳转到登录界面
+     */
+    public void jumpLoginPage(boolean isCheckGestureLock) {
+        if (!isCheckGestureLock) {
+            LoginAndRegisterActivity.launch(ToolConfig.getContext());
+            return;
+        }
+        if (isJumpGestureLock()) {
+            GestureLockActivity.launch(ToolConfig.getContext(), GestureLockActivity.LOGIN);
+        } else {
+            LoginAndRegisterActivity.launch(ToolConfig.getContext());
+        }
+
+    }
+
 }

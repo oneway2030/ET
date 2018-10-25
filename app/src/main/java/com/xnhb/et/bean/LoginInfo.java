@@ -24,6 +24,15 @@ public class LoginInfo {
     private int verifytypeTrade;
     private String token;
     private int status;
+    private String pwd;
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
 
     public int getVerifytypeWithdrawal() {
         return verifytypeWithdrawal;

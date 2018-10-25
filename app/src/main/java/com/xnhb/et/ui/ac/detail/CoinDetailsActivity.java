@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.androidkun.xtablayout.XTabLayout;
+import com.oneway.tool.utils.shape.DevShapeUtils;
+import com.oneway.tool.utils.shape.shape.DevShape;
 import com.oneway.ui.base.ac.BaseTitleActivity;
 import com.oneway.ui.base.in.TitleContainer;
 import com.oneway.ui.base.title.RightViewType;
@@ -89,6 +91,12 @@ public class CoinDetailsActivity extends BaseTitleActivity {
     protected void initData(Bundle savedInstanceState) {
         btnBuy.setOnClickListener(mPerfectClickListener);
         btnSell.setOnClickListener(mPerfectClickListener);
+        DevShapeUtils
+                .shape(DevShape.RECTANGLE)
+                //TODO 這里判断颜色 green_dark or
+                .solid(R.color.red_btn)
+                .radius(3)
+                .into(tvRange);
     }
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
@@ -96,7 +104,7 @@ public class CoinDetailsActivity extends BaseTitleActivity {
         protected void onNoDoubleClick(View v) {
             int id = v.getId();
             if (id == R.id.btn_buy) {
-                BuyAndSellDailog mDailog=new BuyAndSellDailog(CoinDetailsActivity.this);
+                BuyAndSellDailog mDailog = new BuyAndSellDailog(CoinDetailsActivity.this);
                 mDailog.showDialog();
             } else if (id == R.id.btn_sell) {
 

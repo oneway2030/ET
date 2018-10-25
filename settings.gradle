@@ -1,7 +1,9 @@
 include ':app',
+        ':library:websocket',
         ':library:base-res',
         ':library:base-ui',
         ':library:base-tool',
         ':library:ucrop',
         ':library:qr-lib',
         ':library:picture'
+//        ':library:websocket'

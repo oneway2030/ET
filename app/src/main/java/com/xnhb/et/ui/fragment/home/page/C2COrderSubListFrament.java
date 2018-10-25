@@ -97,7 +97,9 @@ public class C2COrderSubListFrament extends BaseFragment implements ListLayout.T
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         C2COrderInfo info = (C2COrderInfo) adapter.getData().get(position);
         //TODO 弹出详情dialog
-        getOrderDetails(info.getId());
+        //当满足status==1，type==0条件时，可触发点击事件查看订单详细信息）
+        if ("1".equals(info.getStatus()) && "0".equals(info.getType()))
+            getOrderDetails(info.getId());
     }
 
     public void getOrderDetails(String id) {

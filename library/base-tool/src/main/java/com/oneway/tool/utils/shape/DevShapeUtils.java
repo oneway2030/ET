@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 
+import com.oneway.tool.ToolConfig;
 import com.oneway.tool.utils.shape.selector.DevSelector;
 import com.oneway.tool.utils.shape.shape.DevShape;
 
@@ -53,8 +54,7 @@ public class DevShapeUtils {
      * 获取全局上下文
      */
     public static Context getContext() {
-        initialize();
-        return context;
+        return ToolConfig.getContext();
     }
 
     /**

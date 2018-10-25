@@ -129,6 +129,6 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
     protected void handleLoginExpires() {
         //去登录
         //清除本地信息,跳转到登录界面
-        UserInfoHelper.getInstance().logoutAndfinishAll();
+        UserInfoHelper.getInstance().logoutAndfinishAll(true);
     }
 }

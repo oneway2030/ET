@@ -70,10 +70,16 @@ public class RegsiterPresenter extends XPresent<IRegisterView> {
                         ResultInfo<LoginInfo> body = response.body();
                         LoginInfo info = body.getResult();
                         if (EmptyUtils.isNotEmpty(info)) {
+                            info.setPwd(pwd);
                             UserInfoHelper.getInstance().saveLoginInfo(info);
                             ToastManager.success(body.getMsg());
                             getV().submit();
                         }
+                    }
+
+                    @Override
+                    protected void handleLoginExpires() {
+                        super.handleLoginExpires();
                     }
                 });
     }

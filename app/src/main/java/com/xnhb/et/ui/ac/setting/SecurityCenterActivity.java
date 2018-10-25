@@ -60,6 +60,12 @@ public class SecurityCenterActivity extends BaseTitleActivity {
         modifyGesture.setOnClickListener(mPerfectClickListener);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        modifyGesture.setTextRight(UserInfoHelper.getInstance().isEnableGestureLock() ? "开启" : "关闭");
+    }
+
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
         @Override
         protected void onNoDoubleClick(View v) {
@@ -72,6 +78,7 @@ public class SecurityCenterActivity extends BaseTitleActivity {
 
             } else if (id == R.id.modify_gesture) {//开启关闭 手势
                 //TODO  开启手势登录  需求
+                SettingGestureLockActivity.launch(SecurityCenterActivity.this);
                 // 1.每次登录后這里 设置是否开启
                 // 2.每次登录后,在退出后,重新登录的时候,判断是否开启了手势
                 // 3.如果开启,则跳转手势界面,3次错误后,跳转到登录界面
