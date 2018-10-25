@@ -24,6 +24,7 @@ import com.xnhb.et.util.MoneyUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -81,7 +82,13 @@ public class HomeSubFragment extends BaseLazyFragment implements ListLayout.Task
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         //TODO 条目点击 跳转到详情页面
-        CoinDetailsActivity.launch(getAc());
+        List<RankingInfo> data = adapter.getData();
+        if (EmptyUtils.isNotEmpty(data)) {
+            RankingInfo info = data.get(position);
+            if (EmptyUtils.isNotEmpty(info)) {
+                CoinDetailsActivity.launch(getAc(), info.getTradeId());
+            }
+        }
     }
 
     @Override

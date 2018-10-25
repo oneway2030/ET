@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.androidkun.xtablayout.XTabLayout;
+import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.shape.DevShapeUtils;
 import com.oneway.tool.utils.shape.shape.DevShape;
 import com.oneway.ui.base.ac.BaseTitleActivity;
@@ -29,7 +30,7 @@ import butterknife.ButterKnife;
  * 描述: 币详情
  * 参考链接:
  */
-public class CoinDetailsActivity extends BaseTitleActivity {
+public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter> implements ICoinDetailsView {
     @BindView(R.id.tv_price)
     TextView tvPrice;
     @BindView(R.id.tv_range)
@@ -56,14 +57,27 @@ public class CoinDetailsActivity extends BaseTitleActivity {
     StateButton btnSell;
     @BindView(R.id.ll_collection)
     LinearLayout llCollection;
+    private String tradeId;
 
-    public static void launch(Context context) {
+    public static void launch(Context context, String tradeId) {
         Intent intent = new Intent();
         intent.setClass(context, CoinDetailsActivity.class);
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
+        intent.putExtra("tradeId", tradeId);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected boolean getIntent(Intent intent) {
+        tradeId = intent.getStringExtra("tradeId");
+        return EmptyUtils.isEmpty(tradeId);
+    }
+
+    @Override
+    public CoinDetailsPresenter newP() {
+        return new CoinDetailsPresenter();
     }
 
     @Override
@@ -91,12 +105,7 @@ public class CoinDetailsActivity extends BaseTitleActivity {
     protected void initData(Bundle savedInstanceState) {
         btnBuy.setOnClickListener(mPerfectClickListener);
         btnSell.setOnClickListener(mPerfectClickListener);
-        DevShapeUtils
-                .shape(DevShape.RECTANGLE)
-                //TODO 這里判断颜色 green_dark or
-                .solid(R.color.red_btn)
-                .radius(3)
-                .into(tvRange);
+        getP().getData(tradeId);
     }
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
@@ -111,4 +120,14 @@ public class CoinDetailsActivity extends BaseTitleActivity {
             }
         }
     };
+
+    @Override
+    public void setBaseUi() {
+        DevShapeUtils
+                .shape(DevShape.RECTANGLE)
+                //TODO 這里判断颜色 green_dark or
+                .solid(R.color.red_btn)
+                .radius(3)
+                .into(tvRange);
+    }
 }

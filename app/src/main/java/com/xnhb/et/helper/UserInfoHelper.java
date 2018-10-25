@@ -137,7 +137,7 @@ public class UserInfoHelper {
         cleanUpUserInfo();
         ActivityManager.getInstance().finishAll(MainActivity.class);
         BusManager.getBus().post(EventBusTags.TAG_HOME_SWTICH_PAGE, MainActivity.FRAGMENT_HOME);
-        jumpLoginPage(false);
+        jumpLoginPage(isCheckGestureLock);
     }
 
     /**

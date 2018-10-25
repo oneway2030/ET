@@ -37,15 +37,78 @@ public class RankingInfo {
     private String rise; //24h涨跌幅
     private String tradeMoney;//24h成交额
     //
-//    private double tradeMaxPrice;
-//    private String tradeMinPrice;
-//    private double tradeNums;
-//    private long tradeId;
-//    private int rise_num;
-//    private boolean usings;
-//    private int showEncyMoeny;
-//    private int area;
+    private String tradeMaxPrice;
+    private String tradeMinPrice;
+    private String tradeNums;
+    private String tradeId;
+    private String rise_num;
+    private String usings;
+    private String showEncyMoeny;
+    private String area;
 
+    public String getTradeMaxPrice() {
+        return tradeMaxPrice;
+    }
+
+    public void setTradeMaxPrice(String tradeMaxPrice) {
+        this.tradeMaxPrice = tradeMaxPrice;
+    }
+
+    public String getTradeMinPrice() {
+        return tradeMinPrice;
+    }
+
+    public void setTradeMinPrice(String tradeMinPrice) {
+        this.tradeMinPrice = tradeMinPrice;
+    }
+
+    public String getTradeNums() {
+        return tradeNums;
+    }
+
+    public void setTradeNums(String tradeNums) {
+        this.tradeNums = tradeNums;
+    }
+
+    public String getTradeId() {
+        return tradeId;
+    }
+
+    public void setTradeId(String tradeId) {
+        this.tradeId = tradeId;
+    }
+
+    public String getRise_num() {
+        return rise_num;
+    }
+
+    public void setRise_num(String rise_num) {
+        this.rise_num = rise_num;
+    }
+
+    public String getUsings() {
+        return usings;
+    }
+
+    public void setUsings(String usings) {
+        this.usings = usings;
+    }
+
+    public String getShowEncyMoeny() {
+        return showEncyMoeny;
+    }
+
+    public void setShowEncyMoeny(String showEncyMoeny) {
+        this.showEncyMoeny = showEncyMoeny;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 
     public String getCurrentPrice() {
         return currentPrice;
