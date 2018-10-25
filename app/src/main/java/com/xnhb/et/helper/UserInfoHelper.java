@@ -67,11 +67,12 @@ public class UserInfoHelper {
     }
 
     /**
-     * 校验是否登录 ,没有则跳转到登录界面
+     * 校验是否登录
+     * false 则跳转到登录界面
      */
     public boolean checkLogin() {
         if (!isLogin()) {
-            LoginAndRegisterActivity.launch(ToolConfig.getContext());
+            jumpLoginPage(true);
             return false;
         }
         return true;
@@ -144,7 +145,6 @@ public class UserInfoHelper {
      * 清除用户信息
      */
     public void cleanUpUserInfo() {
-        //
 //        SpCache.newInstance().remove(SP_KEY_USER_ACCOUNT_NAME);
         SpCache.getInstance().remove(SP_KEY_USER_TOKEN);
         SpCache.getInstance().remove(SP_KEY_USER_STUTAS);

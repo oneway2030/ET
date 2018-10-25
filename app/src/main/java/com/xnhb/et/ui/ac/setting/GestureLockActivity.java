@@ -71,7 +71,7 @@ public class GestureLockActivity extends BaseTitleActivity<RegsiterPresenter> im
 
     @Override
     protected String getTitleText() {
-        return "手势解锁";
+        return pageType == LOGIN ? "解锁登陆" : "手势解锁";
     }
 
     @Override
@@ -192,8 +192,8 @@ public class GestureLockActivity extends BaseTitleActivity<RegsiterPresenter> im
         if (gestureLockPwd.equals(result)) {
             ToastManager.info("正在登录...");
             String accountName = UserInfoHelper.getInstance().getAccountName();
-            String getAccountPwd = UserInfoHelper.getInstance().getAccountName();
-            getP().login(accountName, getAccountPwd);
+            String accountPwd = UserInfoHelper.getInstance().getAccountPwd();
+            getP().login(accountName, accountPwd);
         } else {
             ToastManager.info(errorCount == 2 ? "手势错误" : "手势错误3次,请使用密码登录");
             mGestureLockView.showErrorStatus(400);

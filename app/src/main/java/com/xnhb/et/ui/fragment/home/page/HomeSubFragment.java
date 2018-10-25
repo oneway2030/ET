@@ -86,7 +86,7 @@ public class HomeSubFragment extends BaseLazyFragment implements ListLayout.Task
         if (EmptyUtils.isNotEmpty(data)) {
             RankingInfo info = data.get(position);
             if (EmptyUtils.isNotEmpty(info)) {
-                CoinDetailsActivity.launch(getAc(), info.getTradeId());
+                CoinDetailsActivity.launch(getAc(), info.getTradeId(), info.getTradeCurrencyName() + "/" + info.getCurrencyName());
             }
         }
     }
@@ -110,7 +110,7 @@ public class HomeSubFragment extends BaseLazyFragment implements ListLayout.Task
         } else {
             holder.getView(R.id.center).setVisibility(View.GONE);
             holder.getView(R.id.center_layout).setVisibility(View.VISIBLE);
-            holder.setText(R.id.left, position + " " + data.getCurrencyName())
+            holder.setText(R.id.left, position + " " + data.getTradeCurrencyName() + "/" + data.getCurrencyName())
                     .setText(R.id.tv_unit_price, MoneyUtils.getPrettyNumber(data.getCurrentPrice()) + "")
                     .setText(R.id.tv_rmb_unit_price, MoneyUtils.getPrettyNumber(data.getEncyMoeny()) + "");
 //            TextView tv = holder.getView(R.id.center);

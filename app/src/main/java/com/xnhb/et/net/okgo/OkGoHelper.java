@@ -25,7 +25,7 @@ public class OkGoHelper<T> {
 
     public static String getNetWorkUrl(String url) {
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            StringBuffer sb = new StringBuffer(Api.domain);
+            StringBuffer sb = new StringBuffer(Api.DOMAIN);
             sb.append(url);
             url = sb.toString();
         }

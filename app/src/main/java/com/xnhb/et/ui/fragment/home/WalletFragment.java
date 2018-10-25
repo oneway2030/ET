@@ -14,12 +14,10 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gyf.barlibrary.OnKeyboardListener;
-import com.luck.picture.lib.tools.StringUtils;
 import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.base.fragment.XFragment;
 import com.oneway.ui.common.CommonDivider;
-import com.oneway.ui.common.CommonDividerItemDecoration;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.helper.PageStateHelper;
 import com.oneway.ui.widget.status.OnRetryListener;
@@ -199,7 +197,7 @@ public class WalletFragment extends XFragment<WalletPresenter> implements BaseQu
 
     @Override
     public void showListInfo(WrapCoinInfo data) {
-        totalBtcMoney.setText(MoneyUtils.formatMoney(data.getTotal()));
+        totalBtcMoney.setText(MoneyUtils.scaleMoney4(data.getTotal()));
         if (EmptyUtils.isNotEmpty(data.getCurrencyList())) {
             datas = data.getCurrencyList();
             mPageStateHelper.showContentView();

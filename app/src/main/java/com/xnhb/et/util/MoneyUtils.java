@@ -11,7 +11,7 @@ public class MoneyUtils {
     /**
      * 截取小数点后4位
      */
-    public static String formatMoney(String money) {
+    public static String scaleMoney4(String money) {
         try {
             DecimalFormat decimalFormat = new DecimalFormat("0.0000");
             Double aDouble = Double.valueOf(money);

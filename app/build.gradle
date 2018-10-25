@@ -75,7 +75,7 @@ dependencies {
     api project(':library:base-ui')
     api project(':library:picture')
     api project(':library:qr-lib')
-//    api project(':library:websocket')
+    api project(':library:websocket')
     implementation rootProject.ext.dependencies["multidex"]
     implementation rootProject.ext.dependencies["AndPermission"]
     api rootProject.ext.dependencies["butterknife"]
@@ -89,4 +89,6 @@ dependencies {
     //手势解锁
 //    https://github.com/sinawangnan7/GestureLockView
     implementation 'com.wangnan:gesturelockview:1.0.2'
+    //RxJava2版本
+    implementation 'com.dhh:rxlifecycle2:1.6'
 }

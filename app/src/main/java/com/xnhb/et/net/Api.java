@@ -8,8 +8,14 @@ package com.xnhb.et.net;
 
 
 public interface Api {
-    String domain = "http://47.106.38.200:8080";
-
+    /**
+     * 主域名
+     */
+    String DOMAIN = "http://47.106.38.200:8080";
+    /**
+     * websock 地址
+     */
+    String WEBSOCKET_DOMAIN = "ws://47.106.38.200:8080/search/trade";
     /**
      * 获取验证码 (注册,忘记密码 )
      */
@@ -162,7 +168,7 @@ public interface Api {
     /**
      * 币详情
      */
-    String COIN_DETAILS = "/search/tradeinfo";
+    String COIN_SYNOPSIS = "/search/tradeinfo";
 
 
 }

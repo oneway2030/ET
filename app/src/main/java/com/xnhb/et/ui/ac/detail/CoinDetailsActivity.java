@@ -13,6 +13,7 @@ import com.androidkun.xtablayout.XTabLayout;
 import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.shape.DevShapeUtils;
 import com.oneway.tool.utils.shape.shape.DevShape;
+import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.base.ac.BaseTitleActivity;
 import com.oneway.ui.base.in.TitleContainer;
 import com.oneway.ui.base.title.RightViewType;
@@ -20,10 +21,13 @@ import com.oneway.ui.base.title.TitleLayoutHelper;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.widget.btn.StateButton;
 import com.xnhb.et.R;
+import com.xnhb.et.bean.CoinSynopsisInfo;
+import com.xnhb.et.bean.TradeInfo;
+import com.xnhb.et.bean.TradeUserInfo;
+import com.xnhb.et.util.MoneyUtils;
 import com.xnhb.et.widget.dialog.BuyAndSellDailog;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 作者 oneway on 2018/10/20
@@ -58,20 +62,23 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
     @BindView(R.id.ll_collection)
     LinearLayout llCollection;
     private String tradeId;
+    private String title;
 
-    public static void launch(Context context, String tradeId) {
+    public static void launch(Context context, String tradeId, String title) {
         Intent intent = new Intent();
         intent.setClass(context, CoinDetailsActivity.class);
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
         intent.putExtra("tradeId", tradeId);
+        intent.putExtra("title", title);
         context.startActivity(intent);
     }
 
     @Override
     protected boolean getIntent(Intent intent) {
         tradeId = intent.getStringExtra("tradeId");
+        title = intent.getStringExtra("title");
         return EmptyUtils.isEmpty(tradeId);
     }
 
@@ -82,7 +89,7 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
 
     @Override
     protected String getTitleText() {
-        return "ET/ECNY";
+        return title;
     }
 
     @Override
@@ -105,7 +112,8 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
     protected void initData(Bundle savedInstanceState) {
         btnBuy.setOnClickListener(mPerfectClickListener);
         btnSell.setOnClickListener(mPerfectClickListener);
-        getP().getData(tradeId);
+//        getP().getCoinSynopsis(tradeId);
+        getP().connectWebSocket();
     }
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
@@ -121,13 +129,48 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
         }
     };
 
+
     @Override
-    public void setBaseUi() {
-        DevShapeUtils
-                .shape(DevShape.RECTANGLE)
-                //TODO 這里判断颜色 green_dark or
-                .solid(R.color.red_btn)
-                .radius(3)
-                .into(tvRange);
+    public String getTradeId() {
+        return tradeId;
+    }
+
+    @Override
+    public void setBaseUi(CoinSynopsisInfo coinSynopsisInfo) {
+        //TODO
+        String currencyName = coinSynopsisInfo.getCurrencyName();
+        String currencyTradeName = coinSynopsisInfo.getCurrencyTradeName();
+
+    }
+
+    @Override
+    public void updateTradeInfoUi(TradeInfo tradeInfo) {
+        //TODO 更新Trade 信息
+
+        //TODO 1更新coin信息
+        TradeInfo.TradeInfoBean realTradeInfo = tradeInfo.getTradeInfo();
+        String rise = realTradeInfo.getRise();
+        tvRange.setText(rise + "%");
+        if (EmptyUtils.isNotEmpty(rise)) {
+            DevShapeUtils
+                    .shape(DevShape.RECTANGLE)
+                    .solid(realTradeInfo.getRise().startsWith("+") ? R.color.red_btn : R.color.green_dark)
+                    .radius(3)
+                    .into(tvRange);
+        }
+        tvPrice.setTextColor(realTradeInfo.getRise().startsWith("+") ? UiUtils.getColor(R.color.red_btn) : UiUtils.getColor(R.color.green_dark));
+        tvPrice.setText(realTradeInfo.getCurrentPrice() + "");
+        tvPrice2.setText("≈" + realTradeInfo.getCurrentPrice() + " CNY");
+        tvMax.setText(MoneyUtils.scaleMoney4(realTradeInfo.getTradeMaxPrice()));
+        tvMin.setText(MoneyUtils.scaleMoney4(realTradeInfo.getTradeMinPrice()));
+        tvVolume.setText(MoneyUtils.scaleMoney4(realTradeInfo.getTradeMoney()));
+        //TODO 2更新挂单 和  近期交易
+
+
+    }
+
+    @Override
+    public void updateTradeUserInfoUi(TradeUserInfo tradeUserInfo) {
+        //TODO 更新 底部 点击买卖的用户信息 缓存在本地
     }
 }
