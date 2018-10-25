@@ -13,9 +13,11 @@
 
         <TextView
             android:id="@+id/left"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:ellipsize="end"
+            android:gravity="left|center_vertical"
+            android:maxLines="1"
             android:text="市场"
             android:textColor="@color/black"
             android:textSize="13sp" />
@@ -35,6 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <TextView
