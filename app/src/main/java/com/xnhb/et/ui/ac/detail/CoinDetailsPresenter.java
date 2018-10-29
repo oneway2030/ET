@@ -7,6 +7,7 @@ import com.oneway.tool.event.BusManager;
 import com.oneway.tool.parse.GsonUtil;
 import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.log.LogUtil;
+import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.base.in.XPresent;
 import com.oneway.ui.toast.ToastManager;
 import com.oneway.websocket.RxWebSocket;
@@ -44,6 +45,7 @@ import okhttp3.WebSocket;
 public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
     private WSSendInfo mSendInfo = new WSSendInfo("trade", "1");
     private WebSocket mWebSocket;
+    private boolean isCallBack = false;
 
     @Override
     public void detachV() {
@@ -125,7 +127,7 @@ public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
             senTradeInfo();
             //如果登录就请求用户信息
             if (UserInfoHelper.getInstance().isLogin()) {
-                senUserInfo();
+                senUserInfo(false);
             }
         }
     }
@@ -147,7 +149,8 @@ public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
     /**
      * 查询用户信息
      */
-    public void senUserInfo() {
+    public void senUserInfo(boolean isCallBack) {
+        this.isCallBack = isCallBack;
         mSendInfo.reset();
         mSendInfo.setMethod("userinfo");
         mSendInfo.setTradeId(getV().getTradeId());
@@ -177,7 +180,7 @@ public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
             } else if ("3".equals(code)) {//深度
 
             } else { // "-1"异常
-
+                LogUtil.i("异常json==>" + json);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -205,7 +208,7 @@ public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
      */
     private void convertTradeUserData(String json) {
         TradeUserInfo tradeUserInfo = GsonUtil.getInstance().get(json, TradeUserInfo.class);
-        getV().updateTradeUserInfoUi(tradeUserInfo);
+        getV().updateTradeUserInfoUi(tradeUserInfo, isCallBack);
     }
 
 
@@ -227,7 +230,7 @@ public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
                         //更新当前页面收藏状态
                         getV().setCollection(mTradePairInfo.isCollection());
                         //
-                        ToastManager.info(mTradePairInfo.isCollection()?"已添加到自选列表":"已取消收藏");
+                        ToastManager.info(mTradePairInfo.isCollection() ? "已添加到自选列表" : "已取消收藏");
                     }
                 });
     }

@@ -27,6 +27,7 @@ import com.xnhb.et.R;
 import com.xnhb.et.bean.TradeInfo;
 import com.xnhb.et.bean.TradePairInfo;
 import com.xnhb.et.bean.TradeUserInfo;
+import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.ui.ac.detail.fragment.CoinBuyAndSellRecordFragment;
 import com.xnhb.et.ui.ac.detail.fragment.CoinTransactionRecordFragment;
 import com.xnhb.et.util.MoneyUtils;
@@ -78,7 +79,9 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
     private CoinTransactionRecordFragment transactionFragment;
     private boolean isShowCollection; //是否显示都藏按钮
     private boolean isCollection; //是否已收藏
-    private TradePairInfo mTradePairInfo;
+    private TradePairInfo mTradePairInfo;  //币基础信息
+    private TradeUserInfo mTradeUserInfo;  //用户信息
+    private boolean isBuy;
 
     public static void launch(Context context, String tradeId, String title, boolean isShowCollection, boolean isCollection) {
         Intent intent = new Intent();
@@ -152,11 +155,29 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
         protected void onNoDoubleClick(View v) {
             int id = v.getId();
             if (id == R.id.btn_buy) {
-                BuyAndSellDailog mDailog = new BuyAndSellDailog(CoinDetailsActivity.this);
-                mDailog.showDialog();
+                if (!UserInfoHelper.getInstance().checkLogin()) {
+                    return;
+                }
+                 isBuy= true;
+                if (mTradeUserInfo != null) {
+                    BuyAndSellDailog mDailog = new BuyAndSellDailog(CoinDetailsActivity.this, mTradeUserInfo, true);
+                    mDailog.showDialog();
+                } else {
+                    //查询用户信息
+                    getP().senUserInfo(true);
+                }
             } else if (id == R.id.btn_sell) {
-                BuyAndSellDailog mDailog = new BuyAndSellDailog(CoinDetailsActivity.this);
-                mDailog.showDialog();
+                if (!UserInfoHelper.getInstance().checkLogin()) {
+                    return;
+                }
+                isBuy= false;
+                if (mTradeUserInfo != null) {
+                    BuyAndSellDailog mDailog = new BuyAndSellDailog(CoinDetailsActivity.this, mTradeUserInfo, false);
+                    mDailog.showDialog();
+                } else {
+                    //查询用户信息
+                    getP().senUserInfo(true);
+                }
             } else if (id == R.id.ll_collection) {//收藏
                 //TODO 收藏
                 getP().reqCollection(mTradePairInfo);
@@ -174,7 +195,6 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
     @Override
     public void updateTradeInfoUi(TradeInfo tradeInfo) {
         //TODO 更新Trade 信息
-
         //TODO 1更新coin信息
         mTradePairInfo = tradeInfo.getTradeInfo();
         mTradePairInfo.setCollection(isCollection);
@@ -202,9 +222,13 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
     }
 
     @Override
-    public void updateTradeUserInfoUi(TradeUserInfo tradeUserInfo) {
+    public void updateTradeUserInfoUi(TradeUserInfo tradeUserInfo, boolean isCallBack) {
         //TODO 更新 底部 点击买卖的用户信息 缓存在本地
-
+        this.mTradeUserInfo = tradeUserInfo;
+        if (isCallBack) {
+            BuyAndSellDailog mDailog = new BuyAndSellDailog(CoinDetailsActivity.this, mTradeUserInfo, isBuy);
+            mDailog.showDialog();
+        }
     }
 
     /**

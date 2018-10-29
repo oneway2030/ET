@@ -1,7 +1,6 @@
 package com.xnhb.et.ui.ac.detail;
 
 import com.oneway.ui.base.in.IView;
-import com.xnhb.et.bean.CoinSynopsisInfo;
 import com.xnhb.et.bean.TradeInfo;
 import com.xnhb.et.bean.TradeUserInfo;
 
@@ -16,7 +15,7 @@ public interface ICoinDetailsView extends IView<CoinDetailsPresenter> {
 
     void updateTradeInfoUi(TradeInfo tradeInfo);
 
-    void updateTradeUserInfoUi(TradeUserInfo tradeUserInfo);
+    void updateTradeUserInfoUi(TradeUserInfo tradeUserInfo, boolean isCallBack);
 
     /**
      * 设置收藏

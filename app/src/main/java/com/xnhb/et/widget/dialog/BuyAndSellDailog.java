@@ -12,6 +12,7 @@ import com.oneway.ui.base.fragment.FragmentBaseAdapter;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.dialog.base.BaseDailog;
 import com.xnhb.et.R;
+import com.xnhb.et.bean.TradeUserInfo;
 import com.xnhb.et.widget.BuyAndSellLayout;
 
 import butterknife.BindView;
@@ -22,6 +23,7 @@ import butterknife.BindView;
  * 参考链接:
  */
 public class BuyAndSellDailog extends BaseDailog {
+
 
     @BindView(R.id.ll_buy)
     LinearLayout llBuy;
@@ -41,10 +43,13 @@ public class BuyAndSellDailog extends BaseDailog {
     BuyAndSellLayout buyLayout;
     @BindView(R.id.sell_layout)
     BuyAndSellLayout sellLayout;
-    private FragmentBaseAdapter mFragmentAdapter;
+    private TradeUserInfo mTradeUserInfo;
+    private boolean isBuy;
 
-    public BuyAndSellDailog(@NonNull Context context) {
+    public BuyAndSellDailog(@NonNull Context context, TradeUserInfo mTradeUserInfo, boolean isBuy) {
         super(context);
+        this.mTradeUserInfo = mTradeUserInfo;
+        this.isBuy = isBuy;
     }
 
     @Override
@@ -54,7 +59,7 @@ public class BuyAndSellDailog extends BaseDailog {
         llBuy.setOnClickListener(mPerfectClickListener);
         llSell.setOnClickListener(mPerfectClickListener);
         tvCancel.setOnClickListener(mPerfectClickListener);
-        setupBtnUi(true);
+        setupBtnUi(isBuy);
         buyLayout.setupUi(true);
         sellLayout.setupUi(false);
     }
