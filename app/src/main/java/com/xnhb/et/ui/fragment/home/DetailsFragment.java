@@ -22,7 +22,7 @@ import com.oneway.ui.widget.status.OnRetryListener;
 import com.xnhb.et.MainFragment;
 import com.xnhb.et.R;
 import com.xnhb.et.bean.QuotationInfo;
-import com.xnhb.et.bean.QuotationListInfo;
+import com.xnhb.et.bean.TradePairInfo;
 import com.xnhb.et.bean.SearchInfo;
 import com.xnhb.et.bean.WrapNoticeInfo;
 import com.xnhb.et.bean.base.ResultInfo;
@@ -67,7 +67,7 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
     //    String[] titles = {"ECNY", "ETH", "BTC", "自选"};
     public static final String KEY_RESULT = "key_result";
     private static final int REQ_SEARCH_FRAGMENT = 100;
-    public static ArrayList<QuotationListInfo> customListInfo;
+    public static ArrayList<TradePairInfo> customListInfo;
     private PageStateHelper mPageStateHelper;
 
     @Override
@@ -226,10 +226,10 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
         map.put("token", UserInfoHelper.getInstance().getToken());
         OkGoHelper.postOkGo(Api.CUSTOM_SELECT_LIST, getAc())
                 .params(map)
-                .execute(new DialogCallback<ResultInfo<ArrayList<QuotationListInfo>>>() {
+                .execute(new DialogCallback<ResultInfo<ArrayList<TradePairInfo>>>() {
                     @Override
-                    public void onSuccess(Response<ResultInfo<ArrayList<QuotationListInfo>>> response) {
-                        ResultInfo<ArrayList<QuotationListInfo>> body = response.body();
+                    public void onSuccess(Response<ResultInfo<ArrayList<TradePairInfo>>> response) {
+                        ResultInfo<ArrayList<TradePairInfo>> body = response.body();
                         if (EmptyUtils.isEmpty(body)) {
                             return;
                         }
@@ -238,7 +238,7 @@ public class DetailsFragment extends XFragment implements TabLayout.OnTabSelecte
                     }
 
                     @Override
-                    public void onError(Response<ResultInfo<ArrayList<QuotationListInfo>>> response) {
+                    public void onError(Response<ResultInfo<ArrayList<TradePairInfo>>> response) {
                         handleError(response, areaList);
                     }
                 });

@@ -16,24 +16,24 @@ public class TradeInfo {
      * sellList : [{"nums":1,"price":1.0401}]
      */
 
-    private TradeInfoBean tradeInfo;
-    private List<BuyListBean> buyList;
-    private List<RecordListBean> recordList;
-    private List<SellListBean> sellList;
+    private TradePairInfo tradeInfo; //基础信息
+    private List<RecordListBean> recordList;//成交
+    private List<TradeListBean> buyList; //挂单买
+    private List<TradeListBean> sellList;//挂单卖
 
-    public TradeInfoBean getTradeInfo() {
+    public TradePairInfo getTradeInfo() {
         return tradeInfo;
     }
 
-    public void setTradeInfo(TradeInfoBean tradeInfo) {
+    public void setTradeInfo(TradePairInfo tradeInfo) {
         this.tradeInfo = tradeInfo;
     }
 
-    public List<BuyListBean> getBuyList() {
+    public List<TradeListBean> getBuyList() {
         return buyList;
     }
 
-    public void setBuyList(List<BuyListBean> buyList) {
+    public void setBuyList(List<TradeListBean> buyList) {
         this.buyList = buyList;
     }
 
@@ -45,205 +45,14 @@ public class TradeInfo {
         this.recordList = recordList;
     }
 
-    public List<SellListBean> getSellList() {
+    public List<TradeListBean> getSellList() {
         return sellList;
     }
 
-    public void setSellList(List<SellListBean> sellList) {
+    public void setSellList(List<TradeListBean> sellList) {
         this.sellList = sellList;
     }
 
-    public static class TradeInfoBean {
-        /**
-         * area : 1
-         * currencyName : ECNY
-         * currentPrice : 1.018
-         * encyMoeny : 1.018
-         * showEncyMoeny : 1.018
-         * open : 1.018
-         * recordTime : 2018-10-25 20:37:27
-         * rise : +0.00
-         * rise_num : 0.0
-         * tradeCurrencyName : ET
-         * tradeId : 1
-         * tradeMaxPrice : 0.0
-         * tradeMinPrice : 0.0
-         * tradeMoney : 0.0
-         * tradeNums : 0.0
-         * usings : true
-         */
-
-        private int area;
-        private String currencyName;
-        private double currentPrice; //最新价格
-        private double encyMoeny;  //对应价格
-        private String tradeMaxPrice;//24h  最大价格
-        private String tradeMinPrice;//24h  最小价格
-        private String rise;  //涨跌
-        private String tradeMoney; //成交量
-        private double tradeNums; //成交额
-        private double open;
-        private String recordTime;
-        private double rise_num;
-        private double showEncyMoeny;
-        private String tradeCurrencyName;
-        private int tradeId;
-        private boolean usings;
-
-        public int getArea() {
-            return area;
-        }
-
-        public void setArea(int area) {
-            this.area = area;
-        }
-
-        public String getCurrencyName() {
-            return currencyName;
-        }
-
-        public void setCurrencyName(String currencyName) {
-            this.currencyName = currencyName;
-        }
-
-        public double getCurrentPrice() {
-            return currentPrice;
-        }
-
-        public void setCurrentPrice(double currentPrice) {
-            this.currentPrice = currentPrice;
-        }
-
-        public double getEncyMoeny() {
-            return encyMoeny;
-        }
-
-        public void setEncyMoeny(double encyMoeny) {
-            this.encyMoeny = encyMoeny;
-        }
-
-        public double getOpen() {
-            return open;
-        }
-
-        public void setOpen(double open) {
-            this.open = open;
-        }
-
-        public String getRecordTime() {
-            return recordTime;
-        }
-
-        public void setRecordTime(String recordTime) {
-            this.recordTime = recordTime;
-        }
-
-        public String getRise() {
-            return rise;
-        }
-
-        public void setRise(String rise) {
-            this.rise = rise;
-        }
-
-        public double getRise_num() {
-            return rise_num;
-        }
-
-        public void setRise_num(double rise_num) {
-            this.rise_num = rise_num;
-        }
-
-        public double getShowEncyMoeny() {
-            return showEncyMoeny;
-        }
-
-        public void setShowEncyMoeny(double showEncyMoeny) {
-            this.showEncyMoeny = showEncyMoeny;
-        }
-
-        public String getTradeCurrencyName() {
-            return tradeCurrencyName;
-        }
-
-        public void setTradeCurrencyName(String tradeCurrencyName) {
-            this.tradeCurrencyName = tradeCurrencyName;
-        }
-
-        public int getTradeId() {
-            return tradeId;
-        }
-
-        public void setTradeId(int tradeId) {
-            this.tradeId = tradeId;
-        }
-
-        public String getTradeMaxPrice() {
-            return tradeMaxPrice;
-        }
-
-        public void setTradeMaxPrice(String tradeMaxPrice) {
-            this.tradeMaxPrice = tradeMaxPrice;
-        }
-
-        public String getTradeMinPrice() {
-            return tradeMinPrice;
-        }
-
-        public void setTradeMinPrice(String tradeMinPrice) {
-            this.tradeMinPrice = tradeMinPrice;
-        }
-
-        public String getTradeMoney() {
-            return tradeMoney;
-        }
-
-        public void setTradeMoney(String tradeMoney) {
-            this.tradeMoney = tradeMoney;
-        }
-
-        public double getTradeNums() {
-            return tradeNums;
-        }
-
-        public void setTradeNums(double tradeNums) {
-            this.tradeNums = tradeNums;
-        }
-
-        public boolean isUsings() {
-            return usings;
-        }
-
-        public void setUsings(boolean usings) {
-            this.usings = usings;
-        }
-    }
-
-    public static class BuyListBean {
-        /**
-         * nums : 1.0
-         * price : 1.017
-         */
-
-        private double nums;
-        private double price;
-
-        public double getNums() {
-            return nums;
-        }
-
-        public void setNums(double nums) {
-            this.nums = nums;
-        }
-
-        public double getPrice() {
-            return price;
-        }
-
-        public void setPrice(double price) {
-            this.price = price;
-        }
-    }
 
     public static class RecordListBean {
         /**
@@ -266,53 +75,53 @@ public class TradeInfo {
          * version : 0
          */
 
-        private double buyPrice;
-        private double buyRate;
-        private int buyTrusteeId;
-        private int buyUserId;
+        private String buyPrice;
+        private String buyRate;
+        private String buyTrusteeId;
+        private String buyUserId;
         private long createTime;
-        private int id;
-        private double sellPrice;
-        private double sellRate;
-        private int sellTrusteeId;
-        private int sellUserId;
-        private int tradeId;
-        private double tradePrice;
-        private double tradeQuantity;
-        private int tradeType;
+        private String id;
+        private String sellPrice;
+        private String sellRate;
+        private String sellTrusteeId;
+        private String sellUserId;
+        private String tradeId;
+        private String tradePrice;
+        private String tradeQuantity;
+        private String tradeType;
         private String typeStr;
         private long updateTime;
-        private int version;
+        private String version;
 
-        public double getBuyPrice() {
+        public String getBuyPrice() {
             return buyPrice;
         }
 
-        public void setBuyPrice(double buyPrice) {
+        public void setBuyPrice(String buyPrice) {
             this.buyPrice = buyPrice;
         }
 
-        public double getBuyRate() {
+        public String getBuyRate() {
             return buyRate;
         }
 
-        public void setBuyRate(double buyRate) {
+        public void setBuyRate(String buyRate) {
             this.buyRate = buyRate;
         }
 
-        public int getBuyTrusteeId() {
+        public String getBuyTrusteeId() {
             return buyTrusteeId;
         }
 
-        public void setBuyTrusteeId(int buyTrusteeId) {
+        public void setBuyTrusteeId(String buyTrusteeId) {
             this.buyTrusteeId = buyTrusteeId;
         }
 
-        public int getBuyUserId() {
+        public String getBuyUserId() {
             return buyUserId;
         }
 
-        public void setBuyUserId(int buyUserId) {
+        public void setBuyUserId(String buyUserId) {
             this.buyUserId = buyUserId;
         }
 
@@ -324,75 +133,75 @@ public class TradeInfo {
             this.createTime = createTime;
         }
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
 
-        public double getSellPrice() {
+        public String getSellPrice() {
             return sellPrice;
         }
 
-        public void setSellPrice(double sellPrice) {
+        public void setSellPrice(String sellPrice) {
             this.sellPrice = sellPrice;
         }
 
-        public double getSellRate() {
+        public String getSellRate() {
             return sellRate;
         }
 
-        public void setSellRate(double sellRate) {
+        public void setSellRate(String sellRate) {
             this.sellRate = sellRate;
         }
 
-        public int getSellTrusteeId() {
+        public String getSellTrusteeId() {
             return sellTrusteeId;
         }
 
-        public void setSellTrusteeId(int sellTrusteeId) {
+        public void setSellTrusteeId(String sellTrusteeId) {
             this.sellTrusteeId = sellTrusteeId;
         }
 
-        public int getSellUserId() {
+        public String getSellUserId() {
             return sellUserId;
         }
 
-        public void setSellUserId(int sellUserId) {
+        public void setSellUserId(String sellUserId) {
             this.sellUserId = sellUserId;
         }
 
-        public int getTradeId() {
+        public String getTradeId() {
             return tradeId;
         }
 
-        public void setTradeId(int tradeId) {
+        public void setTradeId(String tradeId) {
             this.tradeId = tradeId;
         }
 
-        public double getTradePrice() {
+        public String getTradePrice() {
             return tradePrice;
         }
 
-        public void setTradePrice(double tradePrice) {
+        public void setTradePrice(String tradePrice) {
             this.tradePrice = tradePrice;
         }
 
-        public double getTradeQuantity() {
+        public String getTradeQuantity() {
             return tradeQuantity;
         }
 
-        public void setTradeQuantity(double tradeQuantity) {
+        public void setTradeQuantity(String tradeQuantity) {
             this.tradeQuantity = tradeQuantity;
         }
 
-        public int getTradeType() {
+        public String getTradeType() {
             return tradeType;
         }
 
-        public void setTradeType(int tradeType) {
+        public void setTradeType(String tradeType) {
             this.tradeType = tradeType;
         }
 
@@ -412,37 +221,37 @@ public class TradeInfo {
             this.updateTime = updateTime;
         }
 
-        public int getVersion() {
+        public String getVersion() {
             return version;
         }
 
-        public void setVersion(int version) {
+        public void setVersion(String version) {
             this.version = version;
         }
     }
 
-    public static class SellListBean {
+
+    public static class TradeListBean {
         /**
          * nums : 1.0
          * price : 1.0401
          */
+        private String nums;
+        private String price;
 
-        private double nums;
-        private double price;
-
-        public double getNums() {
+        public String getNums() {
             return nums;
         }
 
-        public void setNums(double nums) {
+        public void setNums(String nums) {
             this.nums = nums;
         }
 
-        public double getPrice() {
+        public String getPrice() {
             return price;
         }
 
-        public void setPrice(double price) {
+        public void setPrice(String price) {
             this.price = price;
         }
     }

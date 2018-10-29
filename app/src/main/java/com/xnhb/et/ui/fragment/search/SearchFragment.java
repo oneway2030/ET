@@ -30,8 +30,11 @@ import com.oneway.ui.toast.ToastManager;
 import com.xnhb.et.R;
 import com.xnhb.et.adapter.SearchSubAdapter;
 import com.xnhb.et.bean.SearchInfo;
+import com.xnhb.et.bean.UserInfo;
 import com.xnhb.et.bean.WrapSearchResult;
 import com.xnhb.et.event.EventBusTags;
+import com.xnhb.et.helper.UserInfoHelper;
+import com.xnhb.et.ui.ac.detail.CoinDetailsActivity;
 import com.xnhb.et.ui.ac.search.ISearchView;
 import com.xnhb.et.ui.ac.search.SearchPresenter;
 
@@ -184,5 +187,7 @@ public class SearchFragment extends XFragment<SearchPresenter> implements ISearc
 //        bundle.putString(DetailsFragment.KEY_RESULT, searchResult);
 //        setFragmentResult(RESULT_OK, bundle);
         _mActivity.onBackPressed();
+        CoinDetailsActivity.launch(getAc(), info.getTradeId(), info.getTradeCurrencyName() + "/" + info.getCurrencyName(), false, false);
+//        CoinDetailsActivity.launch(getAc(), info.getTradeId(), info.getTradeCurrencyName() + "/" + info.getCurrencyName(), UserInfoHelper.getInstance().isLogin());
     }
 }

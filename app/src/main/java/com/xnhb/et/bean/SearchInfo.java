@@ -26,53 +26,53 @@ public class SearchInfo {
      * recordTime : 2018-10-15 21:45:58
      */
 
-    private int tradeMaxPrice;
-    private int tradeMinPrice;
-    private int tradeNums;
-    private double currentPrice;
+    private String tradeMaxPrice;
+    private String tradeMinPrice;
+    private String tradeNums;
+    private String currentPrice;
     private String currencyName;
     private String tradeCurrencyName;
-    private int tradeId;
-    private int rise_num;
+    private String tradeId;
+    private String rise_num;
     private String rise;
-    private Object con;
+    private String con;
     private boolean usings;
-    private int tradeMoney;
-    private double encyMoeny;
-    private double showEncyMoeny;
-    private int area;
-    private double open;
+    private String tradeMoney;
+    private String encyMoeny;
+    private String showEncyMoeny;
+    private String area;
+    private String open;
     private String recordTime;
 
-    public int getTradeMaxPrice() {
+    public String getTradeMaxPrice() {
         return tradeMaxPrice;
     }
 
-    public void setTradeMaxPrice(int tradeMaxPrice) {
+    public void setTradeMaxPrice(String tradeMaxPrice) {
         this.tradeMaxPrice = tradeMaxPrice;
     }
 
-    public int getTradeMinPrice() {
+    public String getTradeMinPrice() {
         return tradeMinPrice;
     }
 
-    public void setTradeMinPrice(int tradeMinPrice) {
+    public void setTradeMinPrice(String tradeMinPrice) {
         this.tradeMinPrice = tradeMinPrice;
     }
 
-    public int getTradeNums() {
+    public String getTradeNums() {
         return tradeNums;
     }
 
-    public void setTradeNums(int tradeNums) {
+    public void setTradeNums(String tradeNums) {
         this.tradeNums = tradeNums;
     }
 
-    public double getCurrentPrice() {
+    public String getCurrentPrice() {
         return currentPrice;
     }
 
-    public void setCurrentPrice(double currentPrice) {
+    public void setCurrentPrice(String currentPrice) {
         this.currentPrice = currentPrice;
     }
 
@@ -92,19 +92,19 @@ public class SearchInfo {
         this.tradeCurrencyName = tradeCurrencyName;
     }
 
-    public int getTradeId() {
+    public String getTradeId() {
         return tradeId;
     }
 
-    public void setTradeId(int tradeId) {
+    public void setTradeId(String tradeId) {
         this.tradeId = tradeId;
     }
 
-    public int getRise_num() {
+    public String getRise_num() {
         return rise_num;
     }
 
-    public void setRise_num(int rise_num) {
+    public void setRise_num(String rise_num) {
         this.rise_num = rise_num;
     }
 
@@ -116,11 +116,11 @@ public class SearchInfo {
         this.rise = rise;
     }
 
-    public Object getCon() {
+    public String getCon() {
         return con;
     }
 
-    public void setCon(Object con) {
+    public void setCon(String con) {
         this.con = con;
     }
 
@@ -132,43 +132,43 @@ public class SearchInfo {
         this.usings = usings;
     }
 
-    public int getTradeMoney() {
+    public String getTradeMoney() {
         return tradeMoney;
     }
 
-    public void setTradeMoney(int tradeMoney) {
+    public void setTradeMoney(String tradeMoney) {
         this.tradeMoney = tradeMoney;
     }
 
-    public double getEncyMoeny() {
+    public String getEncyMoeny() {
         return encyMoeny;
     }
 
-    public void setEncyMoeny(double encyMoeny) {
+    public void setEncyMoeny(String encyMoeny) {
         this.encyMoeny = encyMoeny;
     }
 
-    public double getShowEncyMoeny() {
+    public String getShowEncyMoeny() {
         return showEncyMoeny;
     }
 
-    public void setShowEncyMoeny(double showEncyMoeny) {
+    public void setShowEncyMoeny(String showEncyMoeny) {
         this.showEncyMoeny = showEncyMoeny;
     }
 
-    public int getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(int area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
-    public double getOpen() {
+    public String getOpen() {
         return open;
     }
 
-    public void setOpen(double open) {
+    public void setOpen(String open) {
         this.open = open;
     }
 

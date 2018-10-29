@@ -11,11 +11,16 @@ import com.xnhb.et.bean.TradeUserInfo;
  * 参考链接:
  */
 public interface ICoinDetailsView extends IView<CoinDetailsPresenter> {
-    void setBaseUi(CoinSynopsisInfo coinSynopsisInfo);
 
     String getTradeId();
 
     void updateTradeInfoUi(TradeInfo tradeInfo);
 
     void updateTradeUserInfoUi(TradeUserInfo tradeUserInfo);
+
+    /**
+     * 设置收藏
+     */
+    void setCollection(boolean isCollection);
+
 }

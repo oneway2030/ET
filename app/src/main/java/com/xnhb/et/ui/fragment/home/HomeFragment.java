@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.androidkun.xtablayout.XTabLayout;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.oneway.ui.base.fragment.FragmentBaseAdapter;
 import com.oneway.ui.base.fragment.XFragment;
 import com.oneway.ui.common.PerfectClickListener;
@@ -20,6 +21,7 @@ import com.xnhb.et.bean.HomeHDataInfo;
 import com.xnhb.et.bean.NoticeInfo2;
 import com.xnhb.et.common.GlideImageLoader;
 import com.xnhb.et.ui.ac.NoticeActivity;
+import com.xnhb.et.ui.ac.detail.CoinDetailsActivity;
 import com.xnhb.et.ui.fragment.home.page.HomeSubFragment;
 import com.xnhb.et.ui.fragment.home.presenter.HomePresenter;
 import com.xnhb.et.ui.fragment.home.view.IHomeView;
@@ -35,7 +37,7 @@ import butterknife.BindView;
  * 描述:
  * 参考链接:
  */
-public class HomeFragment extends XFragment<HomePresenter> implements IHomeView {
+public class HomeFragment extends XFragment<HomePresenter> implements IHomeView, BaseQuickAdapter.OnItemClickListener {
     @BindView(R.id.banner)
     Banner mBanner;
     @BindView(R.id.autoVerticalTextview)
@@ -89,6 +91,7 @@ public class HomeFragment extends XFragment<HomePresenter> implements IHomeView 
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mHRecyclerView.setLayoutManager(linearLayoutManager);
         mAdapter = new HomeHAdapter();
+        mAdapter.setOnItemClickListener(this);
         mHRecyclerView.setAdapter(mAdapter);
         mFragmentAdapter = new FragmentBaseAdapter(getChildFragmentManager(), getFragmentPage(), mTitles);
         mViewPager.setOffscreenPageLimit(mTitles.length);
@@ -166,4 +169,10 @@ public class HomeFragment extends XFragment<HomePresenter> implements IHomeView 
         mAdapter.setNewData(datas);
     }
 
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        List<HomeHDataInfo> data = adapter.getData();
+        HomeHDataInfo info = data.get(position);
+        CoinDetailsActivity.launch(getAc(), info.getTradeId(), info.getTradeCurrencyName() + "/" + info.getCurrencyName(), false,false);
+    }
 }

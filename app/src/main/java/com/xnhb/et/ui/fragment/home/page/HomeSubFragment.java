@@ -86,7 +86,7 @@ public class HomeSubFragment extends BaseLazyFragment implements ListLayout.Task
         if (EmptyUtils.isNotEmpty(data)) {
             RankingInfo info = data.get(position);
             if (EmptyUtils.isNotEmpty(info)) {
-                CoinDetailsActivity.launch(getAc(), info.getTradeId(), info.getTradeCurrencyName() + "/" + info.getCurrencyName());
+                CoinDetailsActivity.launch(getAc(), info.getTradeId(), info.getTradeCurrencyName() + "/" + info.getCurrencyName(),false,false);
             }
         }
     }

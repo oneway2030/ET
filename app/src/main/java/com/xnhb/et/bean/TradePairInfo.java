@@ -2,10 +2,10 @@ package com.xnhb.et.bean;
 
 /**
  * 作者 oneway on 2018/10/8
- * 描述: 行情列表
+ * 描述: 行情列表  (交易对列表信息)
  * 参考链接:
  */
-public class QuotationListInfo {
+public class TradePairInfo {
 
     /**
      * tradeMaxPrice : 0

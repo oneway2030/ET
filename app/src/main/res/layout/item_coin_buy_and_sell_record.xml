@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_buy_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:paddingLeft="10dp"
+        android:text="买入数量"
+        android:textColor="@color/text8c"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/tv_buy_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:maxLines="1"
+        android:text="买入价格"
+        android:textColor="@color/text8c"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/tv_sell_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:maxLines="1"
+        android:text="卖出数量"
+        android:textColor="@color/text8c"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/tv_sell_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:paddingRight="10dp"
+        android:text="卖出价格"
+        android:textColor="@color/text8c"
+        android:textSize="10sp" />
+</LinearLayout>

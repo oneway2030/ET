@@ -3,25 +3,32 @@ package com.xnhb.et.ui.ac.detail;
 import com.dhh.rxlifecycle2.RxLifecycle;
 import com.google.gson.Gson;
 import com.lzy.okgo.model.Response;
+import com.oneway.tool.event.BusManager;
 import com.oneway.tool.parse.GsonUtil;
+import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.log.LogUtil;
 import com.oneway.ui.base.in.XPresent;
+import com.oneway.ui.toast.ToastManager;
 import com.oneway.websocket.RxWebSocket;
 import com.oneway.websocket.WebSocketInfo;
 import com.oneway.websocket.WebSocketSubscriber;
 import com.xnhb.et.bean.CoinSynopsisInfo;
 import com.xnhb.et.bean.TradeInfo;
+import com.xnhb.et.bean.TradePairInfo;
 import com.xnhb.et.bean.TradeUserInfo;
 import com.xnhb.et.bean.WSSendInfo;
 import com.xnhb.et.bean.base.ResultInfo;
+import com.xnhb.et.event.EventBusTags;
 import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.net.Api;
 import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.net.okgo.OkGoHelper;
+import com.xnhb.et.ui.fragment.home.DetailsFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,7 +73,7 @@ public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
                     public void onSuccess(Response<ResultInfo<CoinSynopsisInfo>> response) {
                         ResultInfo<CoinSynopsisInfo> body = response.body();
                         CoinSynopsisInfo result = body.getResult();
-                        getV().setBaseUi(result);
+//                        getV().setBaseUi(result);
                     }
                 });
     }
@@ -179,8 +186,6 @@ public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
 
     /**
      * 转换 交易数据
-     *
-     * @param obj
      */
     private void convertTradeData(String json) {
         TradeInfo tradeInfo = GsonUtil.getInstance().get(json, TradeInfo.class);
@@ -195,6 +200,7 @@ public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
 
     /**
      * 转换 用户信息数据
+     *
      * @param json
      */
     private void convertTradeUserData(String json) {
@@ -202,4 +208,46 @@ public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
         getV().updateTradeUserInfoUi(tradeUserInfo);
     }
 
+
+    public void reqCollection(TradePairInfo mTradePairInfo) {
+        String url;
+        url = mTradePairInfo.isCollection() ? Api.CANCEL_ADD_CUSTOM_SELECT : Api.ADD_CUSTOM_SELECT;
+        Map map = new HashMap();
+        map.put("token", UserInfoHelper.getInstance().getToken());
+        map.put("tradeId", mTradePairInfo.getTradeId());
+        OkGoHelper.postOkGo(url, getV().getAc())
+                .params(map)
+                .execute(new DialogCallback<ResultInfo<Void>>(getV().getAc()) {
+                    @Override
+                    public void onSuccess(Response<ResultInfo<Void>> response) {
+                        updateCuotomSelectInfo(mTradePairInfo);
+                        mTradePairInfo.setCollection(!mTradePairInfo.isCollection());
+                        //通知其他界面刷新
+                        BusManager.getBus().post(EventBusTags.TAG_CUSTOM_SELECT, "-1");
+                        //更新当前页面收藏状态
+                        getV().setCollection(mTradePairInfo.isCollection());
+                        //
+                        ToastManager.info(mTradePairInfo.isCollection()?"已添加到自选列表":"已取消收藏");
+                    }
+                });
+    }
+
+
+    public void updateCuotomSelectInfo(TradePairInfo updateInfo) {
+        if (updateInfo.isCollection()) {//取消自选
+            if (EmptyUtils.isNotEmpty(DetailsFragment.customListInfo)) {
+                for (TradePairInfo info : DetailsFragment.customListInfo) {
+                    if (info.getTradeId().equals(updateInfo.getTradeId())) {
+                        DetailsFragment.customListInfo.remove(info);
+                        return;
+                    }
+                }
+            }
+        } else {
+            if (EmptyUtils.isEmpty(DetailsFragment.customListInfo)) {
+                DetailsFragment.customListInfo = new ArrayList<>();
+            }
+            DetailsFragment.customListInfo.add(updateInfo);
+        }
+    }
 }

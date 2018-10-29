@@ -19,13 +19,14 @@ import com.oneway.ui.widget.list.ListLayout;
 import com.oneway.ui.widget.status.StatusType;
 import com.xnhb.et.R;
 import com.xnhb.et.bean.QuotationInfo;
-import com.xnhb.et.bean.QuotationListInfo;
+import com.xnhb.et.bean.TradePairInfo;
 import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.event.EventBusTags;
 import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.net.Api;
 import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.net.okgo.OkGoHelper;
+import com.xnhb.et.ui.ac.detail.CoinDetailsActivity;
 import com.xnhb.et.ui.ac.user.LoginAndRegisterActivity;
 import com.xnhb.et.ui.fragment.home.DetailsFragment;
 import com.xnhb.et.util.MoneyUtils;
@@ -44,7 +45,7 @@ import butterknife.BindView;
  * 描述: 详情的列表
  * 参考链接:
  */
-public class DetailsSubListFrament extends XFragment implements ListLayout.TaskListener, BaseQuickAdapter.OnItemClickListener, RecyclerViewCreator<QuotationListInfo>, ListLayout.PageStatusListener, BaseQuickAdapter.OnItemChildClickListener {
+public class DetailsSubListFrament extends XFragment implements ListLayout.TaskListener, BaseQuickAdapter.OnItemClickListener, RecyclerViewCreator<TradePairInfo>, ListLayout.PageStatusListener, BaseQuickAdapter.OnItemChildClickListener {
     public final static String BUNDLE_ARGUMENTS = "PageType";
     public final static String CUSTOM_STR = "自选";
     public int TAG_CUSTOM_SELECT_TYPE = 0;//ECNY
@@ -57,7 +58,7 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
     @BindView(R.id.listLayout)
     ListLayout mListLayout;
     private QuotationInfo mQuotationInfo;
-    private XRecyclerViewAdapter<QuotationListInfo> mAdapter;
+    private XRecyclerViewAdapter<TradePairInfo> mAdapter;
 
 
     public static DetailsSubListFrament newInstance(QuotationInfo tag) {
@@ -128,7 +129,7 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
     }
 
     @Override
-    public void bindData(int position, BaseViewHolder holder, QuotationListInfo data) {
+    public void bindData(int position, BaseViewHolder holder, TradePairInfo data) {
         if (CUSTOM_STR.equals(mQuotationInfo.getName())) {
             holder.getView(R.id.iv_custom_select).setVisibility(View.VISIBLE);
             holder.setImageResource(R.id.iv_custom_select, R.mipmap.stars_selected);
@@ -180,14 +181,14 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
         map.put("areaId", mQuotationInfo.getId());
         OkGoHelper.postOkGo(Api.QUOTATION_LIST_DATA, getAc())
                 .params(map)
-                .execute(new DialogCallback<ResultInfo<ArrayList<QuotationListInfo>>>() {
+                .execute(new DialogCallback<ResultInfo<ArrayList<TradePairInfo>>>() {
                     @Override
-                    public void onSuccess(Response<ResultInfo<ArrayList<QuotationListInfo>>> response) {
-                        ResultInfo<ArrayList<QuotationListInfo>> body = response.body();
+                    public void onSuccess(Response<ResultInfo<ArrayList<TradePairInfo>>> response) {
+                        ResultInfo<ArrayList<TradePairInfo>> body = response.body();
                         if (EmptyUtils.isEmpty(body)) {
                             return;
                         }
-                        ArrayList<QuotationListInfo> result = body.getResult();
+                        ArrayList<TradePairInfo> result = body.getResult();
                         formatData(result);
                         mListLayout.setData(result);
                     }
@@ -199,10 +200,10 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
         map.put("token", UserInfoHelper.getInstance().getToken());
         OkGoHelper.postOkGo(Api.CUSTOM_SELECT_LIST, getAc())
                 .params(map)
-                .execute(new DialogCallback<ResultInfo<ArrayList<QuotationListInfo>>>(getActivity()) {
+                .execute(new DialogCallback<ResultInfo<ArrayList<TradePairInfo>>>(getActivity()) {
                     @Override
-                    public void onSuccess(Response<ResultInfo<ArrayList<QuotationListInfo>>> response) {
-                        ResultInfo<ArrayList<QuotationListInfo>> body = response.body();
+                    public void onSuccess(Response<ResultInfo<ArrayList<TradePairInfo>>> response) {
+                        ResultInfo<ArrayList<TradePairInfo>> body = response.body();
                         if (EmptyUtils.isEmpty(body)) {
                             return;
                         }
@@ -231,12 +232,12 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
      * 自选刷新
      */
     @Subscriber(tag = EventBusTags.TAG_CUSTOM_SELECT)
-    public void remoteSwtichPage(String updateName) {
+    public void customRefresh(String updateName) {
         if (!updateName.equals(mQuotationInfo.getName())) {//刷新 非updateName 页面
             if (CUSTOM_STR.equals(mQuotationInfo.getName())) { //如果需要更新的是 自选界面
                 mListLayout.setData(DetailsFragment.customListInfo);
             } else {//刷新非自选界面
-                List<QuotationListInfo> data = mAdapter.getData();
+                List<TradePairInfo> data = mAdapter.getData();
                 formatData(data);
                 mListLayout.notifyDataSetChanged();
             }
@@ -248,15 +249,15 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
      *
      * @param data
      */
-    public void formatData(List<QuotationListInfo> data) {
+    public void formatData(List<TradePairInfo> data) {
         if (EmptyUtils.isEmpty(DetailsFragment.customListInfo)) {
-            for (QuotationListInfo datum : data) {
+            for (TradePairInfo datum : data) {
                 datum.setCollection(false);
             }
             return;
         }
-        for (QuotationListInfo info : data) {
-            for (QuotationListInfo customInfo : DetailsFragment.customListInfo) {
+        for (TradePairInfo info : data) {
+            for (TradePairInfo customInfo : DetailsFragment.customListInfo) {
                 if (info.getTradeId().equals(customInfo.getTradeId())) {
                     info.setCollection(true);
                     break;
@@ -275,8 +276,10 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        //TODO 跳转详情
-        ToastManager.info("跳转详情");
+        List<TradePairInfo> datas = adapter.getData();
+        TradePairInfo info = datas.get(position);
+        boolean collection = CUSTOM_STR.equals(mQuotationInfo.getName()) ? true : info.isCollection();
+        CoinDetailsActivity.launch(getAc(), info.getTradeId(), info.getTradeCurrencyName() + "/" + info.getCurrencyName(), UserInfoHelper.getInstance().isLogin(), collection);
     }
 
     @Override
@@ -285,15 +288,15 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
         //进来 如果登录了 就请求 收藏列表 如果没登录则不请求
         if (UserInfoHelper.getInstance().isLogin()) {//
             Object o = adapter.getData().get(position);
-            if (o instanceof QuotationListInfo) {
-                QuotationListInfo info = (QuotationListInfo) o;
+            if (o instanceof TradePairInfo) {
+                TradePairInfo info = (TradePairInfo) o;
                 reqCollection(info);
             }
         }
     }
 
 
-    public void reqCollection(QuotationListInfo updateInfo) {
+    public void reqCollection(TradePairInfo updateInfo) {
         String url;
         if (CUSTOM_STR.equals(mQuotationInfo.getName())) {
             url = Api.CANCEL_ADD_CUSTOM_SELECT;
@@ -315,11 +318,12 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
                                 mListLayout.setData(DetailsFragment.customListInfo);
                             }
                         } else {
-                            //如果不是自选界面则 改變當前點擊條目信息 並刷新
+                            //如果不是自选界面则 更新自选信息,and 改變當前點擊條目信息 並刷新
                             updateCuotomSelectInfo(updateInfo);
                             updateInfo.setCollection(!updateInfo.isCollection());
                             mListLayout.notifyDataSetChanged();
                         }
+                        ToastManager.info(updateInfo.isCollection() ? "已添加到自选列表" : "已取消收藏");
                         //通知其他界面刷新
                         BusManager.getBus().post(EventBusTags.TAG_CUSTOM_SELECT, mQuotationInfo.getName());
 //                        if (EmptyUtils.isEmpty(DetailsFragment.customListInfo) && !data.isCollection()) {
@@ -333,10 +337,10 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
                 });
     }
 
-    public void updateCuotomSelectInfo(QuotationListInfo updateInfo) {
+    public void updateCuotomSelectInfo(TradePairInfo updateInfo) {
         if (updateInfo.isCollection()) {//取消自选
             if (EmptyUtils.isNotEmpty(DetailsFragment.customListInfo)) {
-                for (QuotationListInfo info : DetailsFragment.customListInfo) {
+                for (TradePairInfo info : DetailsFragment.customListInfo) {
                     if (info.getTradeId().equals(updateInfo.getTradeId())) {
                         DetailsFragment.customListInfo.remove(info);
                         return;

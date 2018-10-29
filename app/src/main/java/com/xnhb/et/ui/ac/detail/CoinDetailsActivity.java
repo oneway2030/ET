@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,17 +17,23 @@ import com.oneway.tool.utils.shape.DevShapeUtils;
 import com.oneway.tool.utils.shape.shape.DevShape;
 import com.oneway.tool.utils.ui.UiUtils;
 import com.oneway.ui.base.ac.BaseTitleActivity;
+import com.oneway.ui.base.fragment.FragmentBaseAdapter;
 import com.oneway.ui.base.in.TitleContainer;
 import com.oneway.ui.base.title.RightViewType;
 import com.oneway.ui.base.title.TitleLayoutHelper;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.widget.btn.StateButton;
 import com.xnhb.et.R;
-import com.xnhb.et.bean.CoinSynopsisInfo;
 import com.xnhb.et.bean.TradeInfo;
+import com.xnhb.et.bean.TradePairInfo;
 import com.xnhb.et.bean.TradeUserInfo;
+import com.xnhb.et.ui.ac.detail.fragment.CoinBuyAndSellRecordFragment;
+import com.xnhb.et.ui.ac.detail.fragment.CoinTransactionRecordFragment;
 import com.xnhb.et.util.MoneyUtils;
 import com.xnhb.et.widget.dialog.BuyAndSellDailog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -61,10 +69,18 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
     StateButton btnSell;
     @BindView(R.id.ll_collection)
     LinearLayout llCollection;
+    @BindView(R.id.iv_collection)
+    ImageView ivCollection;
     private String tradeId;
     private String title;
+    String[] mTitles2 = {"挂单薄", "近期交易"};
+    private CoinBuyAndSellRecordFragment buyAndSellFragment;
+    private CoinTransactionRecordFragment transactionFragment;
+    private boolean isShowCollection; //是否显示都藏按钮
+    private boolean isCollection; //是否已收藏
+    private TradePairInfo mTradePairInfo;
 
-    public static void launch(Context context, String tradeId, String title) {
+    public static void launch(Context context, String tradeId, String title, boolean isShowCollection, boolean isCollection) {
         Intent intent = new Intent();
         intent.setClass(context, CoinDetailsActivity.class);
         if (!(context instanceof Activity)) {
@@ -72,6 +88,8 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
         }
         intent.putExtra("tradeId", tradeId);
         intent.putExtra("title", title);
+        intent.putExtra("isShowCollection", isShowCollection);
+        intent.putExtra("isCollection", isCollection);
         context.startActivity(intent);
     }
 
@@ -79,6 +97,8 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
     protected boolean getIntent(Intent intent) {
         tradeId = intent.getStringExtra("tradeId");
         title = intent.getStringExtra("title");
+        isShowCollection = intent.getBooleanExtra("isShowCollection", false);
+        isCollection = intent.getBooleanExtra("isCollection", false);
         return EmptyUtils.isEmpty(tradeId);
     }
 
@@ -110,9 +130,20 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        if (isShowCollection) {
+            ivCollection.setImageResource(isCollection ? R.mipmap.stars_selected : R.mipmap.stars_unselect);
+        }
         btnBuy.setOnClickListener(mPerfectClickListener);
         btnSell.setOnClickListener(mPerfectClickListener);
+        llCollection.setVisibility(isShowCollection ? View.VISIBLE : View.INVISIBLE);
+        if (isShowCollection) {
+            llCollection.setOnClickListener(mPerfectClickListener);
+        }
 //        getP().getCoinSynopsis(tradeId);
+        FragmentBaseAdapter mFragmentAdapter = new FragmentBaseAdapter(getSupportFragmentManager(), getFragmentPage2(), mTitles2);
+        vp2.setOffscreenPageLimit(mTitles2.length);
+        vp2.setAdapter(mFragmentAdapter);
+        xTablayout2.setupWithViewPager(vp2);
         getP().connectWebSocket();
     }
 
@@ -124,7 +155,11 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
                 BuyAndSellDailog mDailog = new BuyAndSellDailog(CoinDetailsActivity.this);
                 mDailog.showDialog();
             } else if (id == R.id.btn_sell) {
-
+                BuyAndSellDailog mDailog = new BuyAndSellDailog(CoinDetailsActivity.this);
+                mDailog.showDialog();
+            } else if (id == R.id.ll_collection) {//收藏
+                //TODO 收藏
+                getP().reqCollection(mTradePairInfo);
             }
         }
     };
@@ -135,42 +170,57 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
         return tradeId;
     }
 
-    @Override
-    public void setBaseUi(CoinSynopsisInfo coinSynopsisInfo) {
-        //TODO
-        String currencyName = coinSynopsisInfo.getCurrencyName();
-        String currencyTradeName = coinSynopsisInfo.getCurrencyTradeName();
-
-    }
 
     @Override
     public void updateTradeInfoUi(TradeInfo tradeInfo) {
         //TODO 更新Trade 信息
 
         //TODO 1更新coin信息
-        TradeInfo.TradeInfoBean realTradeInfo = tradeInfo.getTradeInfo();
-        String rise = realTradeInfo.getRise();
+        mTradePairInfo = tradeInfo.getTradeInfo();
+        mTradePairInfo.setCollection(isCollection);
+        String rise = mTradePairInfo.getRise();
         tvRange.setText(rise + "%");
         if (EmptyUtils.isNotEmpty(rise)) {
             DevShapeUtils
                     .shape(DevShape.RECTANGLE)
-                    .solid(realTradeInfo.getRise().startsWith("+") ? R.color.red_btn : R.color.green_dark)
+                    .solid(mTradePairInfo.getRise().startsWith("+") ? R.color.red_btn : R.color.green_dark)
                     .radius(3)
                     .into(tvRange);
         }
-        tvPrice.setTextColor(realTradeInfo.getRise().startsWith("+") ? UiUtils.getColor(R.color.red_btn) : UiUtils.getColor(R.color.green_dark));
-        tvPrice.setText(realTradeInfo.getCurrentPrice() + "");
-        tvPrice2.setText("≈" + realTradeInfo.getCurrentPrice() + " CNY");
-        tvMax.setText(MoneyUtils.scaleMoney4(realTradeInfo.getTradeMaxPrice()));
-        tvMin.setText(MoneyUtils.scaleMoney4(realTradeInfo.getTradeMinPrice()));
-        tvVolume.setText(MoneyUtils.scaleMoney4(realTradeInfo.getTradeMoney()));
+        tvPrice.setTextColor(mTradePairInfo.getRise().startsWith("+") ? UiUtils.getColor(R.color.red_btn) : UiUtils.getColor(R.color.green_dark));
+        tvPrice.setText(mTradePairInfo.getCurrentPrice() + "");
+        tvPrice2.setText("≈" + mTradePairInfo.getCurrentPrice() + " CNY");
+        tvMax.setText(MoneyUtils.scaleMoney4(mTradePairInfo.getTradeMaxPrice()));
+        tvMin.setText(MoneyUtils.scaleMoney4(mTradePairInfo.getTradeMinPrice()));
+        tvVolume.setText(MoneyUtils.scaleMoney4(mTradePairInfo.getTradeMoney()));
         //TODO 2更新挂单 和  近期交易
-
-
+        List<TradeInfo.TradeListBean> buyList = tradeInfo.getBuyList();
+        List<TradeInfo.TradeListBean> sellList = tradeInfo.getSellList();
+        List<TradeInfo.RecordListBean> recordList = tradeInfo.getRecordList();
+        buyAndSellFragment.update(buyList, sellList);
+        transactionFragment.update(recordList);
     }
 
     @Override
     public void updateTradeUserInfoUi(TradeUserInfo tradeUserInfo) {
         //TODO 更新 底部 点击买卖的用户信息 缓存在本地
+
+    }
+
+    /**
+     * 显示收藏状态
+     */
+    @Override
+    public void setCollection(boolean isCollection) {
+        ivCollection.setImageResource(isCollection ? R.mipmap.stars_selected : R.mipmap.stars_unselect);
+    }
+
+    public List<Fragment> getFragmentPage2() {
+        List<Fragment> fragments = new ArrayList<>();
+        buyAndSellFragment = CoinBuyAndSellRecordFragment.newInstance();
+        transactionFragment = CoinTransactionRecordFragment.newInstance();
+        fragments.add(buyAndSellFragment);
+        fragments.add(transactionFragment);
+        return fragments;
     }
 }
