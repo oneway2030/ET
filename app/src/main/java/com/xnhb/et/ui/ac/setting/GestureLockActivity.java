@@ -195,7 +195,7 @@ public class GestureLockActivity extends BaseTitleActivity<RegsiterPresenter> im
             String accountPwd = UserInfoHelper.getInstance().getAccountPwd();
             getP().login(accountName, accountPwd);
         } else {
-            ToastManager.info(errorCount == 2 ? "手势错误" : "手势错误3次,请使用密码登录");
+            ToastManager.info(errorCount == 2 ? "手势密码错误3次,请使用密码登录" : "手势密码错误");
             mGestureLockView.showErrorStatus(400);
             errorCount++;
             if (errorCount == 3) {

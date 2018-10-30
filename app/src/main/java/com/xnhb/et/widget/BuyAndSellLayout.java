@@ -120,8 +120,8 @@ public class BuyAndSellLayout extends FrameLayout {
             } else if (id == R.id.tv_recharge) {//充值
                 if (isBuy) {
                     //切换到c2c 并关闭所有
-                    BusManager.getBus().post(EventBusTags.TAG_HOME_SWTICH_PAGE, MainActivity.FRAGMENT_C2C);
                     ActivityManager.getInstance().finishAll(MainActivity2.class);
+                    BusManager.getBus().post(EventBusTags.TAG_HOME_SWTICH_PAGE, MainActivity.FRAGMENT_C2C);
                 } else {
                     RechargeActivity.launch(mContext, mTradePairInfo.getCurrencyName(), mTradePairInfo.getTradeId());
                 }

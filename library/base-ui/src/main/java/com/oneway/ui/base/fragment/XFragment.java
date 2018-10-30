@@ -27,7 +27,7 @@ public abstract class XFragment<P extends IPresenter> extends XMVPFragment<P> {
     protected Activity mActivity;
     protected View mRootView;
     protected ImmersionBar mImmersionBar;
-    private Unbinder unbinder;
+    protected Unbinder unbinder;
 
     @Override
     public void onAttach(Context context) {
@@ -63,6 +63,7 @@ public abstract class XFragment<P extends IPresenter> extends XMVPFragment<P> {
 
     @Override
     public void onSupportVisible() {
+        String name = getClass().getName();
         super.onSupportVisible();
         //如果要在Fragment单独使用沉浸式，请在onSupportVisible实现沉浸式
         if (isBarEnabled()) {

@@ -25,6 +25,7 @@ import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.util.MoneyUtils;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * 作者 oneway on 2018/9/25
@@ -86,6 +87,12 @@ public class C2CSubFragment extends XFragment implements TextWatcher {
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
+
+    }
+
+    @Override
+    protected void initView() {
+        super.initView();
         isInit = true;
         title = getArguments().getString(ARG_TAG);
         et1.setText("0");
@@ -101,12 +108,6 @@ public class C2CSubFragment extends XFragment implements TextWatcher {
         }
         et2.addTextChangedListener(this);
         submit.setOnClickListener(mPerfectClickListener);
-    }
-
-    @Override
-    protected void initView() {
-        super.initView();
-
     }
 
 

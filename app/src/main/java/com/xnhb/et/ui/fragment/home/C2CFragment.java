@@ -1,14 +1,10 @@
 package com.xnhb.et.ui.fragment.home;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,7 +18,6 @@ import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.helper.PageStateHelper;
 import com.oneway.ui.widget.dialog.TipLabelBottomSelectDialog;
 import com.oneway.ui.widget.status.OnRetryListener;
-import com.oneway.ui.widget.status.StatusLayoutManager;
 import com.oneway.ui.widget.status.StatusType;
 import com.oneway.ui.widget.vp.CustomViewPager;
 import com.xnhb.et.MainFragment;
@@ -44,8 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * 作者 oneway on 2018/9/10
@@ -72,6 +65,8 @@ public class C2CFragment extends XFragment<C2CPresenter> implements TabLayout.On
     @BindView(R.id.tv_freeze)
     TextView tvFreeze;
     private PageStateHelper mPageStateHelper;
+    boolean isInitData = false;
+
 
     public static C2CFragment newInstance() {
         Bundle args = new Bundle();
@@ -113,14 +108,20 @@ public class C2CFragment extends XFragment<C2CPresenter> implements TabLayout.On
         return R.layout.fragment_mian_c2c;
     }
 
-    boolean isInit = false;
 
     @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
-        isInit = true;
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        if (!isInitData) {
+            isInitData = true;
+            onRetry(0);
+        }
+    }
+
+
+    @Override
+    protected void initView() {
         mPageStateHelper = new PageStateHelper(getActivity(), contentView, R.layout.unlogin_layout, this);
-        mPageStateHelper.showLoadingView();
         initFragments();
         tablayout.addOnTabSelectedListener(this);
         tablayout.setupWithViewPager(vp);
@@ -129,13 +130,7 @@ public class C2CFragment extends XFragment<C2CPresenter> implements TabLayout.On
         vp.setAdapter(mFragmentAdapter);
         tvBill.setOnClickListener(mPerfectClickListener);
         tvSelectCoin.setOnClickListener(mPerfectClickListener);
-        onRetry(0);
-
-    }
-
-    @Override
-    protected void initView() {
-
+        mPageStateHelper.showContentView();
     }
 
 
@@ -234,7 +229,8 @@ public class C2CFragment extends XFragment<C2CPresenter> implements TabLayout.On
      */
     @Subscriber(tag = EventBusTags.TAG_LOGIN_SUCDESS)
     public void remoteSwtichPage(int position) {
-        if (isInit)
+        //TODO 如果已初始化过,又退出了,在进来回刷新数据
+        if (isInitData)
             getP().getData();
     }
 
