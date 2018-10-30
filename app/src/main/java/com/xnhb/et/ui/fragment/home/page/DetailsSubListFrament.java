@@ -141,9 +141,10 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
                 holder.addOnClickListener(R.id.iv_custom_select);
             }
         }
+
         holder.setText(R.id.tv_coin_name1, data.getTradeCurrencyName())
                 .setText(R.id.tv_coin_name2, "/" + data.getCurrencyName())
-                .setText(R.id.tv_total, "24h量  " + data.getTradeNums())
+                .setText(R.id.tv_total, "24h量  " +     MoneyUtils.getPrettyNumber(MoneyUtils.check0( data.getTradeNums())))
                 .setText(R.id.tv_price1, MoneyUtils.getPrettyNumber(data.getCurrentPrice()))
                 .setText(R.id.tv_price2, "≈" + MoneyUtils.getPrettyNumber(data.getShowEncyMoeny()) + "  ENCY ");
         StateButton btnRiseAndFallRange = holder.getView(R.id.btn_rise_and_fall_range);
