@@ -1,11 +1,14 @@
 package com.xnhb.et.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * 作者 oneway on 2018/10/11
  * 描述:
  * 参考链接:
  */
-public class OrderInfo {
+public class OrderInfo implements Parcelable {
 
     /**
      * id : 109
@@ -46,22 +49,53 @@ public class OrderInfo {
     private String phone;
     private String currencyTradeId;
     private String tradeType;
-    private String tradeTypeStr;
+    private String tradeTypeStr; // 委托 买卖状态
+    private String typeStr;//成交 买卖状态
     private String priority;
-    private double quantity;
-    private double price;
-    private double tradeQuantity;
+    private double quantity; //委托 挂单量
+    private double tradeQuantity;//成交 挂单量
+    private double price; //委托 价格
+    private double tradePrice; //成交 价格
     private String status;
     private String statusStr;
     private String areaId;
     private String areaName;
     private String currencyId;
-    private String currencyName;
     private String tradeCurrencyId;
-    private String tradeCurrencyName;
     private String nums;
     private String robot;
     private String robotStr;
+    private String currencyName;
+    private String tradeCurrencyName; //委托 交易名字
+    private String trandeCurrencyName;//成交 交易名字
+
+    public double getTradePrice() {
+        return tradePrice;
+    }
+
+    public void setTradePrice(double tradePrice) {
+        this.tradePrice = tradePrice;
+    }
+
+    public String getTypeStr() {
+        return typeStr;
+    }
+
+    public void setTypeStr(String typeStr) {
+        this.typeStr = typeStr;
+    }
+
+    public static Creator<OrderInfo> getCREATOR() {
+        return CREATOR;
+    }
+
+    public String getTrandeCurrencyName() {
+        return trandeCurrencyName;
+    }
+
+    public void setTrandeCurrencyName(String trandeCurrencyName) {
+        this.trandeCurrencyName = trandeCurrencyName;
+    }
 
     public String getId() {
         return id;
@@ -270,4 +304,89 @@ public class OrderInfo {
     public void setRobotStr(String robotStr) {
         this.robotStr = robotStr;
     }
+
+    public OrderInfo() {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.createTime);
+        dest.writeString(this.updateTime);
+        dest.writeString(this.remark);
+        dest.writeString(this.version);
+        dest.writeString(this.userId);
+        dest.writeString(this.realName);
+        dest.writeString(this.phone);
+        dest.writeString(this.currencyTradeId);
+        dest.writeString(this.tradeType);
+        dest.writeString(this.tradeTypeStr);
+        dest.writeString(this.typeStr);
+        dest.writeString(this.priority);
+        dest.writeDouble(this.quantity);
+        dest.writeDouble(this.tradeQuantity);
+        dest.writeDouble(this.price);
+        dest.writeDouble(this.tradePrice);
+        dest.writeString(this.status);
+        dest.writeString(this.statusStr);
+        dest.writeString(this.areaId);
+        dest.writeString(this.areaName);
+        dest.writeString(this.currencyId);
+        dest.writeString(this.tradeCurrencyId);
+        dest.writeString(this.nums);
+        dest.writeString(this.robot);
+        dest.writeString(this.robotStr);
+        dest.writeString(this.currencyName);
+        dest.writeString(this.tradeCurrencyName);
+        dest.writeString(this.trandeCurrencyName);
+    }
+
+    protected OrderInfo(Parcel in) {
+        this.id = in.readString();
+        this.createTime = in.readString();
+        this.updateTime = in.readString();
+        this.remark = in.readString();
+        this.version = in.readString();
+        this.userId = in.readString();
+        this.realName = in.readString();
+        this.phone = in.readString();
+        this.currencyTradeId = in.readString();
+        this.tradeType = in.readString();
+        this.tradeTypeStr = in.readString();
+        this.typeStr = in.readString();
+        this.priority = in.readString();
+        this.quantity = in.readDouble();
+        this.tradeQuantity = in.readDouble();
+        this.price = in.readDouble();
+        this.tradePrice = in.readDouble();
+        this.status = in.readString();
+        this.statusStr = in.readString();
+        this.areaId = in.readString();
+        this.areaName = in.readString();
+        this.currencyId = in.readString();
+        this.tradeCurrencyId = in.readString();
+        this.nums = in.readString();
+        this.robot = in.readString();
+        this.robotStr = in.readString();
+        this.currencyName = in.readString();
+        this.tradeCurrencyName = in.readString();
+        this.trandeCurrencyName = in.readString();
+    }
+
+    public static final Creator<OrderInfo> CREATOR = new Creator<OrderInfo>() {
+        @Override
+        public OrderInfo createFromParcel(Parcel source) {
+            return new OrderInfo(source);
+        }
+
+        @Override
+        public OrderInfo[] newArray(int size) {
+            return new OrderInfo[size];
+        }
+    };
 }

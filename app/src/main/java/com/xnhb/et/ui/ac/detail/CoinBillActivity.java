@@ -11,6 +11,9 @@ import android.support.v4.view.ViewPager;
 import com.oneway.ui.base.ac.BaseTitleActivity;
 import com.oneway.ui.base.fragment.FragmentBaseAdapter;
 import com.xnhb.et.R;
+import com.xnhb.et.bean.OrderInfo;
+import com.xnhb.et.bean.TradeUserInfo;
+import com.xnhb.et.ui.ac.detail.fragment.OrderSubListFrament2;
 import com.xnhb.et.ui.fragment.home.page.OrderSubListFrament;
 
 import java.util.ArrayList;
@@ -29,10 +32,15 @@ public class CoinBillActivity extends BaseTitleActivity {
     @BindView(R.id.vp)
     ViewPager vp;
     String[] titles = {"委托记录", "成交记录"};
+    ArrayList<OrderInfo> entrustRecord;
+    ArrayList<OrderInfo> tradeRecord;
+    private String title;
+    private String currentName;
+    private String tradeName;
 
     @Override
     protected String getTitleText() {
-        return "XX/ECNY";
+        return title;
     }
 
     @Override
@@ -40,12 +48,27 @@ public class CoinBillActivity extends BaseTitleActivity {
         return R.layout.activity_coin_bill;
     }
 
-    public static void launch(Context context) {
+    @Override
+    protected boolean getIntent(Intent intent) {
+        title = intent.getStringExtra("title");
+        currentName = intent.getStringExtra("currentName");
+        tradeName = intent.getStringExtra("tradeName");
+        tradeRecord = intent.getParcelableArrayListExtra("tradeRecord");
+        entrustRecord = intent.getParcelableArrayListExtra("entrustRecord");
+        return false;
+    }
+
+    public static void launch(Context context, String title, String currentName, String tradeName, ArrayList<OrderInfo> entrustRecord, ArrayList<OrderInfo> tradeRecord) {
         Intent intent = new Intent();
         intent.setClass(context, CoinBillActivity.class);
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
+        intent.putExtra("title", title);
+        intent.putExtra("currentName", currentName);
+        intent.putExtra("tradeName", tradeName);
+        intent.putParcelableArrayListExtra("tradeRecord", tradeRecord);
+        intent.putParcelableArrayListExtra("entrustRecord", entrustRecord);
         context.startActivity(intent);
     }
 
@@ -58,10 +81,10 @@ public class CoinBillActivity extends BaseTitleActivity {
 
     public List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
-            OrderSubListFrament frament = OrderSubListFrament.newInstance(i);
-            fragments.add(frament);
-        }
+        OrderSubListFrament2 entrustRecordFrament = OrderSubListFrament2.newInstance(entrustRecord, 0,currentName,tradeName);
+        OrderSubListFrament2 tradeRecordFrament = OrderSubListFrament2.newInstance(tradeRecord, 1,currentName,tradeName);
+        fragments.add(entrustRecordFrament);
+        fragments.add(tradeRecordFrament);
         return fragments;
     }
 

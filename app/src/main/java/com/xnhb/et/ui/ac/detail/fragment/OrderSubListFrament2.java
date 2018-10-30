@@ -1,12 +1,15 @@
-package com.xnhb.et.ui.fragment.home.page;
+package com.xnhb.et.ui.ac.detail.fragment;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.lzy.okgo.model.Response;
+import com.oneway.tool.event.BusManager;
+import com.oneway.tool.utils.common.TimeUtils;
 import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.convert.StringUtil;
 import com.oneway.tool.utils.ui.UiUtils;
@@ -20,7 +23,6 @@ import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.list.ListLayout;
 import com.oneway.ui.widget.status.StatusType;
 import com.xnhb.et.R;
-import com.xnhb.et.bean.HomeHDataInfo;
 import com.xnhb.et.bean.OrderInfo;
 import com.xnhb.et.bean.base.LimitPage;
 import com.xnhb.et.bean.base.ResultInfo;
@@ -36,6 +38,7 @@ import org.simple.eventbus.Subscriber;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -45,19 +48,26 @@ import butterknife.BindView;
  * 描述: 订单里的列表
  * 参考链接:
  */
-public class OrderSubListFrament extends BaseFragment implements ListLayout.TaskListener, BaseQuickAdapter.OnItemClickListener, RecyclerViewCreator<OrderInfo>, ListLayout.PageStatusListener {
+public class OrderSubListFrament2 extends BaseFragment implements ListLayout.TaskListener, BaseQuickAdapter.OnItemClickListener, RecyclerViewCreator<OrderInfo>, ListLayout.PageStatusListener {
     public final static String BUNDLE_ARGUMENTS_PAGE_TYPE = "BUNDLE_ARGUMENTS";
+    public final static String BUNDLE_ARGUMENTS_DATA = "BUNDLE_ARGUMENTS_DATA";
     public final static int PAGE_TYPE_EXECUTION_ = 0;//委托记录
     public final static int PAGE_TYPE_complete_ = 1;//成交记录
-    public final static int PAGE_TYPE_Cancel_ = 2;//已取消
     private int pageType = 0;
+    private String currentName;
+    private String tradeName;
     @BindView(R.id.listLayout)
     ListLayout mListLayout;
+    private ArrayList<OrderInfo> recordList;
+    private XRecyclerViewAdapter<OrderInfo> mAdapter;
 
-    public static OrderSubListFrament newInstance(int pageType) {
-        OrderSubListFrament frament = new OrderSubListFrament();
+    public static OrderSubListFrament2 newInstance(ArrayList<OrderInfo> recordList, int pageType, String currentName, String tradeName) {
+        OrderSubListFrament2 frament = new OrderSubListFrament2();
         Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(BUNDLE_ARGUMENTS_DATA, recordList);
         bundle.putInt(BUNDLE_ARGUMENTS_PAGE_TYPE, pageType);
+        bundle.putString("currentName", currentName);
+        bundle.putString("tradeName", tradeName);
         frament.setArguments(bundle);
         return frament;
     }
@@ -71,14 +81,19 @@ public class OrderSubListFrament extends BaseFragment implements ListLayout.Task
     @Override
     protected void initView() {
         super.initView();
+        recordList = getArguments().getParcelableArrayList(BUNDLE_ARGUMENTS_DATA);
         pageType = getArguments().getInt(BUNDLE_ARGUMENTS_PAGE_TYPE, 0);
+        currentName = getArguments().getString("currentName");
+        tradeName = getArguments().getString("tradeName");
+        mListLayout.setEnablePullRefresh(false);
         mListLayout.setBackgroundColor(UiUtils.getColor(R.color.black));
         mListLayout.setTaskListener(this);
         mListLayout.setPageStatusListener(this);
         mListLayout.setOtherErrorView(R.layout.unlogin_layout);
         mListLayout.addItemDecoration(new LinearItemDecoration(10, R.color.black));
         mListLayout.setEmptyText("暂无订单...");
-        mListLayout.setAdaper(new XRecyclerViewAdapter<OrderInfo>(this));
+        mAdapter = new XRecyclerViewAdapter<>(this);
+        mListLayout.setAdaper(mAdapter);
         mListLayout.addOnItemClickListener(this);
         mListLayout.showLoadingView();
         mListLayout.pullRefresh();
@@ -86,11 +101,7 @@ public class OrderSubListFrament extends BaseFragment implements ListLayout.Task
 
     @Override
     public void task() {
-        if (UserInfoHelper.getInstance().isLogin()) {
-            getOrderInfo();
-        } else {
-            mListLayout.showOtherErrorView();
-        }
+        mListLayout.setData(recordList);
     }
 
 
@@ -109,52 +120,21 @@ public class OrderSubListFrament extends BaseFragment implements ListLayout.Task
 
     @Override
     public void bindData(int position, BaseViewHolder holder, OrderInfo data) {
+        String time = "";
+        try {
+            time = TimeUtils.millis2String(Long.valueOf(data.getCreateTime()));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
         holder.setTextColor(R.id.tv_transaction_type, "0".equals(data.getTradeType()) ? UiUtils.getColor(R.color.green_dark) : UiUtils.getColor(R.color.logout_color));
         holder.setText(R.id.tv_transaction_type, pageType == 0 ? data.getTradeTypeStr() : data.getTypeStr())
-                .setText(R.id.tv_name, (pageType == 0 ? data.getTradeCurrencyName() : data.getTrandeCurrencyName()) + "/" + data.getCurrencyName())
-                .setText(R.id.tv_time, data.getCreateTime())
-                .setText(R.id.tv_price, StringUtil.htmlFromat(R.string.item_order_text, MoneyUtils.scaleMoney4((pageType == 0 ? data.getPrice() : data.getTradePrice()) + ""), data.getCurrencyName()))
-                .setText(R.id.tv_count, StringUtil.htmlFromat(R.string.item_order_text, MoneyUtils.scaleMoney4((pageType == 0 ? data.getQuantity() : data.getTradeQuantity()) + ""), pageType == 0 ? data.getTradeCurrencyName() : data.getTrandeCurrencyName()))
-                .setText(R.id.tv_transaction_count, StringUtil.htmlFromat(R.string.item_order_text, MoneyUtils.scaleMoney4(data.getTradeQuantity() + ""), (pageType == 0 ? "" : data.getTrandeCurrencyName())));
+                .setText(R.id.tv_name, currentName + "/" + tradeName)
+                .setText(R.id.tv_time, time)
+                .setText(R.id.tv_price, StringUtil.htmlFromat(R.string.item_order_text, MoneyUtils.scaleMoney4((pageType == 0 ? data.getPrice() : data.getTradePrice()) + ""), tradeName))
+                .setText(R.id.tv_count, StringUtil.htmlFromat(R.string.item_order_text, MoneyUtils.scaleMoney4((pageType == 0 ? data.getQuantity() : data.getTradeQuantity()) + ""), currentName))
+                .setText(R.id.tv_transaction_count, StringUtil.htmlFromat(R.string.item_order_text, MoneyUtils.scaleMoney4(data.getTradeQuantity() + ""), pageType == 0 ? "" : currentName));
     }
 
-    /**
-     */
-    public void getOrderInfo() {
-        Map map = new HashMap();
-        map.put("token", UserInfoHelper.getInstance().getToken());
-        map.put("pageNum", mListLayout.getCurrentPageNumber() + "");
-        map.put("numPerPage", "20");
-        map.put("type", pageType + "");
-        OkGoHelper.postOkGo(Api.ORDER_INFO_URL, this)
-                .params(map)
-                .execute(new DialogCallback<ResultInfo<LimitPage<OrderInfo>>>() {
-                    @Override
-                    public void onSuccess(Response<ResultInfo<LimitPage<OrderInfo>>> response) {
-                        ResultInfo<LimitPage<OrderInfo>> body = response.body();
-                        if (EmptyUtils.isEmpty(body)) {
-                            return;
-                        }
-                        LimitPage<OrderInfo> result = body.getResult();
-                        if (EmptyUtils.isEmpty(result)) {
-                            return;
-                        }
-                        mListLayout.setTotalPageNumber(result.getPages());
-                        mListLayout.setData(result.getList());
-                    }
-
-                    @Override
-                    public void onError(Response<ResultInfo<LimitPage<OrderInfo>>> response) {
-                        super.onError(response);
-                        mListLayout.showErrorView();
-                    }
-
-                    @Override
-                    protected void handleLoginExpires() {
-                        mListLayout.showOtherErrorView();
-                    }
-                });
-    }
 
     @Override
     public void retry(int type) {
@@ -200,8 +180,19 @@ public class OrderSubListFrament extends BaseFragment implements ListLayout.Task
                     @Override
                     public void onSuccess(Response<ResultInfo<Void>> response) {
                         ToastManager.info("取消挂单成功");
-                        mListLayout.showLoadingView();
-                        mListLayout.pullRefresh();
+                        List<OrderInfo> data = mAdapter.getData();
+                        for (int i = 0; i < data.size(); i++) {
+                            if (data.get(i).getId().equals(id)) {
+                                BusManager.getBus().post(EventBusTags.TAG_CANCEL_ENTRUST, "");
+                                mAdapter.remove(i);
+                                if (EmptyUtils.isEmpty(mAdapter.getData())) {
+                                    mListLayout.showEmptyView();
+                                }
+                                return;
+                            }
+                        }
+//                        mListLayout.showLoadingView();
+//                        mListLayout.pullRefresh();
                     }
 
                     @Override

@@ -62,7 +62,7 @@ public class RechargeAndWithdrawalDialog extends BaseDailog {
             int id = v.getId();
             if (id == R.id.tv_recharge) {//充值
                 if (info.getRechargeSwitch() == 1) {
-                    RechargeActivity.launch(mContext, info);
+                    RechargeActivity.launch(mContext, info.getCurrencyName(), info.getCurrencyId());
                     dismiss(false);
                 } else {
                     ToastManager.info("暂未开放");

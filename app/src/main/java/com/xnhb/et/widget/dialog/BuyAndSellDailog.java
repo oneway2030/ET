@@ -7,12 +7,17 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lzy.okgo.model.Response;
 import com.oneway.tool.utils.ui.UiUtils;
-import com.oneway.ui.base.fragment.FragmentBaseAdapter;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.dialog.base.BaseDailog;
 import com.xnhb.et.R;
+import com.xnhb.et.bean.TradePairInfo;
 import com.xnhb.et.bean.TradeUserInfo;
+import com.xnhb.et.bean.base.ResultInfo;
+import com.xnhb.et.interfaces.CallBack;
+import com.xnhb.et.net.ApiService;
+import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.widget.BuyAndSellLayout;
 
 import butterknife.BindView;
@@ -23,7 +28,6 @@ import butterknife.BindView;
  * 参考链接:
  */
 public class BuyAndSellDailog extends BaseDailog {
-
 
     @BindView(R.id.ll_buy)
     LinearLayout llBuy;
@@ -44,11 +48,13 @@ public class BuyAndSellDailog extends BaseDailog {
     @BindView(R.id.sell_layout)
     BuyAndSellLayout sellLayout;
     private TradeUserInfo mTradeUserInfo;
+    private TradePairInfo mTradePairInfo;
     private boolean isBuy;
 
-    public BuyAndSellDailog(@NonNull Context context, TradeUserInfo mTradeUserInfo, boolean isBuy) {
+    public BuyAndSellDailog(@NonNull Context context, TradeUserInfo mTradeUserInfo, TradePairInfo mTradePairInfo, boolean isBuy) {
         super(context);
         this.mTradeUserInfo = mTradeUserInfo;
+        this.mTradePairInfo = mTradePairInfo;
         this.isBuy = isBuy;
     }
 
@@ -59,6 +65,20 @@ public class BuyAndSellDailog extends BaseDailog {
         llBuy.setOnClickListener(mPerfectClickListener);
         llSell.setOnClickListener(mPerfectClickListener);
         tvCancel.setOnClickListener(mPerfectClickListener);
+        buyLayout.setBaseData(true, mTradeUserInfo, mTradePairInfo);
+        sellLayout.setBaseData(false, mTradeUserInfo, mTradePairInfo);
+        buyLayout.setBuyOrSellListener(new BuyAndSellLayout.OnBuyOrSellListener() {
+            @Override
+            public void buyOrSell(String count, String price) {
+                goToBuyOrSell(true, count, price);
+            }
+        });
+        sellLayout.setBuyOrSellListener(new BuyAndSellLayout.OnBuyOrSellListener() {
+            @Override
+            public void buyOrSell(String count, String price) {
+                goToBuyOrSell(false, count, price);
+            }
+        });
         setupBtnUi(isBuy);
         buyLayout.setupUi(true);
         sellLayout.setupUi(false);
@@ -90,6 +110,25 @@ public class BuyAndSellDailog extends BaseDailog {
     @Override
     public int setLayoutId() {
         return R.layout.dailog_buy_and_sell;
+    }
+
+
+    public void goToBuyOrSell(boolean isBuy, String quantity, String price) {
+        ApiService.buyOrSell(this, isBuy, quantity, price, mTradePairInfo.getTradeId(), new DialogCallback<ResultInfo<Void>>() {
+            @Override
+            public void onSuccess(Response<ResultInfo<Void>> response) {
+                dismiss(false);
+                if (listener != null) {
+                    listener.success("");
+                }
+            }
+        });
+    }
+
+    private CallBack listener;
+
+    public void setOnTradeSuccessListener(CallBack l) {
+        this.listener = l;
     }
 
 }

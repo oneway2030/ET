@@ -45,7 +45,10 @@ import okhttp3.WebSocket;
 public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
     private WSSendInfo mSendInfo = new WSSendInfo("trade", "1");
     private WebSocket mWebSocket;
-    private boolean isCallBack = false;
+    /**
+     * 0 不做处理 1.获取完数据后 打开dialog 2.获取完数据后 打开记录列表
+     */
+    private int requstCode = 0;
 
     @Override
     public void detachV() {
@@ -127,7 +130,7 @@ public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
             senTradeInfo();
             //如果登录就请求用户信息
             if (UserInfoHelper.getInstance().isLogin()) {
-                senUserInfo(false);
+                senUserInfo(0);
             }
         }
     }
@@ -149,8 +152,8 @@ public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
     /**
      * 查询用户信息
      */
-    public void senUserInfo(boolean isCallBack) {
-        this.isCallBack = isCallBack;
+    public void senUserInfo(int requstCode) {
+        this.requstCode = requstCode;
         mSendInfo.reset();
         mSendInfo.setMethod("userinfo");
         mSendInfo.setTradeId(getV().getTradeId());
@@ -208,7 +211,7 @@ public class CoinDetailsPresenter extends XPresent<ICoinDetailsView> {
      */
     private void convertTradeUserData(String json) {
         TradeUserInfo tradeUserInfo = GsonUtil.getInstance().get(json, TradeUserInfo.class);
-        getV().updateTradeUserInfoUi(tradeUserInfo, isCallBack);
+        getV().updateTradeUserInfoUi(tradeUserInfo, requstCode);
     }
 
 

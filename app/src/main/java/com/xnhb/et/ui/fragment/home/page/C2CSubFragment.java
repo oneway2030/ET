@@ -19,6 +19,7 @@ import com.oneway.ui.widget.btn.StateButton;
 import com.xnhb.et.R;
 import com.xnhb.et.bean.C2CCoinInfo;
 import com.xnhb.et.bean.C2CListInfo;
+import com.xnhb.et.bean.base.ResultInfo;
 import com.xnhb.et.net.ApiService;
 import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.util.MoneyUtils;
@@ -210,9 +211,9 @@ public class C2CSubFragment extends XFragment implements TextWatcher {
 //            if (checkCount(stringToDouble(totalCount))) {
 //                return;
 //            }
-            ApiService.buyOrSell(this, "我要买".equals(title), totalCount, unitPrice, tradeModus, mCoinInfo.getCurrencyId(), new DialogCallback<String>() {
+            ApiService.buyAndSell(this, "我要买".equals(title), totalCount, unitPrice, tradeModus, mCoinInfo.getCurrencyId(), new DialogCallback<ResultInfo<Void>>() {
                 @Override
-                public void onSuccess(Response<String> response) {
+                public void onSuccess(Response<ResultInfo<Void>> response) {
                     //交易回掉
                     LogUtil.i("交易成功");
                 }

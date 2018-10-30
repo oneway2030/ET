@@ -41,6 +41,8 @@ import butterknife.BindView;
  */
 public class RechargeActivity extends BaseTitleActivity {
     private static String ARG_COIN_INFO = "coinInfo";
+    private static String ARG_COIN_NAME = "coin_name";
+    private static String ARG_COIN_ID = "coin_id";
     @BindView(R.id.iv_qr)
     ImageView ivQr;
     @BindView(R.id.tv_sub_title)
@@ -49,17 +51,23 @@ public class RechargeActivity extends BaseTitleActivity {
     TextView tvAddress;
     @BindView(R.id.btn_copy)
     StateButton btnCopy;
-    private CoinInfo mCoinInfo;
+    //    private CoinInfo mCoinInfo;
+    private String name;
+    private String id;
+
+
     private Bitmap mBitmap;
 
 
-    public static void launch(Context context, CoinInfo info) {
+    public static void launch(Context context, String name, String id) {
         Intent intent = new Intent();
         intent.setClass(context, RechargeActivity.class);
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
-        intent.putExtra(ARG_COIN_INFO, info);
+//        intent.putExtra(ARG_COIN_INFO, info);
+        intent.putExtra(ARG_COIN_NAME, name);
+        intent.putExtra(ARG_COIN_ID, id);
         context.startActivity(intent);
     }
 
@@ -70,13 +78,15 @@ public class RechargeActivity extends BaseTitleActivity {
 
     @Override
     protected boolean getIntent(Intent intent) {
-        mCoinInfo = getIntent().getParcelableExtra(ARG_COIN_INFO);
-        return mCoinInfo == null;
+//        mCoinInfo = getIntent().getParcelableExtra(ARG_COIN_INFO);
+        name = getIntent().getStringExtra(ARG_COIN_NAME);
+        id = getIntent().getStringExtra(ARG_COIN_ID);
+        return EmptyUtils.isEmpty(name) || EmptyUtils.isEmpty(id);
     }
 
     @Override
     protected String getTitleText() {
-        return "充值" + mCoinInfo.getCurrencyName();
+        return "充值" + name;
     }
 
     @Override
@@ -93,7 +103,7 @@ public class RechargeActivity extends BaseTitleActivity {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        tvSubTitle.setText(mCoinInfo.getCurrencyName() + " 充值地址");
+        tvSubTitle.setText(name + " 充值地址");
         btnCopy.setOnClickListener(mPerfectClickListener);
         reqRechargeInfo();
     }
@@ -113,7 +123,7 @@ public class RechargeActivity extends BaseTitleActivity {
     public void reqRechargeInfo() {
         Map map = new HashMap();
         map.put("token", UserInfoHelper.getInstance().getToken());
-        map.put("currencyId", mCoinInfo.getCurrencyId());
+        map.put("currencyId", id);
         OkGoHelper.postOkGo(Api.RECHARGE_URL, this)
                 .params(map)
                 .execute(new DialogCallback<ResultInfo<String>>(this, true, false) {

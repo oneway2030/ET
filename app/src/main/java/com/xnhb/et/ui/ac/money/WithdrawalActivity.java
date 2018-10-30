@@ -58,7 +58,7 @@ public class WithdrawalActivity extends BaseTitleActivity<WithdrawalPresenter> i
     TextView btnTotal;
     @BindView(R.id.et_address)
     EditText etAddress;
-    @BindView(R.id.et_count)
+    @BindView(R.id.et_price)
     EditText etCount;
     @BindView(R.id.et_pwd)
     EditText etPwd;

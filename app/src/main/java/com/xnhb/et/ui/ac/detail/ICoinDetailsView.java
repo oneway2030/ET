@@ -15,7 +15,7 @@ public interface ICoinDetailsView extends IView<CoinDetailsPresenter> {
 
     void updateTradeInfoUi(TradeInfo tradeInfo);
 
-    void updateTradeUserInfoUi(TradeUserInfo tradeUserInfo, boolean isCallBack);
+    void updateTradeUserInfoUi(TradeUserInfo tradeUserInfo, int requstCode);
 
     /**
      * 设置收藏

@@ -148,7 +148,7 @@
             android:paddingLeft="16dp">
 
             <EditText
-                android:id="@+id/et_count"
+                android:id="@+id/et_price"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

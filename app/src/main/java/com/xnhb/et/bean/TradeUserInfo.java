@@ -1,5 +1,6 @@
 package com.xnhb.et.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,9 +13,9 @@ public class TradeUserInfo {
     /**
      * tradeWallet : {"createTime":1536381449000,"currencyId":5,"freeze":303,"id":74,"updateTime":1539242325000,"userId":13,"using":49697,"version":3}
      * wallet : {"createTime":1536381449000,"currencyId":1,"freeze":0,"id":73,"updateTime":1536381449000,"userId":13,"using":0,"version":0}
-     * tradeRecordList : []
      * phone : 15171446097
      * hasTradePassword : false
+     * tradeRecordList : []
      * tradeList : []
      */
 
@@ -22,8 +23,8 @@ public class TradeUserInfo {
     private WalletBean wallet;
     private String phone;
     private boolean hasTradePassword;
-    private List<?> tradeRecordList;
-    private List<?> tradeList;
+    private ArrayList<OrderInfo> tradeRecordList;
+    private ArrayList<OrderInfo> tradeList;
 
     public TradeWalletBean getTradeWallet() {
         return tradeWallet;
@@ -57,19 +58,19 @@ public class TradeUserInfo {
         this.hasTradePassword = hasTradePassword;
     }
 
-    public List<?> getTradeRecordList() {
+    public ArrayList<OrderInfo> getTradeRecordList() {
         return tradeRecordList;
     }
 
-    public void setTradeRecordList(List<?> tradeRecordList) {
+    public void setTradeRecordList(ArrayList<OrderInfo> tradeRecordList) {
         this.tradeRecordList = tradeRecordList;
     }
 
-    public List<?> getTradeList() {
+    public ArrayList<OrderInfo> getTradeList() {
         return tradeList;
     }
 
-    public void setTradeList(List<?> tradeList) {
+    public void setTradeList(ArrayList<OrderInfo> tradeList) {
         this.tradeList = tradeList;
     }
 
@@ -87,11 +88,11 @@ public class TradeUserInfo {
 
         private long createTime;
         private String currencyId;
-        private double freeze;
+        private String freeze;
         private String id;
         private long updateTime;
         private String userId;
-        private double using;
+        private String using;
         private String version;
 
         public long getCreateTime() {
@@ -110,11 +111,11 @@ public class TradeUserInfo {
             this.currencyId = currencyId;
         }
 
-        public double getFreeze() {
+        public String getFreeze() {
             return freeze;
         }
 
-        public void setFreeze(double freeze) {
+        public void setFreeze(String freeze) {
             this.freeze = freeze;
         }
 
@@ -142,11 +143,11 @@ public class TradeUserInfo {
             this.userId = userId;
         }
 
-        public double getUsing() {
+        public String getUsing() {
             return using;
         }
 
-        public void setUsing(double using) {
+        public void setUsing(String using) {
             this.using = using;
         }
 
@@ -177,7 +178,7 @@ public class TradeUserInfo {
         private String id;
         private long updateTime;
         private String userId;
-        private double using;
+        private String using;
         private String version;
 
         public long getCreateTime() {
@@ -228,11 +229,11 @@ public class TradeUserInfo {
             this.userId = userId;
         }
 
-        public double getUsing() {
+        public String getUsing() {
             return using;
         }
 
-        public void setUsing(double using) {
+        public void setUsing(String using) {
             this.using = using;
         }
 

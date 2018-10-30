@@ -21,4 +21,6 @@ public interface EventBusTags {
     String TAG_CUSTOM_SELECT = "custom_select";
     //提现成功 刷新
     String TAG_WITHDRAWALS_SUCCESS = "Withdrawals_success";
+    //取消委托
+    String TAG_CANCEL_ENTRUST = "cancel_entrust";
 }

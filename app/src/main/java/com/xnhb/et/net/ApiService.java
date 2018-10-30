@@ -31,7 +31,7 @@ public class ApiService {
     }
 
 
-    public static void buyOrSell(Object tag, boolean isBuy, String quantity, String price, String tradeModus, String currencyId, Callback<String> callback) {
+    public static void buyAndSell(Object tag, boolean isBuy, String quantity, String price, String tradeModus, String currencyId, Callback<ResultInfo<Void>> callback) {
         Map map = new HashMap();
         map.put("token", UserInfoHelper.getInstance().getToken());
         map.put("quantity", quantity);//买入数量
@@ -49,4 +49,16 @@ public class ApiService {
                 .execute(callback);
     }
 
+    public static void buyOrSell(Object tag, boolean isBuy, String quantity, String price,  String tradeId, Callback<ResultInfo<Void>> callback) {
+        Map map = new HashMap();
+        map.put("token", UserInfoHelper.getInstance().getToken());
+        map.put("quantity", quantity);//买入数量
+        map.put("price", price); //买入价格
+        map.put("tradeType", isBuy?"0":"1");//交易方式 0买 1卖
+        map.put("currencyTradeId", tradeId);//币种id
+        map.put("tradePassword", "");
+        OkGoHelper.postOkGo( Api.BUY_OR_SELL_URL, tag)
+                .params(map)
+                .execute(callback);
+    }
 }

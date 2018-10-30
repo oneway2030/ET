@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.androidkun.xtablayout.XTabLayout;
+import com.oneway.tool.utils.common.KeyboardUtils;
 import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.shape.DevShapeUtils;
 import com.oneway.tool.utils.shape.shape.DevShape;
@@ -27,11 +28,15 @@ import com.xnhb.et.R;
 import com.xnhb.et.bean.TradeInfo;
 import com.xnhb.et.bean.TradePairInfo;
 import com.xnhb.et.bean.TradeUserInfo;
+import com.xnhb.et.event.EventBusTags;
 import com.xnhb.et.helper.UserInfoHelper;
+import com.xnhb.et.interfaces.CallBack;
 import com.xnhb.et.ui.ac.detail.fragment.CoinBuyAndSellRecordFragment;
 import com.xnhb.et.ui.ac.detail.fragment.CoinTransactionRecordFragment;
 import com.xnhb.et.util.MoneyUtils;
 import com.xnhb.et.widget.dialog.BuyAndSellDailog;
+
+import org.simple.eventbus.Subscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +48,7 @@ import butterknife.BindView;
  * 描述: 币详情
  * 参考链接:
  */
-public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter> implements ICoinDetailsView {
+public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter> implements ICoinDetailsView, CallBack {
     @BindView(R.id.tv_price)
     TextView tvPrice;
     @BindView(R.id.tv_range)
@@ -82,6 +87,10 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
     private TradePairInfo mTradePairInfo;  //币基础信息
     private TradeUserInfo mTradeUserInfo;  //用户信息
     private boolean isBuy;
+    private BuyAndSellDailog mDailog;
+    private int QUERY_BUY_OR_SELL = 1;
+    private int QUERY_TRADE_RECORD = 2;
+
 
     public static void launch(Context context, String tradeId, String title, boolean isShowCollection, boolean isCollection) {
         Intent intent = new Intent();
@@ -126,7 +135,13 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
         titleLayoutHelper.setImageLayout(toolbar, this, new TitleLayoutHelper.RightViewClickListener() {
             @Override
             public void onRightViewClickListener(View view, RightViewType Type) {
-                CoinBillActivity.launch(CoinDetailsActivity.this);
+                if (mTradeUserInfo != null) {
+                    String[] split = title.split("/");
+                    CoinBillActivity.launch(CoinDetailsActivity.this, title, EmptyUtils.isEmpty(split) ? "" : split[0], EmptyUtils.isEmpty(split) ? "" : split[1], mTradeUserInfo.getTradeList(), mTradeUserInfo.getTradeRecordList());
+                } else {
+                    //查询用户信息
+                    getP().senUserInfo(QUERY_TRADE_RECORD);
+                }
             }
         }, R.mipmap.bill);
     }
@@ -158,25 +173,23 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
                 if (!UserInfoHelper.getInstance().checkLogin()) {
                     return;
                 }
-                 isBuy= true;
+                isBuy = true;
                 if (mTradeUserInfo != null) {
-                    BuyAndSellDailog mDailog = new BuyAndSellDailog(CoinDetailsActivity.this, mTradeUserInfo, true);
-                    mDailog.showDialog();
+                    showBuyAndSellDialog();
                 } else {
                     //查询用户信息
-                    getP().senUserInfo(true);
+                    getP().senUserInfo(QUERY_BUY_OR_SELL);
                 }
             } else if (id == R.id.btn_sell) {
                 if (!UserInfoHelper.getInstance().checkLogin()) {
                     return;
                 }
-                isBuy= false;
+                isBuy = false;
                 if (mTradeUserInfo != null) {
-                    BuyAndSellDailog mDailog = new BuyAndSellDailog(CoinDetailsActivity.this, mTradeUserInfo, false);
-                    mDailog.showDialog();
+                    showBuyAndSellDialog();
                 } else {
                     //查询用户信息
-                    getP().senUserInfo(true);
+                    getP().senUserInfo(QUERY_BUY_OR_SELL);
                 }
             } else if (id == R.id.ll_collection) {//收藏
                 //TODO 收藏
@@ -221,15 +234,28 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
         transactionFragment.update(recordList);
     }
 
+
     @Override
-    public void updateTradeUserInfoUi(TradeUserInfo tradeUserInfo, boolean isCallBack) {
+    public void updateTradeUserInfoUi(TradeUserInfo tradeUserInfo, int requstCode) {
         //TODO 更新 底部 点击买卖的用户信息 缓存在本地
         this.mTradeUserInfo = tradeUserInfo;
-        if (isCallBack) {
-            BuyAndSellDailog mDailog = new BuyAndSellDailog(CoinDetailsActivity.this, mTradeUserInfo, isBuy);
-            mDailog.showDialog();
+        if (requstCode == QUERY_BUY_OR_SELL) {
+            showBuyAndSellDialog();
+        } else if (requstCode == QUERY_TRADE_RECORD) {
+            if (UserInfoHelper.getInstance().checkLogin()) {
+                String[] split = title.split("/");
+                CoinBillActivity.launch(CoinDetailsActivity.this, title, EmptyUtils.isEmpty(split) ? "" : split[0], EmptyUtils.isEmpty(split) ? "" : split[1], mTradeUserInfo.getTradeList(), mTradeUserInfo.getTradeRecordList());
+            }
+
         }
     }
+
+    public void showBuyAndSellDialog() {
+        mDailog = new BuyAndSellDailog(CoinDetailsActivity.this, mTradeUserInfo, mTradePairInfo, isBuy);
+        mDailog.setOnTradeSuccessListener(CoinDetailsActivity.this);
+        mDailog.showDialog();
+    }
+
 
     /**
      * 显示收藏状态
@@ -246,5 +272,31 @@ public class CoinDetailsActivity extends BaseTitleActivity<CoinDetailsPresenter>
         fragments.add(buyAndSellFragment);
         fragments.add(transactionFragment);
         return fragments;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mDailog != null) {
+            mDailog.dismiss();
+        }
+    }
+
+    /**
+     * 取消委托 刷新
+     */
+    @Subscriber(tag = EventBusTags.TAG_CANCEL_ENTRUST)
+    public void cancelEntrustRefresh(String tag) {
+//        getP().senUserInfo(0);
+        getP().getAllData();
+    }
+
+    /**
+     * 买卖成功回调
+     * 成功后,重新获取当前页面数据
+     */
+    @Override
+    public void success(Object o) {
+        getP().getAllData();
     }
 }

@@ -166,6 +166,10 @@ public interface Api {
      */
     String C2C_SELL_URL = "/front/ctc/trade/1";
     /**
+     * 买or卖
+     */
+    String BUY_OR_SELL_URL = "/front/trade/publish";
+    /**
      * 币详情
      */
     String COIN_SYNOPSIS = "/search/tradeinfo";
