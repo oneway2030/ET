@@ -22,6 +22,7 @@ import com.oneway.ui.widget.status.StatusType;
 import com.oneway.ui.widget.vp.CustomViewPager;
 import com.xnhb.et.MainFragment;
 import com.xnhb.et.R;
+import com.xnhb.et.adapter.C2CAdapter;
 import com.xnhb.et.bean.C2CCoinInfo;
 import com.xnhb.et.bean.C2CListInfo;
 import com.xnhb.et.event.EventBusTags;
@@ -128,6 +129,8 @@ public class C2CFragment extends XFragment<C2CPresenter> implements TabLayout.On
         FragmentBaseAdapter mFragmentAdapter = new FragmentBaseAdapter(getChildFragmentManager(), fragments, titles);
         vp.setOffscreenPageLimit(2);
         vp.setAdapter(mFragmentAdapter);
+//        C2CAdapter mAdapter = new C2CAdapter();
+//        vp.setAdapter(mAdapter);
         tvBill.setOnClickListener(mPerfectClickListener);
         tvSelectCoin.setOnClickListener(mPerfectClickListener);
         mPageStateHelper.showContentView();

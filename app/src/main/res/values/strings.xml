@@ -82,4 +82,7 @@
     <string name="hint_max">交易数量不能超过%1$s</string>
     <string name="hint_min">交易数量不能低于%1$s</string>
     <string name="c2c_order_details_remark"><![CDATA[<font color="#dc2527">%1$s</font>(请务必填写)</font>]]></string>
+
+    <string name="c2c_hint">1.买卖商户均为实地考察认证商户，并提供100万usdt保证金，您每次兑换会冻结商户资产，商户资产不够时，不能接单，可放心兑换;\n\n2.买卖商户均为实名认证商户，并提供保证金，可放心兑换；\n\n3.如需申请成为商户请发邮件到support@ettex.one；\n\n4.请使用本人绑定的银行卡进行汇款，其他任何方式汇款都会退款。（禁止微信和支付宝）\n\n5.商家处理时间9:00 - 21:00非处理时间的订单会在第二天9:00开始处理，一般接单后24小时内会完成打款。\n\n6.如果产生交易纠纷，请及时联系E网全球的客服进行处理。</string>
+
 </resources>

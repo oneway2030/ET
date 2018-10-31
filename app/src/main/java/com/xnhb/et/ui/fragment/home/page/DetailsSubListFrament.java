@@ -296,7 +296,10 @@ public class DetailsSubListFrament extends XFragment implements ListLayout.TaskL
         }
     }
 
-
+    /**
+     * 自选 接口
+     * @param updateInfo
+     */
     public void reqCollection(TradePairInfo updateInfo) {
         String url;
         if (CUSTOM_STR.equals(mQuotationInfo.getName())) {

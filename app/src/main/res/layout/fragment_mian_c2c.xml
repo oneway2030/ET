@@ -183,13 +183,15 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:paddingBottom="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="14dp"
                     android:paddingLeft="@dimen/common_margin_space_20"
                     android:paddingRight="@dimen/common_margin_space_20"
-                    android:text="1.提示体会ishi啊啊啊啊啊啊啊,提示体会ishi啊啊啊啊啊啊啊,提示体会ishi啊啊啊啊啊啊啊,提示体会ishi啊啊啊啊啊啊啊,提示体会ishi啊啊啊啊啊啊啊,提示体会ishi啊啊啊啊啊啊啊"
-                    android:textColor="#787b92" />
+                    android:text="@string/c2c_hint"
+                    android:textColor="#787b92"
+                    android:textSize="11sp" />
 
 
             </LinearLayout>

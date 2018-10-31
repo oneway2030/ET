@@ -1,12 +1,9 @@
-package com.xnhb.et.ui.fragment.home.page;
+package com.xnhb.et.adapter;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -14,7 +11,8 @@ import com.lzy.okgo.model.Response;
 import com.oneway.tool.utils.calculate.BigDecimalUtils;
 import com.oneway.tool.utils.convert.EmptyUtils;
 import com.oneway.tool.utils.log.LogUtil;
-import com.oneway.ui.base.fragment.XFragment;
+import com.oneway.tool.utils.ui.UiUtils;
+import com.oneway.ui.adapter.vp.BaseSubPage;
 import com.oneway.ui.common.PerfectClickListener;
 import com.oneway.ui.toast.ToastManager;
 import com.oneway.ui.widget.btn.StateButton;
@@ -27,114 +25,57 @@ import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.util.MoneyUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
- * 作者 oneway on 2018/9/25
- * 描述:
+ * 作者 oneway on 2018/10/31
+ * 描述:  弃用了
  * 参考链接:
  */
-public class C2CSubFragment extends XFragment implements TextWatcher {
+public class C2CSubPage extends BaseSubPage implements TextWatcher {
     @BindView(R.id.tv_title1)
     TextView tvTitle1;
-    @BindView(R.id.line1)
-    View line1;
     @BindView(R.id.tv_title2)
     TextView tvTitle2;
-    @BindView(R.id.line2)
-    View line2;
-    @BindView(R.id.tv_title3)
-    TextView tvTitle3;
-    @BindView(R.id.line3)
-    View line3;
-    @BindView(R.id.tv_title4)
-    TextView tvTitle4;
-    @BindView(R.id.line4)
-    View line4;
     @BindView(R.id.et3)
     TextView et3;
     @BindView(R.id.et2)
     EditText et2;
     @BindView(R.id.et1)
     TextView et1;
-    @BindView(R.id.tv_right1)
-    TextView tvRight1;
-    @BindView(R.id.tv_right2)
-    TextView tvRight2;
-    @BindView(R.id.tv_right3)
-    TextView tvRight3;
     @BindView(R.id.submit)
     StateButton submit;
     private static String ARG_TAG = "title";
     private String title;
     private C2CListInfo mCoinInfo;
-    private C2CCoinInfo c2CCoinInfo;
     //TODO 交易方式暂时写死
     private String tradeModus = "1";
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LogUtil.i("00000000000000");
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public C2CSubPage(Context context, int position, String title) {
+        super(context, position);
+        this.title = title;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        LogUtil.i("111111111111111");
-    }
-
-    @Override
-    protected int setLayoutId() {
+    public int getlayou() {
         return R.layout.fragment_c2c_sub;
     }
 
-    public static C2CSubFragment newInstance(String title) {
-        C2CSubFragment frament = new C2CSubFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(ARG_TAG, title);
-        frament.setArguments(bundle);
-        return frament;
-    }
-
-    private boolean isInit = false;
-
     @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
-
-    }
-
-    @Override
-    protected void initView() {
-        super.initView();
-        isInit = true;
-        title = getArguments().getString(ARG_TAG);
+    protected void init() {
+        et1.setText("0");
+        et3.setText("0.0000");
         if ("我要买".equals(title)) {
             tvTitle1.setText("买入价");
             tvTitle2.setText("买入量");
+            submit.setText(UiUtils.getString(R.string.c2c_btn, "买入", ""));
         } else if ("我要卖".equals(title)) {
             tvTitle1.setText("卖出价");
             tvTitle2.setText("卖出量");
+            submit.setText((UiUtils.getString(R.string.c2c_btn, "卖出", "")));
         }
         et2.addTextChangedListener(this);
         submit.setOnClickListener(mPerfectClickListener);
-        setBaseData();
     }
-
-    public void setBaseData() {
-        if (et1 != null && submit != null) {
-            if ("我要买".equals(title)) {
-                et1.setText(EmptyUtils.isEmpty(c2CCoinInfo) ? "0" : MoneyUtils.check0(c2CCoinInfo.getBuyPrice()));
-                submit.setText(getString(R.string.c2c_btn, "买入", EmptyUtils.isEmpty(mCoinInfo) ? "" : mCoinInfo.getCurrencyName()));
-            } else {
-                et1.setText(EmptyUtils.isEmpty(c2CCoinInfo) ? "0" : MoneyUtils.check0(c2CCoinInfo.getSellPrice()));
-                submit.setText(getString(R.string.c2c_btn, "卖出", EmptyUtils.isEmpty(mCoinInfo) ? "" : mCoinInfo.getCurrencyName()));
-            }
-        }
-    }
-
 
     PerfectClickListener mPerfectClickListener = new PerfectClickListener() {
         @Override
@@ -208,9 +149,17 @@ public class C2CSubFragment extends XFragment implements TextWatcher {
      * @param c2CCoinInfo
      */
     public void updataUi(C2CListInfo c2cListInfo, C2CCoinInfo c2CCoinInfo) {
+//        if (!isInit) {
+//            onLazyInitView(null);
+//        }
+        if ("我要买".equals(title)) {
+            et1.setText(MoneyUtils.check0(c2CCoinInfo.getBuyPrice()));
+            submit.setText((UiUtils.getString(R.string.c2c_btn, "买入", c2cListInfo.getCurrencyName())));
+        } else {
+            et1.setText(MoneyUtils.check0(c2CCoinInfo.getSellPrice()));
+            submit.setText((UiUtils.getString(R.string.c2c_btn, "卖出", c2cListInfo.getCurrencyName())));
+        }
         this.mCoinInfo = c2cListInfo;
-        this.c2CCoinInfo = c2CCoinInfo;
-        setBaseData();
     }
 
 
@@ -246,11 +195,11 @@ public class C2CSubFragment extends XFragment implements TextWatcher {
         Double maxCount = stringToDouble("我要买".equals(title) ? mCoinInfo.getBuyMax() : mCoinInfo.getSellMin());
         Double minCount = stringToDouble("我要买".equals(title) ? mCoinInfo.getBuyMin() : mCoinInfo.getSellMin());
         if (aDoubleCount < minCount) {
-            ToastManager.info(getString(R.string.hint_min, mCoinInfo.getBuyMin()));
+            ToastManager.info(UiUtils.getString(R.string.hint_min, mCoinInfo.getBuyMin()));
             return true;
         }
         if (aDoubleCount > maxCount) {
-            ToastManager.info(getString(R.string.hint_max, mCoinInfo.getBuyMax()));
+            ToastManager.info((UiUtils.getString(R.string.hint_max, mCoinInfo.getBuyMax())));
             return true;
         }
         return false;
