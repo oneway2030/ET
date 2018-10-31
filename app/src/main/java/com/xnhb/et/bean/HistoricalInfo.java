@@ -51,9 +51,18 @@ public class HistoricalInfo implements Parcelable {
     private String phone;
     private String realName;
     private String statusStr;
+    private String money;
 
     private String realQuantityStr;
     private String idStr;
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
 
     public String getHash() {
         return hash;

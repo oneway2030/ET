@@ -22,6 +22,7 @@ import com.xnhb.et.helper.UserInfoHelper;
 import com.xnhb.et.net.Api;
 import com.xnhb.et.net.okgo.DialogCallback;
 import com.xnhb.et.net.okgo.OkGoHelper;
+import com.xnhb.et.util.MoneyUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,8 +76,12 @@ public class HistoricalFrament extends BaseFragment implements ListLayout.TaskLi
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        HistoricalInfo info = (HistoricalInfo) adapter.getData().get(position);
-        HistoricalDetailsActivity.launch(getAc(), info, getTypeStr());
+        String type = getType();
+        if (!"7".equals(type) && !"8".equals(type) && !"10".equals(type)) {
+            HistoricalInfo info = (HistoricalInfo) adapter.getData().get(position);
+            HistoricalDetailsActivity.launch(getAc(), info, getTypeStr());
+        }
+
     }
 
     @Override
@@ -86,9 +91,19 @@ public class HistoricalFrament extends BaseFragment implements ListLayout.TaskLi
 
     @Override
     public void bindData(int position, BaseViewHolder holder, HistoricalInfo data) {
+        String type = getType();
+        if ("7".equals(type) || "8".equals(type) || "10".equals(type)) {
+            holder.setText(R.id.tv_coin_count, MoneyUtils.getPrettyNumber(data.getMoney()) + "");
+            holder.getView(R.id.iv_right).setVisibility(View.GONE);
+        } else {
+            holder.getView(R.id.iv_right).setVisibility(View.VISIBLE);
+            holder.setText(R.id.tv_coin_count, data.getQuantity() + "");
+        }
+
+
         holder.setText(R.id.tv_coin_name, data.getCurrencyName() + "")
-                .setText(R.id.tv_coin_count, data.getQuantity() + "")
-                .setText(R.id.tv_status, data.getStatusStr() + "")
+//                .setText(R.id.tv_coin_count, data.getQuantity() + "")
+                .setText(R.id.tv_status, EmptyUtils.isEmpty(data.getStatusStr()) ? "" : data.getStatusStr() + "")
                 .setText(R.id.tv_time, data.getCreateTime() + "");
         ImageLoaderManager.getLoader().load(OkGoHelper.getImageUrl(data.getCurrencyName()), holder.getView(R.id.iv_icon));
     }

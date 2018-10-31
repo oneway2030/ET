@@ -49,6 +49,7 @@
         android:gravity="right"
         android:orientation="vertical"
         android:paddingBottom="20dp"
+        android:paddingRight="10dp"
         android:paddingTop="20dp">
 
         <TextView
@@ -69,9 +70,10 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/iv_right"
         android:layout_width="7dp"
         android:layout_height="13dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="15dp"
         android:src="@mipmap/more_right_black" />
 </LinearLayout>

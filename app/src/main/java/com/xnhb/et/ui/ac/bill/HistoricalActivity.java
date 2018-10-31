@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.TextView;
 
 import com.oneway.ui.base.ac.BaseTitleActivity;
 import com.oneway.ui.base.fragment.FragmentBaseAdapter;
@@ -28,6 +30,8 @@ public class HistoricalActivity extends BaseTitleActivity {
     TabLayout tablayout;
     @BindView(R.id.vp)
     ViewPager vp;
+    @BindView(R.id.tv_hint)
+    TextView tvHint;
     String[] titles = {"充值", "提现", "买入手续费", "卖出手续费", "系统赠送"};
 
     public static void launch(Context context) {
@@ -52,6 +56,7 @@ public class HistoricalActivity extends BaseTitleActivity {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        tvHint.setVisibility(View.GONE);
         tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         FragmentBaseAdapter mFragmentAdapter = new FragmentBaseAdapter(getSupportFragmentManager(), getFragments(), titles);
         vp.setAdapter(mFragmentAdapter);
