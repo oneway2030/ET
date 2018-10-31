@@ -7,6 +7,7 @@ import com.oneway.tool.utils.convert.StringUtil;
 import com.oneway.tool.utils.ui.UiUtils;
 import com.xnhb.et.R;
 import com.xnhb.et.bean.HomeHDataInfo;
+import com.xnhb.et.util.MoneyUtils;
 
 /**
  * 作者 oneway on 2018/9/12
@@ -34,6 +35,6 @@ public class HomeHAdapter extends BaseQuickAdapter<HomeHDataInfo, BaseViewHolder
         helper.setText(R.id.tv_currentPrice, item.getCurrentPrice() + "")
                 .setText(R.id.tv_price1, item.getCurrencyName() + "/")
                 .setText(R.id.tv_price2, "￥1");
-        helper.setText(R.id.tv_volum, StringUtil.htmlFromat(R.string.home_item_volum, item.getTradeNums(), item.getTradeCurrencyName()));
+        helper.setText(R.id.tv_volum, StringUtil.htmlFromat(R.string.home_item_volum, MoneyUtils.check0( item.getTradeNums()), item.getTradeCurrencyName()));
     }
 }
